@@ -1,0 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class Player : MonoBehaviour
+{
+    
+    CharacterController characterController;
+
+    //Storing input controller in a variable
+     MovementController inputActions;
+    
+    private void Awake()
+    {
+        characterController = GetComponent<CharacterController>();
+        
+        //Getting action from the input controller script
+        inputActions = FindObjectOfType<MovementController>();
+    }
+
+    void FixedUpdate()
+    {
+        //Debug.Log(inputActions.movement);
+        //Adding the movenet action to the character controller
+        if (inputActions.isRunPressed){
+            characterController.Move(inputActions.runDirectionMove * Time.deltaTime);
+        }else{
+            characterController.Move(inputActions.movement * Time.deltaTime); 
+        }
+       
+        //Getting the walk animation from the Input controller class
+        inputActions.WalkOrRunAnimation();
+        //Rotation to the player
+        inputActions.PlayerRotation();
+    }
+    //Testing
+    
+}
