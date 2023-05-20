@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class robin : MonoBehaviour
 {
-    // This is Robin
-    // Start is called before the first frame update
+    // This is not robin
     void Start()
     {
         
