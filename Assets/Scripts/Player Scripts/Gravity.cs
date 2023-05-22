@@ -23,6 +23,7 @@ public class Gravity : MonoBehaviour
         
     // }
     public void PlayerGravity(){
+        //I am about to add gravity here 
 
     }
 }
