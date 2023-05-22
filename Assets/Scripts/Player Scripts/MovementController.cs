@@ -18,10 +18,13 @@ public class MovementController : MonoBehaviour
     //Movement variables
     bool playerIsWalking;
     bool isMovementPressed = false;
+    int isWalking;
 
     //Run variables 
-    float runSpeed = 3f;
+    int isRunning;
+    float runSpeed = 5f;
     public bool isRunPressed;
+    bool isPlayerIsRunning;
     public Vector3 runDirectionMove;
 
     //rotation varibles
@@ -46,6 +49,8 @@ public class MovementController : MonoBehaviour
 
         //Getting animator component
         animator= GetComponent<Animator>();
+        isWalking = Animator.StringToHash("walk");
+        isRunning = Animator.StringToHash("run");
     }
 
     void OnPlayerMove(InputAction.CallbackContext context)
@@ -54,11 +59,9 @@ public class MovementController : MonoBehaviour
         movementInput = context.ReadValue<Vector2>();
         movement.x = movementInput.x;
         movement.z = movementInput.y;
-        runDirectionMove.x = movement.x * runSpeed;
-        runDirectionMove.z = movement.y * runSpeed;
+        runDirectionMove.x = movementInput.x * runSpeed;
+        runDirectionMove.z = movementInput.y * runSpeed;
         isMovementPressed = movementInput.x != 0 || movementInput.y != 0;
-
-        Debug.Log(runDirectionMove);
     }
 
     void OnPlayerRun(InputAction.CallbackContext context){
@@ -67,16 +70,25 @@ public class MovementController : MonoBehaviour
 
     //Function to apply walk or run animation
     public void WalkOrRunAnimation() {
-        playerIsWalking = animator.GetBool("walk");
-        isRunPressed = animator.GetBool("run");
+        playerIsWalking = animator.GetBool(isWalking);
+        isPlayerIsRunning = animator.GetBool(isRunning);
 
         //Walk animation
         if (isMovementPressed && !playerIsWalking) {
-            animator.SetBool("walk", true);
+            animator.SetBool(isWalking, true);
         }
         //Stop walk animation
         else if(!isMovementPressed && playerIsWalking) {
-            animator.SetBool("walk", false);
+            animator.SetBool(isWalking, false);
+        }
+
+        
+        if ((isMovementPressed && isRunPressed) && !isPlayerIsRunning)
+        {
+            animator.SetBool(isRunning, true);
+        }else if ((!isMovementPressed || !isRunPressed) && isPlayerIsRunning)
+        {
+            animator.SetBool(isRunning, false);
         }
     }
 
@@ -94,6 +106,10 @@ public class MovementController : MonoBehaviour
             targetToLookAt = Quaternion.LookRotation(lookAtPosition);
             transform.rotation = Quaternion.Slerp(rotation, targetToLookAt, rotationPerFrame * Time.deltaTime);
         }
+    }
+
+    void Gravity(){
+        //Adding gravity to the player
     }
 
     private void OnEnable()
