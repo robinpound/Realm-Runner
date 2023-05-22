@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Gravity : MonoBehaviour
 {
+    float gravity = -9.8f;
+    float gravityIfGrounded = -.05f;
     CharacterController controller;
     MovementController movement;
 
@@ -11,19 +13,17 @@ public class Gravity : MonoBehaviour
         controller = GetComponent<CharacterController>();
         movement = FindObjectOfType<MovementController>();
     }
-    // // Start is called before the first frame update
-    // void Start()
-    // {
-        
-    // }
-
-    // // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
     public void PlayerGravity(){
-        //I am about to add gravity here 
+    
+        if (controller.isGrounded)
+        {
+            // Debug.Log("If player is grounded print this...");
+            movement.movement.y = gravityIfGrounded; 
+            movement.runDirectionMove.y = gravityIfGrounded;
+        }else{
+            movement.movement.y += gravity;
+            movement.runDirectionMove.y += gravity;
+        }
 
     }
 }

@@ -4,19 +4,19 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
-{
-    
+{ 
     CharacterController characterController;
 
+    Gravity gravity;
     //Storing input controller in a variable
-     MovementController inputActions;
+    MovementController inputActions;
     
     private void Awake()
     {
-        characterController = GetComponent<CharacterController>();
-        
+        characterController = GetComponent<CharacterController>();        
         //Getting action from the input controller script
         inputActions = FindObjectOfType<MovementController>();
+        gravity = FindObjectOfType<Gravity>();
     }
 
     void FixedUpdate()
@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
         inputActions.WalkOrRunAnimation();
         //Rotation to the player
         inputActions.PlayerRotation();
+        gravity.PlayerGravity();
     }
     //Testing
     
