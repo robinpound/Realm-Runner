@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     CharacterController characterController;
 
     Gravity gravity;
+    PlayerJumps jumps;
     //Storing input controller in a variable
     MovementController inputActions;
     
@@ -16,7 +17,10 @@ public class Player : MonoBehaviour
         characterController = GetComponent<CharacterController>();        
         //Getting action from the input controller script
         inputActions = FindObjectOfType<MovementController>();
+        jumps = FindObjectOfType<PlayerJumps>();
         gravity = FindObjectOfType<Gravity>();
+
+        // jumps.SetJumps();
     }
 
     void FixedUpdate()
@@ -34,6 +38,7 @@ public class Player : MonoBehaviour
         //Rotation to the player
         inputActions.PlayerRotation();
         gravity.PlayerGravity();
+        jumps.Jump();
     }
     //Testing
     
