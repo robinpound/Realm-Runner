@@ -23,9 +23,13 @@ public class MovementController : MonoBehaviour
     //Run variables 
     int isRunning;
     float runSpeed = 5f;
+    float walkSpeed = 2f;
     public bool isRunPressed;
     bool isPlayerIsRunning;
     public Vector3 runDirectionMove;
+
+    //Jump
+    public bool jumpPressed;
 
     //rotation varibles
     float rotationPerFrame = 15.0f;
@@ -47,18 +51,25 @@ public class MovementController : MonoBehaviour
         action.PlayerActions.Run.canceled += OnPlayerRun;
         action.PlayerActions.Run.performed += OnPlayerRun;
 
+        //Jump
+        // action.PlayerActions.Jump.started += playerJumps;
+        // action.PlayerActions.Jump.canceled += playerJumps;
+        // action.PlayerActions.Jump.performed += playerJumps;
+
         //Getting animator component
         animator= GetComponent<Animator>();
+        //wiil play animation based on integer value
         isWalking = Animator.StringToHash("walk");
         isRunning = Animator.StringToHash("run");
+
     }
 
     void OnPlayerMove(InputAction.CallbackContext context)
     {
         //Adding the context value to the is pressed boolean
         movementInput = context.ReadValue<Vector2>();
-        movement.x = movementInput.x;
-        movement.z = movementInput.y;
+        movement.x = movementInput.x * walkSpeed;
+        movement.z = movementInput.y * walkSpeed;
         runDirectionMove.x = movementInput.x * runSpeed;
         runDirectionMove.z = movementInput.y * runSpeed;
         isMovementPressed = movementInput.x != 0 || movementInput.y != 0;
@@ -67,6 +78,11 @@ public class MovementController : MonoBehaviour
     void OnPlayerRun(InputAction.CallbackContext context){
         isRunPressed = context.ReadValueAsButton();
     }
+    //  void playerJumps(InputAction.CallbackContext context){
+    //     jumpPressed = context.ReadValueAsButton();
+    //     Debug.Log(jumpPressed);
+    // }
+
 
     //Function to apply walk or run animation
     public void WalkOrRunAnimation() {
@@ -81,8 +97,7 @@ public class MovementController : MonoBehaviour
         else if(!isMovementPressed && playerIsWalking) {
             animator.SetBool(isWalking, false);
         }
-
-        
+   
         if ((isMovementPressed && isRunPressed) && !isPlayerIsRunning)
         {
             animator.SetBool(isRunning, true);
@@ -106,10 +121,6 @@ public class MovementController : MonoBehaviour
             targetToLookAt = Quaternion.LookRotation(lookAtPosition);
             transform.rotation = Quaternion.Slerp(rotation, targetToLookAt, rotationPerFrame * Time.deltaTime);
         }
-    }
-
-    void Gravity(){
-        //Adding gravity to the player
     }
 
     private void OnEnable()

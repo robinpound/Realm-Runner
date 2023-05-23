@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2160.4854, g: 2264.5625, b: 3287.5234, a: 1}
+  m_IndirectSpecularColor: {r: 2159.457, g: 2263.4805, b: 3286.3555, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -176,7 +176,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 67cb4e45e10124c6792a2f1c338733cd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -617,7 +617,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: cff37caec147b4e9ab7b7baa9832bb6c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -915,6 +915,7 @@ MonoBehaviour:
   movement: {x: 0, y: 0, z: 0}
   isRunPressed: 0
   runDirectionMove: {x: 0, y: 0, z: 0}
+  jumpPressed: 0
 --- !u!114 &1742224625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -939,12 +940,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ee5f5115fd54fe884ec3c57a69cb6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1742224628 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400078, guid: 461413943bab6ef40aa2a33f18380180,
-    type: 3}
-  m_PrefabInstance: {fileID: 1742224619}
+  gravity: -9.8
+  gravityIfGrounded: -0.05
+--- !u!114 &1742224629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742224620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7183c5f08195644e39507718318f5f69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpPressed: 0
 --- !u!1 &1823688464
 GameObject:
   m_ObjectHideFlags: 0
