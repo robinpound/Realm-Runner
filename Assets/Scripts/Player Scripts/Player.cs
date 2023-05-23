@@ -25,7 +25,6 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Debug.Log(inputActions.movement);
         //Adding the movenet action to the character controller
         if (inputActions.isRunPressed){
             characterController.Move(inputActions.runDirectionMove * Time.deltaTime);
@@ -39,6 +38,11 @@ public class Player : MonoBehaviour
         inputActions.PlayerRotation();
         gravity.PlayerGravity();
         jumps.Jump();
+
+        if(gravity.isPlayerFalling)
+        {
+            jumps.DoubleJump();
+        }
     }
     //Testing
     

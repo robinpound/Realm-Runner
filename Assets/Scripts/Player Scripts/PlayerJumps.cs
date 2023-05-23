@@ -11,6 +11,9 @@ public class PlayerJumps : MonoBehaviour
     InputActions jumpInput;
     Gravity addGrav;
 
+    //Animator animator;
+    Animator animator;
+
     public int jumpCounts = 0;
     public bool jumpPressed = false;
     bool isPlayerJump = false;
@@ -25,6 +28,10 @@ public class PlayerJumps : MonoBehaviour
     float secondJumpGravity;
     float thirdJumpVelocity;
     float thirdJumpGravity;
+
+    //Jumps animations
+    int jumpHash;
+    public int jumpCountHash;
 
     public Coroutine resetCurrentJump = null;
 
@@ -41,6 +48,13 @@ public class PlayerJumps : MonoBehaviour
         jumpController = GetComponent<CharacterController>();
         movement = FindObjectOfType<MovementController>();
         addGrav = FindObjectOfType<Gravity>();
+
+        //Get jump count value and animation type from animator 
+        jumpHash = Animator.StringToHash("jump");
+        jumpCountHash = Animator.StringToHash("jumpCount");
+
+        animator = GetComponent<Animator>();
+
         SetJumps();
     }
     void playerJumps(InputAction.CallbackContext context){
@@ -67,35 +81,57 @@ public class PlayerJumps : MonoBehaviour
         jumpGravities.Add(2, secondJumpGravity);
         jumpGravities.Add(3, thirdJumpGravity);
         
+        //if (!jumpVelocities.ContainsKey(3)) {
+        //    jumpGravities.Add(3, thirdJumpGravity);
+        //}
+        
     }
 
     public void Jump(){
         if (!isPlayerJump && jumpController.isGrounded && jumpPressed)
         {
+            Debug.Log("Checking the jumps count..." + jumpCounts);
             if (jumpCounts < 3 && resetCurrentJump != null)
             {               
                 StopCoroutine(resetCurrentJump);
             }
             //Jump Animation true here
-            Debug.Log(jumpCounts);
+            // animator.SetInteger(jumpCountHash, jumpCounts);
+            animator.SetBool("jump", true);
             isPlayerJump = true;
             addGrav.jumpAnimation = true;
             jumpCounts += 1;
             //Adding velocity to the Y axis value of gravity
             movement.movement.y = jumpVelocities[jumpCounts] * .5f;
             movement.runDirectionMove.y = jumpVelocities[jumpCounts] * .5f;
-            Debug.Log("Start jumping...");
+           
         }else if (!jumpPressed && isPlayerJump && jumpController.isGrounded)
         {
             isPlayerJump = false;
-        }       
+        }      
+    }
+    public void DoubleJump() {
+        if (jumpPressed && !jumpController.isGrounded)
+        {
+            animator.SetBool("jump", true);
+            isPlayerJump = true;
+            addGrav.jumpAnimation = true;
+            jumpCounts += 1;
+            //Adding velocity to the Y axis value of gravity
+            movement.movement.y = jumpVelocities[jumpCounts] * .5f;
+            movement.runDirectionMove.y = jumpVelocities[jumpCounts] * .5f;
+        }
+        else
+        {
+            isPlayerJump = false;
+        }
     }
     public void CoroutineStart(){
         resetCurrentJump = StartCoroutine(ResetJumps());
     }
 
     public IEnumerator ResetJumps(){
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(.2f);
         jumpCounts = 0;
     }
      private void OnEnable()

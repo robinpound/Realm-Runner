@@ -5,13 +5,15 @@ using UnityEngine;
 public class Gravity : MonoBehaviour
 {
     public bool jumpAnimation = false;
-    bool isPlayerFalling;
+    public bool isPlayerFalling;
     float multiplyingFall = 2.0f;
     float jumpPreviouYVelocity;
     float newJumpYVelocity;
     float nextjumpYVelocity;
     public float gravity = -9.8f;
     public float gravityIfGrounded = -.5f;
+
+    Animator animator;
     CharacterController controller;
     MovementController movement;
     PlayerJumps jumps;
@@ -20,6 +22,7 @@ public class Gravity : MonoBehaviour
         controller = GetComponent<CharacterController>();
         movement = FindObjectOfType<MovementController>();
         jumps = FindObjectOfType<PlayerJumps>();
+        animator = GetComponent<Animator>();
     }
     public void PlayerGravity(){
     
@@ -32,7 +35,9 @@ public class Gravity : MonoBehaviour
                 jumps.CoroutineStart();
                 jumpAnimation = false;
             }
-            //Animation will be some where here
+            //Animation will be some where here setted to false
+            //animator.SetInteger(jumps.jumpCountHash, jumps.jumpCounts);
+            animator.SetBool("jump", false);
             movement.movement.y = gravityIfGrounded; 
             movement.runDirectionMove.y = gravityIfGrounded;
         }else if (isPlayerFalling)

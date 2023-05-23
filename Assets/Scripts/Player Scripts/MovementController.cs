@@ -51,11 +51,6 @@ public class MovementController : MonoBehaviour
         action.PlayerActions.Run.canceled += OnPlayerRun;
         action.PlayerActions.Run.performed += OnPlayerRun;
 
-        //Jump
-        // action.PlayerActions.Jump.started += playerJumps;
-        // action.PlayerActions.Jump.canceled += playerJumps;
-        // action.PlayerActions.Jump.performed += playerJumps;
-
         //Getting animator component
         animator= GetComponent<Animator>();
         //wiil play animation based on integer value
@@ -78,11 +73,6 @@ public class MovementController : MonoBehaviour
     void OnPlayerRun(InputAction.CallbackContext context){
         isRunPressed = context.ReadValueAsButton();
     }
-    //  void playerJumps(InputAction.CallbackContext context){
-    //     jumpPressed = context.ReadValueAsButton();
-    //     Debug.Log(jumpPressed);
-    // }
-
 
     //Function to apply walk or run animation
     public void WalkOrRunAnimation() {
