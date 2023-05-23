@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Gravity : MonoBehaviour
 {
+    public bool jumpAnimation = false;
     bool isPlayerFalling;
     float multiplyingFall = 2.0f;
     float jumpPreviouYVelocity;
@@ -26,12 +27,18 @@ public class Gravity : MonoBehaviour
        
         if (controller.isGrounded)
         {
+            if (jumpAnimation)
+            {
+                jumps.CoroutineStart();
+                jumpAnimation = false;
+            }
+            //Animation will be some where here
             movement.movement.y = gravityIfGrounded; 
             movement.runDirectionMove.y = gravityIfGrounded;
         }else if (isPlayerFalling)
         {
             jumpPreviouYVelocity = movement.movement.y;
-            newJumpYVelocity = movement.movement.y + (gravity * multiplyingFall * Time.deltaTime);
+            newJumpYVelocity = movement.movement.y + (jumps.jumpGravities[jumps.jumpCounts] * multiplyingFall * Time.deltaTime);
             nextjumpYVelocity = (jumpPreviouYVelocity + newJumpYVelocity) * .5f;
             movement.movement.y = nextjumpYVelocity;
             movement.runDirectionMove.y = nextjumpYVelocity;    
@@ -39,7 +46,7 @@ public class Gravity : MonoBehaviour
         }else{
             //Adding velovity to the Y input 
             jumpPreviouYVelocity = movement.movement.y;
-            newJumpYVelocity = movement.movement.y + (gravity * Time.deltaTime);
+            newJumpYVelocity = movement.movement.y + (jumps.jumpGravities[jumps.jumpCounts] * Time.deltaTime);
             nextjumpYVelocity = (jumpPreviouYVelocity + newJumpYVelocity) * .5f;
             movement.movement.y = nextjumpYVelocity;
             movement.runDirectionMove.y = nextjumpYVelocity;
