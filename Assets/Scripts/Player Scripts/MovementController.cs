@@ -33,6 +33,8 @@ public class MovementController : MonoBehaviour
 
     //rotation varibles
     float rotationPerFrame = 15.0f;
+    public float cameraRotation;
+    Vector2 cameraInput;
     Vector3 lookAtPosition;
     Quaternion rotation;
     Quaternion targetToLookAt;
@@ -50,6 +52,10 @@ public class MovementController : MonoBehaviour
         action.PlayerActions.Run.started += OnPlayerRun;
         action.PlayerActions.Run.canceled += OnPlayerRun;
         action.PlayerActions.Run.performed += OnPlayerRun;
+        //Look
+        action.PlayerActions.Look.started += OnPlayerLook;
+        action.PlayerActions.Look.canceled += OnPlayerLook;
+        action.PlayerActions.Look.performed += OnPlayerLook;
 
         //Getting animator component
         animator= GetComponent<Animator>();
@@ -72,6 +78,9 @@ public class MovementController : MonoBehaviour
 
     void OnPlayerRun(InputAction.CallbackContext context){
         isRunPressed = context.ReadValueAsButton();
+    }
+    void OnPlayerLook(InputAction.CallbackContext context){
+        cameraRotation = context.ReadValue<Vector2>().x;
     }
 
     //Function to apply walk or run animation
@@ -99,18 +108,18 @@ public class MovementController : MonoBehaviour
 
     //Player rotation to direction
     public void PlayerRotation() {
-
+        transform.Rotate(Vector3.up * cameraRotation * rotationPerFrame * Time.deltaTime);
         //Position the player will looka at 
-        lookAtPosition.x = movement.x;
-        lookAtPosition.y = 0.0f;
-        lookAtPosition.z = movement.z;
-        //Adding rotation to player to face at
-        rotation = transform.rotation;
-        if (isMovementPressed)
-        {
-            targetToLookAt = Quaternion.LookRotation(lookAtPosition);
-            transform.rotation = Quaternion.Slerp(rotation, targetToLookAt, rotationPerFrame * Time.deltaTime);
-        }
+        // lookAtPosition.x = movement.x;
+        // lookAtPosition.y = 0.0f;
+        // lookAtPosition.z = movement.z;
+        // //Adding rotation to player to face at
+        // rotation = transform.rotation;
+        // if (isMovementPressed)
+        // {
+        //     targetToLookAt = Quaternion.LookRotation(lookAtPosition);
+        //     transform.rotation = Quaternion.Slerp(rotation, targetToLookAt, rotationPerFrame * Time.deltaTime);
+        // }
     }
 
     private void OnEnable()
