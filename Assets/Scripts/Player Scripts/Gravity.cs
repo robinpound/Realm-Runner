@@ -28,10 +28,8 @@ public class Gravity : MonoBehaviour
     
         isPlayerFalling = movement.movement.y <= 0.0f || !jumps.jumpPressed; //Try same logic for double jump
        
-        if (controller.isGrounded)
-        {
-            if (jumpAnimation)
-            {
+        if (controller.isGrounded) {
+            if (jumpAnimation) {
                 jumps.CoroutineStart();
                 jumpAnimation = false;
             }
@@ -40,15 +38,14 @@ public class Gravity : MonoBehaviour
             animator.SetBool("jump", false);
             movement.movement.y = gravityIfGrounded; 
             movement.runDirectionMove.y = gravityIfGrounded;
-        }else if (isPlayerFalling)
-        {
+        } else if (isPlayerFalling) {
             jumpPreviouYVelocity = movement.movement.y;
             newJumpYVelocity = movement.movement.y + (jumps.jumpGravities[jumps.jumpCounts] * multiplyingFall * Time.deltaTime);
             nextjumpYVelocity = (jumpPreviouYVelocity + newJumpYVelocity) * .5f;
             movement.movement.y = nextjumpYVelocity;
             movement.runDirectionMove.y = nextjumpYVelocity;    
         
-        }else{
+        } else {
             //Adding velovity to the Y input 
             jumpPreviouYVelocity = movement.movement.y;
             newJumpYVelocity = movement.movement.y + (jumps.jumpGravities[jumps.jumpCounts] * Time.deltaTime);
@@ -56,6 +53,5 @@ public class Gravity : MonoBehaviour
             movement.movement.y = nextjumpYVelocity;
             movement.runDirectionMove.y = nextjumpYVelocity;
         }
-
     }
 }
