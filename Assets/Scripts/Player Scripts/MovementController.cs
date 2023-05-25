@@ -63,6 +63,8 @@ public class MovementController : MonoBehaviour
         isWalking = Animator.StringToHash("walk");
         isRunning = Animator.StringToHash("run");
 
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void OnPlayerMove(InputAction.CallbackContext context)
@@ -124,7 +126,7 @@ public class MovementController : MonoBehaviour
 
     private void OnEnable()
     {
-       action.PlayerActions.Enable();
+        action.PlayerActions.Enable();
     }
     private void OnDisable()
     {
