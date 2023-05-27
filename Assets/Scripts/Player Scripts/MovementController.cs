@@ -108,18 +108,18 @@ public class MovementController : MonoBehaviour
 
     //Player rotation to direction
     public void PlayerRotation() {
-        transform.Rotate(Vector3.up * cameraRotation * rotationPerFrame * Time.deltaTime);
-        //Position the player will looka at 
-        // lookAtPosition.x = movement.x;
-        // lookAtPosition.y = 0.0f;
-        // lookAtPosition.z = movement.z;
-        // //Adding rotation to player to face at
-        // rotation = transform.rotation;
-        // if (isMovementPressed)
-        // {
-        //     targetToLookAt = Quaternion.LookRotation(lookAtPosition);
-        //     transform.rotation = Quaternion.Slerp(rotation, targetToLookAt, rotationPerFrame * Time.deltaTime);
-        // }
+        // transform.Rotate(Vector3.up * cameraRotation * rotationPerFrame * Time.deltaTime);
+        // Position the player will looka at 
+        lookAtPosition.x = movement.x;
+        lookAtPosition.y = 0.0f;
+        lookAtPosition.z = movement.z;
+        //Adding rotation to player to face at
+        rotation = transform.rotation;
+        if (isMovementPressed)
+        {
+            targetToLookAt = Quaternion.LookRotation(lookAtPosition);
+            transform.rotation = Quaternion.Slerp(rotation, targetToLookAt, rotationPerFrame * Time.deltaTime);
+        }
     }
 
     private void OnEnable()

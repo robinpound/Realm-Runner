@@ -87,6 +87,12 @@ public class PlayerJumps : MonoBehaviour
         
     }
 
+
+    //Testing Jump with rigidBody
+    public void RigidJump(){
+        
+    }
+
     public void Jump(){
         if (!isPlayerJump && jumpController.isGrounded && jumpPressed)
         {
