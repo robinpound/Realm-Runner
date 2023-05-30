@@ -15,6 +15,8 @@ public class CameraFollow : MonoBehaviour
 
     private void Awake()
     {
+        offSet.z=-7.17f;
+        offSet.y = 1.84f;
         //Getting the player to our transform component
         _player = _playerTransform.gameObject.GetComponent<Player>();
         transform.position = _playerTransform.position;

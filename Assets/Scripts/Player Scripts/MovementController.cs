@@ -6,9 +6,10 @@ using UnityEngine.InputSystem;
 public class MovementController : MonoBehaviour
 {
     //Movenet in the input axis
+   
     Vector2 movementInput;
     public Vector3 movement;
-
+    float hInput, vInput;
     //Input action
     public InputActions action;
 
@@ -22,8 +23,8 @@ public class MovementController : MonoBehaviour
 
     //Run variables 
     int isRunning;
-    float runSpeed = 5f;
-    float walkSpeed = 2f;
+    public float runSpeed = 5f;
+    public float walkSpeed = 2f;
     public bool isRunPressed;
     bool isPlayerIsRunning;
     public Vector3 runDirectionMove;
@@ -34,7 +35,7 @@ public class MovementController : MonoBehaviour
     //rotation varibles
     float rotationPerFrame = 15.0f;
     public float cameraRotation;
-    Vector2 cameraInput;
+    Vector2 cameraAimInput;
     Vector3 lookAtPosition;
     Quaternion rotation;
     Quaternion targetToLookAt;
@@ -67,20 +68,34 @@ public class MovementController : MonoBehaviour
 
     void OnPlayerMove(InputAction.CallbackContext context)
     {
-        //Adding the context value to the is pressed boolean
+        ////Adding the context value to the is pressed boolean
         movementInput = context.ReadValue<Vector2>();
+
+        //USING FOR WHEN MOUSE ROTATION
+        // movement = transform.forward * movementInput.y + transform.right * movementInput.x;
+        // runDirectionMove = transform.forward * movementInput.y + transform.right * movementInput.x;
+        
+        //KEYBOARD ROTATION
         movement.x = movementInput.x * walkSpeed;
         movement.z = movementInput.y * walkSpeed;
         runDirectionMove.x = movementInput.x * runSpeed;
         runDirectionMove.z = movementInput.y * runSpeed;
         isMovementPressed = movementInput.x != 0 || movementInput.y != 0;
+        Debug.Log("X direction" + movementInput.x);
+        Debug.Log("Y direction" + movementInput.y);
     }
 
     void OnPlayerRun(InputAction.CallbackContext context){
         isRunPressed = context.ReadValueAsButton();
     }
     void OnPlayerLook(InputAction.CallbackContext context){
-        cameraRotation = context.ReadValue<Vector2>().x;
+        cameraAimInput += context.ReadValue<Vector2>();
+
+        /**TODO: I need a boolean and an if statement for when the player is carry on a weapon
+        the camera follow, camera rotation an aiming will get in action**/ 
+        
+        // movement = transform.position * cameraAimInput.y + transform.position * cameraAimInput.x;
+        // runDirectionMove = transform.forward * cameraAimInput.y + transform.right * cameraAimInput.x;
     }
 
     //Function to apply walk or run animation
@@ -107,18 +122,24 @@ public class MovementController : MonoBehaviour
     }
 
     //Player rotation to direction
+    public void RoationIfAming(){
+        transform.localRotation = Quaternion.Euler(0, cameraAimInput.x, 0);
+    }
+
+   
     public void PlayerRotation() {
-        // transform.Rotate(Vector3.up * cameraRotation * rotationPerFrame * Time.deltaTime);
         // Position the player will looka at 
         lookAtPosition.x = movement.x;
-        lookAtPosition.y = 0.0f;
+        lookAtPosition.y = 0.0f;  
         lookAtPosition.z = movement.z;
-        //Adding rotation to player to face at
+        // Adding rotation to player to face at
         rotation = transform.rotation;
+        
         if (isMovementPressed)
         {
             targetToLookAt = Quaternion.LookRotation(lookAtPosition);
             transform.rotation = Quaternion.Slerp(rotation, targetToLookAt, rotationPerFrame * Time.deltaTime);
+            // movement = transform.TransformDirection(Vector3.forward)*walkSpeed;
         }
     }
 
