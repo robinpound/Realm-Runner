@@ -1,5 +1,5 @@
 {
-    "name": "New Controls",
+    "name": "InputActions",
     "maps": [
         {
             "name": "PlayerActions",
@@ -36,6 +36,24 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "17bfef0b-1e26-4664-bbca-012562d1d9b7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ArrowAttack",
+                    "type": "Button",
+                    "id": "0490623c-477e-46cc-95ae-b2a69fecb93a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ArrowAiming",
+                    "type": "Button",
+                    "id": "f4665cf4-0bab-4798-8277-1fb05ebbf812",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -326,6 +344,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6203ee91-2dcd-4f03-8f9c-b1d1a68ae3a8",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ArrowAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2f42fa3d-a67b-44a6-a929-5d4b10052c21",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ArrowAiming",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

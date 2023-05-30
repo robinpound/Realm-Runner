@@ -6,13 +6,14 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 { 
     CharacterController characterController;
-     float hInput, vInput;
+    float hInput, vInput;
     Gravity gravity;
     PlayerJumps jumps;
+    PlayerAttack arrowShoot;
     //Storing input controller in a variable
     float speed = 10f;
     MovementController inputActions;
-     Vector3 playerAimMoveInput;
+    Vector3 playerAimMoveInput;
     
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
         inputActions = FindObjectOfType<MovementController>();
         jumps = FindObjectOfType<PlayerJumps>();
         gravity = FindObjectOfType<Gravity>();
+        arrowShoot = FindObjectOfType<PlayerAttack>();
 
         // jumps.SetJumps();
     }
@@ -42,6 +44,7 @@ public class Player : MonoBehaviour
         //Rotation to the player
         inputActions.PlayerRotation();
         gravity.PlayerGravity();
+        arrowShoot.BowAndArrowAttack();
        // inputActions.RoationIfAming();
         jumps.Jump();
 

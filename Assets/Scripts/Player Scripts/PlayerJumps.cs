@@ -87,12 +87,6 @@ public class PlayerJumps : MonoBehaviour
         
     }
 
-
-    //Testing Jump with rigidBody
-    public void RigidJump(){
-        
-    }
-
     public void Jump(){
         if (!isPlayerJump && jumpController.isGrounded && jumpPressed)
         {
@@ -103,7 +97,7 @@ public class PlayerJumps : MonoBehaviour
             }
             //Jump Animation true here
             // animator.SetInteger(jumpCountHash, jumpCounts);
-            animator.SetBool("jump", true);
+            //animator.SetInteger(jumpHash, jumpCountHash);
             isPlayerJump = true;
             addGrav.jumpAnimation = true;
             jumpCounts += 1;
