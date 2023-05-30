@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public GameObject player;
     public GameObject[] options;
 
     // Start is called before the first frame update
@@ -31,6 +32,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
+        player.GetComponent<PauseActivate>().paused = false;
     }
     public void SaveGame()
     {
@@ -53,6 +55,14 @@ public class PauseMenu : MonoBehaviour
     #endregion
 
     #region Options Buttons
+    public void DeactivateAll()
+    {
+        pauseMenu.SetActive(false);
+        options[0].SetActive(false); //Main Options
+        options[1].SetActive(false); //Key Bindings Page
+        options[2].SetActive(false); //Audio Page
+        options[3].SetActive(false); //Video Page
+    }
     public void OptionsBack()
     {
         pauseMenu.SetActive(true);
