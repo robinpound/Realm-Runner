@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
     public GameObject player;
+    public GameObject playerUI;
     public GameObject[] options;
 
     // Start is called before the first frame update
@@ -24,6 +25,7 @@ public class PauseMenu : MonoBehaviour
     public void Pause()
     {
         pauseMenu.SetActive(true);
+        playerUI.SetActive(false);
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
     }
@@ -33,6 +35,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
         player.GetComponent<PauseActivate>().paused = false;
+        playerUI.SetActive(true);
     }
     public void SaveGame()
     {
