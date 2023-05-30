@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,10 +21,29 @@ public class Walking : MonoBehaviour
 
     [Header("Attacking")]   
     public float alertRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange;
+    public bool isplayerInAlertRange, isplayerInAttackRange;
 
     void Awake() 
     {
         player = GameObject.FindWithTag("Player").transform;
+        agent = GetComponent<NavMeshAgent>();
+    }
+
+    private void FixedUpdate() {
+        isplayerInAlertRange = Physics.CheckSphere(transform.position, alertRange, whatIsPlayer);
+        isplayerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+
+        if (!isplayerInAlertRange && !isplayerInAttackRange) Patrol();
+        if (!isplayerInAlertRange && !isplayerInAttackRange) Chase();
+    }
+
+    private void Chase()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void Patrol()
+    {
+        throw new NotImplementedException();
     }
 }
