@@ -42,11 +42,6 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
-
-    public void Back()
-    {
-        credits.SetActive(false);
-    }
     #endregion
 
     #region Credit Buttons
@@ -65,6 +60,10 @@ public class MainMenu : MonoBehaviour
     public void Liam()
     {
         Application.OpenURL("");
+    }
+    public void Back()
+    {
+        credits.SetActive(false);
     }
     #endregion
 }
