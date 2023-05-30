@@ -1,5 +1,5 @@
 {
-    "name": "New Controls",
+    "name": "InputActions",
     "maps": [
         {
             "name": "PlayerActions",
@@ -36,6 +36,15 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "17bfef0b-1e26-4664-bbca-012562d1d9b7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "aeffb1e6-4292-45ed-87b6-d3dd2f819b9e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -326,6 +335,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c1d863bf-9c69-4898-b38b-fc87f9085d6a",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
