@@ -40,9 +40,9 @@ public class Player : MonoBehaviour
         //Getting the walk animation from the Input controller class
         inputActions.WalkOrRunAnimation();
         //Rotation to the player
-        // inputActions.PlayerRotation();
+        inputActions.PlayerRotation();
         gravity.PlayerGravity();
-        inputActions.RoationIfAming();
+       // inputActions.RoationIfAming();
         jumps.Jump();
 
         if(gravity.isPlayerFalling)
