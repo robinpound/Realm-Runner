@@ -72,14 +72,14 @@ public class MovementController : MonoBehaviour
         movementInput = context.ReadValue<Vector2>();
 
         //USING FOR WHEN MOUSE ROTATION
-        // movement = transform.forward * movementInput.y + transform.right * movementInput.x;
-        // runDirectionMove = transform.forward * movementInput.y + transform.right * movementInput.x;
-        
+        //movement = transform.forward * movementInput.y + transform.right * movementInput.x;
+        //runDirectionMove = transform.forward * movementInput.y + transform.right * movementInput.x;
+
         //KEYBOARD ROTATION
-        movement.x = movementInput.x * walkSpeed;
-        movement.z = movementInput.y * walkSpeed;
-        runDirectionMove.x = movementInput.x * runSpeed;
-        runDirectionMove.z = movementInput.y * runSpeed;
+        movement.x = movementInput.x ;
+        movement.z = movementInput.y ;
+        runDirectionMove.x = movementInput.x ;
+        runDirectionMove.z = movementInput.y;
         isMovementPressed = movementInput.x != 0 || movementInput.y != 0;
         Debug.Log("X direction" + movementInput.x);
         Debug.Log("Y direction" + movementInput.y);

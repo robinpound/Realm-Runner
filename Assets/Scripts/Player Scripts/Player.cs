@@ -42,7 +42,11 @@ public class Player : MonoBehaviour
         //Rotation to the player
         inputActions.PlayerRotation();
         gravity.PlayerGravity();
+<<<<<<< Updated upstream
        // inputActions.RoationIfAming();
+=======
+        //inputActions.RoationIfAming();
+>>>>>>> Stashed changes
         jumps.Jump();
 
         if(gravity.isPlayerFalling)

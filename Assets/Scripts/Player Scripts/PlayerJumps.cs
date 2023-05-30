@@ -20,7 +20,7 @@ public class PlayerJumps : MonoBehaviour
     float higherPoint;
     float jumpVelocity;
     float jumpPreviouYvelocity;
-    float maxTimeOfJumps = .75f;
+    float maxTimeOfJumps = .55f;
     float maxJumpHeightOfJump = 4f;
 
     //Different type of jumps and gravities var
