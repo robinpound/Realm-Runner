@@ -75,7 +75,7 @@ public class Walking : MonoBehaviour
 
     private void Attack()
     {
-        agent.SetDestination(transform.position); // stop moving
+        agent.SetDestination(transform.position); //Stop moving
         transform.LookAt(player);
 
         if(!_attacked)
