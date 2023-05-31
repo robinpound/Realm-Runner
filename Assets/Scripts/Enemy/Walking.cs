@@ -83,6 +83,7 @@ public class Walking : MonoBehaviour
             /*
                 ATTACK CODE HERE!
             */
+            Debug.Log("Attacking!");
             _attacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
