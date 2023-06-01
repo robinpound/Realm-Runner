@@ -9,7 +9,7 @@ public class MovingPlatformController : MonoBehaviour
     private float lerpSpeed = 1f;
     private int direction = 1;
 
-    private void Update()
+    private void FixedUpdate()
     {
         Vector3 targetPoint = currentPlatformMoveToTarge();
 

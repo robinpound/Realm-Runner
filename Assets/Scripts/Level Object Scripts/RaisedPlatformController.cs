@@ -8,7 +8,7 @@ public class RaisedPlatformController : MonoBehaviour
     private Transform raisingPlatform, endPoint;
     private float lerpSpeed = 1f;
 
-    private void Update()
+    private void FixedUpdate()
     {
         raisingPlatform.position = Vector3.Lerp(raisingPlatform.position, endPoint.position, lerpSpeed * Time.deltaTime);
     }
