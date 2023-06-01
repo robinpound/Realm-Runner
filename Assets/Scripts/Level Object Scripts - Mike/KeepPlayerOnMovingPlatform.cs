@@ -6,6 +6,7 @@ public class KeepPlayerOnMovingPlatform : MonoBehaviour
 {
     const string PLAYER = "Player";
 
+    // On trigger add set the Player as a child object to this.
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.name + " is ON the moving platform");
@@ -15,7 +16,7 @@ public class KeepPlayerOnMovingPlatform : MonoBehaviour
         }
 
     }
-
+    // On trigger exit, revert.
     private void OnTriggerExit(Collider other)
     {
         Debug.Log(other.gameObject.name + " is OFF the moving platform");
@@ -23,10 +24,10 @@ public class KeepPlayerOnMovingPlatform : MonoBehaviour
         {
             other.gameObject.transform.SetParent(null);
         }
-        
-        
     }
-    /* Old Code used with collisions
+
+
+    /* Old Code used with collisions (Not working with Character controller)
     private void OnCollisionEnter(Collision collision)
     {
         

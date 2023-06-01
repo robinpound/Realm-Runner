@@ -10,6 +10,8 @@ public class RaisedPlatformController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Raise platform from current position to adjustable end point.
+        // To move to a method that will be called by a switch script.
         raisingPlatform.position = Vector3.Lerp(raisingPlatform.position, endPoint.position, lerpSpeed * Time.deltaTime);
     }
 

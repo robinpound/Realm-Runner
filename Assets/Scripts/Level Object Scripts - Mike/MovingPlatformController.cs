@@ -15,15 +15,17 @@ public class MovingPlatformController : MonoBehaviour
 
         movingPlatform.position = Vector3.Lerp(movingPlatform.position, targetPoint, lerpSpeed * Time.deltaTime);
 
+        // Check distance to target position vector.
         float distanceToCurrentTarget = (targetPoint - (Vector3)movingPlatform.position).magnitude;
 
+        // Flip flop with int: (1 x -1 = -1) & (-1 x -1 = 1).
         if (distanceToCurrentTarget <= .1f)
             direction *= -1;
     }
-
+    // Return current target vector position.
     Vector3 currentPlatformMoveToTarge()
     {
-        if (direction == 1)
+        if (direction == 1) // Set current position target in accordance with direction flip flop.
         {
             return startPoint.position;
         } 
