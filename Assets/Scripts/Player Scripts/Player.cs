@@ -31,21 +31,24 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         //Adding the movenet action to the character controller
-        if (inputActions.isRunPressed){
+        if (inputActions.isRunPressed)
+        {
             characterController.Move(inputActions.runDirectionMove * inputActions.runSpeed * Time.deltaTime);
-        }else{
-            characterController.Move(inputActions.movement * inputActions.walkSpeed * Time.deltaTime); 
         }
-       
+        else
+        {
+            characterController.Move(inputActions.movement * inputActions.walkSpeed * Time.deltaTime);
+        }
+
         //Getting the walk animation from the Input controller class
         inputActions.WalkOrRunAnimation();
         //Rotation to the player
         inputActions.PlayerRotation();
         gravity.PlayerGravity();
-       // inputActions.RoationIfAming();
+        // inputActions.RoationIfAming();
         jumps.Jump();
 
-        if(gravity.isPlayerFalling)
+        if (gravity.isPlayerFalling)
         {
             jumps.DoubleJump();
         }

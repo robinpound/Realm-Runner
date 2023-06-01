@@ -81,8 +81,8 @@ public class MovementController : MonoBehaviour
         runDirectionMove.x = movementInput.x;
         runDirectionMove.z = movementInput.y;
         isMovementPressed = movementInput.x != 0 || movementInput.y != 0;
-        Debug.Log("X direction" + movementInput.x);
-        Debug.Log("Y direction" + movementInput.y);
+        //Debug.Log("X direction" + movementInput.x);
+        //Debug.Log("Y direction" + movementInput.y);
     }
 
     void OnPlayerRun(InputAction.CallbackContext context){
