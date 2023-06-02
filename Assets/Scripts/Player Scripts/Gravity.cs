@@ -21,8 +21,8 @@ public class Gravity : MonoBehaviour
     private void Awake() {
         controller = GetComponent<CharacterController>();
         movement = FindObjectOfType<MovementController>();
-        jumps = FindObjectOfType<PlayerJumps>();
         animator = GetComponent<Animator>();
+        jumps = FindObjectOfType<PlayerJumps>();
     }
     public void PlayerGravity(){
     
@@ -34,27 +34,30 @@ public class Gravity : MonoBehaviour
             {
                 jumps.CoroutineStart();
                 jumpAnimation = false;
+                animator.SetBool(jumps.playerJumpHash, false);
+                if (jumps.jumpCounts == 3)
+                {
+                    jumps.jumpCounts = 0;
+                    animator.SetInteger(jumps.jumpCountHash, jumps.jumpCounts);
+                }
             }
-            //Animation will be some where here setted to false
-            //animator.SetInteger(jumps.jumpCountHash, jumps.jumpCounts);
-            animator.SetBool("jump", false);
             movement.movement.y = gravityIfGrounded; 
             movement.runDirectionMove.y = gravityIfGrounded;
         }else if (isPlayerFalling)
         {
             jumpPreviouYVelocity = movement.movement.y;
-            newJumpYVelocity = movement.movement.y + (jumps.jumpGravities[jumps.jumpCounts] * multiplyingFall * Time.deltaTime);
-            nextjumpYVelocity = (jumpPreviouYVelocity + newJumpYVelocity) * .5f;
-            movement.movement.y = nextjumpYVelocity;
-            movement.runDirectionMove.y = nextjumpYVelocity;    
+            movement.movement.y = movement.movement.y + (jumps.jumpGravities[jumps.jumpCounts] * multiplyingFall * Time.deltaTime);
+            movement.movementApplied.y = Mathf.Max((jumpPreviouYVelocity + movement.movement.y) * .5f, 20.0f);
+            // movement.movement.y = nextjumpYVelocity;
+            // movement.runDirectionMove.y = nextjumpYVelocity;    
         
         }else{
             //Adding velovity to the Y input 
             jumpPreviouYVelocity = movement.movement.y;
-            newJumpYVelocity = movement.movement.y + (jumps.jumpGravities[jumps.jumpCounts] * Time.deltaTime);
-            nextjumpYVelocity = (jumpPreviouYVelocity + newJumpYVelocity) * .5f;
-            movement.movement.y = nextjumpYVelocity;
-            movement.runDirectionMove.y = nextjumpYVelocity;
+            movement.movement.y = movement.movement.y + (jumps.jumpGravities[jumps.jumpCounts] * Time.deltaTime);
+            movement.movementApplied.y = (jumpPreviouYVelocity + movement.movement.y) * .5f;
+            // movement.movement.y = nextjumpYVelocity;
+            // movement.runDirectionMove.y = nextjumpYVelocity;
         }
 
     }

@@ -10,8 +10,6 @@ public class PlayerJumps : MonoBehaviour
     //Input action
     InputActions jumpInput;
     Gravity addGrav;
-
-    //Animator animator;
     Animator animator;
 
     public int jumpCounts = 0;
@@ -20,8 +18,8 @@ public class PlayerJumps : MonoBehaviour
     float higherPoint;
     float jumpVelocity;
     float jumpPreviouYvelocity;
-    float maxTimeOfJumps = .75f;
-    float maxJumpHeightOfJump = 4f;
+    float maxTimeOfJumps = .85f; //.75
+    float maxJumpHeightOfJump = 2f;
 
     //Different type of jumps and gravities var
     float secondJumpVelocity;
@@ -30,7 +28,8 @@ public class PlayerJumps : MonoBehaviour
     float thirdJumpGravity;
 
     //Jumps animations
-    int jumpHash;
+    public bool jumpHash = false;
+    public int playerJumpHash;
     public int jumpCountHash;
 
     public Coroutine resetCurrentJump = null;
@@ -50,7 +49,7 @@ public class PlayerJumps : MonoBehaviour
         addGrav = FindObjectOfType<Gravity>();
 
         //Get jump count value and animation type from animator 
-        jumpHash = Animator.StringToHash("jump");
+        playerJumpHash = Animator.StringToHash("jump");
         jumpCountHash = Animator.StringToHash("jumpCount");
 
         animator = GetComponent<Animator>();
@@ -69,8 +68,8 @@ public class PlayerJumps : MonoBehaviour
         secondJumpGravity = (-2 * (maxJumpHeightOfJump + 2)) / Mathf.Pow((higherPoint * 1.25f), 2);
         secondJumpVelocity = (2 * (maxJumpHeightOfJump + 2)) / (higherPoint * 1.25f);  
 
-        thirdJumpGravity = (-2 * (maxJumpHeightOfJump + 4)) / Mathf.Pow((higherPoint * 1.5f), 2);
-        thirdJumpVelocity = (2 * (maxJumpHeightOfJump + 4)) / (higherPoint * 1.5f);  
+        thirdJumpGravity = (-2 * (maxJumpHeightOfJump + 2)) / Mathf.Pow((higherPoint * 1.5f), 2);
+        thirdJumpVelocity = (2 * (maxJumpHeightOfJump + 2)) / (higherPoint * 1.5f);  
         //Velocities
         jumpVelocities.Add(1, jumpVelocity);   
         jumpVelocities.Add(2, secondJumpVelocity);
@@ -83,27 +82,26 @@ public class PlayerJumps : MonoBehaviour
         
         //if (!jumpVelocities.ContainsKey(3)) {
         //    jumpGravities.Add(3, thirdJumpGravity);
-        //}
-        
+        //}       
     }
 
     public void Jump(){
         if (!isPlayerJump && jumpController.isGrounded && jumpPressed)
         {
-            Debug.Log("Checking the jumps count..." + jumpCounts);
             if (jumpCounts < 3 && resetCurrentJump != null)
             {               
                 StopCoroutine(resetCurrentJump);
             }
             //Jump Animation true here
-            // animator.SetInteger(jumpCountHash, jumpCounts);
-            //animator.SetInteger(jumpHash, jumpCountHash);
+            animator.SetInteger(jumpCountHash, jumpCounts);
+            animator.SetBool(playerJumpHash, true);
+            // animator.SetInteger(jumpHash, playerJumpHash);
             isPlayerJump = true;
             addGrav.jumpAnimation = true;
             jumpCounts += 1;
             //Adding velocity to the Y axis value of gravity
             movement.movement.y = jumpVelocities[jumpCounts] * .5f;
-            movement.runDirectionMove.y = jumpVelocities[jumpCounts] * .5f;
+            movement.runDirectionMove.y = jumpVelocities[jumpCounts] * .2f;
            
         }else if (!jumpPressed && isPlayerJump && jumpController.isGrounded)
         {
@@ -113,13 +111,14 @@ public class PlayerJumps : MonoBehaviour
     public void DoubleJump() {
         if (jumpPressed && !jumpController.isGrounded)
         {
-            animator.SetBool("jump", true);
+            animator.SetInteger(jumpCountHash, jumpCounts);
+            // animator.SetBool(jumpHash, true);
             isPlayerJump = true;
             addGrav.jumpAnimation = true;
             jumpCounts += 1;
             //Adding velocity to the Y axis value of gravity
             movement.movement.y = jumpVelocities[jumpCounts] * .5f;
-            movement.runDirectionMove.y = jumpVelocities[jumpCounts] * .5f;
+            movement.runDirectionMove.y = jumpVelocities[jumpCounts] * .2f;
         }
         else
         {

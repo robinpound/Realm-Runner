@@ -34,11 +34,15 @@ public class Player : MonoBehaviour
     {
         //Adding the movenet action to the character controller
         if (inputActions.isRunPressed){
-            characterController.Move(inputActions.runDirectionMove * inputActions.runSpeed * Time.deltaTime);
+            inputActions.movementApplied.x = inputActions.runDirectionMove.x;
+            inputActions.movementApplied.z = inputActions.runDirectionMove.z;
+            // characterController.Move(inputActions.runDirectionMove * inputActions.runSpeed * Time.deltaTime);
         }else{
-            characterController.Move(inputActions.movement * inputActions.walkSpeed * Time.deltaTime); 
+            inputActions.movementApplied.x = inputActions.movement.x;
+            inputActions.movementApplied.z = inputActions.movement.z;
+            // characterController.Move(inputActions.movement * inputActions.walkSpeed * Time.deltaTime); 
         }
-       
+        characterController.Move(inputActions.movementApplied * Time.deltaTime); 
         //Getting the walk animation from the Input controller class
         inputActions.WalkOrRunAnimation();
         //Rotation to the player

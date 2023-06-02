@@ -9,6 +9,7 @@ public class MovementController : MonoBehaviour
    
     Vector2 movementInput;
     public Vector3 movement;
+    public Vector3 movementApplied;
     float hInput, vInput;
     //Input action
     public InputActions action;
@@ -76,8 +77,8 @@ public class MovementController : MonoBehaviour
         // runDirectionMove = transform.forward * movementInput.y + transform.right * movementInput.x;
         
         //KEYBOARD ROTATION
-        movement.x = movementInput.x ;
-        movement.z = movementInput.y ;
+        movement.x = movementInput.x * walkSpeed;
+        movement.z = movementInput.y * walkSpeed ;
         runDirectionMove.x = movementInput.x ;
         runDirectionMove.z = movementInput.y ;
         isMovementPressed = movementInput.x != 0 || movementInput.y != 0;
