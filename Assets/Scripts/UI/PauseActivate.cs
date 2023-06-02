@@ -15,6 +15,7 @@ public class PauseActivate : MonoBehaviour
     }
     private void Start()
     {
+        canvas = GameObject.FindGameObjectWithTag("Canvas");
     }
 
     private void Pause()
@@ -31,7 +32,6 @@ public class PauseActivate : MonoBehaviour
             Debug.Log("Un-Paused!");
             canvas.GetComponent<PauseMenu>().Resume();
             canvas.GetComponent<PauseMenu>().DeactivateAll();
-
         }
     }
 

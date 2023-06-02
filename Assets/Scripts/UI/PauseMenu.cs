@@ -14,6 +14,7 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         pauseMenu.SetActive(false);
         options[0].SetActive(false); //Main Options
         options[1].SetActive(false); //Key Bindings Page
@@ -33,7 +34,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         player.GetComponent<PauseActivate>().paused = false;
         playerUI.SetActive(true);
     }

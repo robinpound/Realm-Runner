@@ -37,6 +37,11 @@ public class OptionsMenu : MonoBehaviour
         resolutionDropdown.RefreshShownValue();
     }
 
+    public void Update()
+    {
+        DontDestroyOnLoad(this);
+    }
+
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
