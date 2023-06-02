@@ -37,6 +37,8 @@ public class Walking : MonoBehaviour
         if (!isplayerInAlertRange && !isplayerInAttackRange) Patrol();
         if (!isplayerInAlertRange && isplayerInAttackRange) Chase();
         if (isplayerInAlertRange && isplayerInAttackRange) Attack();
+
+         
     }
     
     private void Patrol()
@@ -65,11 +67,11 @@ public class Walking : MonoBehaviour
         float currentX = transform.position.x;
         
         waypoint = new Vector3 (currentX + randomX, transform.position.y, currentZ + randomZ);
+        Debug.Log("waypoint:" + waypoint);
 
         //check if place is valid
         if(Physics.Raycast(waypoint, -transform.up, 2f, whatIsGround))
             _isWaypointSet = true;
-
     }
 
     private void Chase()
@@ -99,4 +101,8 @@ public class Walking : MonoBehaviour
         _attacked = false;
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(waypoint, waypointRange);
+    }
 }
