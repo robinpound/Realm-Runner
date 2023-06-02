@@ -41,6 +41,7 @@ public class Walking : MonoBehaviour
     
     private void Patrol()
     {
+        Debug.Log("Patrolling");
         if(!_isWaypointSet) FindWalkPoint();
 
         if(_isWaypointSet)
@@ -48,8 +49,11 @@ public class Walking : MonoBehaviour
 
         //Check if reached waypoint
         Vector3 distanceToWalkPoint = transform.position - waypoint;
-        Debug.Log(distanceToWalkPoint);
+        Debug.Log("distanceToWalkPoint:" + distanceToWalkPoint);
+        Debug.Log("distanceToWalkPoint.magnitude:" + distanceToWalkPoint.magnitude);
+
         if (distanceToWalkPoint.magnitude < 1f)
+            Debug.Log("SetToFalse");
             _isWaypointSet = false;
     }
 
@@ -70,11 +74,13 @@ public class Walking : MonoBehaviour
 
     private void Chase()
     {
+        Debug.Log("Chasing");
         agent.SetDestination(player.position);
     }
 
     private void Attack()
     {
+        Debug.Log("Attackingfunc");
         agent.SetDestination(transform.position); //Stop moving
         transform.LookAt(player);
 
@@ -83,7 +89,7 @@ public class Walking : MonoBehaviour
             /*
                 ATTACK CODE HERE!
             */
-            Debug.Log("Attacking!");
+            Debug.Log("AttackCommence");
             _attacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
