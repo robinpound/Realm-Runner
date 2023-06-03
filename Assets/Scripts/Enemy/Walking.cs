@@ -37,29 +37,23 @@ public class Walking : MonoBehaviour
         if (!isplayerInAlertRange && !isplayerInAttackRange) Patrol();
         if (!isplayerInAlertRange && isplayerInAttackRange) Chase();
         if (isplayerInAlertRange && isplayerInAttackRange) Attack();
-
-         
     }
     
     private void Patrol()
     {
-        Debug.Log("Patrolling");
-        if(!_isWaypointSet) FindWalkPoint();
+        Debug.Log("Patrolling: " + _isWaypointSet);
+        if(!_isWaypointSet) FindWayPoint();
 
         if(_isWaypointSet)
             agent.SetDestination(waypoint);
 
         //Check if reached waypoint
         Vector3 distanceToWalkPoint = transform.position - waypoint;
-        Debug.Log("distanceToWalkPoint:" + distanceToWalkPoint);
-        Debug.Log("distanceToWalkPoint.magnitude:" + distanceToWalkPoint.magnitude);
-
         if (distanceToWalkPoint.magnitude < 1f)
-            Debug.Log("SetToFalse");
             _isWaypointSet = false;
     }
 
-    private void FindWalkPoint()
+    private void FindWayPoint()
     {
         float randomZ = Random.Range(-waypointRange, waypointRange);
         float randomX = Random.Range(-waypointRange, waypointRange);
@@ -67,11 +61,12 @@ public class Walking : MonoBehaviour
         float currentX = transform.position.x;
         
         waypoint = new Vector3 (currentX + randomX, transform.position.y, currentZ + randomZ);
-        Debug.Log("waypoint:" + waypoint);
-
         //check if place is valid
-        if(Physics.Raycast(waypoint, -transform.up, 2f, whatIsGround))
+        
+        if(Physics.Raycast(waypoint, -transform.up, 2f, whatIsGround)){
             _isWaypointSet = true;
+            Debug.Log("found waypoint");
+        }
     }
 
     private void Chase()
@@ -82,7 +77,7 @@ public class Walking : MonoBehaviour
 
     private void Attack()
     {
-        Debug.Log("Attackingfunc");
+        Debug.Log("Attacking");
         agent.SetDestination(transform.position); //Stop moving
         transform.LookAt(player);
 
@@ -91,7 +86,6 @@ public class Walking : MonoBehaviour
             /*
                 ATTACK CODE HERE!
             */
-            Debug.Log("AttackCommence");
             _attacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
@@ -101,8 +95,14 @@ public class Walking : MonoBehaviour
         _attacked = false;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawSphere(waypoint, waypointRange);
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, alertRange);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.DrawSphere(waypoint, 0.5f);
     }
 }

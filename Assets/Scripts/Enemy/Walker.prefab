@@ -56,11 +56,11 @@ MonoBehaviour:
     m_Bits: 128
   waypoint: {x: 0, y: 0, z: 0}
   _isWaypointSet: 0
-  waypointRange: 50
+  waypointRange: 30
   timeBetweenAttacks: 0
   _attacked: 0
-  alertRange: 0
-  attackRange: 0
+  alertRange: 5
+  attackRange: 0.5
   isplayerInAlertRange: 0
   isplayerInAttackRange: 0
 --- !u!195 &1947945118
