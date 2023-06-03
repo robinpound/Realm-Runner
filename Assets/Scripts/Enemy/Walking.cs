@@ -26,7 +26,7 @@ public class Walking : MonoBehaviour
 
     void Awake() 
     {
-        player = GameObject.FindWithTag("Player").transform;
+        player = GameObject.FindWithTag("Playerr").transform;
         agent = GetComponent<NavMeshAgent>();
     }
 
