@@ -7,31 +7,31 @@ using Random = UnityEngine.Random;
 
 public class Walking : MonoBehaviour
 {
-    public NavMeshAgent agent; 
-    public Transform player; 
-    public LayerMask whatIsGround, whatIsPlayer;
-
-    [Header("Patroling")]    
-    public Vector3 waypoint; 
-    [SerializeField] bool _isWaypointSet;
-    public float waypointRange;
-
     [Header("Attacking")]    
-    public float timeBetweenAttacks; 
-    [SerializeField] bool _attacked;
+    [SerializeField] private NavMeshAgent agent; 
+    [SerializeField] private Transform player; 
+    [SerializeField] private LayerMask whatIsGround, whatIsPlayer;
 
-    [Header("Attacking")]   
-    public float alertRange, attackRange;
-    public bool isplayerInAlertRange, isplayerInAttackRange;
+    [Header("Settings")]    
+    [SerializeField] private float waypointRange;
+    [SerializeField] private float alertRange;
+    [SerializeField] private float attackRange;
+    [SerializeField] private float timeBetweenAttacks; 
+ 
+    private Vector3 waypoint; 
+    private bool isWaypointSet;
+    private bool isplayerInAlertRange;
+    private bool isplayerInAttackRange;
+    private bool isattacked; 
 
     void Awake() 
     {
-        player = GameObject.FindWithTag("Playerr").transform;
+        player = GameObject.FindWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
     }
 
     private void FixedUpdate() {
-        isplayerInAlertRange = Physics.CheckSphere(transform.position, alertRange, whatIsPlayer);
+        isplayerInAlertRange = Physics.CheckSphere(transform.position, alertRange, whatIsGround);
         isplayerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         if (!isplayerInAlertRange && !isplayerInAttackRange) Patrol();
@@ -41,16 +41,16 @@ public class Walking : MonoBehaviour
     
     private void Patrol()
     {
-        Debug.Log("Patrolling: " + _isWaypointSet);
-        if(!_isWaypointSet) FindWayPoint();
+        Debug.Log("Patrolling: " + isWaypointSet);
+        if(!isWaypointSet) FindWayPoint();
 
-        if(_isWaypointSet)
+        if(isWaypointSet)
             agent.SetDestination(waypoint);
 
         //Check if reached waypoint
         Vector3 distanceToWalkPoint = transform.position - waypoint;
         if (distanceToWalkPoint.magnitude < 1f)
-            _isWaypointSet = false;
+            isWaypointSet = false;
     }
 
     private void FindWayPoint()
@@ -64,7 +64,7 @@ public class Walking : MonoBehaviour
         //check if place is valid
         
         if(Physics.Raycast(waypoint, -transform.up, 2f, whatIsGround)){
-            _isWaypointSet = true;
+            isWaypointSet = true;
             Debug.Log("found waypoint");
         }
     }
@@ -81,21 +81,23 @@ public class Walking : MonoBehaviour
         agent.SetDestination(transform.position); //Stop moving
         transform.LookAt(player);
 
-        if(!_attacked)
+        if(!isattacked)
         {
             /*
                 ATTACK CODE HERE!
             */
-            _attacked = true;
+            isattacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
 
     private void ResetAttack() {
-        _attacked = false;
+        isattacked = false;
     }
 
     private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(transform.position, waypointRange);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, alertRange);
         Gizmos.color = Color.red;
@@ -104,5 +106,6 @@ public class Walking : MonoBehaviour
 
     private void OnDrawGizmos() {
         Gizmos.DrawSphere(waypoint, 0.5f);
+
     }
 }
