@@ -7,22 +7,26 @@ using Random = UnityEngine.Random;
 
 public class Walking : MonoBehaviour
 {
-    [Header("Attacking")]    
+    [Header("Don't Touch!")]    
     [SerializeField] private NavMeshAgent agent; 
     [SerializeField] private Transform player; 
     [SerializeField] private LayerMask whatIsGround, whatIsPlayer;
 
     [Header("Settings")]    
     [SerializeField] private float waypointRange;
-    [SerializeField] private float alertRange;
+    [SerializeField] private float chaseRange;
     [SerializeField] private float attackRange;
     [SerializeField] private float timeBetweenAttacks; 
- 
-    private Vector3 waypoint; 
-    private bool isWaypointSet;
-    private bool isplayerInAlertRange;
-    private bool isplayerInAttackRange;
-    private bool isattacked; 
+    [SerializeField] private float patrolSpeed = 0.5f;
+    [SerializeField] private float chaseSpeed = 1f;
+    [SerializeField] private float attackSpeed = 1.5f;
+    
+    [Header("Behind the scenes:")] 
+    [SerializeField] private Vector3 waypoint; 
+    [SerializeField] private bool isWaypointSet = false;
+    [SerializeField] private bool isplayerInChaseRange = false;
+    [SerializeField] private bool isplayerInAttackRange = false;
+    [SerializeField] private bool isattacked = false; 
 
     void Awake() 
     {
@@ -31,18 +35,20 @@ public class Walking : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        isplayerInAlertRange = Physics.CheckSphere(transform.position, alertRange, whatIsGround);
+        isplayerInChaseRange = Physics.CheckSphere(transform.position, chaseRange, whatIsPlayer);
         isplayerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!isplayerInAlertRange && !isplayerInAttackRange) Patrol();
-        if (!isplayerInAlertRange && isplayerInAttackRange) Chase();
-        if (isplayerInAlertRange && isplayerInAttackRange) Attack();
+        if (!isplayerInChaseRange && !isplayerInAttackRange) Patrol(); 
+        if (isplayerInChaseRange && !isplayerInAttackRange) Chase(); 
+        if (isplayerInChaseRange && isplayerInAttackRange) Attack(); 
     }
     
     private void Patrol()
     {
+        agent.speed = patrolSpeed;
         Debug.Log("Patrolling: " + isWaypointSet);
-        if(!isWaypointSet) FindWayPoint();
+        if(!isWaypointSet) FindWayPoint(); 
+        if(Random.Range(0,100) == 1) FindWayPoint();
 
         if(isWaypointSet)
             agent.SetDestination(waypoint);
@@ -55,6 +61,7 @@ public class Walking : MonoBehaviour
 
     private void FindWayPoint()
     {
+        Debug.Log("Finding waypoint");
         float randomZ = Random.Range(-waypointRange, waypointRange);
         float randomX = Random.Range(-waypointRange, waypointRange);
         float currentZ = transform.position.z;
@@ -65,18 +72,21 @@ public class Walking : MonoBehaviour
         
         if(Physics.Raycast(waypoint, -transform.up, 2f, whatIsGround)){
             isWaypointSet = true;
-            Debug.Log("found waypoint");
+            Debug.Log("found waypoint:" + waypoint);
         }
     }
 
     private void Chase()
     {
-        Debug.Log("Chasing");
-        agent.SetDestination(player.position);
+        agent.speed = chaseSpeed;
+        Vector3 playerposition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+        Debug.Log("Chasing to: " + player.transform.position);
+        agent.SetDestination(player.transform.position);
     }
 
     private void Attack()
     {
+        agent.speed = attackSpeed;
         Debug.Log("Attacking");
         agent.SetDestination(transform.position); //Stop moving
         transform.LookAt(player);
@@ -99,7 +109,7 @@ public class Walking : MonoBehaviour
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, waypointRange);
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, alertRange);
+        Gizmos.DrawWireSphere(transform.position, chaseRange);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }

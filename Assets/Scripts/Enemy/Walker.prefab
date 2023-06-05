@@ -54,15 +54,15 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  waypoint: {x: 0, y: 0, z: 0}
-  _isWaypointSet: 0
-  waypointRange: 30
+  waypointRange: 5
+  alertRange: 2
+  attackRange: 1
   timeBetweenAttacks: 0
-  _attacked: 0
-  alertRange: 5
-  attackRange: 0.5
+  waypoint: {x: 0, y: 0, z: 0}
+  isWaypointSet: 0
   isplayerInAlertRange: 0
   isplayerInAttackRange: 0
+  isattacked: 0
 --- !u!195 &1947945118
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -73,8 +73,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Speed: 1
+  m_Acceleration: 1
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
