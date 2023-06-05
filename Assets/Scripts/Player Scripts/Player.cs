@@ -6,16 +6,19 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 { 
     public CharacterController characterController;
+    // [SerializeField]
+    // Transform cameraFollow;
+    CameraController cameraController;
     float hInput, vInput;
     Gravity gravity;
     PlayerJumps jumps;
     PlayerAttack arrowShoot;
     //Storing input controller in a variable
-    float speed = 10f;
+    float speed = 1f;
     MovementController inputActions;
 
-    CameraOrbitController camController;
     Vector3 playerAimMoveInput;
+    //Camera rotation
     
     private void Awake()
     {
@@ -25,7 +28,7 @@ public class Player : MonoBehaviour
         jumps = FindObjectOfType<PlayerJumps>();
         gravity = FindObjectOfType<Gravity>();
         arrowShoot = FindObjectOfType<PlayerAttack>();
-        camController = FindObjectOfType<CameraOrbitController>();
+        cameraController = FindObjectOfType<CameraController>();
 
         // jumps.SetJumps();
     }
@@ -35,13 +38,15 @@ public class Player : MonoBehaviour
         if (inputActions.isRunPressed){
             gravity.movementApplied.x = inputActions.runDirectionMove.x;
             gravity.movementApplied.z = inputActions.runDirectionMove.z;
+            
             // characterController.Move(inputActions.runDirectionMove * inputActions.runSpeed * Time.deltaTime);
         }else{
             gravity.movementApplied.x = inputActions.movement.x;
             gravity.movementApplied.z = inputActions.movement.z;
+            
             // characterController.Move(inputActions.movement * inputActions.walkSpeed * Time.deltaTime); 
         }
-        camController.playerLookInput = camController.GetLookInput();
+        // gravity.movementApplied = Quaternion.Euler(0,inputActions.targetToLookAt, 0) * Vector3.forward;
         characterController.Move(gravity.movementApplied * Time.deltaTime); 
         //Getting the walk animation from the Input controller class
         inputActions.WalkOrRunAnimation();
@@ -49,6 +54,7 @@ public class Player : MonoBehaviour
         inputActions.PlayerRotation();
         gravity.PlayerGravity();
         arrowShoot.BowAndArrowAttack();
+        cameraController.CameraRotation();
        // inputActions.RoationIfAming();
         jumps.Jump();
 
@@ -65,6 +71,5 @@ public class Player : MonoBehaviour
         // transform.Translate(playerAimMoveInput * walkSpeed * Time.deltaTime);
         
     }
-    //Testing
-    
+     
 }

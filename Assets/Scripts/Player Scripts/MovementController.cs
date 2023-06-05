@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 public class MovementController : MonoBehaviour
 {
     //Movenet in the input axis
-   
+    [SerializeField]
+    GameObject mainCam;
     Vector2 movementInput;
     public Vector3 movement;
     float hInput, vInput;
@@ -23,8 +24,8 @@ public class MovementController : MonoBehaviour
 
     //Run variables 
     int isRunning;
-    public float runSpeed = 5f;
-    public float walkSpeed = 2f;
+    public float runSpeed = 0.5f;
+    public float walkSpeed = 0.2f;
     public bool isRunPressed;
     bool isPlayerIsRunning;
     public Vector3 runDirectionMove;
@@ -39,8 +40,9 @@ public class MovementController : MonoBehaviour
     Vector3 lookAtPosition;
     Quaternion rotation;
     Quaternion targetToLookAt;
+    // public float targetToLookAt;
     Player playerController;
-    CameraOrbitController cameraOrbitController;
+    Gravity playerGravity;
 
     private void Awake()
     {
@@ -65,9 +67,8 @@ public class MovementController : MonoBehaviour
         //wiil play animation based on integer value
         isWalking = Animator.StringToHash("walk");
         isRunning = Animator.StringToHash("run");
-
-        cameraOrbitController = FindObjectOfType<CameraOrbitController>();
         playerController = FindObjectOfType<Player>();
+        playerGravity = FindObjectOfType<Gravity>();
 
     }
 
@@ -75,17 +76,13 @@ public class MovementController : MonoBehaviour
     {
         ////Adding the context value to the is pressed boolean
         movementInput = context.ReadValue<Vector2>();
-
-        //USING FOR WHEN MOUSE ROTATION
-        // movement = transform.forward * movementInput.y + transform.right * movementInput.x;
-        // runDirectionMove = transform.forward * movementInput.y + transform.right * movementInput.x;
-        
-        //KEYBOARD ROTATION
         movement.x = movementInput.x * walkSpeed;
         movement.z = movementInput.y * walkSpeed ;
         runDirectionMove.x = movementInput.x * runSpeed ;
         runDirectionMove.z = movementInput.y * runSpeed;
         isMovementPressed = movementInput.x != 0 || movementInput.y != 0;
+
+        //I need to get camera inputs here to move the character relative to the camera
         
     }
 
@@ -134,11 +131,6 @@ public class MovementController : MonoBehaviour
     public void PlayerRotation() {
         //PLAYER ROTATE WITH CAMERA
         // transform.localRotation = Quaternion.Euler(0, cameraAimInput.x, 0);
-
-        // playerController.characterController.transform.rotation = Quaternion.Euler(0.0f,playerController.characterController.transform.eulerAngles.y + (
-        //     cameraOrbitController.playerLookInput.x * cameraOrbitController.rotationSpeedMultiplier
-        // ), 0.0f);
-        // Position the player will looka at 
         lookAtPosition.x = movement.x;
         lookAtPosition.y = 0.0f;  
         lookAtPosition.z = movement.z;
@@ -151,12 +143,18 @@ public class MovementController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(rotation, targetToLookAt, rotationPerFrame * Time.deltaTime);
             // movement = transform.TransformDirection(Vector3.forward)*walkSpeed;
         }
-    }
-    public void PlayerLook(){
-        // transform.localRotation = Quaternion.Euler(cameraAimInput.y, cameraAimInput.x, 0);
-        playerController.characterController.transform.rotation = Quaternion.Euler(0.0f,playerController.characterController.transform.eulerAngles.y + (
-            cameraOrbitController.playerLookInput.x * cameraOrbitController.rotationSpeedMultiplier
-        ), 0.0f);
+        
+        // if (isMovementPressed)
+        // {
+        //     targetToLookAt = Quaternion.LookRotation(lookAtPosition).eulerAngles.y + mainCam.transform.rotation.eulerAngles.y;
+        //     Quaternion rotation = Quaternion.Euler(0, targetToLookAt, 0);
+        //     transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationPerFrame * Time.deltaTime);
+        //     // playerGravity.movementApplied = Quaternion.Euler(0,targetToLookAt, 0) * Vector3.forward;
+        //     Vector3 moveToLookAt = new Vector3( 0, 0, targetToLookAt);
+        //     transform.Translate(moveToLookAt * Time.deltaTime);
+            
+        //     // movement = transform.TransformDirection(Vector3.forward)*walkSpeed;
+        // }
     }
     private void OnEnable()
     {
