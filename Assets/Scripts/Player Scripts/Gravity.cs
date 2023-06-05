@@ -17,6 +17,7 @@ public class Gravity : MonoBehaviour
     CharacterController controller;
     MovementController movement;
     PlayerJumps jumps;
+    public Vector3 movementApplied;
 
     private void Awake() {
         controller = GetComponent<CharacterController>();
@@ -42,12 +43,12 @@ public class Gravity : MonoBehaviour
                 }
             }
             movement.movement.y = gravityIfGrounded; 
-            movement.runDirectionMove.y = gravityIfGrounded;
+            movementApplied.y = gravityIfGrounded;
         }else if (isPlayerFalling)
         {
             jumpPreviouYVelocity = movement.movement.y;
             movement.movement.y = movement.movement.y + (jumps.jumpGravities[jumps.jumpCounts] * multiplyingFall * Time.deltaTime);
-            movement.movementApplied.y = Mathf.Max((jumpPreviouYVelocity + movement.movement.y) * .5f, 20.0f);
+            movementApplied.y = Mathf.Max((jumpPreviouYVelocity + movement.movement.y) * .5f, -20.0f);
             // movement.movement.y = nextjumpYVelocity;
             // movement.runDirectionMove.y = nextjumpYVelocity;    
         
@@ -55,7 +56,7 @@ public class Gravity : MonoBehaviour
             //Adding velovity to the Y input 
             jumpPreviouYVelocity = movement.movement.y;
             movement.movement.y = movement.movement.y + (jumps.jumpGravities[jumps.jumpCounts] * Time.deltaTime);
-            movement.movementApplied.y = (jumpPreviouYVelocity + movement.movement.y) * .5f;
+            movementApplied.y = (jumpPreviouYVelocity + movement.movement.y) * .5f;
             // movement.movement.y = nextjumpYVelocity;
             // movement.runDirectionMove.y = nextjumpYVelocity;
         }

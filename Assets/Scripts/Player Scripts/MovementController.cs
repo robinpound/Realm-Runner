@@ -9,7 +9,6 @@ public class MovementController : MonoBehaviour
    
     Vector2 movementInput;
     public Vector3 movement;
-    public Vector3 movementApplied;
     float hInput, vInput;
     //Input action
     public InputActions action;
@@ -36,10 +35,12 @@ public class MovementController : MonoBehaviour
     //rotation varibles
     float rotationPerFrame = 15.0f;
     public float cameraRotation;
-    Vector2 cameraAimInput;
+    public Vector2 cameraAimInput;
     Vector3 lookAtPosition;
     Quaternion rotation;
     Quaternion targetToLookAt;
+    Player playerController;
+    CameraOrbitController cameraOrbitController;
 
     private void Awake()
     {
@@ -65,6 +66,9 @@ public class MovementController : MonoBehaviour
         isWalking = Animator.StringToHash("walk");
         isRunning = Animator.StringToHash("run");
 
+        cameraOrbitController = FindObjectOfType<CameraOrbitController>();
+        playerController = FindObjectOfType<Player>();
+
     }
 
     void OnPlayerMove(InputAction.CallbackContext context)
@@ -79,11 +83,10 @@ public class MovementController : MonoBehaviour
         //KEYBOARD ROTATION
         movement.x = movementInput.x * walkSpeed;
         movement.z = movementInput.y * walkSpeed ;
-        runDirectionMove.x = movementInput.x ;
-        runDirectionMove.z = movementInput.y ;
+        runDirectionMove.x = movementInput.x * runSpeed ;
+        runDirectionMove.z = movementInput.y * runSpeed;
         isMovementPressed = movementInput.x != 0 || movementInput.y != 0;
-        Debug.Log("X direction" + movementInput.x);
-        Debug.Log("Y direction" + movementInput.y);
+        
     }
 
     void OnPlayerRun(InputAction.CallbackContext context){
@@ -124,11 +127,17 @@ public class MovementController : MonoBehaviour
 
     //Player rotation to direction
     public void RoationIfAming(){
-        transform.localRotation = Quaternion.Euler(0, cameraAimInput.x, 0);
+        // transform.localRotation = Quaternion.Euler(0, cameraAimInput.x, 0);
     }
 
    
     public void PlayerRotation() {
+        //PLAYER ROTATE WITH CAMERA
+        // transform.localRotation = Quaternion.Euler(0, cameraAimInput.x, 0);
+
+        // playerController.characterController.transform.rotation = Quaternion.Euler(0.0f,playerController.characterController.transform.eulerAngles.y + (
+        //     cameraOrbitController.playerLookInput.x * cameraOrbitController.rotationSpeedMultiplier
+        // ), 0.0f);
         // Position the player will looka at 
         lookAtPosition.x = movement.x;
         lookAtPosition.y = 0.0f;  
@@ -143,7 +152,12 @@ public class MovementController : MonoBehaviour
             // movement = transform.TransformDirection(Vector3.forward)*walkSpeed;
         }
     }
-
+    public void PlayerLook(){
+        // transform.localRotation = Quaternion.Euler(cameraAimInput.y, cameraAimInput.x, 0);
+        playerController.characterController.transform.rotation = Quaternion.Euler(0.0f,playerController.characterController.transform.eulerAngles.y + (
+            cameraOrbitController.playerLookInput.x * cameraOrbitController.rotationSpeedMultiplier
+        ), 0.0f);
+    }
     private void OnEnable()
     {
        action.PlayerActions.Enable();

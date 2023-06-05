@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 { 
-    CharacterController characterController;
+    public CharacterController characterController;
     float hInput, vInput;
     Gravity gravity;
     PlayerJumps jumps;
@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     //Storing input controller in a variable
     float speed = 10f;
     MovementController inputActions;
+
+    CameraOrbitController camController;
     Vector3 playerAimMoveInput;
     
     private void Awake()
@@ -23,26 +25,24 @@ public class Player : MonoBehaviour
         jumps = FindObjectOfType<PlayerJumps>();
         gravity = FindObjectOfType<Gravity>();
         arrowShoot = FindObjectOfType<PlayerAttack>();
+        camController = FindObjectOfType<CameraOrbitController>();
 
         // jumps.SetJumps();
     }
     private void Update() {
         MoveIfAming();
-    }
-
-    void FixedUpdate()
-    {
-        //Adding the movenet action to the character controller
+         //Adding the movenet action to the character controller
         if (inputActions.isRunPressed){
-            inputActions.movementApplied.x = inputActions.runDirectionMove.x;
-            inputActions.movementApplied.z = inputActions.runDirectionMove.z;
+            gravity.movementApplied.x = inputActions.runDirectionMove.x;
+            gravity.movementApplied.z = inputActions.runDirectionMove.z;
             // characterController.Move(inputActions.runDirectionMove * inputActions.runSpeed * Time.deltaTime);
         }else{
-            inputActions.movementApplied.x = inputActions.movement.x;
-            inputActions.movementApplied.z = inputActions.movement.z;
+            gravity.movementApplied.x = inputActions.movement.x;
+            gravity.movementApplied.z = inputActions.movement.z;
             // characterController.Move(inputActions.movement * inputActions.walkSpeed * Time.deltaTime); 
         }
-        characterController.Move(inputActions.movementApplied * Time.deltaTime); 
+        camController.playerLookInput = camController.GetLookInput();
+        characterController.Move(gravity.movementApplied * Time.deltaTime); 
         //Getting the walk animation from the Input controller class
         inputActions.WalkOrRunAnimation();
         //Rotation to the player
