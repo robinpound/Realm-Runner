@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour
 {
+
     public AudioMixer audioMixer;
 
     public Dropdown resolutionDropdown;
@@ -35,11 +36,6 @@ public class OptionsMenu : MonoBehaviour
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
-    }
-
-    public void Update()
-    {
-        DontDestroyOnLoad(this);
     }
 
     public void SetResolution(int resolutionIndex)

@@ -6,14 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    public GameObject gameManager;
     public GameObject pauseMenu;
     public GameObject player;
     public GameObject playerUI;
     public GameObject[] options;
+    public Slider[] slider;
+    public float[] mixers;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
         player = GameObject.FindGameObjectWithTag("Player");
         pauseMenu.SetActive(false);
         options[0].SetActive(false); //Main Options
