@@ -46,8 +46,8 @@ public class Player : MonoBehaviour
             
             // characterController.Move(inputActions.movement * inputActions.walkSpeed * Time.deltaTime); 
         }
-        // gravity.movementApplied = Quaternion.Euler(0,inputActions.targetToLookAt, 0) * Vector3.forward;
-        characterController.Move(gravity.movementApplied * Time.deltaTime); 
+        //gravity.movementApplied = Quaternion.Euler(0, inputActions.targetToLookAt, 0) * Vector3.forward;
+       
         //Getting the walk animation from the Input controller class
         inputActions.WalkOrRunAnimation();
         //Rotation to the player

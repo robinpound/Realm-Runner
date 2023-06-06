@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour
     public void CameraRotation(){
         xRotation = lookToMove.cameraAimInput.y;
         yRotation = lookToMove.cameraAimInput.x;
-        xRotation = Mathf.Clamp(xRotation, -40, 70);
+        xRotation = Mathf.Clamp(xRotation, -30, 90);
         Quaternion rotation = Quaternion.Euler(xRotation, yRotation, 0);
         
         cameraFollow.rotation = rotation;
