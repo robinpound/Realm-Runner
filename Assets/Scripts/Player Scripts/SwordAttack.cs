@@ -23,8 +23,8 @@ public class SwordAttack : MonoBehaviour
         action = new InputActions();
         //Attack
         action.PlayerActions.Attack.started += OnPlayerAttack;
-        action.PlayerActions.Attack.canceled += OnPlayerAttack;
-        action.PlayerActions.Attack.performed += OnPlayerAttack;
+        //action.PlayerActions.Attack.canceled += OnPlayerAttack;
+        //action.PlayerActions.Attack.performed += OnPlayerAttack;
 
         //Getting animator component
         animator = GetComponent<Animator>();
@@ -32,13 +32,18 @@ public class SwordAttack : MonoBehaviour
         isAttacking = Animator.StringToHash("attack");
 
     }
-
+    private void FixedUpdate()
+    {
+        AttackAnimation();
+    }
     void OnPlayerAttack(InputAction.CallbackContext context)
     {
-        isAttackPressed = true;
+        StartCoroutine(Wait());
+    }
+    void AttackAnimation()
+    {
         attack = animator.GetBool(isAttacking);
-        ////Adding the context value to the is pressed boolean
-        movementInput = context.ReadValue<Vector2>();
+
         //Walk animation
         if (isAttackPressed && !attack)
         {
@@ -50,7 +55,12 @@ public class SwordAttack : MonoBehaviour
             animator.SetBool(isAttacking, false);
         }
     }
-
+    IEnumerator Wait()
+    {
+        isAttackPressed = true;
+        yield return new WaitForSeconds(2);
+        isAttackPressed = false;
+    }
     private void OnEnable()
     {
         action.PlayerActions.Enable();
