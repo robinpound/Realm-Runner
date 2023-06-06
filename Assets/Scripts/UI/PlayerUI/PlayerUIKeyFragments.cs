@@ -12,6 +12,7 @@ public class PlayerUIKeyFragments : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
         fragments[0].SetActive(false);
         fragments[1].SetActive(false);
         fragments[2].SetActive(false);
@@ -22,10 +23,7 @@ public class PlayerUIKeyFragments : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            fragmentsInt += 1;
-        }
+        fragmentsInt = gameManager.GetComponent<GameManager>().levelFragments; 
 
         if(fragmentsInt == 1)
         {
