@@ -8,13 +8,17 @@ public class PauseActivate : MonoBehaviour
     public InputActions action;
     public GameObject canvas;
     public bool paused;
-    void Awake()
-    {
-        action = new InputActions();
-        action.PlayerActions.Pause.performed += _ => Pause();
-    }
     private void Start()
     {
+        canvas = GameObject.FindGameObjectWithTag("Canvas");
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Pause();
+        }
     }
 
     private void Pause()
@@ -31,17 +35,7 @@ public class PauseActivate : MonoBehaviour
             Debug.Log("Un-Paused!");
             canvas.GetComponent<PauseMenu>().Resume();
             canvas.GetComponent<PauseMenu>().DeactivateAll();
-
         }
-    }
-
-    private void OnEnable()
-    {
-        action.Enable();
-    }
-    private void OnDisable()
-    {
-        action.Disable();
     }
 
 }

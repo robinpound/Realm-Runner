@@ -22,7 +22,7 @@ public class MainMenu : MonoBehaviour
     #region Main Menu Buttons
     public void Begin()
     {
-        SceneManager.LoadScene("HubWorld");
+        SceneManager.LoadScene("TestLevel");
     }
     public void LoadGame()
     {
