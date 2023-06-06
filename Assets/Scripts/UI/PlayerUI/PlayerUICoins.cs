@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerUICoins : MonoBehaviour
 {
+    public GameObject gameManager;
     public Text coinText;
     public int coins;
 
@@ -18,6 +19,8 @@ public class PlayerUICoins : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
+        coins = gameManager.GetComponent<GameManager>().coins;
         if (Input.GetKeyDown(KeyCode.Q))
         {
             coins += 1;

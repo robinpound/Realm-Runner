@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerUIKeyFragments : MonoBehaviour
 {
+    public GameObject gameManager;
     public GameObject[] fragments;
     public int fragmentsInt;
 
