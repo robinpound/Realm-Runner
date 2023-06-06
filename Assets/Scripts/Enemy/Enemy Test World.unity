@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 262.38354, g: 325.1084, b: 430.30957, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -437,10 +437,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1947945118, guid: 70d83b5aa2f8ccf4ab74f9d1d1b47b9b, type: 3}
-      propertyPath: m_Speed
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 1145081243045104346, guid: 70d83b5aa2f8ccf4ab74f9d1d1b47b9b,
         type: 3}
       propertyPath: m_RootOrder
@@ -454,7 +450,7 @@ PrefabInstance:
     - target: {fileID: 1145081243045104346, guid: 70d83b5aa2f8ccf4ab74f9d1d1b47b9b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.21
+      value: 1.16
       objectReference: {fileID: 0}
     - target: {fileID: 1145081243045104346, guid: 70d83b5aa2f8ccf4ab74f9d1d1b47b9b,
         type: 3}
@@ -500,31 +496,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Walker
-      objectReference: {fileID: 0}
-    - target: {fileID: 1817085110030939185, guid: 70d83b5aa2f8ccf4ab74f9d1d1b47b9b,
-        type: 3}
-      propertyPath: alertRange
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1817085110030939185, guid: 70d83b5aa2f8ccf4ab74f9d1d1b47b9b,
-        type: 3}
-      propertyPath: chaseRange
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3911204168060574097, guid: 70d83b5aa2f8ccf4ab74f9d1d1b47b9b,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 126
-      objectReference: {fileID: 0}
-    - target: {fileID: 3911204168060574097, guid: 70d83b5aa2f8ccf4ab74f9d1d1b47b9b,
-        type: 3}
-      propertyPath: m_CollisionDetection
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8138033378470571526, guid: 70d83b5aa2f8ccf4ab74f9d1d1b47b9b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70d83b5aa2f8ccf4ab74f9d1d1b47b9b, type: 3}

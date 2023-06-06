@@ -46,7 +46,6 @@ public class Walking : MonoBehaviour
     private void Patrol()
     {
         agent.speed = patrolSpeed;
-        Debug.Log("Patrolling: " + isWaypointSet);
         if(!isWaypointSet) FindWayPoint(); 
         if(Random.Range(0,100) == 1) FindWayPoint();
 
@@ -61,7 +60,6 @@ public class Walking : MonoBehaviour
 
     private void FindWayPoint()
     {
-        Debug.Log("Finding waypoint");
         float randomZ = Random.Range(-waypointRange, waypointRange);
         float randomX = Random.Range(-waypointRange, waypointRange);
         float currentZ = transform.position.z;
@@ -72,7 +70,6 @@ public class Walking : MonoBehaviour
         
         if(Physics.Raycast(waypoint, -transform.up, 2f, whatIsGround)){
             isWaypointSet = true;
-            Debug.Log("found waypoint:" + waypoint);
         }
     }
 
@@ -80,14 +77,12 @@ public class Walking : MonoBehaviour
     {
         agent.speed = chaseSpeed;
         Vector3 playerposition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-        Debug.Log("Chasing to: " + player.transform.position);
         agent.SetDestination(player.transform.position);
     }
 
     private void Attack()
     {
         agent.speed = attackSpeed;
-        Debug.Log("Attacking");
         agent.SetDestination(transform.position); //Stop moving
         transform.LookAt(player);
 
@@ -96,6 +91,7 @@ public class Walking : MonoBehaviour
             /*
                 ATTACK CODE HERE!
             */
+            Debug.Log("BANG!");
             isattacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
