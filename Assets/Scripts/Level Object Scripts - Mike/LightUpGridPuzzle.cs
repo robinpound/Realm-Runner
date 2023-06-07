@@ -8,7 +8,7 @@ public class LightUpGridPuzzle : MonoBehaviour
     [SerializeField]
     private GameObject light;
     private GameObject instantiatedLight;
-    Vector3 rayCastVector;
+    //Vector3 rayCastVector;
     private const string PLAYER = "Player";
     private bool hasLightSpawned = false;
 
@@ -23,29 +23,37 @@ public class LightUpGridPuzzle : MonoBehaviour
     {
         Debug.Log("Light " + hasLightSpawned);
     }
+    
+    
+    
     private void OnTriggerEnter(Collider other)
-    {
+    { 
+            if (other.gameObject.CompareTag(PLAYER))
+            {
+                Debug.Log(other.gameObject.name + " has landed ");
+                instantiatedLight.SetActive(!hasLightSpawned);
+                hasLightSpawned = !hasLightSpawned;
+            }
+        
+        /*
         Debug.Log("eagle has landed");
-        if (other.gameObject.CompareTag(PLAYER) && hasLightSpawned == false)
+        if (other.gameObject.CompareTag(PLAYER) && !hasLightSpawned)
         {
             instantiatedLight.SetActive(true);
             hasLightSpawned=true;
-            
+            Debug.Log(hasLightSpawned);
         }
-        /*
-        if (other.gameObject.CompareTag(PLAYER) && hasLightSpawned == true)
+        
+        else if (other.gameObject.CompareTag(PLAYER) && hasLightSpawned)
         {
             Debug.Log("hasLightSpawned");
             instantiatedLight.SetActive(false);
             hasLightSpawned = false;
-        }*/
+        }
+        */
+        
         
     }
-
-
-
-
-
 
 
 
