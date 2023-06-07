@@ -16,12 +16,12 @@
                 },
                 {
                     "name": "Look",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "49715953-fbc4-47c6-9b29-1d22e9fb5f8b",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Run",
@@ -36,6 +36,24 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "17bfef0b-1e26-4664-bbca-012562d1d9b7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ArrowAttack",
+                    "type": "Button",
+                    "id": "0490623c-477e-46cc-95ae-b2a69fecb93a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ArrowAiming",
+                    "type": "Button",
+                    "id": "f4665cf4-0bab-4798-8277-1fb05ebbf812",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -266,7 +284,7 @@
                 {
                     "name": "",
                     "id": "34aaa79f-069d-4f54-bc49-373f04a1b4f5",
-                    "path": "<Mouse>/delta",
+                    "path": "<Pointer>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -277,7 +295,18 @@
                 {
                     "name": "",
                     "id": "62d5ddcc-0b3a-469a-b074-afff383c10c9",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "77ea9957-f2c3-4010-8337-8ddef4419401",
+                    "path": "*/{Hatswitch}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -326,6 +355,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6203ee91-2dcd-4f03-8f9c-b1d1a68ae3a8",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ArrowAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2f42fa3d-a67b-44a6-a929-5d4b10052c21",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ArrowAiming",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

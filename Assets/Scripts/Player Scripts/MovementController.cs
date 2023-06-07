@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 public class MovementController : MonoBehaviour
 {
     //Movenet in the input axis
-   
+    [SerializeField]
+    // GameObject mainCam;
     Vector2 movementInput;
     public Vector3 movement;
     float hInput, vInput;
@@ -23,11 +24,14 @@ public class MovementController : MonoBehaviour
 
     //Run variables 
     int isRunning;
-    public float runSpeed = 5f;
-    public float walkSpeed = 2f;
+    public float runSpeed = 0.5f;
+    public float walkSpeed = 0.2f;
     public bool isRunPressed;
+    public float magnitude;
     bool isPlayerIsRunning;
     public Vector3 runDirectionMove;
+    public Vector3 moveToLookAt;
+    private bool _cursorLocked;
 
     //Jump
     public bool jumpPressed;
@@ -35,10 +39,16 @@ public class MovementController : MonoBehaviour
     //rotation varibles
     float rotationPerFrame = 15.0f;
     public float cameraRotation;
-    Vector2 cameraAimInput;
+    public Vector2 cameraAimInput;
     Vector3 lookAtPosition;
     Quaternion rotation;
     Quaternion targetToLookAt;
+    // public float targetToLookAt;
+    Player playerController;
+    Gravity playerGravity;
+
+    //Camera
+    public Transform cameraTarget;
 
     private void Awake()
     {
@@ -63,6 +73,10 @@ public class MovementController : MonoBehaviour
         //wiil play animation based on integer value
         isWalking = Animator.StringToHash("walk");
         isRunning = Animator.StringToHash("run");
+        playerController = FindObjectOfType<Player>();
+        playerGravity = FindObjectOfType<Gravity>();
+
+        _cursorLocked = Cursor.lockState == CursorLockMode.Locked;
 
     }
 
@@ -70,32 +84,45 @@ public class MovementController : MonoBehaviour
     {
         ////Adding the context value to the is pressed boolean
         movementInput = context.ReadValue<Vector2>();
+        // movement = new Vector3(movementInput.x, 0, movementInput.y);
+        // magnitude = Mathf.Clamp01(movement.magnitude) * walkSpeed;
 
-        //USING FOR WHEN MOUSE ROTATION
-        // movement = transform.forward * movementInput.y + transform.right * movementInput.x;
-        // runDirectionMove = transform.forward * movementInput.y + transform.right * movementInput.x;
-        
-        //KEYBOARD ROTATION
-        movement.x = movementInput.x;
-        movement.z = movementInput.y;
-        runDirectionMove.x = movementInput.x;
-        runDirectionMove.z = movementInput.y;
+
+        movement = transform.position;
+        movement.x = movementInput.x  * walkSpeed;
+        movement.z = movementInput.y * walkSpeed ;
+        runDirectionMove.x = movementInput.x * runSpeed ;
+        runDirectionMove.z = movementInput.y * runSpeed;
+        //  movement = Quaternion.AngleAxis(cameraTarget.rotation.eulerAngles.y, Vector3.up) * movement;
         isMovementPressed = movementInput.x != 0 || movementInput.y != 0;
-        //Debug.Log("X direction" + movementInput.x);
-        //Debug.Log("Y direction" + movementInput.y);
+        // movement.Normalize();
+
+        //I need to get camera inputs here to move the character relative to the camera
+        
+
+       
     }
 
     void OnPlayerRun(InputAction.CallbackContext context){
         isRunPressed = context.ReadValueAsButton();
     }
     void OnPlayerLook(InputAction.CallbackContext context){
-        cameraAimInput += context.ReadValue<Vector2>();
+        cameraAimInput = context.ReadValue<Vector2>();
+        ToggleCursorMode(!_cursorLocked);
+        cameraAimInput *= 1f;
 
         /**TODO: I need a boolean and an if statement for when the player is carry on a weapon
-        the camera follow, camera rotation an aiming will get in action**/ 
-        
+        the camera follow, camera rotation an aiming will get in action**/
+
         // movement = transform.position * cameraAimInput.y + transform.position * cameraAimInput.x;
         // runDirectionMove = transform.forward * cameraAimInput.y + transform.right * cameraAimInput.x;
+    }
+    private void ToggleCursorMode(bool newValue)
+    {
+        _cursorLocked = newValue;
+
+        Cursor.visible = !_cursorLocked; //hiding/revealing
+        Cursor.lockState = _cursorLocked ? CursorLockMode.Locked : CursorLockMode.None; //locking/unlocking
     }
 
     //Function to apply walk or run animation
@@ -123,26 +150,39 @@ public class MovementController : MonoBehaviour
 
     //Player rotation to direction
     public void RoationIfAming(){
-        transform.localRotation = Quaternion.Euler(0, cameraAimInput.x, 0);
+        // transform.localRotation = Quaternion.Euler(0, cameraAimInput.x, 0);
     }
 
    
     public void PlayerRotation() {
-        // Position the player will looka at 
+        //PLAYER ROTATE WITH CAMERA
+        // transform.localRotation = Quaternion.Euler(0, cameraAimInput.x, 0);
         lookAtPosition.x = movement.x;
         lookAtPosition.y = 0.0f;  
         lookAtPosition.z = movement.z;
         // Adding rotation to player to face at
         rotation = transform.rotation;
-        
+
         if (isMovementPressed)
         {
-            targetToLookAt = Quaternion.LookRotation(lookAtPosition);
-            transform.rotation = Quaternion.Slerp(rotation, targetToLookAt, rotationPerFrame * Time.deltaTime);
-            // movement = transform.TransformDirection(Vector3.forward)*walkSpeed;
+           targetToLookAt = Quaternion.LookRotation(lookAtPosition);
+           transform.rotation = Quaternion.Slerp(rotation, targetToLookAt, rotationPerFrame * Time.deltaTime);
+           // movement = transform.TransformDirection(Vector3.forward)*walkSpeed;
         }
-    }
 
+        // if (isMovementPressed)
+        // {
+        //     targetToLookAt = Quaternion.LookRotation(lookAtPosition).eulerAngles.y + cameraTarget.transform.rotation.eulerAngles.y;
+        //     Quaternion rotation = Quaternion.Euler(0, targetToLookAt, 0);
+        //     transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationPerFrame * Time.deltaTime);
+        //     // playerGravity.movementApplied = Quaternion.Euler(0,targetToLookAt, 0) * Vector3.forward;
+        //     // moveToLookAt = new Vector3(0,0, targetToLookAt);
+        //     // //transform.Translate(moveToLookAt * Time.deltaTime);
+        //     // playerController.characterController.Move(moveToLookAt * Time.deltaTime);
+
+        //     // movement = transform.TransformDirection(Vector3.forward)*walkSpeed;
+        // }
+    }
     private void OnEnable()
     {
        action.PlayerActions.Enable();

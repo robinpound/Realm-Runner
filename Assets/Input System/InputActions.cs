@@ -38,12 +38,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Look"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""49715953-fbc4-47c6-9b29-1d22e9fb5f8b"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Run"",
@@ -58,6 +58,24 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""17bfef0b-1e26-4664-bbca-012562d1d9b7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ArrowAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""0490623c-477e-46cc-95ae-b2a69fecb93a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ArrowAiming"",
+                    ""type"": ""Button"",
+                    ""id"": ""f4665cf4-0bab-4798-8277-1fb05ebbf812"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -288,7 +306,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""34aaa79f-069d-4f54-bc49-373f04a1b4f5"",
-                    ""path"": ""<Mouse>/delta"",
+                    ""path"": ""<Pointer>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -299,7 +317,18 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""62d5ddcc-0b3a-469a-b074-afff383c10c9"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""77ea9957-f2c3-4010-8337-8ddef4419401"",
+                    ""path"": ""*/{Hatswitch}"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -350,6 +379,28 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6203ee91-2dcd-4f03-8f9c-b1d1a68ae3a8"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ArrowAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f42fa3d-a67b-44a6-a929-5d4b10052c21"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ArrowAiming"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -362,6 +413,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_PlayerActions_Look = m_PlayerActions.FindAction("Look", throwIfNotFound: true);
         m_PlayerActions_Run = m_PlayerActions.FindAction("Run", throwIfNotFound: true);
         m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerActions_ArrowAttack = m_PlayerActions.FindAction("ArrowAttack", throwIfNotFound: true);
+        m_PlayerActions_ArrowAiming = m_PlayerActions.FindAction("ArrowAiming", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -427,6 +480,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_Look;
     private readonly InputAction m_PlayerActions_Run;
     private readonly InputAction m_PlayerActions_Jump;
+    private readonly InputAction m_PlayerActions_ArrowAttack;
+    private readonly InputAction m_PlayerActions_ArrowAiming;
     public struct PlayerActionsActions
     {
         private @InputActions m_Wrapper;
@@ -435,6 +490,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_PlayerActions_Look;
         public InputAction @Run => m_Wrapper.m_PlayerActions_Run;
         public InputAction @Jump => m_Wrapper.m_PlayerActions_Jump;
+        public InputAction @ArrowAttack => m_Wrapper.m_PlayerActions_ArrowAttack;
+        public InputAction @ArrowAiming => m_Wrapper.m_PlayerActions_ArrowAiming;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -456,6 +513,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @ArrowAttack.started += instance.OnArrowAttack;
+            @ArrowAttack.performed += instance.OnArrowAttack;
+            @ArrowAttack.canceled += instance.OnArrowAttack;
+            @ArrowAiming.started += instance.OnArrowAiming;
+            @ArrowAiming.performed += instance.OnArrowAiming;
+            @ArrowAiming.canceled += instance.OnArrowAiming;
         }
 
         private void UnregisterCallbacks(IPlayerActionsActions instance)
@@ -472,6 +535,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @ArrowAttack.started -= instance.OnArrowAttack;
+            @ArrowAttack.performed -= instance.OnArrowAttack;
+            @ArrowAttack.canceled -= instance.OnArrowAttack;
+            @ArrowAiming.started -= instance.OnArrowAiming;
+            @ArrowAiming.performed -= instance.OnArrowAiming;
+            @ArrowAiming.canceled -= instance.OnArrowAiming;
         }
 
         public void RemoveCallbacks(IPlayerActionsActions instance)
@@ -495,5 +564,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnArrowAttack(InputAction.CallbackContext context);
+        void OnArrowAiming(InputAction.CallbackContext context);
     }
 }
