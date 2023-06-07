@@ -13,18 +13,16 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         credits.SetActive(false);
+        options[0].SetActive(false); //Main Options
+        options[1].SetActive(false); //Key Bindings Page
+        options[2].SetActive(false); //Audio Page
+        options[3].SetActive(false); //Video Page
     }
-    public void Update()
-    {
-        if(bar.value == 0.5f || bar.value == 0.4999999f)
-        {
-            bar.value = 1;
-        }
-    }
+
     #region Main Menu Buttons
     public void Begin()
     {
-        SceneManager.LoadScene("HubWorld");
+        SceneManager.LoadScene("TestLevel");
     }
     public void LoadGame()
     {
@@ -32,11 +30,13 @@ public class MainMenu : MonoBehaviour
     }
     public void Options()
     {
-        SceneManager.LoadScene("Options");
+        options[0].SetActive(true);
+        options[1].SetActive(true);
     }
     public void Credits()
     {
         credits.SetActive(true);
+        bar.value = 1;
     }
     public void Exit()
     {
@@ -61,9 +61,39 @@ public class MainMenu : MonoBehaviour
     {
         Application.OpenURL("");
     }
-    public void Back()
+    public void CreditBack()
     {
         credits.SetActive(false);
     }
+    #endregion
+
+    #region Options
+    public void OptionsBack()
+    {
+        options[0].SetActive(false);
+        options[1].SetActive(false);
+        options[2].SetActive(false);
+        options[3].SetActive(false);
+    }
+
+    public void KeyBindings()
+    {
+        options[1].SetActive(true);
+        options[2].SetActive(false);
+        options[3].SetActive(false);
+    }
+    public void Audio()
+    {
+        options[2].SetActive(true);
+        options[1].SetActive(false);
+        options[3].SetActive(false);
+    }
+    public void Video()
+    {
+        options[3].SetActive(true);
+        options[1].SetActive(false);
+        options[2].SetActive(false);
+    }
+
     #endregion
 }
