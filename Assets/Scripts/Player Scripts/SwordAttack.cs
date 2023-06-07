@@ -11,20 +11,20 @@ public class SwordAttack : MonoBehaviour
 
     //Input action
     public InputActions action;
-    Vector2 movementInput;
     
     //Attacking
     public int isAttacking;
     public bool isAttackPressed;
     public bool attack;
+
     private void Awake()
     {
         //Initializing the input action system
         action = new InputActions();
         //Attack
         action.PlayerActions.Attack.started += OnPlayerAttack;
-        //action.PlayerActions.Attack.canceled += OnPlayerAttack;
-        //action.PlayerActions.Attack.performed += OnPlayerAttack;
+        action.PlayerActions.Attack.canceled += OnPlayerAttack;
+        action.PlayerActions.Attack.performed += OnPlayerAttack;
 
         //Getting animator component
         animator = GetComponent<Animator>();
@@ -38,9 +38,9 @@ public class SwordAttack : MonoBehaviour
     }
     void OnPlayerAttack(InputAction.CallbackContext context)
     {
-        StartCoroutine(Wait());
+        isAttackPressed = context.ReadValueAsButton();
     }
-    void AttackAnimation()
+    public void AttackAnimation()
     {
         attack = animator.GetBool(isAttacking);
 
