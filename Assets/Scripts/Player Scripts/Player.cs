@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     }
     private void Update() {
         MoveIfAming();
+
          //Adding the movenet action to the character controller
         if (inputActions.isRunPressed){
             gravity.movementApplied.x = inputActions.runDirectionMove.x;
@@ -51,17 +52,22 @@ public class Player : MonoBehaviour
         // Vector3 playermove = gravity.movementApplied * inputActions.magnitude;
          characterController.Move(gravity.movementApplied * Time.deltaTime); 
        
+    }
+
+    
         //Getting the walk animation from the Input controller class
         inputActions.WalkOrRunAnimation();
         //Rotation to the player
         inputActions.PlayerRotation();
         gravity.PlayerGravity();
+
         arrowShoot.BowAndArrowAttack();
         // cameraController.CameraRotation();
        // inputActions.RoationIfAming();
+        
         jumps.Jump();
 
-        if(gravity.isPlayerFalling)
+        if (gravity.isPlayerFalling)
         {
             jumps.DoubleJump();
         }

@@ -87,6 +87,7 @@ public class MovementController : MonoBehaviour
         // movement = new Vector3(movementInput.x, 0, movementInput.y);
         // magnitude = Mathf.Clamp01(movement.magnitude) * walkSpeed;
 
+
         movement = transform.position;
         movement.x = movementInput.x  * walkSpeed;
         movement.z = movementInput.y * walkSpeed ;
@@ -98,6 +99,8 @@ public class MovementController : MonoBehaviour
 
         //I need to get camera inputs here to move the character relative to the camera
         
+
+       
     }
 
     void OnPlayerRun(InputAction.CallbackContext context){
