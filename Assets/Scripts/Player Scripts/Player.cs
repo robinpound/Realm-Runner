@@ -5,14 +5,20 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 { 
-    CharacterController characterController;
-     float hInput, vInput;
+    public CharacterController characterController;
+    // [SerializeField]
+    // Transform cameraFollow;
+    // CameraController cameraController;
+    float hInput, vInput;
     Gravity gravity;
     PlayerJumps jumps;
+    PlayerAttack arrowShoot;
     //Storing input controller in a variable
-    float speed = 10f;
+    float speed = 1f;
     MovementController inputActions;
-     Vector3 playerAimMoveInput;
+
+    Vector3 playerAimMoveInput;
+    //Camera rotation
     
     private void Awake()
     {
@@ -21,31 +27,44 @@ public class Player : MonoBehaviour
         inputActions = FindObjectOfType<MovementController>();
         jumps = FindObjectOfType<PlayerJumps>();
         gravity = FindObjectOfType<Gravity>();
+        arrowShoot = FindObjectOfType<PlayerAttack>();
+        // cameraController = FindObjectOfType<CameraController>();
+
 
         // jumps.SetJumps();
     }
     private void Update() {
         MoveIfAming();
+
+         //Adding the movenet action to the character controller
+        if (inputActions.isRunPressed){
+            gravity.movementApplied.x = inputActions.runDirectionMove.x;
+            gravity.movementApplied.z = inputActions.runDirectionMove.z;
+            
+            // characterController.Move(inputActions.runDirectionMove * inputActions.runSpeed * Time.deltaTime);
+        }else{
+            gravity.movementApplied.x = inputActions.movement.x;
+            gravity.movementApplied.z = inputActions.movement.z;
+            
+            // characterController.Move(inputActions.movement * inputActions.walkSpeed * Time.deltaTime); 
+        }
+        //gravity.movementApplied = Quaternion.Euler(0, inputActions.targetToLookAt, 0) * Vector3.forward;
+        // Vector3 playermove = gravity.movementApplied * inputActions.magnitude;
+         characterController.Move(gravity.movementApplied * Time.deltaTime); 
+       
     }
 
-    void FixedUpdate()
-    {
-        //Adding the movenet action to the character controller
-        if (inputActions.isRunPressed)
-        {
-            characterController.Move(inputActions.runDirectionMove * inputActions.runSpeed * Time.deltaTime);
-        }
-        else
-        {
-            characterController.Move(inputActions.movement * inputActions.walkSpeed * Time.deltaTime);
-        }
-
+    
         //Getting the walk animation from the Input controller class
         inputActions.WalkOrRunAnimation();
         //Rotation to the player
         inputActions.PlayerRotation();
         gravity.PlayerGravity();
-        // inputActions.RoationIfAming();
+
+        arrowShoot.BowAndArrowAttack();
+        // cameraController.CameraRotation();
+       // inputActions.RoationIfAming();
+        
         jumps.Jump();
 
         if (gravity.isPlayerFalling)
@@ -61,6 +80,5 @@ public class Player : MonoBehaviour
         // transform.Translate(playerAimMoveInput * walkSpeed * Time.deltaTime);
         
     }
-    //Testing
-    
+     
 }
