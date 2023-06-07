@@ -7,7 +7,7 @@ public class MovementController : MonoBehaviour
 {
     //Movenet in the input axis
     [SerializeField]
-    GameObject mainCam;
+    // GameObject mainCam;
     Vector2 movementInput;
     public Vector3 movement;
     float hInput, vInput;
@@ -27,6 +27,7 @@ public class MovementController : MonoBehaviour
     public float runSpeed = 0.5f;
     public float walkSpeed = 0.2f;
     public bool isRunPressed;
+    public float magnitude;
     bool isPlayerIsRunning;
     public Vector3 runDirectionMove;
     public Vector3 moveToLookAt;
@@ -41,10 +42,13 @@ public class MovementController : MonoBehaviour
     public Vector2 cameraAimInput;
     Vector3 lookAtPosition;
     Quaternion rotation;
-    //Quaternion targetToLookAt;
-    public float targetToLookAt;
+    Quaternion targetToLookAt;
+    // public float targetToLookAt;
     Player playerController;
     Gravity playerGravity;
+
+    //Camera
+    public Transform cameraTarget;
 
     private void Awake()
     {
@@ -80,12 +84,17 @@ public class MovementController : MonoBehaviour
     {
         ////Adding the context value to the is pressed boolean
         movementInput = context.ReadValue<Vector2>();
+        // movement = new Vector3(movementInput.x, 0, movementInput.y);
+        // magnitude = Mathf.Clamp01(movement.magnitude) * walkSpeed;
+
         movement = transform.position;
         movement.x = movementInput.x  * walkSpeed;
         movement.z = movementInput.y * walkSpeed ;
         runDirectionMove.x = movementInput.x * runSpeed ;
         runDirectionMove.z = movementInput.y * runSpeed;
+        //  movement = Quaternion.AngleAxis(cameraTarget.rotation.eulerAngles.y, Vector3.up) * movement;
         isMovementPressed = movementInput.x != 0 || movementInput.y != 0;
+        // movement.Normalize();
 
         //I need to get camera inputs here to move the character relative to the camera
         
@@ -145,31 +154,31 @@ public class MovementController : MonoBehaviour
     public void PlayerRotation() {
         //PLAYER ROTATE WITH CAMERA
         // transform.localRotation = Quaternion.Euler(0, cameraAimInput.x, 0);
-        //lookAtPosition.x = movement.x;
-        //lookAtPosition.y = 0.0f;  
-        //lookAtPosition.z = movement.z;
-        //// Adding rotation to player to face at
-        //rotation = transform.rotation;
-
-        //if (isMovementPressed)
-        //{
-        //    targetToLookAt = Quaternion.LookRotation(lookAtPosition);
-        //    transform.rotation = Quaternion.Slerp(rotation, targetToLookAt, rotationPerFrame * Time.deltaTime);
-        //    // movement = transform.TransformDirection(Vector3.forward)*walkSpeed;
-        //}
+        lookAtPosition.x = movement.x;
+        lookAtPosition.y = 0.0f;  
+        lookAtPosition.z = movement.z;
+        // Adding rotation to player to face at
+        rotation = transform.rotation;
 
         if (isMovementPressed)
         {
-            targetToLookAt = Quaternion.LookRotation(lookAtPosition).eulerAngles.y + mainCam.transform.rotation.eulerAngles.y;
-            Quaternion rotation = Quaternion.Euler(0, targetToLookAt, 0);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationPerFrame * Time.deltaTime);
-            // playerGravity.movementApplied = Quaternion.Euler(0,targetToLookAt, 0) * Vector3.forward;
-            moveToLookAt = new Vector3(0,0, targetToLookAt);
-            //transform.Translate(moveToLookAt * Time.deltaTime);
-            playerController.characterController.Move(moveToLookAt * Time.deltaTime);
-
-            // movement = transform.TransformDirection(Vector3.forward)*walkSpeed;
+           targetToLookAt = Quaternion.LookRotation(lookAtPosition);
+           transform.rotation = Quaternion.Slerp(rotation, targetToLookAt, rotationPerFrame * Time.deltaTime);
+           // movement = transform.TransformDirection(Vector3.forward)*walkSpeed;
         }
+
+        // if (isMovementPressed)
+        // {
+        //     targetToLookAt = Quaternion.LookRotation(lookAtPosition).eulerAngles.y + cameraTarget.transform.rotation.eulerAngles.y;
+        //     Quaternion rotation = Quaternion.Euler(0, targetToLookAt, 0);
+        //     transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationPerFrame * Time.deltaTime);
+        //     // playerGravity.movementApplied = Quaternion.Euler(0,targetToLookAt, 0) * Vector3.forward;
+        //     // moveToLookAt = new Vector3(0,0, targetToLookAt);
+        //     // //transform.Translate(moveToLookAt * Time.deltaTime);
+        //     // playerController.characterController.Move(moveToLookAt * Time.deltaTime);
+
+        //     // movement = transform.TransformDirection(Vector3.forward)*walkSpeed;
+        // }
     }
     private void OnEnable()
     {

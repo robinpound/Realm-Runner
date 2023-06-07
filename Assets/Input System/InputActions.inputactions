@@ -16,12 +16,12 @@
                 },
                 {
                     "name": "Look",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "49715953-fbc4-47c6-9b29-1d22e9fb5f8b",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Run",
@@ -284,7 +284,7 @@
                 {
                     "name": "",
                     "id": "34aaa79f-069d-4f54-bc49-373f04a1b4f5",
-                    "path": "<Mouse>/delta",
+                    "path": "<Pointer>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -295,7 +295,18 @@
                 {
                     "name": "",
                     "id": "62d5ddcc-0b3a-469a-b074-afff383c10c9",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "77ea9957-f2c3-4010-8337-8ddef4419401",
+                    "path": "*/{Hatswitch}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public CharacterController characterController;
     // [SerializeField]
     // Transform cameraFollow;
-    CameraController cameraController;
+    // CameraController cameraController;
     float hInput, vInput;
     Gravity gravity;
     PlayerJumps jumps;
@@ -28,7 +28,8 @@ public class Player : MonoBehaviour
         jumps = FindObjectOfType<PlayerJumps>();
         gravity = FindObjectOfType<Gravity>();
         arrowShoot = FindObjectOfType<PlayerAttack>();
-        cameraController = FindObjectOfType<CameraController>();
+        // cameraController = FindObjectOfType<CameraController>();
+
 
         // jumps.SetJumps();
     }
@@ -47,6 +48,8 @@ public class Player : MonoBehaviour
             // characterController.Move(inputActions.movement * inputActions.walkSpeed * Time.deltaTime); 
         }
         //gravity.movementApplied = Quaternion.Euler(0, inputActions.targetToLookAt, 0) * Vector3.forward;
+        // Vector3 playermove = gravity.movementApplied * inputActions.magnitude;
+         characterController.Move(gravity.movementApplied * Time.deltaTime); 
        
         //Getting the walk animation from the Input controller class
         inputActions.WalkOrRunAnimation();
@@ -54,7 +57,7 @@ public class Player : MonoBehaviour
         inputActions.PlayerRotation();
         gravity.PlayerGravity();
         arrowShoot.BowAndArrowAttack();
-        cameraController.CameraRotation();
+        // cameraController.CameraRotation();
        // inputActions.RoationIfAming();
         jumps.Jump();
 

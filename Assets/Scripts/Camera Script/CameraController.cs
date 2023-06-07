@@ -5,19 +5,20 @@ using UnityEngine.Animations;
 
 public class CameraController : MonoBehaviour
 {
+    PlayerInputsController inputController;
     [SerializeField]
      Transform cameraFollow;
      float xRotation;
      float yRotation;
-     MovementController lookToMove;
+    
     // Start is called before the first frame update
     void Start()
     {
-        lookToMove = FindObjectOfType<MovementController>();
+       inputController = GetComponent<PlayerInputsController>();
     }
     public void CameraRotation(){
-        xRotation = lookToMove.cameraAimInput.y;
-        yRotation = lookToMove.cameraAimInput.x;
+        xRotation += inputController.lookInput.y;
+        yRotation += inputController.lookInput.x;
         xRotation = Mathf.Clamp(xRotation, -30, 90);
         Quaternion rotation = Quaternion.Euler(xRotation, yRotation, 0);
         
