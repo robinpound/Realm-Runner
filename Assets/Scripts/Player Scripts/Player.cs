@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
         // Vector3 playermove = gravity.movementApplied * inputActions.magnitude;
          characterController.Move(gravity.movementApplied * Time.deltaTime); 
        
-    }
+    
 
     
         //Getting the walk animation from the Input controller class
