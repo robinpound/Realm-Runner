@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    //Movenet in the input axis
-    [SerializeField]
-    Vector2 movementInput;
-    public Vector3 movement;
-    float hInput, vInput;
-    //Input action
+    //OTHER SCRIPTS
+    Player playerController;
+    Gravity playerGravity;
     PlayerInputsController actionInputs;
 
+    //Movenet in the input axis
+    float hInput, vInput;
+    //Input action
+    
     //Get animator
     Animator animator;
 
@@ -38,8 +39,7 @@ public class MovementController : MonoBehaviour
     Vector3 lookAtPosition;
     Quaternion rotation;
     public float targetToLookAt;
-    Player playerController;
-    Gravity playerGravity;
+    
 
     //Camera
     public GameObject cameraTarget;
@@ -99,9 +99,9 @@ public class MovementController : MonoBehaviour
    
     public void PlayerRotation() {
         // transform.localRotation = Quaternion.Euler(0, cameraAimInput.x, 0);
-        lookAtPosition.x = movement.x;
+        lookAtPosition.x = actionInputs.movement.x;
         lookAtPosition.y = 0.0f;  
-        lookAtPosition.z = movement.z;
+        lookAtPosition.z = actionInputs.movement.z;
     
         if (actionInputs.isMovementPressed)
         {

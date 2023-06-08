@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 { 
+    [HideInInspector]
     public CharacterController characterController;
     // [SerializeField]
     // Transform cameraFollow;

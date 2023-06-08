@@ -82,6 +82,7 @@ public class PlayerJumps : MonoBehaviour
             }
             //Jump Animation true here
             animator.SetInteger(jumpCountHash, jumpCounts);
+            animator.SetBool(playerJumpHash, true);
             isPlayerJump = true;
             addGrav.jumpAnimation = true;
             jumpCounts += 1;
