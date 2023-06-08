@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// using UnityEngine.InputSystem;
 
 public class PlayerJumps : MonoBehaviour
 {
@@ -14,9 +13,8 @@ public class PlayerJumps : MonoBehaviour
     bool isPlayerJump = false;
     float higherPoint;
     float jumpVelocity;
-    float jumpPreviouYvelocity;
-    float maxTimeOfJumps = .85f; //.75
-    float maxJumpHeightOfJump = 1.5f;
+    float maxTimeOfJumps = .75f; //.75
+    float maxJumpHeightOfJump = 1f;
 
 
     //Different type of jumps and gravities var
@@ -56,8 +54,8 @@ public class PlayerJumps : MonoBehaviour
         addGrav.gravity = (-2 * maxJumpHeightOfJump) / Mathf.Pow(higherPoint, 2);
         jumpVelocity = (2 * maxJumpHeightOfJump) / higherPoint;
 
-        secondJumpGravity = (-2 * (maxJumpHeightOfJump + 2)) / Mathf.Pow((higherPoint * 1.25f), 2);
-        secondJumpVelocity = (2 * (maxJumpHeightOfJump + 2)) / (higherPoint * 1.25f);  
+        secondJumpGravity = (-2 * (maxJumpHeightOfJump + 1)) / Mathf.Pow((higherPoint * 1.25f), 2);
+        secondJumpVelocity = (2 * (maxJumpHeightOfJump + 1)) / (higherPoint * 1.25f);  
 
         thirdJumpGravity = (-2 * (maxJumpHeightOfJump + 2)) / Mathf.Pow((higherPoint * 1.75f), 2);
         thirdJumpVelocity = (2 * (maxJumpHeightOfJump + 2)) / (higherPoint * 1.5f);  
@@ -96,7 +94,7 @@ public class PlayerJumps : MonoBehaviour
         }      
     }
     public void DoubleJump() {
-        if (inputController.jumpPressed && !jumpController.isGrounded)
+        if (inputController.jumpPressed )
         {
             isPlayerJump = true;
             inputController.movement.y = jumpVelocity * 2f;

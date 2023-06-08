@@ -8,8 +8,6 @@ public class Gravity : MonoBehaviour
     public bool isPlayerFalling;
     float multiplyingFall = 2.0f;
     float jumpPreviouYVelocity;
-    float newJumpYVelocity;
-    float nextjumpYVelocity;
     public float gravity = -9.8f;
     public float gravityIfGrounded = -.5f;
 

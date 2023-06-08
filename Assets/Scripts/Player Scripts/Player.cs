@@ -7,8 +7,6 @@ public class Player : MonoBehaviour
 { 
     [HideInInspector]
     public CharacterController characterController;
-    // [SerializeField]
-    // Transform cameraFollow;
     CameraController cameraController;
     float hInput, vInput;
     PlayerInputsController inputController;
@@ -16,7 +14,6 @@ public class Player : MonoBehaviour
     PlayerJumps jumps;
     PlayerAttack arrowShoot;
     //Storing input controller in a variable
-    float speed = 1f;
     MovementController moveController;
 
     Vector3 playerAimMoveInput;
