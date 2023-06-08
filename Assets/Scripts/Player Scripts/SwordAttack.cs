@@ -43,6 +43,7 @@ public class SwordAttack : MonoBehaviour
     void OnPlayerAttack(InputAction.CallbackContext context)
     {
         isAttackPressed = context.ReadValueAsButton();
+        attacking = context.ReadValueAsButton();
         StartCoroutine(Wait());
     }
     public void AttackAnimation()
