@@ -8,14 +8,15 @@ public class Player : MonoBehaviour
     public CharacterController characterController;
     // [SerializeField]
     // Transform cameraFollow;
-    // CameraController cameraController;
+    CameraController cameraController;
     float hInput, vInput;
+    PlayerInputsController inputController;
     Gravity gravity;
     PlayerJumps jumps;
     PlayerAttack arrowShoot;
     //Storing input controller in a variable
     float speed = 1f;
-    MovementController inputActions;
+    MovementController moveController;
 
     Vector3 playerAimMoveInput;
     //Camera rotation
@@ -24,11 +25,12 @@ public class Player : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();        
         //Getting action from the input controller script
-        inputActions = FindObjectOfType<MovementController>();
+        moveController = FindObjectOfType<MovementController>();
         jumps = FindObjectOfType<PlayerJumps>();
         gravity = FindObjectOfType<Gravity>();
         arrowShoot = FindObjectOfType<PlayerAttack>();
-        // cameraController = FindObjectOfType<CameraController>();
+        cameraController = FindObjectOfType<CameraController>();
+        inputController = GetComponent<PlayerInputsController>();
 
 
         // jumps.SetJumps();
@@ -37,33 +39,26 @@ public class Player : MonoBehaviour
         MoveIfAming();
 
          //Adding the movenet action to the character controller
-        if (inputActions.isRunPressed){
-            gravity.movementApplied.x = inputActions.runDirectionMove.x;
-            gravity.movementApplied.z = inputActions.runDirectionMove.z;
-            
-            // characterController.Move(inputActions.runDirectionMove * inputActions.runSpeed * Time.deltaTime);
+        if (inputController.isRunPressed){
+            gravity.movementApplied.x = inputController.runDirectionMove.x;
+            gravity.movementApplied.z = inputController.runDirectionMove.z;
         }else{
-            gravity.movementApplied.x = inputActions.movement.x;
-            gravity.movementApplied.z = inputActions.movement.z;
+            gravity.movementApplied.x = inputController.movement.x;
+            gravity.movementApplied.z = inputController.movement.z;
             
-            // characterController.Move(inputActions.movement * inputActions.walkSpeed * Time.deltaTime); 
         }
-        //gravity.movementApplied = Quaternion.Euler(0, inputActions.targetToLookAt, 0) * Vector3.forward;
-        // Vector3 playermove = gravity.movementApplied * inputActions.magnitude;
          characterController.Move(gravity.movementApplied * Time.deltaTime); 
-       
-    }
 
     
         //Getting the walk animation from the Input controller class
-        inputActions.WalkOrRunAnimation();
+        moveController.WalkOrRunAnimation();
         //Rotation to the player
-        inputActions.PlayerRotation();
+        moveController.PlayerRotation();
         gravity.PlayerGravity();
 
-        arrowShoot.BowAndArrowAttack();
-        // cameraController.CameraRotation();
-       // inputActions.RoationIfAming();
+        // arrowShoot.BowAndArrowAttack();
+        cameraController.CameraRotation();
+       // moveController.RoationIfAming();
         
         jumps.Jump();
 
@@ -71,7 +66,7 @@ public class Player : MonoBehaviour
         {
             jumps.DoubleJump();
         }
-    }
+}
       public void MoveIfAming(){
         hInput=Input.GetAxisRaw("Horizontal");
         vInput=Input.GetAxisRaw("Vertical");

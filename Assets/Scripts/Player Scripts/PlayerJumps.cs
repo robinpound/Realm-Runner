@@ -1,19 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+// using UnityEngine.InputSystem;
 
 public class PlayerJumps : MonoBehaviour
 {
     CharacterController jumpController;
-    MovementController movement;
-    //Input action
-    InputActions jumpInput;
+    PlayerInputsController inputController;
     Gravity addGrav;
     Animator animator;
 
     public int jumpCounts = 0;
-    public bool jumpPressed = false;
     bool isPlayerJump = false;
     float higherPoint;
     float jumpVelocity;
@@ -40,14 +37,10 @@ public class PlayerJumps : MonoBehaviour
     public Dictionary<int, float> jumpGravities = new Dictionary<int, float>();
 
     private void Awake() {
-        jumpInput = new InputActions();
-        jumpInput.PlayerActions.Jump.started += playerJumps;
-        jumpInput.PlayerActions.Jump.canceled += playerJumps;
-        jumpInput.PlayerActions.Jump.performed += playerJumps;
 
         jumpController = GetComponent<CharacterController>();
-        movement = FindObjectOfType<MovementController>();
         addGrav = FindObjectOfType<Gravity>();
+        inputController = GetComponent<PlayerInputsController>();
 
         //Get jump count value and animation type from animator 
         playerJumpHash = Animator.StringToHash("jump");
@@ -56,10 +49,6 @@ public class PlayerJumps : MonoBehaviour
         animator = GetComponent<Animator>();
 
         SetJumps();
-    }
-    void playerJumps(InputAction.CallbackContext context){
-        jumpPressed = context.ReadValueAsButton();
-        //I need to prevent adding the button adding value if pressed consecutively 
     }
     void SetJumps(){
         
@@ -82,13 +71,10 @@ public class PlayerJumps : MonoBehaviour
         jumpGravities.Add(2, secondJumpGravity);
         jumpGravities.Add(3, thirdJumpGravity);
         
-        //if (!jumpVelocities.ContainsKey(3)) {
-        //    jumpGravities.Add(3, thirdJumpGravity);
-        //}       
     }
 
     public void Jump(){
-        if (!isPlayerJump && jumpController.isGrounded && jumpPressed)
+        if (!isPlayerJump && jumpController.isGrounded && inputController.jumpPressed)
         {
             if (jumpCounts < 3 && resetCurrentJump != null)
             {               
@@ -96,35 +82,24 @@ public class PlayerJumps : MonoBehaviour
             }
             //Jump Animation true here
             animator.SetInteger(jumpCountHash, jumpCounts);
-            animator.SetBool(playerJumpHash, true);
-            // animator.SetInteger(jumpHash, playerJumpHash);
             isPlayerJump = true;
             addGrav.jumpAnimation = true;
             jumpCounts += 1;
             //Adding velocity to the Y axis value of gravity
-            movement.movement.y = jumpVelocities[jumpCounts];
+            inputController.movement.y = jumpVelocities[jumpCounts];
             addGrav.movementApplied.y = jumpVelocities[jumpCounts];
            
-        }else if (!jumpPressed && isPlayerJump && jumpController.isGrounded)
+        }else if (!inputController.jumpPressed && isPlayerJump && jumpController.isGrounded)
         {
             isPlayerJump = false;
         }      
     }
     public void DoubleJump() {
-        if (jumpPressed && !jumpController.isGrounded)
+        if (inputController.jumpPressed && !jumpController.isGrounded)
         {
-            if (jumpCounts < 2 && resetCurrentJump != null)
-            {               
-                StopCoroutine(resetCurrentJump);
-            }
-            animator.SetInteger(jumpCountHash, jumpCounts);
-            // animator.SetBool(jumpHash, true);
             isPlayerJump = true;
-            addGrav.jumpAnimation = true;
-            jumpCounts += 1;
-            //Adding velocity to the Y axis value of gravity
-            movement.movement.y = jumpVelocities[jumpCounts];
-            movement.runDirectionMove.y = jumpVelocities[jumpCounts];
+            inputController.movement.y = jumpVelocity * 2f;
+            inputController.runDirectionMove.y = jumpVelocity * 2f;
         }
         else
         {
@@ -138,13 +113,5 @@ public class PlayerJumps : MonoBehaviour
     public IEnumerator ResetJumps(){
         yield return new WaitForSeconds(.5f);
         jumpCounts = 0;
-    }
-     private void OnEnable()
-    {
-       jumpInput.PlayerActions.Enable();
-    }
-    private void OnDisable()
-    {
-        jumpInput.PlayerActions.Disable();
     }
 }

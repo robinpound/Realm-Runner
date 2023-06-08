@@ -15,19 +15,21 @@ public class Gravity : MonoBehaviour
 
     Animator animator;
     CharacterController controller;
-    MovementController movement;
+    PlayerInputsController movement;
+    PlayerInputsController jumpInput;
     PlayerJumps jumps;
     public Vector3 movementApplied;
 
     private void Awake() {
         controller = GetComponent<CharacterController>();
-        movement = FindObjectOfType<MovementController>();
+        movement = FindObjectOfType<PlayerInputsController>();
         animator = GetComponent<Animator>();
         jumps = FindObjectOfType<PlayerJumps>();
+        jumpInput = GetComponent<PlayerInputsController>();
     }
     public void PlayerGravity(){
     
-        isPlayerFalling = movement.movement.y <= 0.0f || !jumps.jumpPressed; //Try same logic for double jump
+        isPlayerFalling = movement.movement.y <= 0.0f || !jumpInput.jumpPressed; //Try same logic for double jump
        
         if (controller.isGrounded)
         {
@@ -48,17 +50,13 @@ public class Gravity : MonoBehaviour
         {
             jumpPreviouYVelocity = movement.movement.y;
             movement.movement.y = movement.movement.y + (jumps.jumpGravities[jumps.jumpCounts] * multiplyingFall * Time.deltaTime);
-            movementApplied.y = Mathf.Max((jumpPreviouYVelocity + movement.movement.y) * .5f, -20.0f);
-            // movement.movement.y = nextjumpYVelocity;
-            // movement.runDirectionMove.y = nextjumpYVelocity;    
+            movementApplied.y = Mathf.Max((jumpPreviouYVelocity + movement.movement.y) * .5f, -20.0f);  
         
         }else{
             //Adding velovity to the Y input 
             jumpPreviouYVelocity = movement.movement.y;
             movement.movement.y = movement.movement.y + (jumps.jumpGravities[jumps.jumpCounts] * Time.deltaTime);
             movementApplied.y = (jumpPreviouYVelocity + movement.movement.y) * .5f;
-            // movement.movement.y = nextjumpYVelocity;
-            // movement.runDirectionMove.y = nextjumpYVelocity;
         }
 
     }
