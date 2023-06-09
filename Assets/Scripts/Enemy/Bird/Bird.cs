@@ -9,27 +9,28 @@ public class Bird : MonoBehaviour
     private Rigidbody rb;
     private Transform player; 
 
-    [Header("Behind The Scenes:")] 
-    [SerializeField] private bool isplayerInCircleRange = false;
-    [SerializeField] private bool isplayerInAttackRange = false;
-    [SerializeField] private Vector3 waypoint; 
-    [SerializeField] private bool isWaypointSet = false;
-
-    [Header("Settings:")] 
-    [SerializeField] private float circleSightRange = 25f;
-    [SerializeField] private float circleSpeed;
-    [SerializeField] private float circleHeight = 10f;
-    [SerializeField] private float attackSpeed;
+    [Header("Alerted!:")] 
     [SerializeField] private float attackRange;
+    [SerializeField] private float delayBeforeReset;
+    [SerializeField] private float alertSightRange;
+    [SerializeField] private float alertSpeed;
+    [SerializeField] private float escapeSpeed;
+
+    private bool isplayerInAlertRange = false;
+    private bool isplayerInAttackRange = false;
+    [SerializeField] private bool justAttacked = false;
+    
 
     [Header("Layers")] 
     [SerializeField] private LayerMask whatIsPlayer;
 
-    [Header("Patrol:")] 
+    [Header("Patrolling!:")] 
     [SerializeField] GameObject patrolPoint;
-    [SerializeField] float patrolPointRange;
-    [SerializeField] float patrolSpeedmultiplier = 0.2f;
-    [SerializeField] float patrolwaypointacceptaceRadius = 10f;
+    [SerializeField] float patrolPointRange; 
+    [SerializeField] float patrolSpeedmultiplier;
+    [SerializeField] float patrolwaypointAcceptaceRadius; 
+    private Vector3 waypoint; 
+    private bool isWaypointSet = false;
 
     private void Start() 
     {
@@ -41,22 +42,24 @@ public class Bird : MonoBehaviour
     {
         float disctance = (player.position - transform.position).magnitude;
 
-        isplayerInCircleRange = Physics.CheckSphere(transform.position, circleSightRange, whatIsPlayer);
-        Debug.Log("isplayerInCircleRange:" + isplayerInCircleRange);
+        isplayerInAlertRange = Physics.CheckSphere(transform.position, alertSightRange, whatIsPlayer);
         isplayerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!isplayerInCircleRange && !isplayerInAttackRange) Patrol(); 
-        if (isplayerInCircleRange && !isplayerInAttackRange) Circle(); 
-        if (isplayerInCircleRange && isplayerInAttackRange) Attack(); 
+        if (!isplayerInAlertRange) Patrol(); 
+        if (isplayerInAlertRange) MoveToPlayer(); 
+
     }
 
     private void Patrol()
     {
+        justAttacked = false;
         if(!isWaypointSet) FindWayPoint(); 
         if(isWaypointSet) 
         {
             transform.LookAt(waypoint);
             rb.AddRelativeForce(Vector3.forward * patrolSpeedmultiplier, ForceMode.Force);
+            
+            //rb.AddForceAtPosition(Vector3.forward * patrolSpeedmultiplier, transform.position, ForceMode.Force);
         }
         
         WayPointReachedCheck();
@@ -66,45 +69,59 @@ public class Bird : MonoBehaviour
     {
         float randomZ = Random.Range(-patrolPointRange, patrolPointRange);
         float randomX = Random.Range(-patrolPointRange, patrolPointRange);
-        float currentYYZ = patrolPoint.transform.position.z;
-        float currentYYX = patrolPoint.transform.position.x;
-        float currentPPY = patrolPoint.transform.position.y;
 
-        waypoint = new Vector3 (currentYYX + randomX, currentPPY, currentYYZ + randomZ);
+        Vector3 currentPos = patrolPoint.transform.position;
+        waypoint = new Vector3(currentPos.x + randomX, currentPos.y, currentPos.z + randomZ);
         isWaypointSet = true;
     }
 
     private void WayPointReachedCheck()
     {
         Vector3 distanceToWalkPoint = transform.position - waypoint;
-        if (distanceToWalkPoint.magnitude < patrolwaypointacceptaceRadius)
+        if (distanceToWalkPoint.magnitude < patrolwaypointAcceptaceRadius)
+        {
             isWaypointSet = false;
+        }
     }
 
-    private void Circle()
-    {
-        transform.LookAt(player);
+    private void MoveToPlayer()
+    {  
+        transform.LookAt(player);    
+        if (!isplayerInAttackRange && !justAttacked) //move towards player
+        {
+            rb.AddRelativeForce(Vector3.forward * alertSpeed, ForceMode.Force);
+            Invoke(nameof(Escape), delayBeforeReset);
+        }
+        if (isplayerInAttackRange) 
+        {
+            Debug.Log("HIT!");
+            Escape();
+        }
     }
 
-    private void Attack()
+    private void Escape()
     {
-        
+        justAttacked = true;
+        rb.AddForce(Vector3.up * escapeSpeed);
+        Invoke(nameof(ResetAttack), delayBeforeReset);
     }
+    
+    private void ResetAttack() => justAttacked = false;
 
     private void OnDrawGizmosSelected() {
         
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(patrolPoint.transform.position, patrolPointRange);
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, circleSightRange);
+        Gizmos.DrawWireSphere(transform.position, alertSightRange);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.black;
         Gizmos.DrawSphere(waypoint, 1f);
-        if (!isplayerInCircleRange && !isplayerInAttackRange)
+        if (!isplayerInAlertRange && !isplayerInAttackRange)
         {
             Gizmos.color = Color.black;
-            Gizmos.DrawWireSphere(waypoint, patrolwaypointacceptaceRadius);
+            Gizmos.DrawWireSphere(waypoint, patrolwaypointAcceptaceRadius);
         }
     }
 }

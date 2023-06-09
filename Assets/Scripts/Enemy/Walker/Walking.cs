@@ -112,6 +112,5 @@ public class Walking : MonoBehaviour
 
     private void OnDrawGizmos() {
         Gizmos.DrawSphere(waypoint, 0.5f);
-
     }
 }
