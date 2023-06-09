@@ -5,8 +5,9 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     public GameObject player;
-    public Animator animator;
+    public float dist;
     public GameObject arrow;
+    public Transform arrowTransform;
     public int launchVelocity;
     public int arrowOn;
     public bool reloading;
@@ -14,7 +15,7 @@ public class Arrow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = player.GetComponent<Animator>();
+        dist = Vector3.Distance(arrowTransform.position, transform.position);
     }
 
     // Update is called once per frame
@@ -32,20 +33,14 @@ public class Arrow : MonoBehaviour
         {
             StartCoroutine(Reload());
         }
-        if (reloading)
-        {
-            animator.SetBool("reload", true);
-        }
-        else if (!reloading)
-        {
-            animator.SetBool("reload", false);
-        }
+
     }
 
     public void Fire()
     {
         GameObject ball = Instantiate(arrow, transform.position, transform.rotation);
         ball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, launchVelocity));
+
     }
     IEnumerator Reload()
     {

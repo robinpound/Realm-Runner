@@ -12,7 +12,6 @@ public class CoinCollectable : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager");
-        coin = GameObject.FindGameObjectWithTag("Coin");
     }
 
     // Update is called once per frame

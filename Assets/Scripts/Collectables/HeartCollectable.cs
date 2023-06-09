@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FragmentCollectable : MonoBehaviour
+public class HeartCollectable : MonoBehaviour
 {
     public GameObject player;
-    public GameObject gameManager;
-    public GameObject fragment;
+    public GameObject heart;
+    public float health;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager");
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -19,6 +18,7 @@ public class FragmentCollectable : MonoBehaviour
     void Update()
     {
         transform.Rotate(0, 100 * Time.deltaTime, 0);
+        health = player.GetComponent<PlayerUIHealth>().health;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,10 +26,12 @@ public class FragmentCollectable : MonoBehaviour
         //Debug.Log("In!");
         if (other.tag == "Player")
         {
-            Debug.Log("In!");
-            player.GetComponent<PlayerUIKeyFragments>().fragmentsInt++;
-            gameManager.GetComponent<GameManager>().fragments++;
-            GameObject.Destroy(fragment);
+            //Debug.Log("In!");
+            if(health < 5)
+            {
+                player.GetComponent<PlayerUIHealth>().health++;
+                GameObject.Destroy(heart);
+            }
         }
     }
 }
