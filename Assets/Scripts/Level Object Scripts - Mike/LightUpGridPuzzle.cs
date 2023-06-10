@@ -10,7 +10,7 @@ public class LightUpGridPuzzle : MonoBehaviour
     private GameObject instantiatedLight;
     //Vector3 rayCastVector;
     private const string PLAYER = "Player";
-    private bool hasLightSpawned = false;
+    public bool hasLightSpawned = false;
 
     private void Start()
     {
