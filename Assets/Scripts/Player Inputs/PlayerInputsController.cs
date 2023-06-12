@@ -5,9 +5,9 @@ using UnityEngine.InputSystem;
 public class PlayerInputsController : MonoBehaviour
 {
     public Vector2 moveInput;
-     public bool jumpPressed = false;
+    public bool jumpPressed = false;
     public Vector2 lookInput;
-    public float runSpeed = 0.5f;
+    public float runSpeed = 1.5f;
     public float walkSpeed = 0.2f;
     public bool isRunning;
     public bool isRunPressed;
@@ -22,9 +22,9 @@ public class PlayerInputsController : MonoBehaviour
         actions = new InputActions();
         //Move input
         //Move
-        actions.PlayerActions.Movement.started += OnPlayerMove;
-        actions.PlayerActions.Movement.canceled += OnPlayerMove;
-        actions.PlayerActions.Movement.performed += OnPlayerMove;
+        // actions.PlayerActions.Movement.started += OnPlayerMove;
+        // actions.PlayerActions.Movement.canceled += OnPlayerMove;
+        // actions.PlayerActions.Movement.performed += OnPlayerMove;
 
         //Run
         actions.PlayerActions.Run.started += OnPlayerRun;
@@ -35,12 +35,12 @@ public class PlayerInputsController : MonoBehaviour
         //Look input
         actions.PlayerActions.Look.started += OnLook;
         actions.PlayerActions.Look.canceled += OnLook;
-        actions.PlayerActions.Look.performed += OnLook;
+       
 
         //Jump
         actions.PlayerActions.Jump.started += playerJumps;
         actions.PlayerActions.Jump.canceled += playerJumps;
-        actions.PlayerActions.Jump.performed += playerJumps;
+        // actions.PlayerActions.Jump.performed += playerJumps;
 
     }
      void OnPlayerRun(InputAction.CallbackContext context){
@@ -57,17 +57,19 @@ public class PlayerInputsController : MonoBehaviour
         // movement = transform.position * cameraAimInput.y + transform.position * cameraAimInput.x;
         // runDirectionMove = transform.forward * cameraAimInput.y + transform.right * cameraAimInput.x;
     }
-    void OnPlayerMove(InputAction.CallbackContext context)
-    {
-        ////Adding the context value to the is pressed boolean
-        movementInput = context.ReadValue<Vector2>();
-        movement = transform.position;
-        movement.x = movementInput.x  * walkSpeed;
-        movement.z = movementInput.y * walkSpeed ;
-        runDirectionMove.x = movementInput.x * runSpeed ;
-        runDirectionMove.z = movementInput.y * runSpeed;
-        isMovementPressed = movementInput.sqrMagnitude > 0;  
-        }
+    // void OnPlayerMove(InputAction.CallbackContext context)
+    // {
+    //     ////Adding the context value to the is pressed boolean
+    //     movementInput = context.ReadValue<Vector2>();
+    //     // movement = transform.position;
+    //     // movement.x = movementInput.x  * walkSpeed;
+    //     // movement.z = movementInput.y * walkSpeed ;
+    //     // runDirectionMove.x = movementInput.x * runSpeed ;
+    //     // runDirectionMove.z = movementInput.y * runSpeed;
+    //     // runDirectionMove.x = movementInput.x * runSpeed ;
+    //     // runDirectionMove.z = movementInput.y * runSpeed;
+    //     isMovementPressed = movementInput.sqrMagnitude > 0;  
+    //     }
 
     void OnLook(InputAction.CallbackContext context)
     {
