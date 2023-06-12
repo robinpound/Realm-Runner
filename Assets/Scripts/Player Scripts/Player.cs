@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     public Vector3 currentMovement;
     bool doOneJump;
     bool doDoubleJump;
+    int jumpCount = 0;
 
     void Start()
     {
@@ -47,9 +48,11 @@ public class Player : MonoBehaviour
         HandleRotation(_cameraRelativeMovement);
         _cameraRelativeMovement = ConvertToCameraSpace(currentMovement);
         characterController.Move(_cameraRelativeMovement * Time.deltaTime);
+        Debug.Log(" JUMP COUNTING FOR NOW"+ jumpCount);
 
-        
-        
+        if(characterController.isGrounded){
+            jumpCount = 0;
+        }
     }
 
     Vector3 SetInitialMovement()
@@ -84,27 +87,28 @@ public class Player : MonoBehaviour
     }
     void HandleJump()
     {
-       
+        Debug.Log("This another jump count" + jumpCount);
         // check if on the ground
         if ( characterController.isGrounded )
         { 
+           
             Jump();
-        }else if(isPlayerFalling && input.isJumpPressed && doDoubleJump){
-            animator.SetBool("jump", true);
-            YaxisVelocity = jumpForce;
-            // doOneJump = false;
+
+        }else if(isPlayerFalling && input.isJumpPressed && jumpCount > 2){
+            Jump();
         }
         
     }
     void Jump()
     {
+        jumpCount++;
         animator.SetBool("jump", false);
         YaxisVelocity = -0.5f;
 
         // perform jump if jump button pressed
         if (input.isJumpPressed)
         {
-            doOneJump = true;
+            Debug.Log("Player jump");
             animator.SetBool("jump", true);
             YaxisVelocity = jumpForce;
         }
