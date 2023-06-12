@@ -17,11 +17,21 @@ public class EnemyHealth : MonoBehaviour
     public GameObject fragment;
     public bool spawned;
 
+    //Damage
+    public int swordDamageMin;
+    public int swordDamageMax;
+    public int arrowDamageMin;
+    public int arrowDamageMax;
+
 
     // Start is called before the first frame update
     void Start()
     {
         health = 10;
+        swordDamageMin = 1;
+        swordDamageMax = 5;
+        arrowDamageMin = 4;
+        arrowDamageMax = 7;
     }
 
     // Update is called once per frame
@@ -62,9 +72,14 @@ public class EnemyHealth : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(attacking && other.tag == "Sword")
+        if(other.CompareTag("Sword") && attacking)
         {
-            int random = Random.Range(1, 5);
+            int random = Random.Range(swordDamageMin, swordDamageMax);
+            health -= random;
+        }
+        else if (other.CompareTag("Arrow"))
+        {
+            int random = Random.Range(arrowDamageMin, arrowDamageMax);
             health -= random;
         }
     }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1989258544732588116}
   m_Layer: 0
   m_Name: Shaft
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 8779566215749711609}
   m_Layer: 0
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -205,9 +205,10 @@ GameObject:
   - component: {fileID: 3870208460809172110}
   - component: {fileID: 8192024976912411356}
   - component: {fileID: -7799402801942301503}
+  - component: {fileID: 208135380070407623}
   m_Layer: 0
   m_Name: Arrow
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -221,7 +222,7 @@ Transform:
   m_GameObject: {fileID: 7422282595457829629}
   m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
   m_LocalPosition: {x: -42.051697, y: -139.45389, z: -233.38777}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1683286440655938762}
@@ -257,3 +258,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f83dff259cc1b4a89c507e77ab01a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &208135380070407623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7422282595457829629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cae3db768359a54da7166ce5e3d4171, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 8192024976912411356}

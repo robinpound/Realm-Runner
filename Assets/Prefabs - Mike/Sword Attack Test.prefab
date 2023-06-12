@@ -326,9 +326,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2965cb90db053bf4b907ac7fc235246a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrow: {fileID: 0}
-  spawnLocation: {fileID: 0}
+  pooledObjects: []
+  objectToPool: {fileID: 0}
+  amountToPool: 0
+  turret: {fileID: 0}
   launchVelocity: 10
+  ammo: 0
 --- !u!114 &5545671964839383157
 MonoBehaviour:
   m_ObjectHideFlags: 0

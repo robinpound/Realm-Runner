@@ -33,13 +33,14 @@ public class Arrow : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            launchVelocity++;
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Fire();
-        }
-        if (ammo)
-        {
-            StartCoroutine(Reload());
+            launchVelocity = 0;
         }
     }
     public void Fire()
@@ -47,7 +48,10 @@ public class Arrow : MonoBehaviour
         GameObject bullet = Arrow.SharedInstance.GetPooledObject();
         if (bullet != null)
         {
-             StartCoroutine(Wait());
+            bullet.transform.position = turret.transform.position;
+            bullet.transform.rotation = turret.transform.rotation;
+            bullet.SetActive(true);
+            bullet.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, launchVelocity));
         }
     }
 
@@ -61,22 +65,5 @@ public class Arrow : MonoBehaviour
             }
         }
         return null;
-    }
-
-    IEnumerator Wait()
-    {
-        GameObject bullet = Arrow.SharedInstance.GetPooledObject();
-        bullet.transform.position = turret.transform.position;
-        bullet.transform.rotation = turret.transform.rotation;
-        bullet.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, launchVelocity * Time.deltaTime));
-        bullet.SetActive(true);
-        yield return new WaitForSeconds(2);
-        bullet.SetActive(false);
-    }
-
-    IEnumerator Reload()
-    {
-        yield return new WaitForSeconds(1);
-        ammo = false;
     }
 }
