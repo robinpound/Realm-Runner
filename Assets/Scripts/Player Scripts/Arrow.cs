@@ -4,53 +4,79 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    public GameObject player;
-    public float dist;
-    public GameObject arrow;
-    public Transform arrowTransform;
-    public int launchVelocity;
-    public int arrowOn;
-    public bool reloading;
+    //Object Pooling Vars
+    public static Arrow SharedInstance;
+    public List<GameObject> pooledObjects;
+    public GameObject objectToPool;
+    public int amountToPool;
+    public GameObject turret;
 
+    //bullet Vars
+    public int launchVelocity;
+    public bool ammo;
+
+    private void Awake()
+    {
+        SharedInstance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        dist = Vector3.Distance(arrowTransform.position, transform.position);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
+        pooledObjects = new List<GameObject>();
+        GameObject tmp;
+        for (int i = 0; i < amountToPool; i++)
         {
-            if(arrowOn == 1 && !reloading)
-            {
-                arrowOn = arrowOn - 1;
-                Fire();
-            }
+            tmp = Instantiate(objectToPool);
+            tmp.SetActive(false);
+            pooledObjects.Add(tmp);
         }
-        if (arrowOn <= 0)
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Fire();
+        }
+        if (ammo)
         {
             StartCoroutine(Reload());
         }
-
     }
-
     public void Fire()
     {
-        GameObject ball = Instantiate(arrow, transform.position, transform.rotation);
-        ball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, launchVelocity));
-
+        GameObject bullet = Arrow.SharedInstance.GetPooledObject();
+        if (bullet != null)
+        {
+             StartCoroutine(Wait());
+        }
     }
+
+    public GameObject GetPooledObject()
+    {
+        for (int i = 0; i < amountToPool; i++)
+        {
+            if (!pooledObjects[i].activeInHierarchy)
+            {
+                return pooledObjects[i];
+            }
+        }
+        return null;
+    }
+
+    IEnumerator Wait()
+    {
+        GameObject bullet = Arrow.SharedInstance.GetPooledObject();
+        bullet.transform.position = turret.transform.position;
+        bullet.transform.rotation = turret.transform.rotation;
+        bullet.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, launchVelocity * Time.deltaTime));
+        bullet.SetActive(true);
+        yield return new WaitForSeconds(2);
+        bullet.SetActive(false);
+    }
+
     IEnumerator Reload()
     {
-        reloading = true;
         yield return new WaitForSeconds(1);
-        if (arrowOn <= 0)
-        {
-            arrowOn = 1;
-        }
-        reloading = false;
-        StopCoroutine(Reload());
+        ammo = false;
     }
 }
