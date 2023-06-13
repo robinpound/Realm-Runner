@@ -4,35 +4,37 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
-{
-
-
-    [SerializeField] float moveSpeed = 3f;
-    [SerializeField] float runSpeed = 5f;
-    [SerializeField] float jumpForce = 16f;
-    float rotationFactorPerFrame = 15.0f;
-    private float YaxisVelocity;
+{ 
     Vector3 _cameraRelativeMovement;
-    Vector3 moveDirection;
+    public Vector3 moveDirection;
+    ActionInputs input;
+    PlayerAnimations animations;
+    
+    PlayerController cc; //character controller
+    PlayerJump jump;
+    Gravity gravity;
+    private Animator animator;
+    public Vector3 currentMovement;
+    float rotationFactorPerFrame = 15.0f;
+    public float YaxisVelocity;
     // bool isJumpPressed;
     bool isRunIsPressed;
-    bool isWalkIsPressed;
-    bool isPlayerFalling;
-    float gravityMultiplier = 5f;
-    int jumpMaxHeight = 2;
-    private CharacterController characterController;
-    private Animator animator;
-    ActionInputs input;
-    public Vector3 currentMovement;
-    bool doOneJump;
-    bool doDoubleJump;
-    int jumpCount = 0;
+    public bool isWalkIsPressed;
+    // bool isPlayerFalling;
+    // float gravityMultiplier = 5f;
+    // int jumpMaxHeight = 2;
+    // bool doOneJump;
+    // bool doDoubleJump;
+    // int jumpCount = 0;
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
+        cc = GetComponent<PlayerController>();
         animator = GetComponent<Animator>();
         input = GetComponent<ActionInputs>();
+        jump = GetComponent<PlayerJump>();
+        gravity = GetComponent<Gravity>();
+        animations = GetComponent<PlayerAnimations>();
         
         // jumpH = maxNumOfJumps;
 
@@ -41,88 +43,37 @@ public class Player : MonoBehaviour
     void Update()
     {
         currentMovement = SetInitialMovement();
-        HandleJump();
-        Gravity();
+        // HandleJump();
+        // Gravity();
         // DoubleJump();
+        gravity.PlayerGravity();
+        jump.HandleJump();
+        
         currentMovement.y = YaxisVelocity;
         HandleRotation(_cameraRelativeMovement);
         _cameraRelativeMovement = ConvertToCameraSpace(currentMovement);
-        characterController.Move(_cameraRelativeMovement * Time.deltaTime);
-        Debug.Log(" JUMP COUNTING FOR NOW"+ jumpCount);
-
-        if(characterController.isGrounded){
-            jumpCount = 0;
+        cc.controller.Move(_cameraRelativeMovement * Time.deltaTime);
+        // Debug.Log(" JUMP COUNTING FOR NOW"+ jumpCount);
+        if (gravity.playerIsFalling)
+        {
+            jump.DoubleJump();
         }
+        // if(characterController.isGrounded){
+        //     jumpCount = 0;
+        // }
     }
 
     Vector3 SetInitialMovement()
     {
-        moveDirection = new Vector3(input.inputMovement.x, 0f, input.inputMovement.y);
-
+       moveDirection = new Vector3(input.inputMovement.x, 0f, input.inputMovement.y);
         isWalkIsPressed = moveDirection.magnitude != 0;
         // isJumpPressed = Input.GetButtonDown("Jump");
-        PlayerAnimations();
+        animations.WalkAnimation();
+        animations.RunAnimation();
+        animations.JumpAnimation();
         return moveDirection;
     }
 
-    void PlayerAnimations()
-    {
-        if (input.isRunPressed)
-        {
-            moveDirection *= runSpeed;
-            animator.SetBool("run", true);
-            animator.SetBool("walk", true);
-        }
-        else if (isWalkIsPressed)
-        {
-            moveDirection *= moveSpeed;
-            animator.SetBool("run", false);
-            animator.SetBool("walk", true);
-        }
-        else
-        {
-            animator.SetBool("run", false);
-            animator.SetBool("walk", false);
-        }
-    }
-    void HandleJump()
-    {
-        Debug.Log("This another jump count" + jumpCount);
-        // check if on the ground
-        if ( characterController.isGrounded )
-        { 
-           
-            Jump();
-
-        }else if(isPlayerFalling && input.isJumpPressed && jumpCount > 2){
-            Jump();
-        }
-        
-    }
-    void Jump()
-    {
-        jumpCount++;
-        animator.SetBool("jump", false);
-        YaxisVelocity = -0.5f;
-
-        // perform jump if jump button pressed
-        if (input.isJumpPressed)
-        {
-            Debug.Log("Player jump");
-            animator.SetBool("jump", true);
-            YaxisVelocity = jumpForce;
-        }
-        
-    }
-    
-
-    void Gravity(){
-        isPlayerFalling = currentMovement.y <= 0.0f || !input.isJumpPressed;
-        YaxisVelocity += Physics.gravity.y * gravityMultiplier * Time.deltaTime;
-        
-            //When jump over enemies
-            // YaxisVelocity += Physics.gravity.y * 20f * Time.deltaTime;
-    }
     void HandleRotation(Vector3 movementInput)
     {
         if (movementInput.x == 0 && movementInput.z == 0)
