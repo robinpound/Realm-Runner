@@ -15,6 +15,8 @@ public class Arrow : MonoBehaviour
     public int launchVelocity;
     public bool ammo;
 
+    public GameObject[] powerIndicator;
+
     private void Awake()
     {
         SharedInstance = this;
@@ -41,6 +43,34 @@ public class Arrow : MonoBehaviour
         {
             Fire();
             launchVelocity = 0;
+        }
+        if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            launchVelocity = 0;
+        }
+        if(launchVelocity == 0)
+        {
+            powerIndicator[0].SetActive(false);
+            powerIndicator[2].SetActive(false);
+            powerIndicator[1].SetActive(false);
+        }
+        else if(launchVelocity <= 200 && launchVelocity > 0)
+        {
+            powerIndicator[0].SetActive(true);
+            powerIndicator[2].SetActive(false);
+            powerIndicator[1].SetActive(false);
+        }
+        else if(launchVelocity >= 201 && launchVelocity <= 500)
+        {
+            powerIndicator[1].SetActive(true);
+            powerIndicator[0].SetActive(false);
+            powerIndicator[2].SetActive(false);
+        }
+        else if (launchVelocity >= 501)
+        {
+            powerIndicator[2].SetActive(true);
+            powerIndicator[0].SetActive(false);
+            powerIndicator[1].SetActive(false);
         }
     }
     public void Fire()

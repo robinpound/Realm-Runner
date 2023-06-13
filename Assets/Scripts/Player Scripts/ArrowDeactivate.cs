@@ -27,10 +27,10 @@ public class ArrowDeactivate : MonoBehaviour
     void Update()
     {
         StartCoroutine(Stop());
-        if (rb.velocity.magnitude <= 0)
-        {
-            gameObject.SetActive(false);
-        }
+        //if (rb.velocity.magnitude <= 0)
+        //{
+        //    gameObject.SetActive(false);
+        //}
     }
 
     IEnumerator Stop()
