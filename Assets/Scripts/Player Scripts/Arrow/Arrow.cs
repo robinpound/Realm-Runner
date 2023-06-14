@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Arrow : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class Arrow : MonoBehaviour
     public bool ammo;
 
     public GameObject[] powerIndicator;
+
+    public ArrowSlider slider;
 
     private void Awake()
     {
@@ -38,15 +41,18 @@ public class Arrow : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse1))
         {
             launchVelocity++;
+            slider.SetPower(launchVelocity);
         }
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Fire();
             launchVelocity = 0;
+            slider.SetPower(launchVelocity);
         }
         if (Input.GetKeyUp(KeyCode.Mouse1))
         {
             launchVelocity = 0;
+            slider.SetPower(launchVelocity);
         }
         if(launchVelocity == 0)
         {
