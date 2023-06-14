@@ -46,38 +46,16 @@ public class Arrow : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Fire();
-            launchVelocity = 0;
+            new WaitForSeconds(0.5f);
+            launchVelocity = 1000;
             slider.SetPower(launchVelocity);
         }
         if (Input.GetKeyUp(KeyCode.Mouse1))
         {
-            launchVelocity = 0;
+            launchVelocity = 1000;
             slider.SetPower(launchVelocity);
         }
-        if(launchVelocity == 0)
-        {
-            powerIndicator[0].SetActive(false);
-            powerIndicator[2].SetActive(false);
-            powerIndicator[1].SetActive(false);
-        }
-        else if(launchVelocity <= 200 && launchVelocity > 0)
-        {
-            powerIndicator[0].SetActive(true);
-            powerIndicator[2].SetActive(false);
-            powerIndicator[1].SetActive(false);
-        }
-        else if(launchVelocity >= 201 && launchVelocity <= 500)
-        {
-            powerIndicator[1].SetActive(true);
-            powerIndicator[0].SetActive(false);
-            powerIndicator[2].SetActive(false);
-        }
-        else if (launchVelocity >= 501)
-        {
-            powerIndicator[2].SetActive(true);
-            powerIndicator[0].SetActive(false);
-            powerIndicator[1].SetActive(false);
-        }
+
     }
     public void Fire()
     {

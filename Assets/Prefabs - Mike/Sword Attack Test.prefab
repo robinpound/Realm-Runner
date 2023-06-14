@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3491148449702420876}
   - component: {fileID: 3004133319213131686}
   - component: {fileID: 9020177048289862228}
-  - component: {fileID: 3024074443277928736}
   m_Layer: 0
   m_Name: ArrowSpawner
   m_TagString: Sword
@@ -84,19 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3024074443277928736
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3920311981211553894}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5365090516748992304
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,6 +318,8 @@ MonoBehaviour:
   turret: {fileID: 0}
   launchVelocity: 10
   ammo: 0
+  powerIndicator: []
+  slider: {fileID: 0}
 --- !u!114 &5545671964839383157
 MonoBehaviour:
   m_ObjectHideFlags: 0
