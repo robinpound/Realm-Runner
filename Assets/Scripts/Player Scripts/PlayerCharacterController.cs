@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerCharacterController : MonoBehaviour
 {
     [HideInInspector]
     public CharacterController controller;

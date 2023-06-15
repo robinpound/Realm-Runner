@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerJumps : MonoBehaviour
 {
     PlayerAnimations anim;
-    PlayerController cc;
+    PlayerCharacterController cc;
     MainPlyer player;
     ActionInputs input; // NOTE: PlayerInput class must be generated from New Input System in Inspector
 
@@ -25,7 +25,7 @@ public class PlayerJumps : MonoBehaviour
 
     private void Awake()
     {
-        cc = GetComponent<PlayerController>();
+        cc = GetComponent<PlayerCharacterController>();
         anim = GetComponent<PlayerAnimations>();
         input = GetComponent<ActionInputs>();
         player = GetComponent<MainPlyer>();

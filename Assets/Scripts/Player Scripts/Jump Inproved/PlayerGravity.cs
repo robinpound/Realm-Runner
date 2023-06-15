@@ -6,7 +6,7 @@ public class PlayerGravity : MonoBehaviour
 {
     public bool isFalling;
     public Vector3 currentMovement;
-    PlayerController cc;
+    PlayerCharacterController cc;
     PlayerAnimations anim;
     ActionInputs input;
     PlayerJumps pJumps;
@@ -17,7 +17,7 @@ public class PlayerGravity : MonoBehaviour
     void Start()
     {
         input = GetComponent<ActionInputs>();
-        cc = GetComponent<PlayerController>();
+        cc = GetComponent<PlayerCharacterController>();
         anim = GetComponent<PlayerAnimations>();
         pJumps = GetComponent<PlayerJumps>();
 

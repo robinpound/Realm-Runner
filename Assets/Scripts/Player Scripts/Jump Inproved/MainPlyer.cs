@@ -10,7 +10,7 @@ public class MainPlyer : MonoBehaviour
     PlayerJumps pJumps;
     PlayerAnimations anim;
     // declare reference variables
-    PlayerController cc;
+    PlayerCharacterController cc;
     PlayerGravity pgravity;
     ActionInputs input; // NOTE: PlayerInput class must be generated from New Input System in Inspector
     CameraMoveController camMove;
@@ -31,7 +31,7 @@ public class MainPlyer : MonoBehaviour
         // initially set reference variables
         pJumps = GetComponent<PlayerJumps>();
         anim = GetComponent<PlayerAnimations>();
-        cc = FindObjectOfType<PlayerController>();
+        cc = FindObjectOfType<PlayerCharacterController>();
         // pJumps.SetupJumpVariables();
         input = GetComponent<ActionInputs>();
         pgravity = GetComponent<PlayerGravity>();
