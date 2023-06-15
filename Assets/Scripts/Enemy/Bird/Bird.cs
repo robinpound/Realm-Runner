@@ -94,7 +94,7 @@ public class Bird : MonoBehaviour
         }
         if (isplayerInAttackRange) 
         {
-            Debug.Log("HIT!");
+            //Debug.Log("HIT!");
             Escape();
         }
     }
