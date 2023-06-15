@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SwordAttack",
+                    "type": "Button",
+                    "id": "faded01c-7a79-4112-9bd8-6e7f684e93d0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -377,6 +386,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ArrowAiming",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d4570ace-8a58-4363-9de2-169a491db716",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwordAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

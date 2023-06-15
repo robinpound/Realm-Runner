@@ -80,6 +80,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwordAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""faded01c-7a79-4112-9bd8-6e7f684e93d0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -401,6 +410,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""ArrowAiming"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d4570ace-8a58-4363-9de2-169a491db716"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwordAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -415,6 +435,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
         m_PlayerActions_ArrowAttack = m_PlayerActions.FindAction("ArrowAttack", throwIfNotFound: true);
         m_PlayerActions_ArrowAiming = m_PlayerActions.FindAction("ArrowAiming", throwIfNotFound: true);
+        m_PlayerActions_SwordAttack = m_PlayerActions.FindAction("SwordAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -482,6 +503,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_Jump;
     private readonly InputAction m_PlayerActions_ArrowAttack;
     private readonly InputAction m_PlayerActions_ArrowAiming;
+    private readonly InputAction m_PlayerActions_SwordAttack;
     public struct PlayerActionsActions
     {
         private @InputActions m_Wrapper;
@@ -492,6 +514,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_PlayerActions_Jump;
         public InputAction @ArrowAttack => m_Wrapper.m_PlayerActions_ArrowAttack;
         public InputAction @ArrowAiming => m_Wrapper.m_PlayerActions_ArrowAiming;
+        public InputAction @SwordAttack => m_Wrapper.m_PlayerActions_SwordAttack;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -519,6 +542,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @ArrowAiming.started += instance.OnArrowAiming;
             @ArrowAiming.performed += instance.OnArrowAiming;
             @ArrowAiming.canceled += instance.OnArrowAiming;
+            @SwordAttack.started += instance.OnSwordAttack;
+            @SwordAttack.performed += instance.OnSwordAttack;
+            @SwordAttack.canceled += instance.OnSwordAttack;
         }
 
         private void UnregisterCallbacks(IPlayerActionsActions instance)
@@ -541,6 +567,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @ArrowAiming.started -= instance.OnArrowAiming;
             @ArrowAiming.performed -= instance.OnArrowAiming;
             @ArrowAiming.canceled -= instance.OnArrowAiming;
+            @SwordAttack.started -= instance.OnSwordAttack;
+            @SwordAttack.performed -= instance.OnSwordAttack;
+            @SwordAttack.canceled -= instance.OnSwordAttack;
         }
 
         public void RemoveCallbacks(IPlayerActionsActions instance)
@@ -566,5 +595,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnArrowAttack(InputAction.CallbackContext context);
         void OnArrowAiming(InputAction.CallbackContext context);
+        void OnSwordAttack(InputAction.CallbackContext context);
     }
 }
