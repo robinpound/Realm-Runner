@@ -44,7 +44,7 @@ public class MovementController : MonoBehaviour
     Quaternion rotation;
     Quaternion targetToLookAt;
     // public float targetToLookAt;
-    Player playerController;
+    // Player playerController;
     Gravity playerGravity;
 
     //Camera
@@ -73,7 +73,7 @@ public class MovementController : MonoBehaviour
         //wiil play animation based on integer value
         isWalking = Animator.StringToHash("walk");
         isRunning = Animator.StringToHash("run");
-        playerController = FindObjectOfType<Player>();
+        // playerController = FindObjectOfType<Player>();
         playerGravity = FindObjectOfType<Gravity>();
 
         _cursorLocked = Cursor.lockState == CursorLockMode.Locked;
