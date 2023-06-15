@@ -21,7 +21,7 @@ public class EnemyHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        attacking = player.GetComponent<SwordAttack>().attacking;
+        // attacking = player.GetComponent<SwordAttack>().attacking;
         if(health <= 0)
         {
             GameObject.Destroy(enemy);
