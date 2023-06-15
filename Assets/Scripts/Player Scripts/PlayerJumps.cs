@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerJumps : MonoBehaviour
 {
     CharacterController jumpController;
-    MovementController movement;
+    // MovementController movement;
     //Input action
     InputActions jumpInput;
     Gravity addGrav;
@@ -46,7 +46,7 @@ public class PlayerJumps : MonoBehaviour
         jumpInput.PlayerActions.Jump.performed += playerJumps;
 
         jumpController = GetComponent<CharacterController>();
-        movement = FindObjectOfType<MovementController>();
+        // movement = FindObjectOfType<MovementController>();
         addGrav = FindObjectOfType<Gravity>();
 
         //Get jump count value and animation type from animator 
@@ -64,7 +64,7 @@ public class PlayerJumps : MonoBehaviour
     void SetJumps(){
         
         higherPoint = maxTimeOfJumps / 2;
-        addGrav.gravity = (-2 * maxJumpHeightOfJump) / Mathf.Pow(higherPoint, 2);
+        // addGrav.gravity = (-2 * maxJumpHeightOfJump) / Mathf.Pow(higherPoint, 2);
         jumpVelocity = (2 * maxJumpHeightOfJump) / higherPoint;
 
         secondJumpGravity = (-2 * (maxJumpHeightOfJump + 2)) / Mathf.Pow((higherPoint * 1.25f), 2);
@@ -77,8 +77,8 @@ public class PlayerJumps : MonoBehaviour
         jumpVelocities.Add(2, secondJumpVelocity);
         jumpVelocities.Add(3, thirdJumpVelocity);
         //Gravities
-        jumpGravities.Add(0, addGrav.gravity);
-        jumpGravities.Add(1, addGrav.gravity);
+        // jumpGravities.Add(0, addGrav.gravity);
+        // jumpGravities.Add(1, addGrav.gravity);
         jumpGravities.Add(2, secondJumpGravity);
         jumpGravities.Add(3, thirdJumpGravity);
         
@@ -99,11 +99,11 @@ public class PlayerJumps : MonoBehaviour
             animator.SetBool(playerJumpHash, true);
             // animator.SetInteger(jumpHash, playerJumpHash);
             isPlayerJump = true;
-            addGrav.jumpAnimation = true;
-            jumpCounts += 1;
-            //Adding velocity to the Y axis value of gravity
-            movement.movement.y = jumpVelocities[jumpCounts];
-            addGrav.movementApplied.y = jumpVelocities[jumpCounts];
+            // addGrav.jumpAnimation = true;
+            // jumpCounts += 1;
+            // //Adding velocity to the Y axis value of gravity
+            // movement.movement.y = jumpVelocities[jumpCounts];
+            // addGrav.movementApplied.y = jumpVelocities[jumpCounts];
            
         }else if (!jumpPressed && isPlayerJump && jumpController.isGrounded)
         {
@@ -120,11 +120,11 @@ public class PlayerJumps : MonoBehaviour
             animator.SetInteger(jumpCountHash, jumpCounts);
             // animator.SetBool(jumpHash, true);
             isPlayerJump = true;
-            addGrav.jumpAnimation = true;
-            jumpCounts += 1;
-            //Adding velocity to the Y axis value of gravity
-            movement.movement.y = jumpVelocities[jumpCounts];
-            movement.runDirectionMove.y = jumpVelocities[jumpCounts];
+            // addGrav.jumpAnimation = true;
+            // jumpCounts += 1;
+            // //Adding velocity to the Y axis value of gravity
+            // movement.movement.y = jumpVelocities[jumpCounts];
+            // movement.runDirectionMove.y = jumpVelocities[jumpCounts];
         }
         else
         {
