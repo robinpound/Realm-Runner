@@ -6,20 +6,18 @@ public class PlayerAnimations : MonoBehaviour
 {
     public Animator animator;
     ActionInputs input;
-    Player player;
     [SerializeField] float moveSpeed = 3f;
     [SerializeField] float runSpeed = 5f;
-    int isJumpingHash;
-    int isRunningHash;
-    int isWalkingHash;
+    public int isJumpingHash;
+    public int isRunningHash;
+    public int isWalkingHash;
     public int jumpCountHash;
-    bool isJumpingHashAnimator = false;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         input = GetComponent<ActionInputs>();
-        player = GetComponent<Player>();
+       
 
         //Animations hash
         isWalkingHash = Animator.StringToHash("walk");
@@ -29,28 +27,34 @@ public class PlayerAnimations : MonoBehaviour
     }
     public void WalkAnimation()
     {
-        if (input.isRunPressed)
+        bool isWalking = animator.GetBool(isWalkingHash);
+        bool isRunning = animator.GetBool(isRunningHash);
+
+        // start walking if movement pressed is true and not already walking
+        if (input.isMovementPressed && !isWalking)
         {
-            player.moveDirection *= runSpeed;
-            animator.SetBool(isRunningHash, true);
             animator.SetBool(isWalkingHash, true);
         }
-        else if (player.isWalkIsPressed)
+        // stop walking if isMovementPressed is false and not already walking
+        else if (!input.isMovementPressed && isWalking)
         {
-            player.moveDirection *= moveSpeed;
-            animator.SetBool(isRunningHash, false);
-            animator.SetBool(isWalkingHash, true);
-        }
-        else
-        {
-            animator.SetBool(isRunningHash, false);
             animator.SetBool(isWalkingHash, false);
+        }
+        // run if movement and run pressed are true and not currently running
+        if ((input.isMovementPressed && input.isRunPressed) && !isRunning)
+        {
+            animator.SetBool(isRunningHash, true);
+        }
+        // stop running if movement or run pressed are false and currently running
+        else if ((!input.isMovementPressed || !input.isRunPressed) && isRunning)
+        {
+            animator.SetBool(isRunningHash, false);
         }
     }
 
     public void RunAnimation()
     {
-        if (input.isRunPressed && player.isWalkIsPressed)
+        if (input.isRunPressed && input.isMovementPressed)
         {
             animator.SetBool(isRunningHash, true);
         }
