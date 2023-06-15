@@ -4,22 +4,14 @@ using UnityEngine;
 
 public class ArrowDeactivate : MonoBehaviour
 {
-    //Vector3 previousPosition;
-    //Vector3 lastMoveDirection;
-    //public Rigidbody rb;
+
     private void Start()
     {
-        //previousPosition = transform.position;
-        //lastMoveDirection = Vector3.zero;
+
     }
 
     private void FixedUpdate()
     {
-        //if (transform.position != previousPosition)
-        //{
-        //    lastMoveDirection = (transform.position - previousPosition).normalized;
-        //    previousPosition = transform.position;
-        //}
         //gameObject.transform.LookAt(transform.forward);
     }
 
