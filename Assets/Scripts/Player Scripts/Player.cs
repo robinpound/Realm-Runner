@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
         inputActions.PlayerRotation();
         gravity.PlayerGravity();
 
-        arrowShoot.BowAndArrowAttack();
+        //arrowShoot.BowAndArrowAttack();
         // cameraController.CameraRotation();
        // inputActions.RoationIfAming();
         
