@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MainPlyer : MonoBehaviour
+public class Player : MonoBehaviour
 {
 
     //Other Scripts

@@ -5,7 +5,7 @@ using UnityEngine.Animations;
 
 public class CameraController : MonoBehaviour
 {
-    PlayerInputsController inputController;
+    ActionInputs inputController;
     [SerializeField]
      Transform cameraFollow;
      float xRotation;
@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       inputController = GetComponent<PlayerInputsController>();
+       inputController = GetComponent<ActionInputs>();
     }
     public void CameraRotation(){
         xRotation += inputController.lookInput.y;
