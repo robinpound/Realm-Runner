@@ -1,150 +1,110 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerJumps : MonoBehaviour
 {
-    CharacterController jumpController;
-    MovementController movement;
-    //Input action
-    InputActions jumpInput;
-    Gravity addGrav;
-    Animator animator;
+    PlayerAnimations anim;
+    PlayerCharacterController cc;
+    Player player;
+    ActionInputs input; // NOTE: PlayerInput class must be generated from New Input System in Inspector
 
-    public int jumpCounts = 0;
-    public bool jumpPressed = false;
-    bool isPlayerJump = false;
-    float higherPoint;
-    float jumpVelocity;
-    float jumpPreviouYvelocity;
-    float maxTimeOfJumps = .85f; //.75
-    float maxJumpHeightOfJump = 1.5f;
+    float _maxJumpHeight = 4.0f;
+    float _maxJumpTime = .75f;
+    bool _isJumping = false;
+    float _initialJumpVelocity;
+    float _gravity = -9.8f;
+    public int _jumpCount = 0;
+    int maxDoubleJump = 3;
+    int doubleJumpLeft;
+    PlayerGravity pGravity;
 
+    Dictionary<int, float> _initialJumpVelocities = new Dictionary<int, float>();
+    public Dictionary<int, float> _jumpGravities = new Dictionary<int, float>();
+    public Coroutine _currentJumpResetRoutine = null;
 
-    //Different type of jumps and gravities var
-    float secondJumpVelocity;
-    float secondJumpGravity;
-    float thirdJumpVelocity;
-    float thirdJumpGravity;
-
-    //Jumps animations
-    public bool jumpHash = false;
-    public int playerJumpHash;
-    public int jumpCountHash;
-
-    public Coroutine resetCurrentJump = null;
-
-    //Adding a dictionary to apply three different type of gravity to three type of jumps
-    Dictionary<int, float> jumpVelocities = new Dictionary<int, float>();
-    public Dictionary<int, float> jumpGravities = new Dictionary<int, float>();
-
-    private void Awake() {
-        jumpInput = new InputActions();
-        jumpInput.PlayerActions.Jump.started += playerJumps;
-        jumpInput.PlayerActions.Jump.canceled += playerJumps;
-        jumpInput.PlayerActions.Jump.performed += playerJumps;
-
-        jumpController = GetComponent<CharacterController>();
-        movement = FindObjectOfType<MovementController>();
-        addGrav = FindObjectOfType<Gravity>();
-
-        //Get jump count value and animation type from animator 
-        playerJumpHash = Animator.StringToHash("jump");
-        jumpCountHash = Animator.StringToHash("jumpCount");
-
-        animator = GetComponent<Animator>();
-
-        SetJumps();
+    private void Awake()
+    {
+        cc = GetComponent<PlayerCharacterController>();
+        anim = GetComponent<PlayerAnimations>();
+        input = GetComponent<ActionInputs>();
+        player = GetComponent<Player>();
+        pGravity = GetComponent<PlayerGravity>();
+        doubleJumpLeft = maxDoubleJump;
+        SetupJumpVariables();
     }
-    void playerJumps(InputAction.CallbackContext context){
-        jumpPressed = context.ReadValueAsButton();
-        //I need to prevent adding the button adding value if pressed consecutively 
-    }
-    void SetJumps(){
+    public void SetupJumpVariables()
+    {
+        int square = 2;
+        int addSubstractFromGravity = 2;
+        int jumpStateHigherThanFirst = 2;
+        int jumpStateHigherThanSecond = 4;
+        float maxHeightSecondJumpMultiplier = 1.25f;
+        float maxHeightThirdJumpMultiplier = 1.25f;
+
+        float timeToApex = _maxJumpTime / 2;
         
-        higherPoint = maxTimeOfJumps / 2;
-        addGrav.gravity = (-2 * maxJumpHeightOfJump) / Mathf.Pow(higherPoint, 2);
-        jumpVelocity = (2 * maxJumpHeightOfJump) / higherPoint;
+        _gravity = (-addSubstractFromGravity * _maxJumpHeight) / Mathf.Pow(timeToApex, square);
+        _initialJumpVelocity = (addSubstractFromGravity * _maxJumpHeight) / timeToApex;
+        float secondJumpGravity = (-addSubstractFromGravity * (_maxJumpHeight + jumpStateHigherThanFirst)) / Mathf.Pow((timeToApex * maxHeightSecondJumpMultiplier), square);
+        float secondJumpInitialVelocity = (addSubstractFromGravity * (_maxJumpHeight + jumpStateHigherThanFirst)) / (timeToApex * maxHeightSecondJumpMultiplier);
+        float thirdJumpGravity = (-addSubstractFromGravity * (_maxJumpHeight + jumpStateHigherThanSecond)) / Mathf.Pow((timeToApex * maxHeightThirdJumpMultiplier), square);
+        float thirdJumpInitialVelocity = (addSubstractFromGravity * (_maxJumpHeight + jumpStateHigherThanSecond)) / (timeToApex * maxHeightThirdJumpMultiplier);
 
-        secondJumpGravity = (-2 * (maxJumpHeightOfJump + 2)) / Mathf.Pow((higherPoint * 1.25f), 2);
-        secondJumpVelocity = (2 * (maxJumpHeightOfJump + 2)) / (higherPoint * 1.25f);  
+        _initialJumpVelocities.Add(1, _initialJumpVelocity);
+        _initialJumpVelocities.Add(2, secondJumpInitialVelocity);
+        _initialJumpVelocities.Add(3, thirdJumpInitialVelocity);
 
-        thirdJumpGravity = (-2 * (maxJumpHeightOfJump + 2)) / Mathf.Pow((higherPoint * 1.75f), 2);
-        thirdJumpVelocity = (2 * (maxJumpHeightOfJump + 2)) / (higherPoint * 1.5f);  
-        //Velocities
-        jumpVelocities.Add(1, jumpVelocity);   
-        jumpVelocities.Add(2, secondJumpVelocity);
-        jumpVelocities.Add(3, thirdJumpVelocity);
-        //Gravities
-        jumpGravities.Add(0, addGrav.gravity);
-        jumpGravities.Add(1, addGrav.gravity);
-        jumpGravities.Add(2, secondJumpGravity);
-        jumpGravities.Add(3, thirdJumpGravity);
-        
-        //if (!jumpVelocities.ContainsKey(3)) {
-        //    jumpGravities.Add(3, thirdJumpGravity);
-        //}       
+        _jumpGravities.Add(0, _gravity);
+        _jumpGravities.Add(1, _gravity);
+        _jumpGravities.Add(2, secondJumpGravity);
+        _jumpGravities.Add(3, thirdJumpGravity);
     }
 
-    public void Jump(){
-        if (!isPlayerJump && jumpController.isGrounded && jumpPressed)
+    // launch character into the air with initial vertical velocity if conditions met
+    public void HandleJump()
+    {
+        if (!_isJumping && cc.IsGrounded() && input.isJumpPressed)
         {
-            if (jumpCounts < 3 && resetCurrentJump != null)
-            {               
-                StopCoroutine(resetCurrentJump);
+            doubleJumpLeft = maxDoubleJump;
+            if (_jumpCount < 3 && _currentJumpResetRoutine != null)
+            {
+                StopCoroutine(_currentJumpResetRoutine);
             }
-            //Jump Animation true here
-            animator.SetInteger(jumpCountHash, jumpCounts);
-            animator.SetBool(playerJumpHash, true);
-            // animator.SetInteger(jumpHash, playerJumpHash);
-            isPlayerJump = true;
-            addGrav.jumpAnimation = true;
-            jumpCounts += 1;
-            //Adding velocity to the Y axis value of gravity
-            movement.movement.y = jumpVelocities[jumpCounts];
-            addGrav.movementApplied.y = jumpVelocities[jumpCounts];
-           
-        }else if (!jumpPressed && isPlayerJump && jumpController.isGrounded)
-        {
-            isPlayerJump = false;
-        }      
-    }
-    public void DoubleJump() {
-        if (jumpPressed && !jumpController.isGrounded)
-        {
-            if (jumpCounts < 2 && resetCurrentJump != null)
-            {               
-                StopCoroutine(resetCurrentJump);
-            }
-            animator.SetInteger(jumpCountHash, jumpCounts);
-            // animator.SetBool(jumpHash, true);
-            isPlayerJump = true;
-            addGrav.jumpAnimation = true;
-            jumpCounts += 1;
-            //Adding velocity to the Y axis value of gravity
-            movement.movement.y = jumpVelocities[jumpCounts];
-            movement.runDirectionMove.y = jumpVelocities[jumpCounts];
+            anim.animator.SetBool(anim.isJumpingHash, true);
+            
+            _isJumping = true;
+            pGravity._isJumpAnimating = true;
+            _jumpCount += 1;
+            anim.animator.SetInteger(anim.jumpCountHash, _jumpCount);
+            pGravity.currentMovement.y = _initialJumpVelocities[_jumpCount];
+            pGravity._appliedMovement.y = _initialJumpVelocities[_jumpCount];
         }
-        else
+        else if (!input.isJumpPressed && _isJumping && cc.IsGrounded())
         {
-            isPlayerJump = false;
+            _isJumping = false;
         }
     }
-    public void CoroutineStart(){
-        resetCurrentJump = StartCoroutine(ResetJumps());
+    public void DoubleJump(){
+        if (cc.IsGrounded() && input.isJumpPressed)
+        {
+            // doubleJumpLeft = maxDoubleJump;
+        }
+        if ( input.isJumpPressed && doubleJumpLeft > 0)
+        {
+            pGravity.currentMovement.y = _initialJumpVelocity;
+            doubleJumpLeft -= 1;
+        }
+        
     }
-
-    public IEnumerator ResetJumps(){
+    public void CoroutineStart()
+    {
+        _currentJumpResetRoutine = StartCoroutine(IJumpResetRoutine());
+    }
+    IEnumerator IJumpResetRoutine()
+    {
         yield return new WaitForSeconds(.5f);
-        jumpCounts = 0;
+        _jumpCount = 0;
     }
-     private void OnEnable()
-    {
-       jumpInput.PlayerActions.Enable();
-    }
-    private void OnDisable()
-    {
-        jumpInput.PlayerActions.Disable();
-    }
+
 }

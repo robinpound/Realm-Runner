@@ -4,81 +4,82 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
-{ 
-    public CharacterController characterController;
-    // [SerializeField]
-    // Transform cameraFollow;
-    // CameraController cameraController;
-    float hInput, vInput;
-    Gravity gravity;
-    PlayerJumps jumps;
-    PlayerAttack arrowShoot;
-    //Storing input controller in a variable
-    float speed = 1f;
-    MovementController inputActions;
+{
 
-    Vector3 playerAimMoveInput;
-    //Camera rotation
-    
-    private void Awake()
+    //Other Scripts
+    PlayerJumps pJumps;
+    PlayerAnimations anim;
+    // declare reference variables
+    PlayerCharacterController cc;
+    PlayerGravity pgravity;
+    ActionInputs input; // NOTE: PlayerInput class must be generated from New Input System in Inspector
+    CameraMoveController camMove;
+    Vector3 cameraRelativeMovement;
+    // variables to store optimized setter/getter parameter IDs
+    // constants
+    float _rotationFactorPerFrame = 15.0f;
+    float _runMultiplier = 4.0f;
+    int _zero = 0;
+    // gravity variables
+    float _gravity = -9.8f;
+    // jumping variables
+    bool _isJumpPressed = false;
+
+    // Awake is called earlier than Start in Unity's event life cycle
+    void Awake()
     {
-        characterController = GetComponent<CharacterController>();        
-        //Getting action from the input controller script
-        inputActions = FindObjectOfType<MovementController>();
-        jumps = FindObjectOfType<PlayerJumps>();
-        gravity = FindObjectOfType<Gravity>();
-        arrowShoot = FindObjectOfType<PlayerAttack>();
-        // cameraController = FindObjectOfType<CameraController>();
-
-
-        // jumps.SetJumps();
+        // initially set reference variables
+        pJumps = GetComponent<PlayerJumps>();
+        anim = GetComponent<PlayerAnimations>();
+        cc = FindObjectOfType<PlayerCharacterController>();
+        // pJumps.SetupJumpVariables();
+        input = GetComponent<ActionInputs>();
+        pgravity = GetComponent<PlayerGravity>();
+        camMove = GetComponent<CameraMoveController>();
     }
-    private void Update() {
-        MoveIfAming();
 
-         //Adding the movenet action to the character controller
-        if (inputActions.isRunPressed){
-            gravity.movementApplied.x = inputActions.runDirectionMove.x;
-            gravity.movementApplied.z = inputActions.runDirectionMove.z;
-            
-            // characterController.Move(inputActions.runDirectionMove * inputActions.runSpeed * Time.deltaTime);
-        }else{
-            gravity.movementApplied.x = inputActions.movement.x;
-            gravity.movementApplied.z = inputActions.movement.z;
-            
-            // characterController.Move(inputActions.movement * inputActions.walkSpeed * Time.deltaTime); 
-        }
-        //gravity.movementApplied = Quaternion.Euler(0, inputActions.targetToLookAt, 0) * Vector3.forward;
-        // Vector3 playermove = gravity.movementApplied * inputActions.magnitude;
-         characterController.Move(gravity.movementApplied * Time.deltaTime); 
-       
-    
+    void HandleRotation()
+    {
+        Vector3 positionToLookAt;
+        // the change in position our character should point to
+        positionToLookAt.x = cameraRelativeMovement.x;
+        positionToLookAt.y = _zero;
+        positionToLookAt.z = cameraRelativeMovement.z;
+        // the current rotation of our character
+        Quaternion currentRotation = transform.rotation;
 
-    
-        //Getting the walk animation from the Input controller class
-        inputActions.WalkOrRunAnimation();
-        //Rotation to the player
-        inputActions.PlayerRotation();
-        gravity.PlayerGravity();
-
-        //arrowShoot.BowAndArrowAttack();
-        // cameraController.CameraRotation();
-       // inputActions.RoationIfAming();
-        
-        jumps.Jump();
-
-        if (gravity.isPlayerFalling)
+        if (input.isMovementPressed)
         {
-            jumps.DoubleJump();
+            // creates a new rotation based on where the player is currently pressing
+            Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
+            // rotate the character to face the positionToLookAt            
+            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, _rotationFactorPerFrame * Time.deltaTime);
         }
     }
-      public void MoveIfAming(){
-        hInput=Input.GetAxisRaw("Horizontal");
-        vInput=Input.GetAxisRaw("Vertical");
-        playerAimMoveInput = new Vector3(hInput, 0, vInput);
-        characterController.Move(playerAimMoveInput * Time.deltaTime); 
-        // transform.Translate(playerAimMoveInput * walkSpeed * Time.deltaTime);
-        
+
+    // Update is called once per frame
+    void Update()
+    {
+        Movement();
+        HandleRotation();
+        anim.WalkAnimation();
+        pgravity.HandleGravity();
+        pJumps.HandleJump();
+        if (pgravity.isFalling)
+        {
+            pJumps.DoubleJump();
+        }
     }
-     
+    void Movement()
+    {
+        cameraRelativeMovement = camMove.ConvertToCameraSpace( pgravity._appliedMovement );
+        pgravity._appliedMovement.x = input.isRunPressed ? input.inputMovement.x * _runMultiplier : input.inputMovement.x;
+        pgravity._appliedMovement.z = input.isRunPressed ? input.inputMovement.y * _runMultiplier : input.inputMovement.y;
+
+        cc.controller.Move(cameraRelativeMovement * Time.deltaTime);
+    }
+
+    // set the initial velocity and gravity using jump heights and durations
+
+
 }

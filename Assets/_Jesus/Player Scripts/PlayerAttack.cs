@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerAttack : MonoBehaviour
 {
     InputActions arrowAttackAction;
-    MovementController aimingMove;
+    // MovementController aimingMove;
     bool isShootPressed = false;
     bool aiming = false;
     Animator animator;
@@ -15,7 +15,7 @@ public class PlayerAttack : MonoBehaviour
     {
         arrowAttackAction = new InputActions();
         animator = GetComponent<Animator>();
-        aimingMove = FindObjectOfType<MovementController>();
+        // aimingMove = FindObjectOfType<MovementController>();
 
         //Shooting
         arrowAttackAction.PlayerActions.ArrowAttack.started += OnShooting;
@@ -35,7 +35,7 @@ public class PlayerAttack : MonoBehaviour
             aiming = true;
             Debug.Log("The player is aiming  here...");
             animator.SetBool("aiming", true);
-            aimingMove.RoationIfAming();
+            // aimingMove.RoationIfAming();
         }
         else {
             aiming = false;
