@@ -9,7 +9,7 @@ public class PlayerJumps : MonoBehaviour
     Player player;
     ActionInputs input; // NOTE: PlayerInput class must be generated from New Input System in Inspector
 
-    float _maxJumpHeight = 4.0f;
+    float _maxJumpHeight = 1.5f;
     float _maxJumpTime = .75f;
     bool _isJumping = false;
     float _initialJumpVelocity;
@@ -36,10 +36,10 @@ public class PlayerJumps : MonoBehaviour
     public void SetupJumpVariables()
     {
         int square = 2;
-        int addSubstractFromGravity = 2;
-        int jumpStateHigherThanFirst = 2;
+        float addSubstractFromGravity = 1.5f;
+        int jumpStateHigherThanFirst = 1;
         int jumpStateHigherThanSecond = 4;
-        float maxHeightSecondJumpMultiplier = 1.25f;
+        float maxHeightSecondJumpMultiplier = 1f;
         float maxHeightThirdJumpMultiplier = 1.25f;
 
         float timeToApex = _maxJumpTime / 2;

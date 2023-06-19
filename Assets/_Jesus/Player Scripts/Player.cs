@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     // variables to store optimized setter/getter parameter IDs
     // constants
     float _rotationFactorPerFrame = 15.0f;
-    float _runMultiplier = 4.0f;
+    float _runMultiplier = 6.0f;
     int _zero = 0;
     // gravity variables
     float _gravity = -9.8f;
