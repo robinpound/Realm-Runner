@@ -12,6 +12,8 @@ public class PlayerAnimations : MonoBehaviour
     public int isRunningHash;
     public int isWalkingHash;
     public int jumpCountHash;
+    public int isAimingHash;
+    public int isShootingHash;
 
     void Start()
     {
@@ -19,17 +21,19 @@ public class PlayerAnimations : MonoBehaviour
         input = GetComponent<ActionInputs>();
        
 
-        //Animations hash
+        //Animations hash variables
         isWalkingHash = Animator.StringToHash("walk");
         isRunningHash = Animator.StringToHash("run");
         isJumpingHash = Animator.StringToHash("jump");
         jumpCountHash = Animator.StringToHash("jumpCount");
+        isAimingHash = Animator.StringToHash("aiming");
+        isShootingHash = Animator.StringToHash("shoot");
     }
     public void WalkAnimation()
     {
         bool isWalking = animator.GetBool(isWalkingHash);
         bool isRunning = animator.GetBool(isRunningHash);
-
+       
         // start walking if movement pressed is true and not already walking
         if (input.isMovementPressed && !isWalking)
         {
@@ -52,26 +56,21 @@ public class PlayerAnimations : MonoBehaviour
         }
     }
 
-    public void RunAnimation()
+    public void AimAndShootState()
     {
-        if (input.isRunPressed && input.isMovementPressed)
-        {
-            animator.SetBool(isRunningHash, true);
+        bool isAiming = animator.GetBool(isAimingHash);
+        bool isShooting = animator.GetBool(isShootingHash);
+
+        if (input.isAimingPressed && !isAiming) {
+            animator.SetBool(isAimingHash, true);
+        }else if (!input.isAimingPressed && isAiming) {
+            animator.SetBool(isAimingHash, false);
         }
-        else
-        {
-            animator.SetBool(isRunningHash, false);
-        }
-    }
-    public void JumpAnimation()
-    {
-        if (input.isJumpPressed)
-        {
-            animator.SetBool(isJumpingHash, true);
-        }
-        else
-        {
-            animator.SetBool(isJumpingHash, false);
+
+        if(input.isShootPressed && !isShooting){
+            animator.SetBool(isShootingHash, true);
+        }else if (!input.isShootPressed && isShooting) {
+            animator.SetBool(isShootingHash, false);
         }
     }
 }

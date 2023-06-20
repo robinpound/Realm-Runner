@@ -63,6 +63,7 @@ public class Player : MonoBehaviour
         Movement();
         HandleRotation();
         anim.WalkAnimation();
+        anim.AimAndShootState();
         pgravity.HandleGravity();
         pJumps.HandleJump();
         if (pgravity.isFalling)
