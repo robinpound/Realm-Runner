@@ -2033,6 +2033,11 @@ GameObject:
   - component: {fileID: 2417352199222696853}
   - component: {fileID: 4233951735770538584}
   - component: {fileID: 1138510523418656419}
+  - component: {fileID: 1037980289307641331}
+  - component: {fileID: 1155921403643298706}
+  - component: {fileID: 4799733159392204069}
+  - component: {fileID: 1572603601446205417}
+  - component: {fileID: 1299575092401912288}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -2268,6 +2273,98 @@ MonoBehaviour:
   handSword: {fileID: 9094050609415998305}
   backBow: {fileID: 0}
   handBow: {fileID: 0}
+--- !u!114 &1037980289307641331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982230885238964114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b184fa86a84e439c05b494eea4089, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  player: {fileID: 1982230885238964114}
+  playerUI: {fileID: 0}
+  options:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  optionsOpen: 0
+--- !u!114 &1155921403643298706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982230885238964114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5c1f72988ba2a7418157672c409057f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  paused: 0
+--- !u!114 &4799733159392204069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982230885238964114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5824327a13ab49442823707a6cf878d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  fragments:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  fragmentsInt: 0
+--- !u!114 &1572603601446205417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982230885238964114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53787c7967935034e91f9aea394e58ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  coinText: {fileID: 0}
+  coins: 0
+--- !u!114 &1299575092401912288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982230885238964114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce577bbeda1adf488c1fae7b12b731c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1982230885238964114}
+  health: 0
+  hearts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  extra: []
 --- !u!1 &1982243808146908978
 GameObject:
   m_ObjectHideFlags: 0
