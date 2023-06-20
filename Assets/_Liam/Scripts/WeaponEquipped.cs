@@ -8,6 +8,9 @@ public class WeaponEquipped : MonoBehaviour
 
     public Animator animator;
 
+    public GameObject backSword;
+    public GameObject handSword;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -20,6 +23,7 @@ public class WeaponEquipped : MonoBehaviour
             // Bow and Arrow Attack De-activation Code Goes Here.
             animator.SetBool("SwordEquipped", true);
             player.GetComponent<SwordAttack>().swordEquipped = true;
+            StartCoroutine(Wait());
         }
         if (Input.GetKey(KeyCode.Alpha2))
         {
@@ -27,5 +31,12 @@ public class WeaponEquipped : MonoBehaviour
             player.GetComponent<SwordAttack>().swordEquipped = false;
             // Bow and Arrow Attack Activation Code Goes Here.
         }
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0.2f);
+        backSword.SetActive(false);
+        handSword.SetActive(true);
     }
 }
