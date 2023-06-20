@@ -11,9 +11,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject player;
     public GameObject playerUI;
     public GameObject[] options;
-    public Slider[] slider;
-    public float[] mixers;
 
+    public bool optionsOpen;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +37,11 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
-        //Cursor.lockState = CursorLockMode.Locked;
+        options[0].SetActive(false); //Main Options
+        options[1].SetActive(false); //Key Bindings Page
+        options[2].SetActive(false); //Audio Page
+        options[3].SetActive(false); //Video Page
+        optionsOpen = false;
         player.GetComponent<PauseActivate>().paused = false;
         playerUI.SetActive(true);
     }
@@ -48,9 +51,20 @@ public class PauseMenu : MonoBehaviour
     }
     public void Options()
     {
-        pauseMenu.SetActive(false);
-        options[0].SetActive(true);
-        options[1].SetActive(true);
+        if (!optionsOpen)
+        {
+            options[0].SetActive(true);
+            options[1].SetActive(true);
+            optionsOpen = true;
+        }
+        else if (optionsOpen)
+        {
+            options[0].SetActive(false);
+            options[1].SetActive(false);
+            options[2].SetActive(false);
+            options[3].SetActive(false);
+            optionsOpen = false;
+        }
     }
     public void ExitMainMenu()
     {
@@ -63,14 +77,6 @@ public class PauseMenu : MonoBehaviour
     #endregion
 
     #region Options Buttons
-    public void DeactivateAll()
-    {
-        pauseMenu.SetActive(false);
-        options[0].SetActive(false); //Main Options
-        options[1].SetActive(false); //Key Bindings Page
-        options[2].SetActive(false); //Audio Page
-        options[3].SetActive(false); //Video Page
-    }
     public void OptionsBack()
     {
         pauseMenu.SetActive(true);

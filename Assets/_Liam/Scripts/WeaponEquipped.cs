@@ -19,6 +19,11 @@ public class WeaponEquipped : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+
+        handBow.SetActive(false);
+        backBow.SetActive(true);
+        backSword.SetActive(true);
+        handSword.SetActive(false);
     }
     // Update is called once per frame
     void Update()

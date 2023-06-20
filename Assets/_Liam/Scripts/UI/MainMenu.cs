@@ -10,8 +10,12 @@ public class MainMenu : MonoBehaviour
     public GameObject credits;
     public Scrollbar bar;
 
+    public bool optionsOpen;
+    public bool creditsOpen;
+
     private void Start()
     {
+        optionsOpen = false;
         credits.SetActive(false);
         options[0].SetActive(false); //Main Options
         options[1].SetActive(false); //Key Bindings Page
@@ -22,7 +26,7 @@ public class MainMenu : MonoBehaviour
     #region Main Menu Buttons
     public void Begin()
     {
-        SceneManager.LoadScene("TestLevel");
+        SceneManager.LoadScene("FirstLevel");
     }
     public void LoadGame()
     {
@@ -30,13 +34,41 @@ public class MainMenu : MonoBehaviour
     }
     public void Options()
     {
-        options[0].SetActive(true);
-        options[1].SetActive(true);
+        if (!optionsOpen)
+        {
+            options[0].SetActive(true);
+            options[1].SetActive(true);
+            optionsOpen = true;
+            credits.SetActive(false);
+            creditsOpen = false;
+        }
+        else if (optionsOpen)
+        {
+            options[0].SetActive(false);
+            options[1].SetActive(false);
+            options[2].SetActive(false);
+            options[3].SetActive(false);
+            optionsOpen = false;
+        }
     }
     public void Credits()
     {
-        credits.SetActive(true);
-        bar.value = 1;
+        if (!creditsOpen) 
+        {
+            creditsOpen = true;
+            credits.SetActive(true);
+            bar.value = 1;
+            options[0].SetActive(false);
+            options[1].SetActive(false);
+            options[2].SetActive(false);
+            options[3].SetActive(false);
+            optionsOpen = false;
+        }
+        else if (creditsOpen)
+        {
+            creditsOpen = false;
+            credits.SetActive(false);
+        }
     }
     public void Exit()
     {
@@ -64,6 +96,7 @@ public class MainMenu : MonoBehaviour
     public void CreditBack()
     {
         credits.SetActive(false);
+        creditsOpen = false;
     }
     #endregion
 
@@ -74,6 +107,7 @@ public class MainMenu : MonoBehaviour
         options[1].SetActive(false);
         options[2].SetActive(false);
         options[3].SetActive(false);
+        optionsOpen = false;
     }
 
     public void KeyBindings()
