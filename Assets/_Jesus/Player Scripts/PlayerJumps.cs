@@ -6,7 +6,6 @@ public class PlayerJumps : MonoBehaviour
 {
     PlayerAnimations anim;
     PlayerCharacterController cc;
-    Player player;
     ActionInputs input; // NOTE: PlayerInput class must be generated from New Input System in Inspector
 
     float _maxJumpHeight = 1.5f;
@@ -28,7 +27,6 @@ public class PlayerJumps : MonoBehaviour
         cc = GetComponent<PlayerCharacterController>();
         anim = GetComponent<PlayerAnimations>();
         input = GetComponent<ActionInputs>();
-        player = GetComponent<Player>();
         pGravity = GetComponent<PlayerGravity>();
         doubleJumpLeft = maxDoubleJump;
         SetupJumpVariables();
