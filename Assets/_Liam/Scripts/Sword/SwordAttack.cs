@@ -57,13 +57,11 @@ public class SwordAttack : MonoBehaviour
         if (isAttackPressed && !attack)
         {
             animator.SetBool(isAttacking, true);
-            attack = true;
         }
         //Stop walk animation
         else if (!isAttackPressed && attack)
         {
             animator.SetBool(isAttacking, false);
-            attack = false;
         }
     }
     IEnumerator Wait()
