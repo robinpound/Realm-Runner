@@ -19,12 +19,14 @@ public class LSystemScript : MonoBehaviour
 
     private int length;
     private int angle;
+    private int iterations;
     public GameObject branch;
     // Start is called before the first frame update
     void Start()
     {
         length = 5;
         angle = 100;
+        iterations = 5;
         transformStack = new Stack<TransformInfo>();
 
         rules = new Dictionary<char, string>
@@ -42,15 +44,28 @@ public class LSystemScript : MonoBehaviour
 
         StringBuilder sb = new StringBuilder();
 
-        foreach(char c in currentString)
+        for(int i = 0; i < iterations; i++)
         {
-            // *Append() adds the value to the StringBuilder
-            // Term of Statement: if rules contains the key, then add value corresponding that key.
-            // Otherwise, add the value itself
-            sb.Append(rules.ContainsKey(c) ? rules[c] : c.ToString());
-        }
+            foreach (char c in currentString)
+            {
+                // *Append() adds the value to the StringBuilder
+                // Term of Statement: if rules contains the key, then add value corresponding that key.
+                // Otherwise, add the value itself
+                sb.Append(rules.ContainsKey(c) ? rules[c] : c.ToString());
+            }
+            currentString = sb.ToString();
 
-        currentString = sb.ToString();
+            sb = new StringBuilder();
+        }
+        //foreach(char c in currentString)
+        //{
+        //    // *Append() adds the value to the StringBuilder
+        //    // Term of Statement: if rules contains the key, then add value corresponding that key.
+        //    // Otherwise, add the value itself
+        //    sb.Append(rules.ContainsKey(c) ? rules[c] : c.ToString());
+        //}
+
+        //currentString = sb.ToString();
 
         foreach(char c in currentString)
         {
