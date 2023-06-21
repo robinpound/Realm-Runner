@@ -17,9 +17,9 @@ public class LSystemScript : MonoBehaviour
     private Stack<TransformInfo> transformStack;
     private Dictionary</*type*/char,/*value*/string> rules;
 
-    private int length;
-    private int angle;
-    private int iterations;
+    public int length;
+    public int angle;
+    public int iterations;
     public GameObject branch;
     // Start is called before the first frame update
     void Start()
