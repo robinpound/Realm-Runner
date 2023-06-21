@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class NoteBlock3 : MonoBehaviour
 {
+    [SerializeField]
+    private NotePuzzleManager manager;
+    private int noteId = 3; // used for note puzzle manager
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision != null)
+        Debug.Log(collision);
+        if (collision != null) // Change to arrow or sword when merged
         {
             Debug.Log(collision.gameObject.name + " has collided with ");
             PlaySoundOfBlock3();
@@ -16,5 +20,8 @@ public class NoteBlock3 : MonoBehaviour
     {
         //Play sound
         Debug.Log("Play sound of block 3");
+        manager.NoteBlockSoundHasPlayed(noteId);
     }
+
+   
 }
