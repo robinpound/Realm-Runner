@@ -7,11 +7,12 @@ public class NoteBlock2 : MonoBehaviour
     [SerializeField]
     private NotePuzzleManager manager;
     private int noteId = 2; // used for note puzzle manager
+    
     private void OnCollisionEnter(Collision collision)
     {
         if (collision != null)  // Change to arrow or sword when merged
         {
-            Debug.Log(collision.gameObject.name + " has collided with ");
+            //Debug.Log(collision.gameObject.name + " has collided with ");
             PlaySoundOfBlock2();
         }
     }

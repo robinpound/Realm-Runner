@@ -6,13 +6,13 @@ public class NoteBlock1 : MonoBehaviour
 {
     [SerializeField]
     private NotePuzzleManager manager;
-    private int noteId = 1; // used for note puzzle manager
+    [SerializeField] public int noteId = 1; // used for note puzzle manager
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision != null)  // Change to arrow or sword when merged
+        if (collision.gameObject.CompareTag("Player"))  // Change to arrow or sword when merged
         {
-            Debug.Log(collision.gameObject.name + " has collided with ");
+            Debug.Log(collision.gameObject.name + " has collided with " + noteId);
             PlaySoundOfBlock1();
         }
     }
