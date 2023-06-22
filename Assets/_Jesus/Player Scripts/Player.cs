@@ -73,8 +73,8 @@ public class Player : MonoBehaviour
     void Movement()
     {
         cameraRelativeMovement = camMove.ConvertToCameraSpace( pgravity._appliedMovement );
-        pgravity._appliedMovement.x = input.isRunPressed ? input.inputMovement.x * _runMultiplier : input.inputMovement.x;
-        pgravity._appliedMovement.z = input.isRunPressed ? input.inputMovement.y * _runMultiplier : input.inputMovement.y;
+        pgravity._appliedMovement.x = input.inputMovement.x * _runMultiplier;
+        pgravity._appliedMovement.z = input.inputMovement.y * _runMultiplier;
 
         cc.controller.Move(cameraRelativeMovement * Time.deltaTime);
     }
