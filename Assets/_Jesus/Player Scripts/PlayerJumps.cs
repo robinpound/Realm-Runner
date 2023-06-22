@@ -15,7 +15,7 @@ public class PlayerJumps : MonoBehaviour
     float _initialJumpVelocity;
     float _gravity = -9.8f;
     public int _jumpCount = 0;
-    int maxDoubleJump = 3;
+    int maxDoubleJump = 1;
     int doubleJumpLeft;
     PlayerGravity pGravity;
 
@@ -86,13 +86,10 @@ public class PlayerJumps : MonoBehaviour
         }
     }
     public void DoubleJump(){
-        if (cc.IsGrounded() && input.isJumpPressed)
+        
+        if (!cc.IsGrounded() && input.isJumpPressed && doubleJumpLeft > 0)
         {
-            // doubleJumpLeft = maxDoubleJump;
-        }
-        if ( input.isJumpPressed && doubleJumpLeft > 0)
-        {
-            pGravity.currentMovement.y = _initialJumpVelocity;
+            pGravity.currentMovement.y = _initialJumpVelocity * 1.0f;
             doubleJumpLeft -= 1;
         }
         
