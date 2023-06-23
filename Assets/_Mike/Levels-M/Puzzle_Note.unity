@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2160.1182, g: 2264.498, b: 3287.914, a: 1}
+  m_IndirectSpecularColor: {r: 2158.433, g: 2261.3872, b: 3281.458, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -696,7 +696,7 @@ GameObject:
   - component: {fileID: 975290990}
   - component: {fileID: 975290989}
   m_Layer: 0
-  m_Name: Note
+  m_Name: Note 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -825,7 +825,7 @@ GameObject:
   - component: {fileID: 1743107416}
   - component: {fileID: 1743107415}
   m_Layer: 0
-  m_Name: Note
+  m_Name: Note 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -969,9 +969,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noteBlocksInPuzzle:
+  - {fileID: 1943105201}
   - {fileID: 1743107410}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 975290987}
 --- !u!4 &1850090944
 Transform:
   m_ObjectHideFlags: 0
@@ -1005,7 +1005,7 @@ GameObject:
   - component: {fileID: 1943105204}
   - component: {fileID: 1943105203}
   m_Layer: 0
-  m_Name: Note
+  m_Name: Note 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

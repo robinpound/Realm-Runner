@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoteBlock1 : MonoBehaviour
+public class NoteBlock : MonoBehaviour
 {
     [SerializeField]
     private NotePuzzleManager manager;

@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+// Created by Michael
+// Validator Refactored by Robin
 public class NotePuzzleManager : MonoBehaviour
 {
     [SerializeField]
