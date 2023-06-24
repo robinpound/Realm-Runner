@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &51491228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 51491229}
+  m_Layer: 0
+  m_Name: mid spawn point
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &51491229
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51491228}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.37, y: 0, z: 0.33}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1007671680}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &195465313
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,6 +728,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1007671680}
   - component: {fileID: 1007671679}
+  - component: {fileID: 1007671681}
   m_Layer: 0
   m_Name: TimeTrial
   m_TagString: Untagged
@@ -716,8 +748,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32dcbde7fcde4df4fbb5bf78d9afb225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTimerRunning: 0
+  points: 0
   timeText: {fileID: 2082399452}
+  timeRemaining: 10
+  isTimerRunning: 0
 --- !u!4 &1007671680
 Transform:
   m_ObjectHideFlags: 0
@@ -732,9 +766,26 @@ Transform:
   m_Children:
   - {fileID: 1732584141499384840}
   - {fileID: 2143828269}
+  - {fileID: 51491229}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1007671681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007671678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52d93242c4ba57e42b226b9a3809f7c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomMaxValue: 5
+  randomMinValue: 2
+  target: {fileID: 7878461753953147160, guid: 361ccbd0a20eac942b2b38dc546a0480, type: 3}
+  midSpawnPoint: {fileID: 51491229}
 --- !u!1001 &2029402617
 PrefabInstance:
   m_ObjectHideFlags: 0
