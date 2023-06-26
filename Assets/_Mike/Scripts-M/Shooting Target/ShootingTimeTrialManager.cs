@@ -61,7 +61,7 @@ public class ShootingTimeTrialManager : MonoBehaviour
         {
             Debug.Log("++Timer Finished");
             timeRemaining = 0;
-            points= 0; // Reset points.
+            //points= 0; // Reset points.
             isTimerRunning = false;
         }
         DisplayTimeRemaining(timeRemaining);
