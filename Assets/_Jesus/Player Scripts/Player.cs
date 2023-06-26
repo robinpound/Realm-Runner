@@ -67,12 +67,13 @@ public class Player : MonoBehaviour
         HandleRotation();
         anim.WalkAnimation();
         pgravity.HandleGravity();
-        aimCam.RotatePlayerToAimPosition();
         pJumps.HandleJump();
+
         if (pgravity.isFalling)
-        {
             pJumps.DoubleJump();
-        }
+        
+        if (aimCam.aimCam.activeInHierarchy)
+            aimCam.RotatePlayerToAimPosition();
     }
     void Movement()
     {
