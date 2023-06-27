@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     PlayerGravity pgravity;
     ActionInputs input; // NOTE: PlayerInput class must be generated from New Input System in Inspector
     CameraMoveController camMove;
+    AimCameraControl aimCam;
     Vector3 cameraRelativeMovement;
     // variables to store optimized setter/getter parameter IDs
     // constants
@@ -36,6 +37,8 @@ public class Player : MonoBehaviour
         input = GetComponent<ActionInputs>();
         pgravity = GetComponent<PlayerGravity>();
         camMove = GetComponent<CameraMoveController>();
+        aimCam = GetComponent<AimCameraControl>();
+        
     }
 
     void HandleRotation()
@@ -65,10 +68,12 @@ public class Player : MonoBehaviour
         anim.WalkAnimation();
         pgravity.HandleGravity();
         pJumps.HandleJump();
+
         if (pgravity.isFalling)
-        {
             pJumps.DoubleJump();
-        }
+        
+        if (aimCam.aimCam.activeInHierarchy)
+            aimCam.RotatePlayerToAimPosition();
     }
     void Movement()
     {
@@ -78,8 +83,6 @@ public class Player : MonoBehaviour
 
         cc.controller.Move(cameraRelativeMovement * Time.deltaTime);
     }
-
-    // set the initial velocity and gravity using jump heights and durations
 
 
 }
