@@ -2033,6 +2033,7 @@ GameObject:
   - component: {fileID: 2417352199222696853}
   - component: {fileID: 4233951735770538584}
   - component: {fileID: 1138510523418656419}
+  - component: {fileID: 6651248490861351664}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -2168,7 +2169,6 @@ MonoBehaviour:
   runSpeed: 5
   isJumpingHash: 0
   isRunningHash: 0
-  isWalkingHash: 0
   jumpCountHash: 0
 --- !u!114 &1983659029573869424
 MonoBehaviour:
@@ -2238,7 +2238,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1982230885238964114}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3d04db798941494fbf15bdaad2cb6bf, type: 3}
   m_Name: 
@@ -2247,9 +2247,9 @@ MonoBehaviour:
   animator: {fileID: 1933365306793619524}
   isAttacking: 0
   isAttackPressed: 0
-  attack: 0
   attacking: 0
   swordEquipped: 0
+  swordCount: 0
 --- !u!114 &1138510523418656419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2268,6 +2268,28 @@ MonoBehaviour:
   handSword: {fileID: 9094050609415998305}
   backBow: {fileID: 0}
   handBow: {fileID: 0}
+--- !u!114 &6651248490861351664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982230885238964114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef4118b12247d414db84c9c597f87054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1933365306793619524}
+  attackPoint: {fileID: 0}
+  attackRange: 0.5
+  attackDamage: 40
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 512
+  swordEquipped: 1
+  isAttackPressed: 0
+  swordCount: 0
 --- !u!1 &1982243808146908978
 GameObject:
   m_ObjectHideFlags: 0

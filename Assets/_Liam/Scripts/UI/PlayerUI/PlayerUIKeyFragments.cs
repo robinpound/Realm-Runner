@@ -8,6 +8,7 @@ public class PlayerUIKeyFragments : MonoBehaviour
     public GameObject gameManager;
     public GameObject[] fragments;
     public int fragmentsInt;
+    public int arrayPos;
 
     // Start is called before the first frame update
     void Start()
@@ -25,27 +26,14 @@ public class PlayerUIKeyFragments : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             fragmentsInt += 1;
+            AddFragment();
         }
 
-        if(fragmentsInt == 1)
-        {
-            fragments[0].SetActive(true);
-        }
-        else if(fragmentsInt == 2)
-        {
-            fragments[1].SetActive(true);
-        }
-        else if(fragmentsInt == 3)
-        {
-            fragments[2].SetActive(true);
-        }
-        else if(fragmentsInt == 4)
-        {
-            fragments[3].SetActive(true);
-        }
-        else if(fragmentsInt == 5)
-        {
-            fragments[4].SetActive(true);
-        }
+    }
+
+    public void AddFragment()
+    {
+        arrayPos += 1;
+        fragments[arrayPos].SetActive(true);
     }
 }

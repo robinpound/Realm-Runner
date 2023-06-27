@@ -19,8 +19,8 @@ public class PlayerUICoins : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager");
-        coins = gameManager.GetComponent<GameManager>().coins;
+        //gameManager = GameObject.FindGameObjectWithTag("GameManager");
+        //coins = gameManager.GetComponent<GameManager>().coins;
         if (Input.GetKeyDown(KeyCode.Q))
         {
             coins += 1;
