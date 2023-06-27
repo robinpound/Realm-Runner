@@ -4,34 +4,34 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public GameObject player;
-
-    public int health;
-    public bool attacking;
-
-    public int minSwordDamage;
-    public int maxSwordDamage;
+    [Header("Health Variables")]
+    public int maxHealth = 100;
+    int currentHealth;
     // Start is called before the first frame update
     void Start()
     {
-        health = 5;
-
-        minSwordDamage = 0;
-        maxSwordDamage = 5;
+        currentHealth = maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(int damage)
     {
-        attacking = player.GetComponent<SwordAttack>().attacking;
-    }
+        currentHealth -= damage;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Sword")
+
+        // Play Hurt Animations and Sounds
+
+        // Enemy is Dead
+        if(currentHealth <= 0)
         {
-            int random = Random.Range(minSwordDamage, maxSwordDamage);
-            health -= random;
+            Die();
         }
+    }
+    void Die()
+    {
+        Debug.Log("Enemy Died");
+        //Play Death Animation
+
+        // Disable the Enemy
+        gameObject.SetActive(false);
     }
 }

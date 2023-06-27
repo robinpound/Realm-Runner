@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WeaponEquipped : MonoBehaviour
 {
+    public InputActions action;
     public GameObject player;
 
     public Animator animator;
@@ -16,29 +18,50 @@ public class WeaponEquipped : MonoBehaviour
     public GameObject backBow;
     public GameObject handBow;
 
+    private void Awake()
+    {
+        action = new InputActions();
+    }
     private void Start()
     {
         animator = GetComponent<Animator>();
+        handBow.SetActive(false);
+        handSword.SetActive(false);
     }
     // Update is called once per frame
     void Update()
     {
+        //action.PlayerActions.SwordSwap.started += SwordEquip;
+        //action.PlayerActions.BowSwap.started += BowEquip;
+
         if (Input.GetKey(KeyCode.Alpha1))
         {
-            // Bow and Arrow Attack De-activation Code Goes Here.
-            animator.SetBool("SwordEquipped", true);
-            player.GetComponent<SwordAttack>().swordEquipped = true;
-            StartCoroutine(SwordEquipper());
+            SwordEquip();
         }
         if (Input.GetKey(KeyCode.Alpha2))
         {
-            animator.SetBool("SwordEquipped", false);
-            player.GetComponent<SwordAttack>().swordEquipped = false;
-            StartCoroutine(BowEquipper());
-            // Bow and Arrow Attack Activation Code Goes Here.
+            BowEquip();
         }
     }
-    
+
+    public void SwordEquip()//(InputAction.CallbackContext context)
+    {
+        // Bow and Arrow Attack De-activation Code Goes Here.
+        animator.SetBool("SwordEquipped", true);
+        player.GetComponent<Sword>().swordEquipped = true;
+        player.GetComponent<Arrow>().bowEquipped = false;
+        StartCoroutine(SwordEquipper());
+    }
+
+    public void BowEquip()//(InputAction.CallbackContext context)
+    {
+        animator.SetBool("SwordEquipped", false);
+        player.GetComponent<Sword>().swordEquipped = false;
+        player.GetComponent<Arrow>().bowEquipped = true;
+        StartCoroutine(BowEquipper());
+        // Bow and Arrow Attack Activation Code Goes Here.
+    }
+
     IEnumerator SwordEquipper()
     {
         yield return new WaitForSeconds(0.2f);
@@ -57,5 +80,15 @@ public class WeaponEquipped : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         backBow.SetActive(false);
         handBow.SetActive(true);
+    }
+
+    private void OnEnable()
+    {
+        action.PlayerActions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        action.PlayerActions.Disable();
     }
 }
