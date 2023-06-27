@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -64,7 +61,7 @@ public class Walking : MonoBehaviour
         float randomX = Random.Range(-waypointRange, waypointRange);
         float currentZ = transform.position.z;
         float currentX = transform.position.x;
-        
+
         waypoint = new Vector3 (currentX + randomX, transform.position.y, currentZ + randomZ);
         //check if place is valid
         
