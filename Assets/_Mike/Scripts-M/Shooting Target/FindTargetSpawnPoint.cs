@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,36 +12,75 @@ public class FindTargetSpawnPoint : MonoBehaviour
     [SerializeField] Transform[] targetSpawnPoints = new Transform[6];
     [Tooltip("Set how many targets will spawn in this trial (MAX = 6).")]
     [SerializeField]
-    private int targetsInTrial;
+    public int targetsInTrial; // Read in manager
    
     [SerializeField]
     private GameObject target;
-    
+    [Tooltip("Select true to activate random spawn order, or false to keep default spawn order (1 ~ 6)")]
+    [SerializeField]
+    private bool shuffleList;
+    // List used to shuffle and choose random spawn order of targets.
+    private List<int> indexNumbers = new List<int> { 0, 1, 2, 3, 4, 5};
+    [SerializeField]
+    private ShootingTimeTrialManager manager;
+    private bool startTrial = false;
     
 
     private void Start()
     {
+        manager = GetComponent<ShootingTimeTrialManager>();
+
+        if(shuffleList)
+        {
+            ShuffleList(indexNumbers);
+        }
         
     }
     private void Update()
     {
 
-        if (Input.GetKeyUp(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             Debug.Log("Key has been pressed");
-            
+            startTrial = true;
+
             // Go through list of vectors postions to instantiate a target at a random position.
+            // If shuffle is on, instantiate from shuffled list.
             for (int i = 0; i < targetsInTrial; i++)
             {
-                //int randomIndex = Random.Range(0, targetSpawnPoints.Length); // Targets can spawn in same position.
+                //Debug.Log("Target Instantiated at " + transform.position);
+                if (!shuffleList)
+                {
+                    Instantiate(target, targetSpawnPoints[i].position, Quaternion.identity);
+                }
+                else
+                {
+                    Instantiate(target, targetSpawnPoints[indexNumbers[i]].position, Quaternion.identity);
+                }
 
-                Debug.Log("Target Instantiated at " + transform.position);
-                Instantiate(target, targetSpawnPoints[i].position, Quaternion.identity);
             }
+        }
+
+        if (startTrial == true)
+        {
+            manager.Timer();
+        }
             
+            
+        
+    }
+    
+    // Shuffle list using FISHER-YATES SHUFFLE
+    private void ShuffleList<T>(List<T> inputList)
+    {
+        for (int i = 0; i < inputList.Count - 1;i++)
+        {
+            T temp = inputList[i];
+            int random = Random.Range(i, inputList.Count);
+            inputList[i] = inputList[random];
+            inputList[random] = temp;
         }
     }
-
     
     // Draw a gizmo at each possible target spawn point in vector3 array.
     private void OnDrawGizmos()

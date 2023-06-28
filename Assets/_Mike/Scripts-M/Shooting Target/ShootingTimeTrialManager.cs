@@ -12,32 +12,33 @@ public class ShootingTimeTrialManager : MonoBehaviour
     [SerializeField]
     private int points = 0;
     [SerializeField]
-    private TMP_Text timeText;
+    private int pointsToWin;
+    [SerializeField]
+    private TMP_Text timeText, playerWins;
+    private FindTargetSpawnPoint targetSpawn;
+    private bool stopTimer = false;
 
     [Header("Timer Settings")]
+    [Tooltip("Set Timer Amount in Seconds")]
     [SerializeField]
     private float timeRemaining = 10f;
-    [SerializeField]
-    private bool isTimerRunning;
+    
 
     private void Start()
     {
-        isTimerRunning = true;
-        
+        targetSpawn = GetComponent<FindTargetSpawnPoint>();
+        pointsToWin = targetSpawn.targetsInTrial;
     }
 
     private void Update()
     {
-        Timer();
-
-        
-
         //Debug.Log("Player has " + points + " Points");
-        if (points >= 2)
+        if (points >= pointsToWin)
         {
             Debug.Log("The Player Beat The Time Trial");
-
-            timeText.text = "Player Wins!";
+            stopTimer = true;
+            playerWins.gameObject.SetActive(true);
+            
 
             // need to add puzzle triumph script containing + 1 Fragment + PlayTriumphSound
         }
@@ -46,13 +47,13 @@ public class ShootingTimeTrialManager : MonoBehaviour
     
 
     // Timer for time trial
-    private void Timer()
+    public void Timer()
     {
         Debug.Log("Time Trail Has Started");
 
-        if (isTimerRunning == true && timeRemaining > 0)
+        if (!stopTimer && timeRemaining > 0)
         {
-            
+
             timeRemaining -= Time.deltaTime;
             //Debug.Log("Time remaining = " + timeRemaining);
             
@@ -62,7 +63,6 @@ public class ShootingTimeTrialManager : MonoBehaviour
             Debug.Log("++Timer Finished");
             timeRemaining = 0;
             //points= 0; // Reset points.
-            isTimerRunning = false;
         }
         DisplayTimeRemaining(timeRemaining);
     }
