@@ -25,6 +25,15 @@ public class Walking : MonoBehaviour
     [SerializeField] private bool isplayerInAttackRange = false;
     [SerializeField] private bool isattacked = false; 
 
+    private enum EnemyAnimationState
+    {
+        idle, 
+        walking,
+        attacking
+    }
+
+    [SerializeField] private EnemyAnimationState currentAnimationState;
+
     void Awake() 
     {
         player = GameObject.FindWithTag("Player").transform;
