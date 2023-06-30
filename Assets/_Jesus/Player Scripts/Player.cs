@@ -71,9 +71,9 @@ public class Player : MonoBehaviour
 
         if (pgravity.isFalling)
             pJumps.DoubleJump();
-        
-        if (aimCam.aimCam.activeInHierarchy)
-            aimCam.RotatePlayerToAimPosition();
+
+        //if (aimCam.aimCam.activeInHierarchy)
+        //    aimCam.RotatePlayerToAimPosition();
     }
     void Movement()
     {
