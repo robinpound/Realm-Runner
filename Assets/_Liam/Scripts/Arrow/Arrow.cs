@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Arrow : MonoBehaviour
 {
+    public Transform player;
+    public GameObject arrow;
     //Object Pooling Vars
     [Header("Object Pooling GameObjects")]
     [Tooltip("Object To Pool is the gameobject you wish to spawn")]
@@ -25,10 +27,16 @@ public class Arrow : MonoBehaviour
     [Tooltip("Ammo is the amount of arrows able to spawn and fly before reloading")]
     public bool ammo;
     public bool bowEquipped;
+    public GameObject aimCam;
+    public float hitInfo;
 
+    public GameObject bow;
+
+    public Transform reticle;
     private void Awake()
     {
         SharedInstance = this;
+        launchVelocity = 100;
     }
     // Start is called before the first frame update
     void Start()
@@ -52,11 +60,11 @@ public class Arrow : MonoBehaviour
         {
             Fire();
             new WaitForSeconds(0.5f);
-            launchVelocity = 1000;
+            launchVelocity = 100;
         }
         if (Input.GetKeyUp(KeyCode.Mouse1))
         {
-            launchVelocity = 1000;
+            launchVelocity = 100;
         }
 
     }
@@ -70,17 +78,13 @@ public class Arrow : MonoBehaviour
                 bullet.transform.position = turret.transform.position;
                 bullet.transform.rotation = turret.transform.rotation;
                 bullet.SetActive(true);
-                bullet.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, launchVelocity));
+                //bullet.GetComponent<Rigidbody>().velocity = turret.transform.forward * launchVelocity;
+                bullet.GetComponent<Rigidbody>().AddForce(transform.forward * launchVelocity, ForceMode.Impulse);
             }
         }
     }
 
-    IEnumerator DeactivateArrow()
-    {
-        GameObject bullet = Arrow.SharedInstance.GetPooledObject();
-        yield return new WaitForSeconds(1);
-        bullet.SetActive(true);
-    }
+
 
     public GameObject GetPooledObject()
     {
