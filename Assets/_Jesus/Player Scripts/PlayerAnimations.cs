@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 
 public class PlayerAnimations : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class PlayerAnimations : MonoBehaviour
     ActionInputs input;
     [SerializeField] float moveSpeed = 3f;
     [SerializeField] float runSpeed = 5f;
+    [SerializeField] GameObject dust;
+    PlayerCharacterController controller;
     public int isJumpingHash;
     public int isRunningHash;
     // public int isWalkingHash;
@@ -17,6 +20,8 @@ public class PlayerAnimations : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         input = GetComponent<ActionInputs>();
+        controller = GetComponent<PlayerCharacterController>();
+        dust.SetActive(false);
        
 
         //Animations hash
@@ -24,6 +29,14 @@ public class PlayerAnimations : MonoBehaviour
         isRunningHash = Animator.StringToHash("run");
         isJumpingHash = Animator.StringToHash("jump");
         jumpCountHash = Animator.StringToHash("jumpCount");
+    }
+    void Update(){
+        if (input.isMovementPressed && controller.IsGrounded())
+        {
+             dust.SetActive(true);
+        }else{
+             dust.SetActive(false);
+        }
     }
     public void WalkAnimation()
     {
@@ -73,6 +86,13 @@ public class PlayerAnimations : MonoBehaviour
         {
             animator.SetBool(isJumpingHash, false);
         }
+    }
+
+    public void StartRunDust(){
+        dust.SetActive(true);
+    }
+    public void EndRunDust(){
+        dust.SetActive(false);
     }
 }
 
