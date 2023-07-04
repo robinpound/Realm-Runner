@@ -5,11 +5,13 @@ using UnityEngine.ProBuilder;
 
 public class PlayerAnimations : MonoBehaviour
 {
+    [HideInInspector]
     public Animator animator;
     ActionInputs input;
     [SerializeField] float moveSpeed = 3f;
     [SerializeField] float runSpeed = 5f;
     [SerializeField] GameObject dust;
+    [Tooltip("Set the particle effect to simulate dust when the player is moving. FootSteps GameOject gos here.")]
     PlayerCharacterController controller;
     public int isJumpingHash;
     public int isRunningHash;

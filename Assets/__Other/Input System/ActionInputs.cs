@@ -26,12 +26,10 @@ public class ActionInputs : MonoBehaviour
         //Jump
         jumpAction.started += OnJump;
         jumpAction.canceled += OnJump;
-        // jumpAction.performed += OnJump;
-
+       
         //Look
         lookAction.started += OnLook;
         lookAction.canceled += OnLook;
-        // lookAction.performed += OnLook;  
 
         //Run 
         // runAction.started += OnRun;
