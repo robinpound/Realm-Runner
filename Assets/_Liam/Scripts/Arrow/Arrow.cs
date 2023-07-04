@@ -27,16 +27,16 @@ public class Arrow : MonoBehaviour
     [Tooltip("Ammo is the amount of arrows able to spawn and fly before reloading")]
     public bool ammo;
     public bool bowEquipped;
+    
     public GameObject aimCam;
+    public Camera aimC;
+    public float range = 100f;
     public float hitInfo;
 
-    public GameObject bow;
-
-    public Transform reticle;
     private void Awake()
     {
         SharedInstance = this;
-        launchVelocity = 100;
+        launchVelocity = 1;
     }
     // Start is called before the first frame update
     void Start()
@@ -60,11 +60,11 @@ public class Arrow : MonoBehaviour
         {
             Fire();
             new WaitForSeconds(0.5f);
-            launchVelocity = 100;
+            launchVelocity = 1;
         }
         if (Input.GetKeyUp(KeyCode.Mouse1))
         {
-            launchVelocity = 100;
+            launchVelocity = 1;
         }
 
     }
@@ -75,12 +75,32 @@ public class Arrow : MonoBehaviour
             GameObject bullet = Arrow.SharedInstance.GetPooledObject();
             if (bullet != null)
             {
-                bullet.transform.position = turret.transform.position;
-                bullet.transform.rotation = turret.transform.rotation;
-                bullet.SetActive(true);
-                //bullet.GetComponent<Rigidbody>().velocity = turret.transform.forward * launchVelocity;
-                bullet.GetComponent<Rigidbody>().AddForce(transform.forward * launchVelocity, ForceMode.Impulse);
+                //bullet.transform.position = turret.transform.position;
+                //bullet.transform.rotation = turret.transform.rotation;
+                //bullet.SetActive(true);
+                ////bullet.GetComponent<Rigidbody>().velocity = turret.transform.forward * launchVelocity;
+                //bullet.GetComponent<Rigidbody>().AddForce(transform.forward * launchVelocity, ForceMode.Impulse);
+                RaycastHit hit;
+                if (Physics.Raycast(aimC.transform.position, transform.forward, out hit, range))
+                {
+                    Debug.Log(hit.transform.name);
+                    bullet.transform.position = turret.transform.position;
+                    bullet.transform.rotation = turret.transform.rotation;
+                    //Get the direction from the hit point
+                    Vector3 targetDirection = hit.point - bullet.transform.position;
+                    targetDirection.Normalize();
+
+                    // Calculate the distance to move based on speed and deltaTime
+                    float distanceToMove = launchVelocity * Time.deltaTime;
+                    bullet.SetActive(true);
+                    // Move the object along the raycast Direction
+                    bullet.GetComponent<Rigidbody>().AddForce(targetDirection * distanceToMove, ForceMode.Impulse);
+                    //bullet.transform.Translate(targetDirection * distanceToMove);
+                    bullet.transform.LookAt(hit.point);
+
+                }
             }
+
         }
     }
 

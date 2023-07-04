@@ -9,7 +9,6 @@ public class AimCameraControl : MonoBehaviour
 {
     // public GameObject camFollow;
     public GameObject aimCam;
-    public GameObject magicArrow;
     public GameObject arrowPowerUp;
     public GameObject reticle;
     [SerializeField] Transform aimTarget;
@@ -57,7 +56,6 @@ public class AimCameraControl : MonoBehaviour
             aimCam.SetActive(true);
             animator.SetBool("aiming", true);
             reticle.SetActive(true);
-            magicArrow.SetActive(true);
             rig.weight = 1f;
             
         }
@@ -66,7 +64,6 @@ public class AimCameraControl : MonoBehaviour
             aimCam.SetActive(false);
             animator.SetBool("aiming", false);
             reticle.SetActive(false);
-            magicArrow.SetActive(false);
             rig.weight = 0f;
         }
     }
