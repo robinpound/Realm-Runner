@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
             // creates a new rotation based on where the player is currently pressing
             Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
             // rotate the character to face the positionToLookAt            
-            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, _rotationFactorPerFrame * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(currentRotation, targetRotation, _rotationFactorPerFrame * Time.deltaTime);
         }
     }
 

@@ -64,12 +64,11 @@ public class PlayerJumps : MonoBehaviour
         _jumpGravities.Add(3, thirdJumpGravity);
     }
 
-    void Update(){
+    private void Update(){
         HandleJump();
         DoubleJump();
     }
 
-    // launch character into the air with initial vertical velocity if conditions met
     public void HandleJump()
     {
         if (!_isJumping && cc.IsGrounded() && input.isJumpPressed)
