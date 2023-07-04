@@ -7,7 +7,6 @@ public class Player : MonoBehaviour
 {
 
     //Other Scripts
-    PlayerJumps pJumps;
     PlayerAnimations anim;
     // declare reference variables
     PlayerCharacterController cc;
@@ -19,7 +18,7 @@ public class Player : MonoBehaviour
     // variables to store optimized setter/getter parameter IDs
     // constants
     float _rotationFactorPerFrame = 15.0f;
-    float _runMultiplier = 6.0f;
+    float _runMultiplier = 8.0f;
     int _zero = 0;
     // gravity variables
     float _gravity = -9.8f;
@@ -30,10 +29,8 @@ public class Player : MonoBehaviour
     void Awake()
     {
         // initially set reference variables
-        pJumps = GetComponent<PlayerJumps>();
         anim = GetComponent<PlayerAnimations>();
         cc = FindObjectOfType<PlayerCharacterController>();
-        // pJumps.SetupJumpVariables();
         input = GetComponent<ActionInputs>();
         pgravity = GetComponent<PlayerGravity>();
         camMove = GetComponent<CameraMoveController>();
@@ -67,10 +64,6 @@ public class Player : MonoBehaviour
         HandleRotation();
         anim.WalkAnimation();
         pgravity.HandleGravity();
-        pJumps.HandleJump();
-
-        if (pgravity.isFalling)
-            pJumps.DoubleJump();
         
         if (aimCam.aimCam.activeInHierarchy)
             aimCam.RotatePlayerToAimPosition();

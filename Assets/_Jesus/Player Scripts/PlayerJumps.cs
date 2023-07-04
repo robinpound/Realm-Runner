@@ -10,7 +10,9 @@ public class PlayerJumps : MonoBehaviour
     ActionInputs input; // NOTE: PlayerInput class must be generated from New Input System in Inspector
 
     float _maxJumpHeight = 1.5f;
+    float _firstJumpMaxHeight = 2f;
     float _maxJumpTime = .75f;
+    float _firstJumpTime = .45f;
     bool _isJumping = false;
     float _initialJumpVelocity;
     float _gravity = -9.8f;
@@ -43,9 +45,10 @@ public class PlayerJumps : MonoBehaviour
         float maxHeightThirdJumpMultiplier = 1.25f;
 
         float timeToApex = _maxJumpTime / 2;
+        float firstJumpTimeToApex = _firstJumpTime / 2;
         
-        _gravity = (-addSubstractFromGravity * _maxJumpHeight) / Mathf.Pow(timeToApex, square);
-        _initialJumpVelocity = (addSubstractFromGravity * _maxJumpHeight) / timeToApex;
+        _gravity = (-addSubstractFromGravity * _firstJumpMaxHeight) / Mathf.Pow(firstJumpTimeToApex, square);
+        _initialJumpVelocity = (addSubstractFromGravity * _firstJumpMaxHeight) / firstJumpTimeToApex;
         float secondJumpGravity = (-addSubstractFromGravity * (_maxJumpHeight + jumpStateHigherThanFirst)) / Mathf.Pow((timeToApex * maxHeightSecondJumpMultiplier), square);
         float secondJumpInitialVelocity = (addSubstractFromGravity * (_maxJumpHeight + jumpStateHigherThanFirst)) / (timeToApex * maxHeightSecondJumpMultiplier);
         float thirdJumpGravity = (-addSubstractFromGravity * (_maxJumpHeight + jumpStateHigherThanSecond)) / Mathf.Pow((timeToApex * maxHeightThirdJumpMultiplier), square);
@@ -59,6 +62,11 @@ public class PlayerJumps : MonoBehaviour
         _jumpGravities.Add(1, _gravity);
         _jumpGravities.Add(2, secondJumpGravity);
         _jumpGravities.Add(3, thirdJumpGravity);
+    }
+
+    void Update(){
+        HandleJump();
+        DoubleJump();
     }
 
     // launch character into the air with initial vertical velocity if conditions met
@@ -87,7 +95,7 @@ public class PlayerJumps : MonoBehaviour
     }
     public void DoubleJump(){
         
-        if (!cc.IsGrounded() && input.isJumpPressed && doubleJumpLeft > 0)
+        if (!cc.IsGrounded() && input.isJumpPressed && doubleJumpLeft > 0 && pGravity.isFalling)
         {
             pGravity.currentMovement.y = _initialJumpVelocity * 1.0f;
             doubleJumpLeft -= 1;
