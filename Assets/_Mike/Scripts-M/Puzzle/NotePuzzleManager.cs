@@ -5,6 +5,8 @@ using UnityEngine;
 // Validator Refactored by Robin
 public class NotePuzzleManager : MonoBehaviour
 {
+    [Header("Settings")]
+    [Tooltip("Set note cubes in list in order of id 1~3. This list is used to validate the correct order has been played to solve the puzzle.")]
     [SerializeField]
     private GameObject[] noteBlocksInPuzzle; // How many note blocks in puzzle.
     private List<int> noteBlockPlayOrder = new List<int>(); // How many notes have been played in game.

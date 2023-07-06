@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 6640053215584458930}
   - component: {fileID: 2686099056487090858}
   m_Layer: 0
-  m_Name: Sound 2
+  m_Name: Sound2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 710408632530487536}
   - component: {fileID: 7262697842570048220}
   m_Layer: 0
-  m_Name: Sound 1
+  m_Name: Sound1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -418,6 +418,9 @@ MonoBehaviour:
   noteId: 0
   manager: {fileID: 0}
   playerInTrigger: 0
+  sound1: {fileID: 3755835472782647810}
+  sound2: {fileID: 1146199004247444142}
+  sound3: {fileID: 6616448174500622177}
   noteBlockCenterLocation: {fileID: 64719542381443886}
   gizmoSize: {x: 3.08, y: 2, z: 2.18}
   gizmoOffsetX: -0.48
@@ -432,7 +435,7 @@ GameObject:
   - component: {fileID: 5045809288990002986}
   - component: {fileID: 4578570914287020730}
   m_Layer: 0
-  m_Name: Sound 3
+  m_Name: Sound3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
