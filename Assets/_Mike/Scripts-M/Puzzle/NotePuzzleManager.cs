@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// Created by Michael
-// Validator Refactored by Robin
+// Created by Michael.
+// Validate Order Of Notes Played method Refactored by Robin.
 public class NotePuzzleManager : MonoBehaviour
 {
     [Header("Settings")]
@@ -27,9 +27,32 @@ public class NotePuzzleManager : MonoBehaviour
         //Debug.Log("how many notes in order " + check);
 
 
-        if (orderCheckSuccess == 3) Debug.Log("PUZZLE SOLVED");
+        if (orderCheckSuccess == 3)
+        {
+            Debug.Log("PUZZLE SOLVED");
+            // Play winning sound after coroutine.
+            StartCoroutine(CountSeconds());
+            
+        }
         
        
+    }
+    
+    private IEnumerator CountSeconds (int seconds = 4)
+    {
+        for (int i = 0; i <= seconds; i++)
+        {
+            Debug.Log(i + " seconds have passed.");
+            
+            yield return new WaitForSeconds(.1f);
+        }
+        PlayTriumphSound();
+    }
+
+    private void PlayTriumphSound()
+    {
+        Debug.Log("Play Winning Sound");
+        GetComponent<AudioSource>().Play();
     }
 
     public void NoteBlockSoundHasPlayed(int noteId)

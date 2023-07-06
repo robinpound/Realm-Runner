@@ -29,6 +29,11 @@ public class NoteBlock : MonoBehaviour
     [SerializeField]
     private float gizmoOffsetX;
 
+    private void Start()
+    {
+        manager = GetComponentInParent<NotePuzzleManager>();
+        
+    }
     private void Update()
     {
         if (playerInTrigger == true && Input.GetKeyDown(KeyCode.N)) // Change to interact action input.
