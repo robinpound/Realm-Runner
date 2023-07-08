@@ -18,7 +18,9 @@ public class Player : MonoBehaviour
     // variables to store optimized setter/getter parameter IDs
     // constants
     float _rotationFactorPerFrame = 15.0f;
-    float _runMultiplier = 8.0f;
+    float _runMultiplier = 0f; //8.0f;
+    float _jumpMoveMultiplier = 8.0f;
+    float topSpeed = 15;
     int _zero = 0;
     // gravity variables
     float _gravity = -9.8f;
@@ -35,7 +37,7 @@ public class Player : MonoBehaviour
         pgravity = GetComponent<PlayerGravity>();
         camMove = GetComponent<CameraMoveController>();
         aimCam = GetComponent<AimCameraControl>();
-        
+
     }
 
     void HandleRotation()
@@ -50,11 +52,20 @@ public class Player : MonoBehaviour
 
         if (input.isMovementPressed)
         {
-            // creates a new rotation based on where the player is currently pressing
+            _runMultiplier += 15 * Time.deltaTime;
+            // creates a new rotationbased on where the player is currently pressing
             Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
             // rotate the character to face the positionToLookAt            
             transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, _rotationFactorPerFrame * Time.deltaTime);
         }
+        else
+        {
+            _runMultiplier = 0;
+        }
+
+
+
+
     }
 
     // Update is called once per frame
@@ -64,17 +75,34 @@ public class Player : MonoBehaviour
         HandleRotation();
         anim.WalkAnimation();
         pgravity.HandleGravity();
-        
+        PlayerMoveAcceleration();
+
         if (aimCam.aimCam.activeInHierarchy)
             aimCam.RotatePlayerToAimPosition();
+        if (_runMultiplier < topSpeed)
+        {
+            _runMultiplier = 0f;
+        }
+    }
+    void PlayerMoveAcceleration()
+    {
+        if (_runMultiplier > topSpeed)
+        {
+            _runMultiplier = topSpeed;
+        }
+        else if (_runMultiplier < -topSpeed)
+        {
+            _runMultiplier = -topSpeed;
+        }
     }
     void Movement()
     {
-        cameraRelativeMovement = camMove.ConvertToCameraSpace( pgravity._appliedMovement );
-        pgravity._appliedMovement.x = input.inputMovement.x * _runMultiplier;
-        pgravity._appliedMovement.z = input.inputMovement.y * _runMultiplier;
+        cameraRelativeMovement = camMove.ConvertToCameraSpace(pgravity._appliedMovement);
+        pgravity._appliedMovement.x = input.isJumpPressed ? input.inputMovement.x * _jumpMoveMultiplier : input.inputMovement.x * _runMultiplier;
+        pgravity._appliedMovement.z = input.isJumpPressed ? input.inputMovement.y * _jumpMoveMultiplier : input.inputMovement.y * _runMultiplier;
 
         cc.controller.Move(cameraRelativeMovement * Time.deltaTime);
+        Debug.Log("RUN SPEED..." + _runMultiplier);
     }
 
 
