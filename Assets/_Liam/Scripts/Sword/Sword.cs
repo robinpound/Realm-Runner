@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Sword : MonoBehaviour
 {
+    public GameObject player;
     //Input action
     public InputActions action;
     
@@ -33,6 +34,7 @@ public class Sword : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        attackDamage = player.GetComponent<PlayerStats>().attackDamage;
         // Player input for attacking
         if (swordEquipped && !isAttackPressed)
         {

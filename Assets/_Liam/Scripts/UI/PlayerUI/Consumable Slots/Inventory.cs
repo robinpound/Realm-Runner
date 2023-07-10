@@ -26,7 +26,7 @@ public class Inventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             GameObject.Destroy(one);
             GameObject.Destroy(two);
@@ -36,7 +36,7 @@ public class Inventory : MonoBehaviour
             two = Instantiate(items[arrayPos2], slot2.transform.position, transform.rotation); ;
             two.transform.SetParent(slot2Parent.transform);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             GameObject.Destroy(one);
             GameObject.Destroy(two);

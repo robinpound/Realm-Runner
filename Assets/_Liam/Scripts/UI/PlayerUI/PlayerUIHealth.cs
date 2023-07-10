@@ -13,12 +13,13 @@ public class PlayerUIHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        health = 5;
+        //health = 5;
     }
 
     // Update is called once per frame
     void Update()
     {
+        health = player.GetComponent<PlayerStats>().health;
         if (Input.GetKeyDown(KeyCode.F))
         {
             health -= damage;
