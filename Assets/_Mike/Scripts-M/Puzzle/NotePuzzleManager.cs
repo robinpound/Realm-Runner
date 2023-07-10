@@ -10,11 +10,17 @@ public class NotePuzzleManager : MonoBehaviour
     [SerializeField]
     private GameObject[] noteBlocksInPuzzle; // How many note blocks in puzzle.
     private List<int> noteBlockPlayOrder = new List<int>(); // How many notes have been played in game.
-
+    [Header("Debugs")]
+    [SerializeField]
+    private GameObject fragment;
+    [SerializeField]
+    private Transform spawnTransform;
+    [SerializeField]
+    private bool isPuzzleSolved = false;
     private int orderCheckSuccess = 0; // How many notes have been played in order.
 
     private void Update()
-    {    
+    {
         // Check if all note blocks have been played
         if (noteBlocksInPuzzle.Length == noteBlockPlayOrder.Count)
         {
@@ -27,26 +33,28 @@ public class NotePuzzleManager : MonoBehaviour
         //Debug.Log("how many notes in order " + check);
 
 
-        if (orderCheckSuccess == 3)
+        if (orderCheckSuccess == 3 && !isPuzzleSolved)
         {
             Debug.Log("PUZZLE SOLVED");
             // Play winning sound after coroutine.
             StartCoroutine(CountSeconds());
-            
+            isPuzzleSolved=true;
+
         }
-        
-       
+
+
     }
-    
-    private IEnumerator CountSeconds (int seconds = 4)
+
+    private IEnumerator CountSeconds(int seconds = 4)
     {
         for (int i = 0; i <= seconds; i++)
         {
             Debug.Log(i + " seconds have passed.");
-            
+
             yield return new WaitForSeconds(.1f);
         }
         PlayTriumphSound();
+        SpawnFragment();
     }
 
     private void PlayTriumphSound()
@@ -55,6 +63,12 @@ public class NotePuzzleManager : MonoBehaviour
         GetComponent<AudioSource>().Play();
     }
 
+    private void SpawnFragment()
+    {
+        // Instantiate fragment at vector location when the puzzle is solved.
+        Instantiate(fragment, spawnTransform.position, Quaternion.identity);
+        
+    }
     public void NoteBlockSoundHasPlayed(int noteId)
     {
         noteBlockPlayOrder.Add(noteId);
