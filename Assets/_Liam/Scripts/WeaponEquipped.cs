@@ -62,6 +62,11 @@ public class WeaponEquipped : MonoBehaviour
         // Bow and Arrow Attack Activation Code Goes Here.
     }
 
+    public void ConsumableEquipper()
+    {
+
+    }
+
     IEnumerator SwordEquipper()
     {
         yield return new WaitForSeconds(0.2f);
