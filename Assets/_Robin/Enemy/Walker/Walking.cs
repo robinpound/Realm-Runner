@@ -53,7 +53,7 @@ public class Walking : MonoBehaviour
     {
         agent.speed = patrolSpeed;
         if(!isWaypointSet) FindWayPoint(); 
-        if(Random.Range(0,100) == 1) FindWayPoint();
+        if(Random.Range(0,1000) == 1) FindWayPoint();
 
         if(isWaypointSet)
             agent.SetDestination(waypoint);
