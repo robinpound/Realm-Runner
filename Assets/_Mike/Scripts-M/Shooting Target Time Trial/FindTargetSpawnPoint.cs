@@ -39,27 +39,6 @@ public class FindTargetSpawnPoint : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            Debug.Log("Key has been pressed");
-            startTrial = true;
-
-            // Go through list of vectors postions to instantiate a target at a random position.
-            // If shuffle is on, instantiate from shuffled list.
-            for (int i = 0; i < targetsInTrial; i++)
-            {
-                //Debug.Log("Target Instantiated at " + transform.position);
-                if (!shuffleList)
-                {
-                    Instantiate(target, targetSpawnPoints[i].position, Quaternion.identity);
-                }
-                else
-                {
-                    Instantiate(target, targetSpawnPoints[indexNumbers[i]].position, Quaternion.identity);
-                }
-
-            }
-        }
 
         if (startTrial == true)
         {
@@ -68,6 +47,28 @@ public class FindTargetSpawnPoint : MonoBehaviour
             
             
         
+    }
+
+    public void StartTrial()
+    {
+        Debug.Log("Trial has started");
+        startTrial = true;
+
+        // Go through list of vectors postions to instantiate a target at a random position.
+        // If shuffle is on, instantiate from shuffled list.
+        for (int i = 0; i < targetsInTrial; i++)
+        {
+            //Debug.Log("Target Instantiated at " + transform.position);
+            if (!shuffleList)
+            {
+                Instantiate(target, targetSpawnPoints[i].position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(target, targetSpawnPoints[indexNumbers[i]].position, Quaternion.identity);
+            }
+
+        }
     }
     
     // Shuffle list using FISHER-YATES SHUFFLE

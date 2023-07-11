@@ -17,6 +17,10 @@ public class ShootingTimeTrialManager : MonoBehaviour
     private TMP_Text timeText, playerWins;
     private FindTargetSpawnPoint targetSpawn;
     private bool stopTimer = false;
+    [SerializeField]
+    private Transform spawnPoint;
+    [SerializeField]
+    private GameObject fragment;
 
     [Header("Timer Settings")]
     [Tooltip("Set Timer Amount in Seconds")]
@@ -35,16 +39,24 @@ public class ShootingTimeTrialManager : MonoBehaviour
         //Debug.Log("Player has " + points + " Points");
         if (points >= pointsToWin)
         {
-            Debug.Log("The Player Beat The Time Trial");
-            stopTimer = true;
-            playerWins.gameObject.SetActive(true);
-            
-
-            // need to add puzzle triumph script containing + 1 Fragment + PlayTriumphSound
+            OnPlayerWins();
         }
     }
 
-    
+    private void OnPlayerWins()
+    {
+        Debug.Log("The Player Beat The Time Trial");
+        stopTimer = true;
+        playerWins.gameObject.SetActive(true);
+        SpawnFragment();
+
+        // need to add puzzle triumph script containing + 1 Fragment + PlayTriumphSound
+    }
+
+    private void SpawnFragment()
+    {
+        Instantiate(fragment, spawnPoint.position, Quaternion.identity);
+    }
 
     // Timer for time trial
     public void Timer()
