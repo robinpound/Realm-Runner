@@ -10,6 +10,7 @@ public class Walking : MonoBehaviour
     [SerializeField] private LayerMask whatIsGround, whatIsPlayer;
 
     [Header("Settings")]    
+    [SerializeField] private int attackDamage;
     [SerializeField] private float waypointRange;
     [SerializeField] private float chaseRange;
     [SerializeField] private float attackRange;
@@ -94,9 +95,11 @@ public class Walking : MonoBehaviour
 
         if(!isattacked)
         {
+
             /*
                 ATTACK CODE HERE!
             */
+            player.GetComponent<PlayerStats>().TakeDamage(attackDamage);
             isattacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }

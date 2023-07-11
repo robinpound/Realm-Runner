@@ -21,7 +21,7 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        invincible = shop.GetComponent<ShopScript>().invincible;
+        //invincible = shop.GetComponent<ShopScript>().invincible;
     }
 
     public void TakeDamage(int damage)
