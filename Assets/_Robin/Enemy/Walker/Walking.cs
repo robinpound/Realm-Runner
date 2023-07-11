@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -28,6 +25,15 @@ public class Walking : MonoBehaviour
     [SerializeField] private bool isplayerInAttackRange = false;
     [SerializeField] private bool isattacked = false; 
 
+    private enum EnemyAnimationState
+    {
+        idle, 
+        walking,
+        attacking
+    }
+
+    [SerializeField] private EnemyAnimationState currentAnimationState;
+
     void Awake() 
     {
         player = GameObject.FindWithTag("Player").transform;
@@ -47,7 +53,7 @@ public class Walking : MonoBehaviour
     {
         agent.speed = patrolSpeed;
         if(!isWaypointSet) FindWayPoint(); 
-        if(Random.Range(0,100) == 1) FindWayPoint();
+        if(Random.Range(0,1000) == 1) FindWayPoint();
 
         if(isWaypointSet)
             agent.SetDestination(waypoint);
@@ -64,7 +70,7 @@ public class Walking : MonoBehaviour
         float randomX = Random.Range(-waypointRange, waypointRange);
         float currentZ = transform.position.z;
         float currentX = transform.position.x;
-        
+
         waypoint = new Vector3 (currentX + randomX, transform.position.y, currentZ + randomZ);
         //check if place is valid
         
