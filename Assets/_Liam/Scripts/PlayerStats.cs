@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    public GameObject shop;
+    public GameObject inviPotion;
     public int health;
     public int attackDamage;
     public float speed;
@@ -21,7 +21,7 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        invincible = shop.GetComponent<ShopScript>().invincible;
+        invincible = inviPotion.GetComponent<Invincibility>().invincible;
     }
 
     public void TakeDamage(int damage)

@@ -11,14 +11,11 @@ public class PauseMenu : MonoBehaviour
     public GameObject player;
     public GameObject playerUI;
     public GameObject[] options;
-    public Slider[] slider;
-    public float[] mixers;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager");
-        player = GameObject.FindGameObjectWithTag("Player");
         pauseMenu.SetActive(false);
         options[0].SetActive(false); //Main Options
         options[1].SetActive(false); //Key Bindings Page
@@ -41,6 +38,11 @@ public class PauseMenu : MonoBehaviour
         //Cursor.lockState = CursorLockMode.Locked;
         player.GetComponent<PauseActivate>().paused = false;
         playerUI.SetActive(true);
+        pauseMenu.SetActive(false);
+        options[0].SetActive(false); //Main Options
+        options[1].SetActive(false); //Key Bindings Page
+        options[2].SetActive(false); //Audio Page
+        options[3].SetActive(false); //Video Page
     }
     public void SaveGame()
     {
@@ -63,14 +65,6 @@ public class PauseMenu : MonoBehaviour
     #endregion
 
     #region Options Buttons
-    public void DeactivateAll()
-    {
-        pauseMenu.SetActive(false);
-        options[0].SetActive(false); //Main Options
-        options[1].SetActive(false); //Key Bindings Page
-        options[2].SetActive(false); //Audio Page
-        options[3].SetActive(false); //Video Page
-    }
     public void OptionsBack()
     {
         pauseMenu.SetActive(true);

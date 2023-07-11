@@ -39,8 +39,6 @@ public class ShopScript : MonoBehaviour
     {
         //Grab Coins from PlayerUICoins Script on Player Object
         coin = player.GetComponent<PlayerUICoins>().coins;
-        //Grab Attack Damage from PlayerStats Script on Player Object
-        attackDamage = player.GetComponent<PlayerStats>().attackDamage;
 
         //Attack Damage Price to Strings
         damageDisplay.text = attackDamage.ToString("0");
@@ -56,9 +54,16 @@ public class ShopScript : MonoBehaviour
     {
         if (coin >= attackDamagePrice)
         {
-            player.GetComponent<PlayerStats>().attackDamage += 5;
+            //Deducting Price from overall coins in playerUICoins Script
             player.GetComponent<PlayerUICoins>().coins -= attackDamagePrice;
+            //Adding money on top of the current price to make pricing much higher next time
             attackDamagePrice += 5;
+
+            //Sending return value to Inventory Script.
+            player.GetComponent<Inventory>().strength = true;
+            player.GetComponent<Inventory>().OneOrTwo();
+            
+
         }
     }
     public void Invincibility()

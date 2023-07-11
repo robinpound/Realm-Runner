@@ -17,6 +17,7 @@ public class WeaponEquipped : MonoBehaviour
     //Bow Objects
     public GameObject backBow;
     public GameObject handBow;
+    public bool bow;
 
     private void Awake()
     {

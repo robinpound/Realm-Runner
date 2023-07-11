@@ -34,7 +34,6 @@ public class PauseActivate : MonoBehaviour
             paused = false;
             Debug.Log("Un-Paused!");
             canvas.GetComponent<PauseMenu>().Resume();
-            canvas.GetComponent<PauseMenu>().DeactivateAll();
         }
     }
 
