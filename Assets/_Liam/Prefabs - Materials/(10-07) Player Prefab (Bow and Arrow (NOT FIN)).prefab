@@ -9546,7 +9546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9393bb595a62d7b4591398ccb7335e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shop: {fileID: 0}
+  inviPotion: {fileID: 0}
   health: 0
   attackDamage: 0
   speed: 0
@@ -9564,15 +9564,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
-  slot1: {fileID: 0}
-  slot2: {fileID: 0}
-  slot1Parent: {fileID: 0}
-  slot2Parent: {fileID: 0}
+  slot1:
+  - {fileID: 0}
+  - {fileID: 0}
+  slot2:
+  - {fileID: 0}
+  - {fileID: 0}
   items:
-  - {fileID: 3778210975454136448, guid: 3bcd48c45b3fd5a43b0d433b76e3cbea, type: 3}
-  - {fileID: 3778210975454136448, guid: d0d4c433d2e29dd4c910470c7a35d5ff, type: 3}
+  - {fileID: 4645841252835974725, guid: 478bb908c26b51349bea46eb7d528848, type: 3}
+  - {fileID: 3413604373531721724, guid: bcdb65ff45c13e641868d9b9cd2af8c7, type: 3}
   arrayPos1: 0
   arrayPos2: 1
+  slotItem: []
 --- !u!1 &6796087478190253409
 GameObject:
   m_ObjectHideFlags: 0

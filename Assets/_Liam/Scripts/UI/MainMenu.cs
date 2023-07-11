@@ -47,11 +47,11 @@ public class MainMenu : MonoBehaviour
     #region Credit Buttons
     public void Mike()
     {
-        Application.OpenURL("");
+        Application.OpenURL("https://mikehayes.itch.io");
     }
     public void Robin()
     {
-        Application.OpenURL("");
+        Application.OpenURL("https://itch.io/profile/robinpound");
     }
     public void Jesus()
     {
@@ -59,7 +59,7 @@ public class MainMenu : MonoBehaviour
     }
     public void Liam()
     {
-        Application.OpenURL("");
+        Application.OpenURL("https://liamwils20.itch.io");
     }
     public void CreditBack()
     {
