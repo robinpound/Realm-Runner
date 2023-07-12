@@ -9089,6 +9089,7 @@ GameObject:
   - component: {fileID: 4910075969616725317}
   - component: {fileID: 949714323319580725}
   - component: {fileID: 949714323319580724}
+  - component: {fileID: 385941491}
   m_Layer: 0
   m_Name: (10-07) Player Prefab (Bow and Arrow (NOT FIN))
   m_TagString: Untagged
@@ -9227,6 +9228,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   moveSpeed: 3
   runSpeed: 5
+  dust: {fileID: 0}
   isJumpingHash: 0
   isRunningHash: 0
   jumpCountHash: 0
@@ -9464,6 +9466,7 @@ MonoBehaviour:
   handSword: {fileID: 6796087477425557781}
   backBow: {fileID: 6796087477277771912}
   handBow: {fileID: 6796087477403601505}
+  bow: 0
 --- !u!114 &6796087478138580258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9501,7 +9504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   coinText: {fileID: 0}
-  coins: 10000
+  coins: 0
 --- !u!114 &1489752701609549660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9514,10 +9517,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ce577bbeda1adf488c1fae7b12b731c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 6796087478138580275}
   health: 0
   damage: 0.5
-  hearts: []
+  hearts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &4910075969616725317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9531,9 +9539,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
-  fragments: []
   fragmentsInt: 0
-  arrayPos: 0
+  display: {fileID: 0}
 --- !u!114 &949714323319580725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9558,11 +9565,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6796087478138580275}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a0351275249eef40a197bb87d95cfcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   canvas: {fileID: 0}
   slot1:
   - {fileID: 0}
@@ -9576,6 +9584,26 @@ MonoBehaviour:
   arrayPos1: 0
   arrayPos2: 1
   slotItem: []
+  bow: 0
+  sword: 0
+  invincibility: 0
+  strength: 0
+  oneItem: 0
+  twoItems: 0
+--- !u!114 &385941491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6796087478138580275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5c1f72988ba2a7418157672c409057f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  paused: 0
 --- !u!1 &6796087478190253409
 GameObject:
   m_ObjectHideFlags: 0
