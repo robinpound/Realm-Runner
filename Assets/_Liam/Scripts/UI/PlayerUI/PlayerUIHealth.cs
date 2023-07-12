@@ -10,16 +10,10 @@ public class PlayerUIHealth : MonoBehaviour
     public float damage = 0.5f;
     public GameObject[] hearts;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //health = 5;
-    }
-
     // Update is called once per frame
     void Update()
     {
-        health = player.GetComponent<PlayerStats>().health;
+        health = player.GetComponent<PlayerStats>().currentHealth;
         if (Input.GetKeyDown(KeyCode.F))
         {
             health -= damage;

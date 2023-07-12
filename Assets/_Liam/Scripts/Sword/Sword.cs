@@ -22,7 +22,6 @@ public class Sword : MonoBehaviour
     [Header("Sword Variables")]
     public bool swordEquipped;
     public bool isAttackPressed;
-    public int swordCount;
 
     private void Awake()
     {
@@ -60,34 +59,15 @@ public class Sword : MonoBehaviour
             //Debug.Log("We Hit " + enemy.name);
             enemy.GetComponent<EnemyHealth>().TakeDamage(attackDamage);
         }
-
-        swordCount += 1;
     }
     // Running Player Attack Animations
     public void AttackAnimations()
     {
         //Start Attack animation
-        if (isAttackPressed && swordCount == 1)
+        if (isAttackPressed)
         {
-            animator.SetInteger("swordCount", swordCount);
-            //StartCoroutine(Wait());
             animator.SetBool("Sword", true);
             StartCoroutine(Wait1());
-        }
-        else if (isAttackPressed && swordCount == 2)
-        {
-            animator.SetInteger("swordCount", swordCount);
-            //StartCoroutine(Wait());
-            animator.SetBool("Sword", true);
-            StartCoroutine(Wait1());
-        }
-        else if (isAttackPressed && swordCount == 3)
-        {
-            animator.SetInteger("swordCount", swordCount);
-            //StartCoroutine(Wait());
-            animator.SetBool("Sword", true);
-            StartCoroutine(Wait1());
-            StartCoroutine(SetZero());
         }
     }
 
@@ -98,13 +78,6 @@ public class Sword : MonoBehaviour
         isAttackPressed = false;
         yield return new WaitForSeconds(1f);
         animator.SetBool("Sword", false);
-    }
-    // Coroutine to set sword count to 0
-    IEnumerator SetZero()
-    {
-        yield return new WaitForSeconds(1f);
-        swordCount = 0;
-        animator.SetInteger("swordCount", swordCount);
     }
     // Function to draw gizmo of attack area
     private void OnDrawGizmosSelected()
