@@ -28,8 +28,9 @@ public class PlayerDeathScrn : MonoBehaviour
 
     public void No()
     {
-        //Exit to Main Menu
-        SceneManager.LoadScene("MainMenu");
+        //Close the Confirmation Pop-Up
+        confirm.SetActive(false);
+        
     }
     #endregion
 
