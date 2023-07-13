@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
         // the current rotation of our character
         Quaternion currentRotation = transform.rotation;
 
-        if (input.isMovementPressed)
+        if (input.isMovementPressed && !input.isJumpPressed)
         {
             _runMultiplier += 15 * Time.deltaTime;
             // creates a new rotationbased on where the player is currently pressing

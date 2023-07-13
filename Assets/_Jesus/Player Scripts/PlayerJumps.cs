@@ -17,7 +17,7 @@ public class PlayerJumps : MonoBehaviour
     float _initialJumpVelocity;
     float _gravity = -9.8f;
     public int _jumpCount = 0;
-    int maxDoubleJump = 1;
+    int maxDoubleJump = 2;
     int doubleJumpLeft;
     PlayerGravity pGravity;
 
@@ -73,7 +73,7 @@ public class PlayerJumps : MonoBehaviour
     // launch character into the air with initial vertical velocity if conditions met
     public void HandleJump()
     {
-        if (!_isJumping && pGravity.isFalling && cc.IsGrounded() && input.isJumpPressed)
+        if (!_isJumping && pGravity.isFalling && input.isJumpPressed)
         {
             doubleJumpLeft = maxDoubleJump;
             if (_jumpCount < 3 && _currentJumpResetRoutine != null)
@@ -97,7 +97,7 @@ public class PlayerJumps : MonoBehaviour
     public void DoubleJump()
     {
 
-        if (!cc.IsGrounded() && input.isJumpPressed && doubleJumpLeft > 0 && pGravity.isFalling)
+        if (!cc.IsGrounded() && doubleJumpLeft > 0 && pGravity.isFalling && _isJumping && input.isJumpPressed)
         {
             pGravity.currentMovement.y = _initialJumpVelocity * 1.0f;
             doubleJumpLeft -= 1;
