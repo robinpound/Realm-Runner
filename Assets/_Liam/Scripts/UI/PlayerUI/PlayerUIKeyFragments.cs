@@ -6,34 +6,24 @@ using UnityEngine.UI;
 public class PlayerUIKeyFragments : MonoBehaviour
 {
     public GameObject gameManager;
-    public GameObject[] fragments;
     public int fragmentsInt;
-    public int arrayPos;
+    public Text display;
 
     // Start is called before the first frame update
     void Start()
     {
-        fragments[0].SetActive(false);
-        fragments[1].SetActive(false);
-        fragments[2].SetActive(false);
-        fragments[3].SetActive(false);
-        fragments[4].SetActive(false);
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
     }
 
     // Update is called once per frame
     void Update()
     {
+        fragmentsInt = gameManager.GetComponent<GameManager>().fragments;
         if (Input.GetKeyDown(KeyCode.E))
         {
-            fragmentsInt += 1;
-            AddFragment();
+            gameManager.GetComponent<GameManager>().fragments++;
         }
 
-    }
-
-    public void AddFragment()
-    {
-        arrayPos += 1;
-        fragments[arrayPos].SetActive(true);
+        display.text = fragmentsInt.ToString();
     }
 }

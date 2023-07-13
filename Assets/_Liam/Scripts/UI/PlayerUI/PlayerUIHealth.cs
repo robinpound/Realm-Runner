@@ -19,7 +19,7 @@ public class PlayerUIHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        health = player.GetComponent<PlayerStats>().health;
+        health = player.GetComponent<PlayerStats>().currentHealth;
         if (Input.GetKeyDown(KeyCode.F))
         {
             health -= damage;

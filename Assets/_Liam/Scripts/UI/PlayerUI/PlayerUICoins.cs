@@ -13,17 +13,16 @@ public class PlayerUICoins : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
     }
 
     // Update is called once per frame
     void Update()
     {
-        //gameManager = GameObject.FindGameObjectWithTag("GameManager");
-        //coins = gameManager.GetComponent<GameManager>().coins;
+        coins = gameManager.GetComponent<GameManager>().coins;
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            coins += 1;
+            gameManager.GetComponent<GameManager>().coins++;
         }
 
         coinText.text = coins.ToString();
