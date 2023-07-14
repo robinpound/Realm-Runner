@@ -8,6 +8,7 @@ public class Bird : MonoBehaviour
 {
     private Rigidbody rb;
     private Transform player; 
+    private CapsuleCollider thisCollider;
 
     [Header("Alerted!:")] 
     [SerializeField] private float attackRange;
@@ -36,6 +37,7 @@ public class Bird : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         player = GameObject.FindWithTag("Player").transform;
+        thisCollider = GetComponent<CapsuleCollider>();
     }
 
     private void FixedUpdate() 
@@ -123,5 +125,10 @@ public class Bird : MonoBehaviour
             Gizmos.color = Color.black;
             Gizmos.DrawWireSphere(waypoint, patrolwaypointAcceptaceRadius);
         }
+    }
+    private void OnCollisionEnter(Collision other) {
+        Debug.Log("Collided");
+        Physics.IgnoreCollision(thisCollider, other.gameObject.GetComponent<Collider>());
+        
     }
 }

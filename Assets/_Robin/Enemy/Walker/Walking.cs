@@ -54,7 +54,7 @@ public class Walking : MonoBehaviour
     {
         agent.speed = patrolSpeed;
         if(!isWaypointSet) FindWayPoint(); 
-        if(Random.Range(0,1000) == 1) FindWayPoint();
+        if(Random.Range(0,100) == 1) FindWayPoint();
 
         if(isWaypointSet)
             agent.SetDestination(waypoint);
@@ -75,7 +75,7 @@ public class Walking : MonoBehaviour
         waypoint = new Vector3 (currentX + randomX, transform.position.y, currentZ + randomZ);
         //check if place is valid
         
-        if(Physics.Raycast(waypoint, -transform.up, 2f, whatIsGround)){
+        if(Physics.Raycast(waypoint, -transform.up, 1000f, whatIsGround)){
             isWaypointSet = true;
         }
     }
