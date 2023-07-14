@@ -10588,7 +10588,9 @@ GameObject:
   - component: {fileID: 586645772756024265}
   - component: {fileID: 1271867967819648163}
   - component: {fileID: 4696734383496025786}
-  m_Layer: 0
+  - component: {fileID: 664190217}
+  - component: {fileID: 1985673989680737017}
+  m_Layer: 8
   m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -10602,7 +10604,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6582770137662045900}
-  m_LocalRotation: {x: -0, y: -0.14634961, z: -0, w: -0.989233}
+  m_LocalRotation: {x: -0, y: -0.14635037, z: 0, w: -0.98923284}
   m_LocalPosition: {x: 16.286531, y: 9.63, z: -7.9636707}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10927,7 +10929,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6582770137662045900}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2965cb90db053bf4b907ac7fc235246a, type: 3}
   m_Name: 
@@ -10984,6 +10986,7 @@ MonoBehaviour:
   handSword: {fileID: 6582770138039534314}
   backBow: {fileID: 2007973375704205013}
   handBow: {fileID: 6582770137983900062}
+  bow: 0
 --- !u!114 &6582770137662045917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10996,6 +10999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef4118b12247d414db84c9c597f87054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 6582770137662045900}
   animator: {fileID: 6582770137662045907}
   attackPoint: {fileID: 2123599717849917810}
   attackRange: 0.2
@@ -11013,7 +11017,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6582770137662045900}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53787c7967935034e91f9aea394e58ae, type: 3}
   m_Name: 
@@ -11028,7 +11032,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6582770137662045900}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ce577bbeda1adf488c1fae7b12b731c, type: 3}
   m_Name: 
@@ -11044,15 +11048,51 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6582770137662045900}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5824327a13ab49442823707a6cf878d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
-  fragments: []
   fragmentsInt: 0
-  arrayPos: 0
+  display: {fileID: 0}
+--- !u!114 &664190217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6582770137662045900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9393bb595a62d7b4591398ccb7335e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 100
+  attackDamage: 5
+  speed: 5
+  invincible: 0
+  player: {fileID: 6582770137662045900}
+  deathScrn: {fileID: 0}
+  animator: {fileID: 6582770137662045907}
+  characterController: {fileID: 0}
+  deathCam: {fileID: 0}
+  mainCam: {fileID: 0}
+--- !u!114 &1985673989680737017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6582770137662045900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5c1f72988ba2a7418157672c409057f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  paused: 0
 --- !u!1 &6582770137983900062
 GameObject:
   m_ObjectHideFlags: 0
@@ -11071,7 +11111,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6582770137983864888
 Transform:
   m_ObjectHideFlags: 0
@@ -11270,10 +11310,11 @@ GameObject:
   - component: {fileID: 1912416774042249790}
   - component: {fileID: 4429417080041284699}
   - component: {fileID: 9131793224193957468}
+  - component: {fileID: 2023504079}
   m_Layer: 0
   m_Name: Arrow Launcher
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -11285,7 +11326,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6908327824295946994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.205, y: 1.3419999, z: 0.116}
+  m_LocalPosition: {x: -1.97, y: 1.34, z: 0.12}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11342,3 +11383,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2023504079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6908327824295946994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d1d4fb505517e47a7984eb4ecd8ba1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrow: {fileID: 5348930431889049736, guid: 87fe2a44b787d5c4a92bb43530036d5a, type: 3}
+  turret: {fileID: 6908327824295946994}
+  launchVelocity: 10

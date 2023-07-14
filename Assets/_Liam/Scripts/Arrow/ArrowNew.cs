@@ -18,16 +18,17 @@ public class ArrowNew : MonoBehaviour
     }
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name != "Player")
+        if (collision != null)
         {
             rigidbody.isKinematic = true;
             StartCoroutine(Countdown());
         }
+        
     }
 
     IEnumerator Countdown()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(6);
         Destroy(gameObject);
     }
 
