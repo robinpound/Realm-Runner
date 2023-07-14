@@ -33,6 +33,11 @@ public class Bird : MonoBehaviour
     private Vector3 waypoint; 
     private bool isWaypointSet = false;
 
+    [Header("Added by Mike")]
+    [SerializeField]
+    private int attackDamage;
+
+
     private void Start() 
     {
         rb = GetComponent<Rigidbody>();
@@ -128,7 +133,11 @@ public class Bird : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other) {
         Debug.Log("Collided");
-        Physics.IgnoreCollision(thisCollider, other.gameObject.GetComponent<Collider>());
+        //Physics.IgnoreCollision(thisCollider, other.gameObject.GetComponent<Collider>());
+        if (other.gameObject.CompareTag("Player"))
+        {
+            player.GetComponent<PlayerStats>().TakeDamage(attackDamage);
+        }
         
     }
 }

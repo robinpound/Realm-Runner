@@ -1,9 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+
+// Created by Liam.
+// On Collision method altered by Michael to call take damage method on enemies.
 
 public class ArrowNew : MonoBehaviour
 {
+    [Header("Arrow Settings")]
+    [SerializeField]
+    private int damage = 50;
+    [Header("Debugs")]
     public Rigidbody rigidbody;
    // Cinemachine.CinemachineImpulseSource source;
     private void Awake()
@@ -18,8 +26,17 @@ public class ArrowNew : MonoBehaviour
     }
     public void OnCollisionEnter(Collision collision)
     {
+        var enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
+
         if (collision != null)
         {
+            if (enemyHealth != null)
+            {
+                Debug.Log(collision.gameObject.name + " was hit with an arrow to the knee");
+                enemyHealth.TakeDamage(damage);
+                StartCoroutine(Countdown());
+            }
+            else return;
             rigidbody.isKinematic = true;
             StartCoroutine(Countdown());
         }
@@ -28,7 +45,7 @@ public class ArrowNew : MonoBehaviour
 
     IEnumerator Countdown()
     {
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(.3f);
         Destroy(gameObject);
     }
 

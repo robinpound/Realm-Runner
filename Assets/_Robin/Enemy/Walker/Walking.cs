@@ -10,7 +10,7 @@ public class Walking : MonoBehaviour
     [SerializeField] private LayerMask whatIsGround, whatIsPlayer;
 
     [Header("Settings")]    
-    [SerializeField] private int attackDamage;
+    [SerializeField] private int attackDamage = 1;
     [SerializeField] private float waypointRange;
     [SerializeField] private float chaseRange;
     [SerializeField] private float attackRange;
@@ -18,6 +18,7 @@ public class Walking : MonoBehaviour
     [SerializeField] private float patrolSpeed = 0.5f;
     [SerializeField] private float chaseSpeed = 1f;
     [SerializeField] private float attackSpeed = 1.5f;
+    [SerializeField] private int ranChanceWaypointReset = 1000;
     
     [Header("Behind the scenes:")] 
     [SerializeField] private Vector3 waypoint; 
@@ -54,7 +55,7 @@ public class Walking : MonoBehaviour
     {
         agent.speed = patrolSpeed;
         if(!isWaypointSet) FindWayPoint(); 
-        if(Random.Range(0,100) == 1) FindWayPoint();
+        if(Random.Range(0, ranChanceWaypointReset) == 1) FindWayPoint();
 
         if(isWaypointSet)
             agent.SetDestination(waypoint);
