@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
             aimCam.RotatePlayerToAimPosition();
         if (_runMultiplier < topSpeed)
         {
-            _runMultiplier = 0f;
+            _runMultiplier = 8.0f;
         }
     }
     void PlayerMoveAcceleration()
