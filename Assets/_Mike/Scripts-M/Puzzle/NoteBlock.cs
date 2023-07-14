@@ -18,6 +18,7 @@ public class NoteBlock : MonoBehaviour
 
 
     [Header("Sound Debug Settings")]
+    [Tooltip("Add sound to not block game object and drag and drop here")]
     [SerializeField]
     private GameObject sound1, sound2, sound3;
 
