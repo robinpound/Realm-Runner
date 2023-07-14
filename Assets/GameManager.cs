@@ -10,9 +10,11 @@ public class GameManager : MonoBehaviour
     public int coins;
     public int fragments;
 
+    private const string PLAYERTAG = "Player";
+
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag(PLAYERTAG);
         // Reset coins and fragments on start.
         coins = 0;
         fragments = 0;
