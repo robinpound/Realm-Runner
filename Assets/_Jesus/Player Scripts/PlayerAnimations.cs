@@ -23,7 +23,7 @@ public class PlayerAnimations : MonoBehaviour
         animator = GetComponent<Animator>();
         input = GetComponent<ActionInputs>();
         controller = GetComponent<PlayerCharacterController>();
-        dust.SetActive(false);
+        //dust.SetActive(false);
        
 
         //Animations hash
@@ -35,9 +35,9 @@ public class PlayerAnimations : MonoBehaviour
     void Update(){
         if (input.isMovementPressed && controller.IsGrounded())
         {
-             dust.SetActive(true);
+            //dust.SetActive(true);
         }else{
-             dust.SetActive(false);
+            //dust.SetActive(false);
         }
     }
     public void WalkAnimation()
@@ -91,10 +91,10 @@ public class PlayerAnimations : MonoBehaviour
     }
 
     public void StartRunDust(){
-        dust.SetActive(true);
+        //dust.SetActive(true);
     }
     public void EndRunDust(){
-        dust.SetActive(false);
+        //dust.SetActive(false);
     }
 }
 
