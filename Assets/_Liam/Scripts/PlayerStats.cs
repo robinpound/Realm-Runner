@@ -21,18 +21,19 @@ public class PlayerStats : MonoBehaviour
     public GameObject mainCam;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        attackDamage = 15;
+        maxHealth = 5;
+        currentHealth = maxHealth;
+        speed = 10;
+
         deathCam.SetActive(false);
         characterController = GetComponent<CharacterController>();
         characterController.enabled = true;
         animator.enabled = true;
         deathScrn.SetActive(false);
         invincible = false;
-        attackDamage = 15;
-        maxHealth = 5;
-        currentHealth = maxHealth;
-        speed = 10;
     }
 
     // Update is called once per frame
