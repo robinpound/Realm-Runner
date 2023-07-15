@@ -9,7 +9,7 @@ public class WaterRespawn : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(spawnPoint.transform.position + " Spawn point poistion");
+        //Debug.Log(spawnPoint.transform.position + " Spawn point poistion");
     }
     private void OnTriggerEnter(Collider other)
     {

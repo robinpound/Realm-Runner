@@ -28,10 +28,15 @@ public class ShootingTimeTrialManager : MonoBehaviour
     [SerializeField]
     private float timeRemaining = 10f;
 
-    // Change to event later.
-    public bool isTrialRunning = false;
+    // Change isTrialRunning bool to event later.
+    public bool isTrialRunning = false; // Only read in interact to stop trial being played more than once at one time.
     [SerializeField]
     private bool fragmentSpawned = false; // Dont spawn fragment again
+    private bool isTimerSoundPlaying = false; // Dont play timer sound more than once.
+    private bool isWinSoundPlaying = false; // Dont play win sound more than once.
+
+    private AudioSource timerSound;
+
 
     private void Start()
     {
@@ -39,19 +44,22 @@ public class ShootingTimeTrialManager : MonoBehaviour
         pointsToWin = targetSpawn.targetsInTrial;
 
         ui = FindObjectOfType<UIManager>();
+
+        timerSound = GetComponent<AudioSource>(); // Change later!!
+        
+
     }
 
     private void Update()
     {
         //Debug.Log("Player has " + points + " Points");
-        if (points >= pointsToWin)
+        if (points >= pointsToWin && isTrialRunning)
         {
             OnPlayerWins();
         }
-        if (timeRemaining <= 0) 
+        if (timeRemaining <= 0 && isTrialRunning) // End the time trial.
         {
-            Debug.Log("Player Loses, game resets");
-            Invoke(nameof(ResetAttack), .1f); // Allow player to play trail again.
+            OnPlayerFails();
         }
     }
 
@@ -60,15 +68,24 @@ public class ShootingTimeTrialManager : MonoBehaviour
         Debug.Log("The Player Beat The Time Trial");
         stopTimer = true;
         ui.HideTimer();
+        StopTimerSound();
         PlayPuzzleCompleteSound();
         ui.PlayerWinsShootingTrail(); // Show winning text in player UI.
+        Invoke(nameof(ResetTrial), .1f);
         if (!fragmentSpawned)
         {
             SpawnFragment();
             fragmentSpawned = true;
         }
-        else return;
-        Invoke(nameof(ResetAttack), .1f); // Allow player to play trail again.
+        
+    }
+
+    private void OnPlayerFails()
+    {
+        Debug.Log("Player Loses, game resets");
+        ui.HideTimer();
+        StopTimerSound();
+        Invoke(nameof(ResetTrial), .1f);
     }
 
     private void SpawnFragment()
@@ -80,24 +97,26 @@ public class ShootingTimeTrialManager : MonoBehaviour
     // Timer for time trial
     public void Timer()
     {
-        Debug.Log("Time Trail Has Started");
+        Debug.Log("Timer is running");
 
         if (!stopTimer && timeRemaining > 0)
         {
-
+            isTrialRunning = true;
             timeRemaining -= Time.deltaTime;
             //Debug.Log("Time remaining = " + timeRemaining);
-            
+            ui.ShowTimer();
+            ui.DisplayTimeRemaining(timeRemaining);
+            PlayTimerSound();
         }
         else
         {
+            isTrialRunning= false;
             Debug.Log("++Timer Finished");
             timeRemaining = 0;
             ui.HideTimer();
             //points= 0; // Reset points.
         }
-        ui.ShowTimer();
-        ui.DisplayTimeRemaining(timeRemaining);
+        
     }
 
     public int pointsAdded(int pointsGained)
@@ -107,16 +126,45 @@ public class ShootingTimeTrialManager : MonoBehaviour
         return pointsGained;
     }
 
-    private void PlayPuzzleCompleteSound()
+    private void PlayTimerSound()
     {
-        Debug.Log("play puzzle win sound");
-        FindObjectOfType<AudioManager>().PlaySound("PuzzleWon");
+        if (isTrialRunning && !isTimerSoundPlaying)
+        {
+            isTimerSoundPlaying = true;
+            timerSound.Play();
+            //FindObjectOfType<AudioManager>().PlaySound("TimerClockTicking"); Change back to audio manager from audio source later.
+            //Debug.Log(isTimerSoundPlaying + " time trial sound has played");
+        }
     }
 
-    
-
-    private void ResetAttack()
+    private void StopTimerSound()
     {
-        isTrialRunning = false;
+        if (isTimerSoundPlaying)
+        {
+            isTimerSoundPlaying = false;
+            timerSound.Stop();
+
+        }
+    }
+    private void PlayPuzzleCompleteSound()
+    {
+        //Debug.Log("play puzzle win sound");
+        if (!isWinSoundPlaying)
+        {
+            isWinSoundPlaying = true;
+            FindObjectOfType<AudioManager>().PlaySound("PuzzleWon");
+        }
+        
+    }
+
+
+
+    private void ResetTrial()
+    {
+        //isTrialRunning = false;
+        points = 0;
+        // Destroy all current targets that if they exist
+       
+        
     }
 }

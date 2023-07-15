@@ -28,7 +28,7 @@ public class NotePuzzleManager : MonoBehaviour
             ValidateOrderOfNotesPlayed();
         }
 
-        Debug.Log("@@@ List of added notes played " + noteBlockPlayOrder.Count);
+        //Debug.Log("@@@ List of added notes played " + noteBlockPlayOrder.Count);
 
         //Debug.Log("how many notes in order " + check);
 

@@ -23,7 +23,6 @@ public class InteractToStartTrial : MonoBehaviour
             && !manager.isTrialRunning) // Change to input settings
         {
             spawn.StartTrial();
-            manager.isTrialRunning = true;
         }
     }
 
