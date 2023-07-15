@@ -15,6 +15,7 @@ public class NoteBlock : MonoBehaviour
     private NotePuzzleManager manager;
     [SerializeField]
     private bool playerInTrigger = false;
+    private bool hasBlockBeenPlayed = false; // Do once.
 
 
     [Header("Sound Debug Settings")]
@@ -29,11 +30,13 @@ public class NoteBlock : MonoBehaviour
     private Vector3 gizmoSize;
     [SerializeField]
     private float gizmoOffsetX;
+    private UIManager ui;
 
     private void Start()
     {
         manager = GetComponentInParent<NotePuzzleManager>();
-        
+        ui = FindAnyObjectByType<UIManager>();
+
     }
     private void Update()
     {
@@ -59,6 +62,11 @@ public class NoteBlock : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             playerInTrigger = true;
+            if (!hasBlockBeenPlayed)
+            {
+                hasBlockBeenPlayed = true;
+                ui.PressEDisplay();
+            }
         }
     }
 
@@ -67,6 +75,7 @@ public class NoteBlock : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             playerInTrigger = false;
+            hasBlockBeenPlayed = false;
         }
         
     }

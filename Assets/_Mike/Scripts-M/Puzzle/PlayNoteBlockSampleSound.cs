@@ -15,6 +15,14 @@ public class PlayNoteBlockSampleSound : MonoBehaviour
     private float gizmoOffsetX;
     [SerializeField]
     private Vector3 gizmoSize;
+    private UIManager ui;
+    private bool hasBlockBeenPlayed = false;
+
+    private void Start()
+    {
+        ui = FindAnyObjectByType<UIManager>();
+
+    }
     private void Update()
     {
         if (playerInTrigger && Input.GetKeyDown(KeyCode.E))
@@ -29,6 +37,11 @@ public class PlayNoteBlockSampleSound : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             playerInTrigger = true;
+            if (!hasBlockBeenPlayed)
+            {
+                hasBlockBeenPlayed = true;
+                ui.PressEDisplay();
+            }
         }
     }
 
@@ -37,6 +50,7 @@ public class PlayNoteBlockSampleSound : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             playerInTrigger = false;
+            hasBlockBeenPlayed = false;
         }
 
     }
