@@ -2095,7 +2095,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2577028663783971901}
   - component: {fileID: 1009994028271354415}
-  - component: {fileID: 1033613902}
+  - component: {fileID: 1231939400811017229}
   m_Layer: 0
   m_Name: Fragment (Main)
   m_TagString: Untagged
@@ -2134,7 +2134,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.80119586, y: 2.9556317, z: 0.79201365}
   m_Center: {x: -0.02159254, y: 0.25515297, z: -0.002218604}
---- !u!114 &1033613902
+--- !u!114 &1231939400811017229
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2143,9 +2143,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7677299400744006471}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85c81bfcd783dfc48a3db1f277725d20, type: 3}
+  m_Script: {fileID: 11500000, guid: 11bf9237586383c4fba2016370d690d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  gameManager: {fileID: 0}
+  fragment: {fileID: 0}
 --- !u!1 &7948970435578713802
 GameObject:
   m_ObjectHideFlags: 0

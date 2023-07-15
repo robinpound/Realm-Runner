@@ -2,20 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Edited by Mike.
+
 public class GameManager : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
     public int coins;
     public int fragments;
-    // Start is called before the first frame update
+
+    private const string PLAYERTAG = "Player";
+
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag(PLAYERTAG);
+        // Reset coins and fragments on start.
+        coins = 0;
+        fragments = 0;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
+    public int CoinCollected(int coinValue)
+    {
+        coins += coinValue;
+        return coins;
     }
 }
