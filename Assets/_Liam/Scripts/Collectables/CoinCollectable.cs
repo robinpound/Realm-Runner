@@ -17,7 +17,7 @@ public class CoinCollectable : MonoBehaviour
     private int normalCoinAmount;
     private const string PLAYERTAG = "Player", GAMEMANAGERTAG = "GameManager";
 
-    void Start()
+    void Awake()
     {
         gameManager = GameObject.FindGameObjectWithTag(GAMEMANAGERTAG);
         _gameManager = gameManager.GetComponent<GameManager>();
