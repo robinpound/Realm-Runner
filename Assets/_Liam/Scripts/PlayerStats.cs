@@ -23,7 +23,7 @@ public class PlayerStats : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        attackDamage = 15;
+        attackDamage = 50;
         maxHealth = 5;
         currentHealth = maxHealth;
         speed = 10;
