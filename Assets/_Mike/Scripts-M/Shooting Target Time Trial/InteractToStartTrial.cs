@@ -9,17 +9,21 @@ public class InteractToStartTrial : MonoBehaviour
     private InteractableArea interactableArea;
     
     private FindTargetSpawnPoint spawn;
+    private ShootingTimeTrialManager manager;
     
 
     private void Start()
     {
         spawn = GetComponent<FindTargetSpawnPoint>();   
+        manager = GetComponent<ShootingTimeTrialManager>();
     }
     private void Update()
     {
-        if (interactableArea.canPlayerInteract && Input.GetKeyDown(KeyCode.N)) // Change to input settings
+        if (interactableArea.canPlayerInteract && Input.GetKeyDown(KeyCode.N)
+            && !manager.isTrialRunning) // Change to input settings
         {
             spawn.StartTrial();
+            manager.isTrialRunning = true;
         }
     }
 

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using Unity.VisualScripting;
 using System.Runtime.CompilerServices;
 
@@ -14,24 +13,32 @@ public class ShootingTimeTrialManager : MonoBehaviour
     [SerializeField]
     private int pointsToWin;
     [SerializeField]
-    private TMP_Text timeText, playerWins;
     private FindTargetSpawnPoint targetSpawn;
+   
     private bool stopTimer = false;
     [SerializeField]
     private Transform spawnPoint;
     [SerializeField]
     private GameObject fragment;
+    [SerializeField]
+    private UIManager ui;
 
     [Header("Timer Settings")]
     [Tooltip("Set Timer Amount in Seconds")]
     [SerializeField]
     private float timeRemaining = 10f;
-    
+
+    // Change to event later.
+    public bool isTrialRunning = false;
+    [SerializeField]
+    private bool fragmentSpawned = false; // Dont spawn fragment again
 
     private void Start()
     {
         targetSpawn = GetComponent<FindTargetSpawnPoint>();
         pointsToWin = targetSpawn.targetsInTrial;
+
+        ui = FindObjectOfType<UIManager>();
     }
 
     private void Update()
@@ -41,21 +48,33 @@ public class ShootingTimeTrialManager : MonoBehaviour
         {
             OnPlayerWins();
         }
+        if (timeRemaining <= 0) 
+        {
+            Debug.Log("Player Loses, game resets");
+            Invoke(nameof(ResetAttack), .1f); // Allow player to play trail again.
+        }
     }
 
     private void OnPlayerWins()
     {
         Debug.Log("The Player Beat The Time Trial");
         stopTimer = true;
-        playerWins.gameObject.SetActive(true);
-        SpawnFragment();
-
-        // need to add puzzle triumph script containing + 1 Fragment + PlayTriumphSound
+        ui.HideTimer();
+        PlayPuzzleCompleteSound();
+        ui.PlayerWinsShootingTrail(); // Show winning text in player UI.
+        if (!fragmentSpawned)
+        {
+            SpawnFragment();
+            fragmentSpawned = true;
+        }
+        else return;
+        Invoke(nameof(ResetAttack), .1f); // Allow player to play trail again.
     }
 
     private void SpawnFragment()
     {
         Instantiate(fragment, spawnPoint.position, Quaternion.identity);
+
     }
 
     // Timer for time trial
@@ -74,17 +93,11 @@ public class ShootingTimeTrialManager : MonoBehaviour
         {
             Debug.Log("++Timer Finished");
             timeRemaining = 0;
+            ui.HideTimer();
             //points= 0; // Reset points.
         }
-        DisplayTimeRemaining(timeRemaining);
-    }
-
-    // Convert timer into minutes and seconds.
-    private void DisplayTimeRemaining(float timeDisplay)
-    {
-        float minutes = Mathf.FloorToInt(timeDisplay / 60);
-        float seconds = Mathf.FloorToInt(timeDisplay% 60);
-        timeText.text = string.Format("{0:00}:{1:00}", minutes,seconds);
+        ui.ShowTimer();
+        ui.DisplayTimeRemaining(timeRemaining);
     }
 
     public int pointsAdded(int pointsGained)
@@ -92,5 +105,18 @@ public class ShootingTimeTrialManager : MonoBehaviour
         Debug.Log("Player +1 Points");
         points += pointsGained;
         return pointsGained;
+    }
+
+    private void PlayPuzzleCompleteSound()
+    {
+        Debug.Log("play puzzle win sound");
+        FindObjectOfType<AudioManager>().PlaySound("PuzzleWon");
+    }
+
+    
+
+    private void ResetAttack()
+    {
+        isTrialRunning = false;
     }
 }

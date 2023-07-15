@@ -28,8 +28,14 @@ public class TargetHp : MonoBehaviour
         {
             // Add points to manager
             manager.pointsAdded(pointsAdded);
+            PlayPopSound();
             Destroy(gameObject);
             Destroy(collision.gameObject);
         }
+    }
+
+    private void PlayPopSound()
+    {
+        FindObjectOfType<AudioManager>().PlaySound("BalloonPopped");
     }
 }
