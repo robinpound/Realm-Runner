@@ -7,9 +7,8 @@ using UnityEngine;
 
 public class FragmentCollectable : MonoBehaviour
 {
-    [Header("Don't Touch")]
-    public GameObject player;
-    public GameObject gameManager;
+    private GameObject player;
+    private GameObject gameManager;
     //public GameObject fragment;
 
 

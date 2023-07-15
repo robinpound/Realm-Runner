@@ -21,11 +21,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-    void Update()
-    {
-
-    }
-
     public int CoinCollected(int coinValue)
     {
         coins += coinValue;
