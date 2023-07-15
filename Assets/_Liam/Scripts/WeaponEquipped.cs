@@ -7,6 +7,7 @@ public class WeaponEquipped : MonoBehaviour
 {
     public InputActions action;
     public GameObject player;
+    [SerializeField] private GameObject launcher;
 
     public Animator animator;
 
@@ -18,6 +19,8 @@ public class WeaponEquipped : MonoBehaviour
     public GameObject backBow;
     public GameObject handBow;
     public bool bow;
+
+    [SerializeField] private GameObject playerRoot;
 
     private void Awake()
     {
@@ -50,7 +53,9 @@ public class WeaponEquipped : MonoBehaviour
         // Bow and Arrow Attack De-activation Code Goes Here.
         animator.SetBool("SwordEquipped", true);
         player.GetComponent<Sword>().swordEquipped = true;
+
         bow = false;
+
         StartCoroutine(SwordEquipper());
     }
 
@@ -58,7 +63,9 @@ public class WeaponEquipped : MonoBehaviour
     {
         animator.SetBool("SwordEquipped", false);
         player.GetComponent<Sword>().swordEquipped = false;
+
         bow = true;
+
         StartCoroutine(BowEquipper());
         // Bow and Arrow Attack Activation Code Goes Here.
     }
@@ -76,6 +83,7 @@ public class WeaponEquipped : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         backSword.SetActive(false);
         handSword.SetActive(true);
+        playerRoot.GetComponent<SwordSounds>().True();
     }
 
     IEnumerator BowEquipper()
@@ -86,6 +94,7 @@ public class WeaponEquipped : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         backBow.SetActive(false);
         handBow.SetActive(true);
+        playerRoot.GetComponent<SwordSounds>().False();
     }
 
     private void OnEnable()
