@@ -7,6 +7,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private GameObject player;
+    [SerializeField]
+    private GameObject portalDoor;
     public int coins;
     public int fragments;
 
@@ -20,6 +22,13 @@ public class GameManager : MonoBehaviour
         fragments = 0;
     }
 
+    private void Update()
+    {
+        if (fragments >= 2)
+        {
+            portalDoor.SetActive(true);
+        } 
+    }
 
     public int CoinCollected(int coinValue)
     {
