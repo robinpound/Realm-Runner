@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class PlayerSounds : MonoBehaviour
 {
+    public Animator animator;
     public GameObject player;
     public AudioSource audios;
     public AudioClip footStep1;
@@ -16,10 +17,14 @@ public class PlayerSounds : MonoBehaviour
     [SerializeField] bool isJumping;
     public float timer;
 
-    [SerializeField] private UnityEvent loop;
+    [SerializeField] private UnityEvent jump;
+    [SerializeField] private UnityEvent footsteps;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         isWalking = player.GetComponent<ActionInputs>().isMovementPressed;
     }
@@ -28,39 +33,53 @@ public class PlayerSounds : MonoBehaviour
     void Update()
     {
         isWalking = player.GetComponent<ActionInputs>().isMovementPressed;
-        if(isWalking && timer == 0)
+        isJumping = player.GetComponent<ActionInputs>().isJumpPressed;
+        if (animator.GetBool("jump") == true && timer == 0)
         {
-            timer = 1;
-            loop.Invoke();
-            Invoke(nameof(Reset), 0.8f);
+            jump.Invoke();
         }
-        else if (!isWalking)
+        else if(animator.GetBool("run") == true && timer ==0)
         {
-            timer = 0;
+            footsteps.Invoke();
         }
+        
+        //if(isWalking && isJumping && timer == 0)
+        //{
+        //    jump.Invoke();
+        //}
+        //else if(isWalking && !isJumping && timer == 0)
+        //{
+        //    footsteps.Invoke();
+        //}
     }
     private void Reset()
     {
         timer = 0;
     }
-    public void StartCo()
+    public void StartFootstepts()
     {
+        timer = 1;
         StartCoroutine(Footsteps());
+        Invoke(nameof(Reset), 0.5f);
     }
-
-    public IEnumerator Footsteps()
+    public void StartJump()
+    {
+        timer = 1;
+        Jump();
+        Invoke(nameof(Reset), 0.5f);
+    }
+    IEnumerator Footsteps()
     {
         audios.clip = footStep1;
         audios.Play();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.257f);
         audios.clip = footStep2;
         audios.Play();
+        
     }
-    private void OnCollisionEnter(Collision collision)
+    void Jump()
     {
-        if (collision.gameObject.CompareTag("Ground") && isWalking)
-        {
-            //loop.Invoke();
-        }
+        audios.clip = jumpLaunch;
+        audios.Play();
     }
 }
