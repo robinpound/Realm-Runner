@@ -29,27 +29,6 @@ public class Breakablerock : MonoBehaviour
         health = maxHealth;
     }
 
-    private void Update()
-    {
-
-
-        //Debug
-        Debug.Log("breakable block's Healht " + health);
-        Debug.Log(spawnedPieces.Count);
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-
-            int damage = 1;
-            TakeDamage(damage);
-        }
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            DeSpawnPieces();
-        }
-
-    }
-
     private void TakeDamage(int damage)
     {
         health -= damage;

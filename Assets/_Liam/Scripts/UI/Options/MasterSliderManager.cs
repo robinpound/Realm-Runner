@@ -12,7 +12,7 @@ public class MasterSliderManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager");
+        gameManager = GameObject.FindGameObjectWithTag("OptionsManager");
         // Master Volume Slider
         masterSlider.value = gameManager.GetComponent<OptionsManager>().mixer;
         mixer = masterSlider.value;

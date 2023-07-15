@@ -4,22 +4,29 @@ using UnityEngine;
 
 public class ArrowTest : MonoBehaviour
 {
+    public GameObject player;
     public GameObject arrow;
     public GameObject turret;
     public float launchVelocity = 10f;
+
+    public bool bow;
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        bow = player.GetComponent<WeaponEquipped>().bow;
+        if (Input.GetMouseButton(1))
         {
-            Debug.Log("Input Works!");
-            Fire();
+            if (Input.GetMouseButtonDown(0))
+            {
+                Debug.Log("Input Works!");
+                Fire();
+            }
         }
     }
 

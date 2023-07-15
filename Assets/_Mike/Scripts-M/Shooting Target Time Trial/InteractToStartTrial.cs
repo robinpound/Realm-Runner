@@ -19,7 +19,7 @@ public class InteractToStartTrial : MonoBehaviour
     }
     private void Update()
     {
-        if (interactableArea.canPlayerInteract && Input.GetKeyDown(KeyCode.N)
+        if (interactableArea.canPlayerInteract && Input.GetKeyDown(KeyCode.E)
             && !manager.isTrialRunning) // Change to input settings
         {
             spawn.StartTrial();

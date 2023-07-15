@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WaterRespawn : MonoBehaviour
 {
     [SerializeField]
-    private Transform spawnPoint, player;
+    private Transform player;
 
     private void Update()
     {
@@ -17,8 +18,11 @@ public class WaterRespawn : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log(other.tag + " spawned at new point");
-            
-            player.position += new Vector3(spawnPoint.position.x, player.position.y, spawnPoint.position.z);
+
+            //player.position += new Vector3(spawnPoint.position.x, player.position.y, spawnPoint.position.z);
+            //player.position = spawnPoint.position;
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            player.GetComponent<PlayerStats>().InstaDead();
         }
     }
 }

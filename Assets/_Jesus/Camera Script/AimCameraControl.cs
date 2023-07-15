@@ -51,7 +51,7 @@ public class AimCameraControl : MonoBehaviour
     public void CameraAimToggle()
     {
         //These inputs needs to be replaced for the new iput system mouse buttons
-        if (Input.GetKeyDown(KeyCode.Q) && !aimCam.activeInHierarchy)
+        if (Input.GetMouseButtonDown(1) && !aimCam.activeInHierarchy)
         {
             aimCam.SetActive(true);
             animator.SetBool("aiming", true);
@@ -59,7 +59,7 @@ public class AimCameraControl : MonoBehaviour
             rig.weight = 1f;
             
         }
-        if (Input.GetKeyUp(KeyCode.Q) && aimCam.activeInHierarchy)
+        if (Input.GetMouseButtonUp(1) && aimCam.activeInHierarchy)
         {
             aimCam.SetActive(false);
             animator.SetBool("aiming", false);

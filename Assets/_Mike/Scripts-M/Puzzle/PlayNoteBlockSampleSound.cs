@@ -17,7 +17,7 @@ public class PlayNoteBlockSampleSound : MonoBehaviour
     private Vector3 gizmoSize;
     private void Update()
     {
-        if (playerInTrigger && Input.GetKeyDown(KeyCode.N))
+        if (playerInTrigger && Input.GetKeyDown(KeyCode.E))
         {
             GetComponent<AudioSource>().Play(); 
         }

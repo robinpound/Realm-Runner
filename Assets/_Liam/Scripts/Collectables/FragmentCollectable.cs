@@ -47,7 +47,6 @@ public class FragmentCollectable : MonoBehaviour
     private void FragmentCollected()
     {
         _gameManager.fragments++;
-        player.GetComponent<PlayerUIKeyFragments>().fragmentsInt++;
 
         // Set fragment to not appear again at this location TO DO!
     }

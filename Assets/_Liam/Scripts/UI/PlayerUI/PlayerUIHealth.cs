@@ -40,11 +40,11 @@ public class PlayerUIHealth : MonoBehaviour
         }
         else if (health <= 4 && health > 3)
         {
-            hearts[4].SetActive(false);
+            hearts[0].SetActive(false);
         }
         else if (health <= 3 && health > 2)
         {
-            hearts[3].SetActive(false);
+            hearts[1].SetActive(false);
         }
         else if (health <= 2 && health > 1)
         {
@@ -52,12 +52,11 @@ public class PlayerUIHealth : MonoBehaviour
         }
         else if (health <= 1 && health > 0)
         {
-            hearts[1].SetActive(false);
+            hearts[3].SetActive(false);
         }
         else if (health <= 0)
         {
-            hearts[0].SetActive(false);
-            GameObject.Destroy(player);
+            hearts[4].SetActive(false);
         }
         #endregion
 
