@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
     private TextMeshProUGUI coins, fragments;
 
     [SerializeField]
-    private TextMeshProUGUI timeRemaining, success, portalIsOpen;
+    private TextMeshProUGUI timeRemaining, success, portalIsOpen, pressE;
 
 
     private void Start()
@@ -52,6 +52,12 @@ public class UIManager : MonoBehaviour
         // Display player wins text
         success.gameObject.SetActive(true);
         StartCoroutine(Timer(success.gameObject));
+    }
+
+    public void PressEDisplay()
+    {
+        pressE.gameObject.SetActive(true);
+        StartCoroutine(Timer(pressE.gameObject));
     }
 
     public void TellPlayerPortalIsOpen()

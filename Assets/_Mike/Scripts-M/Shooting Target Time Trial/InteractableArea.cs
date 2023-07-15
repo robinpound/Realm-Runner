@@ -7,6 +7,10 @@ public class InteractableArea : MonoBehaviour
     [Header("Debug")]
     public bool canPlayerInteract = false;
     private const string PLAYER = "Player";
+    [SerializeField]
+    private UIManager ui;
+    private bool hasUIDisplayed = false; // Do once
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,6 +18,12 @@ public class InteractableArea : MonoBehaviour
         if (other.gameObject.CompareTag(PLAYER))
         {
             canPlayerInteract = true;
+            if (!hasUIDisplayed)
+            {
+                hasUIDisplayed = true;
+                ui.PressEDisplay();
+            }
+            
         }
     }
 
@@ -22,6 +32,7 @@ public class InteractableArea : MonoBehaviour
         if (other.gameObject.CompareTag(PLAYER))
         {
             canPlayerInteract = false;
+            hasUIDisplayed = false;
         }
     }
 }
