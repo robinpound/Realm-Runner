@@ -11634,7 +11634,6 @@ GameObject:
   m_Component:
   - component: {fileID: 666718248}
   - component: {fileID: 666718249}
-  - component: {fileID: 666718250}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -11672,21 +11671,6 @@ MonoBehaviour:
   mixer: 0
   mixer1: 0
   mixer2: 0
---- !u!114 &666718250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666718246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86469a1212881d94f9636710b4c195ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  coins: 0
-  fragments: 0
 --- !u!1 &671547543
 GameObject:
   m_ObjectHideFlags: 0

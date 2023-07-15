@@ -34,12 +34,7 @@ public class PlayerDeathScrn : MonoBehaviour
     }
     #endregion
 
-    public void LoadLastCheckpoint()
-    {
-        //Respawn Player back at last known checkpoint
-    }
-
-    public void ReLoadLevel()
+    public void Respawn()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     private const string PLAYERTAG = "Player";
 
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag(PLAYERTAG);

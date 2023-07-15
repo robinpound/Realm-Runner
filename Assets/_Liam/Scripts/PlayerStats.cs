@@ -60,8 +60,15 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public void InstaDead()
+    {
+        currentHealth = 0;
+    }
+
     void Die()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         deathCam.transform.position = mainCam.transform.position;
         deathCam.transform.rotation = mainCam.transform.rotation;
         deathCam.SetActive(true);
