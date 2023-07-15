@@ -5,7 +5,7 @@ using UnityEngine;
 public class WaterRespawn : MonoBehaviour
 {
     [SerializeField]
-    private GameObject spawnPoint, player;
+    private Transform spawnPoint, player;
 
     private void Update()
     {
@@ -17,8 +17,8 @@ public class WaterRespawn : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log(other.tag + " spawned at new point");
-        
-            player.transform.position = spawnPoint.transform.position;
+            
+            player.position += new Vector3(spawnPoint.position.x, player.position.y, spawnPoint.position.z);
         }
     }
 }
