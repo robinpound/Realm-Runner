@@ -50,7 +50,7 @@ public class WeaponEquipped : MonoBehaviour
         // Bow and Arrow Attack De-activation Code Goes Here.
         animator.SetBool("SwordEquipped", true);
         player.GetComponent<Sword>().swordEquipped = true;
-        player.GetComponent<Arrow>().bowEquipped = false;
+        bow = false;
         StartCoroutine(SwordEquipper());
     }
 
@@ -58,7 +58,7 @@ public class WeaponEquipped : MonoBehaviour
     {
         animator.SetBool("SwordEquipped", false);
         player.GetComponent<Sword>().swordEquipped = false;
-        player.GetComponent<Arrow>().bowEquipped = true;
+        bow = true;
         StartCoroutine(BowEquipper());
         // Bow and Arrow Attack Activation Code Goes Here.
     }
