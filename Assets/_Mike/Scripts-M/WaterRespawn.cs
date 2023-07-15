@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class WaterRespawn : MonoBehaviour
 {
     [SerializeField]
-    private Transform spawnPoint, player;
+    private Transform player;
 
     private void Update()
     {

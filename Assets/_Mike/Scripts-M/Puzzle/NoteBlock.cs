@@ -37,7 +37,7 @@ public class NoteBlock : MonoBehaviour
     }
     private void Update()
     {
-        if (playerInTrigger == true && Input.GetKeyDown(KeyCode.N)) // Change to interact action input.
+        if (playerInTrigger == true && Input.GetKeyDown(KeyCode.E)) // Change to interact action input.
         {
             PlaySoundOfBlock();
         }
