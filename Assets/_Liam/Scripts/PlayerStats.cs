@@ -44,7 +44,8 @@ public class PlayerStats : MonoBehaviour
         if(currentHealth <= 0)
         {
             characterController.enabled = false;
-            Invoke(nameof(Die), 0.5f);
+            Invoke(nameof(DisableAnimator), 1f);
+            Invoke(nameof(Die), 1.5f);
         }
     }
 
@@ -66,10 +67,10 @@ public class PlayerStats : MonoBehaviour
         deathCam.transform.rotation = mainCam.transform.rotation;
         deathCam.SetActive(true);
         mainCam.SetActive(false);
-        //characterController.enabled = false;
-        //yield return new WaitForSeconds(0.5f);
         deathScrn.SetActive(true);
-        //yield return new WaitForSeconds(0.1f);
+    }
+    void DisableAnimator()
+    {
         animator.enabled = false;
     }
 }
