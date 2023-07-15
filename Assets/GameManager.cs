@@ -9,8 +9,12 @@ public class GameManager : MonoBehaviour
     private GameObject player;
     [SerializeField]
     private GameObject portalDoor;
+    [SerializeField]
+    private UIManager ui;
     public int coins;
     public int fragments;
+
+    private bool isPortalOpened = false;
 
     private const string PLAYERTAG = "Player";
 
@@ -24,9 +28,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (fragments >= 2)
+        if (fragments >= 2 && !isPortalOpened)
         {
+            isPortalOpened = true;
             portalDoor.SetActive(true);
+            ui.TellPlayerPortalIsOpen();
         } 
     }
 
