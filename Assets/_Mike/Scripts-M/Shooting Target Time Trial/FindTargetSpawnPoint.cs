@@ -38,15 +38,10 @@ public class FindTargetSpawnPoint : MonoBehaviour
     }
     private void Update()
     {
-
-
         if (startTrial == true)
         {
             manager.Timer();
         }
-            
-            
-        
     }
 
     public void StartTrial()
