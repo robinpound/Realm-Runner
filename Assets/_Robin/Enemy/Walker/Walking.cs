@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -13,6 +10,7 @@ public class Walking : MonoBehaviour
     [SerializeField] private LayerMask whatIsGround, whatIsPlayer;
 
     [Header("Settings")]    
+    [SerializeField] private int attackDamage = 1;
     [SerializeField] private float waypointRange;
     [SerializeField] private float chaseRange;
     [SerializeField] private float attackRange;
@@ -20,6 +18,7 @@ public class Walking : MonoBehaviour
     [SerializeField] private float patrolSpeed = 0.5f;
     [SerializeField] private float chaseSpeed = 1f;
     [SerializeField] private float attackSpeed = 1.5f;
+    [SerializeField] private int ranChanceWaypointReset = 1000;
     
     [Header("Behind the scenes:")] 
     [SerializeField] private Vector3 waypoint; 
@@ -27,6 +26,15 @@ public class Walking : MonoBehaviour
     [SerializeField] private bool isplayerInChaseRange = false;
     [SerializeField] private bool isplayerInAttackRange = false;
     [SerializeField] private bool isattacked = false; 
+
+    private enum EnemyAnimationState
+    {
+        idle, 
+        walking,
+        attacking
+    }
+
+    [SerializeField] private EnemyAnimationState currentAnimationState;
 
     void Awake() 
     {
@@ -47,7 +55,7 @@ public class Walking : MonoBehaviour
     {
         agent.speed = patrolSpeed;
         if(!isWaypointSet) FindWayPoint(); 
-        if(Random.Range(0,100) == 1) FindWayPoint();
+        if(Random.Range(0, ranChanceWaypointReset) == 1) FindWayPoint();
 
         if(isWaypointSet)
             agent.SetDestination(waypoint);
@@ -64,11 +72,11 @@ public class Walking : MonoBehaviour
         float randomX = Random.Range(-waypointRange, waypointRange);
         float currentZ = transform.position.z;
         float currentX = transform.position.x;
-        
+
         waypoint = new Vector3 (currentX + randomX, transform.position.y, currentZ + randomZ);
         //check if place is valid
         
-        if(Physics.Raycast(waypoint, -transform.up, 2f, whatIsGround)){
+        if(Physics.Raycast(waypoint, -transform.up, 1000f, whatIsGround)){
             isWaypointSet = true;
         }
     }
@@ -88,9 +96,11 @@ public class Walking : MonoBehaviour
 
         if(!isattacked)
         {
+
             /*
                 ATTACK CODE HERE!
             */
+            player.GetComponent<PlayerStats>().TakeDamage(attackDamage);
             isattacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }

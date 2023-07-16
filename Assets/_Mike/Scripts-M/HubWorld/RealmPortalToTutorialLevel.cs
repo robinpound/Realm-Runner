@@ -12,7 +12,7 @@ public class RealmPortalToTutorialLevel : MonoBehaviour
     {
         if (other.gameObject.CompareTag(PLAYER))
         {
-            SceneManager.LoadScene("TutorialLevelMikeRev1"); // Change string to build index TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            SceneManager.LoadScene("MainMenu"); // Change string to build index TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         }
     }
 }

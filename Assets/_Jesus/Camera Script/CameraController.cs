@@ -6,8 +6,12 @@ using UnityEngine.Animations;
 public class CameraController : MonoBehaviour
 {
     ActionInputs inputController;
-    [SerializeField]
-     Transform cameraFollow;
+    [SerializeField] Transform cameraFollow;
+     //Toggle cameras
+     public GameObject camFollow;
+     public GameObject aimCam;
+     public GameObject magicArrow;
+     public GameObject arrowPowerUp;
      float xRotation;
      float yRotation;
     
@@ -16,6 +20,10 @@ public class CameraController : MonoBehaviour
     {
        inputController = GetComponent<ActionInputs>();
     }
+    void Update(){
+        CameraRotation();
+        
+    }
     public void CameraRotation(){
         xRotation += inputController.lookInput.y;
         yRotation += inputController.lookInput.x;
@@ -23,5 +31,13 @@ public class CameraController : MonoBehaviour
         Quaternion rotation = Quaternion.Euler(xRotation, yRotation, 0);
         
         cameraFollow.rotation = rotation;
+    }
+    public void CameraAimToggle(){
+        if (Input.GetKeyDown(KeyCode.Q) && !aimCam.activeInHierarchy)
+        {
+            aimCam.SetActive(true);
+        }else{
+            aimCam.SetActive(false);
+        }
     }
 }

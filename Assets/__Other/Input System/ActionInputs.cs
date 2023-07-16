@@ -26,17 +26,15 @@ public class ActionInputs : MonoBehaviour
         //Jump
         jumpAction.started += OnJump;
         jumpAction.canceled += OnJump;
-        // jumpAction.performed += OnJump;
-
+       
         //Look
         lookAction.started += OnLook;
         lookAction.canceled += OnLook;
-        // lookAction.performed += OnLook;  
 
         //Run 
-        runAction.started += OnRun;
-        runAction.canceled += OnRun;
-        runAction.performed += OnRun;  
+        // runAction.started += OnRun;
+        // runAction.canceled += OnRun;
+        // runAction.performed += OnRun;  
     }
 
     void OnMove(InputAction.CallbackContext ctx){
@@ -50,9 +48,9 @@ public class ActionInputs : MonoBehaviour
     void OnLook(InputAction.CallbackContext ctx){
         lookInput = ctx.ReadValue<Vector2>();
     }
-    void OnRun(InputAction.CallbackContext ctx){
-        isRunPressed = ctx.ReadValueAsButton();
-    }
+    // void OnRun(InputAction.CallbackContext ctx){
+    //     isRunPressed = ctx.ReadValueAsButton();
+    // }
 
     private void OnEnable() {
         actions.PlayerActions.Enable();

@@ -10,12 +10,14 @@ public class PlayerJumps : MonoBehaviour
     ActionInputs input; // NOTE: PlayerInput class must be generated from New Input System in Inspector
 
     float _maxJumpHeight = 1.5f;
+    float _firstJumpMaxHeight = 2f;
     float _maxJumpTime = .75f;
+    float _firstJumpTime = .45f;
     bool _isJumping = false;
     float _initialJumpVelocity;
     float _gravity = -9.8f;
     public int _jumpCount = 0;
-    int maxDoubleJump = 3;
+    int maxDoubleJump = 2;
     int doubleJumpLeft;
     PlayerGravity pGravity;
 
@@ -43,9 +45,10 @@ public class PlayerJumps : MonoBehaviour
         float maxHeightThirdJumpMultiplier = 1.25f;
 
         float timeToApex = _maxJumpTime / 2;
-        
-        _gravity = (-addSubstractFromGravity * _maxJumpHeight) / Mathf.Pow(timeToApex, square);
-        _initialJumpVelocity = (addSubstractFromGravity * _maxJumpHeight) / timeToApex;
+        float firstJumpTimeToApex = _firstJumpTime / 2;
+
+        _gravity = (-addSubstractFromGravity * _firstJumpMaxHeight) / Mathf.Pow(firstJumpTimeToApex, square);
+        _initialJumpVelocity = (addSubstractFromGravity * _firstJumpMaxHeight) / firstJumpTimeToApex;
         float secondJumpGravity = (-addSubstractFromGravity * (_maxJumpHeight + jumpStateHigherThanFirst)) / Mathf.Pow((timeToApex * maxHeightSecondJumpMultiplier), square);
         float secondJumpInitialVelocity = (addSubstractFromGravity * (_maxJumpHeight + jumpStateHigherThanFirst)) / (timeToApex * maxHeightSecondJumpMultiplier);
         float thirdJumpGravity = (-addSubstractFromGravity * (_maxJumpHeight + jumpStateHigherThanSecond)) / Mathf.Pow((timeToApex * maxHeightThirdJumpMultiplier), square);
@@ -61,10 +64,16 @@ public class PlayerJumps : MonoBehaviour
         _jumpGravities.Add(3, thirdJumpGravity);
     }
 
+    void Update()
+    {
+        HandleJump();
+        DoubleJump();
+    }
+
     // launch character into the air with initial vertical velocity if conditions met
     public void HandleJump()
     {
-        if (!_isJumping && cc.IsGrounded() && input.isJumpPressed)
+        if (!_isJumping && pGravity.isFalling && input.isJumpPressed)
         {
             doubleJumpLeft = maxDoubleJump;
             if (_jumpCount < 3 && _currentJumpResetRoutine != null)
@@ -72,7 +81,7 @@ public class PlayerJumps : MonoBehaviour
                 StopCoroutine(_currentJumpResetRoutine);
             }
             anim.animator.SetBool(anim.isJumpingHash, true);
-            
+
             _isJumping = true;
             pGravity._isJumpAnimating = true;
             _jumpCount += 1;
@@ -85,17 +94,15 @@ public class PlayerJumps : MonoBehaviour
             _isJumping = false;
         }
     }
-    public void DoubleJump(){
-        if (cc.IsGrounded() && input.isJumpPressed)
+    public void DoubleJump()
+    {
+
+        if (!cc.IsGrounded() && doubleJumpLeft > 0 && pGravity.isFalling && _isJumping && input.isJumpPressed)
         {
-            // doubleJumpLeft = maxDoubleJump;
-        }
-        if ( input.isJumpPressed && doubleJumpLeft > 0)
-        {
-            pGravity.currentMovement.y = _initialJumpVelocity;
+            pGravity.currentMovement.y = _initialJumpVelocity * 1.0f;
             doubleJumpLeft -= 1;
         }
-        
+
     }
     public void CoroutineStart()
     {

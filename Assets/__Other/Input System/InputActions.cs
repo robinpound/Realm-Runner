@@ -41,7 +41,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""49715953-fbc4-47c6-9b29-1d22e9fb5f8b"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
+                    ""processors"": ""ScaleVector2(x=0.1,y=0.2)"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
@@ -74,9 +74,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""ArrowAiming"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""f4665cf4-0bab-4798-8277-1fb05ebbf812"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -413,12 +413,195 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""f5ecb9e8-d2d2-4076-975e-95f81fe33f2f"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ArrowAiming"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""d4570ace-8a58-4363-9de2-169a491db716"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SwordAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""850ec1c8-75c8-465f-9a20-5aac1702ab58"",
+            ""actions"": [
+                {
+                    ""name"": ""LSLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""48996391-3817-47d1-bd47-8efb1fdff62c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LSRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""7bce066a-2f28-4f31-9c31-640d9190f828"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LSUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""d3930f0b-55dd-4b01-8249-f226ec601bc4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LSDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""f0b1cf2b-df4b-4f4f-8ef4-b331cec7b47c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reset"",
+                    ""type"": ""Button"",
+                    ""id"": ""83656a1d-1f21-41ba-be25-4155d2675365"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""d803677e-3827-4548-b82d-9684b6891bf2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""1fe5bb2d-5757-49f4-8670-c0fe9abd1b9f"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LSLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a006762-da22-4ead-8862-82562e79d6c8"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LSLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""15f9794b-66dd-4120-ac00-d02e179af66a"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LSRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6a91bd5e-ed7d-4a87-9879-49180c50eeeb"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LSRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e42bb01-2073-436f-839d-26951c87511f"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LSUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""34fff772-cce4-4cb9-b87a-5c7512f88eb8"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LSUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b227a17a-e134-4a6c-8b32-ce206c6b74df"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LSDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d2c6d9bb-8365-4a76-bc97-ba7d0308683d"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LSDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6df560cd-8e45-4e76-ae8b-5446a1ca6ab5"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ca753fb2-dbe8-466d-ba00-47ee9ea44ade"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -436,6 +619,14 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_PlayerActions_ArrowAttack = m_PlayerActions.FindAction("ArrowAttack", throwIfNotFound: true);
         m_PlayerActions_ArrowAiming = m_PlayerActions.FindAction("ArrowAiming", throwIfNotFound: true);
         m_PlayerActions_SwordAttack = m_PlayerActions.FindAction("SwordAttack", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_LSLeft = m_UI.FindAction("LSLeft", throwIfNotFound: true);
+        m_UI_LSRight = m_UI.FindAction("LSRight", throwIfNotFound: true);
+        m_UI_LSUp = m_UI.FindAction("LSUp", throwIfNotFound: true);
+        m_UI_LSDown = m_UI.FindAction("LSDown", throwIfNotFound: true);
+        m_UI_Reset = m_UI.FindAction("Reset", throwIfNotFound: true);
+        m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -587,6 +778,92 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActionsActions @PlayerActions => new PlayerActionsActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_LSLeft;
+    private readonly InputAction m_UI_LSRight;
+    private readonly InputAction m_UI_LSUp;
+    private readonly InputAction m_UI_LSDown;
+    private readonly InputAction m_UI_Reset;
+    private readonly InputAction m_UI_Click;
+    public struct UIActions
+    {
+        private @InputActions m_Wrapper;
+        public UIActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @LSLeft => m_Wrapper.m_UI_LSLeft;
+        public InputAction @LSRight => m_Wrapper.m_UI_LSRight;
+        public InputAction @LSUp => m_Wrapper.m_UI_LSUp;
+        public InputAction @LSDown => m_Wrapper.m_UI_LSDown;
+        public InputAction @Reset => m_Wrapper.m_UI_Reset;
+        public InputAction @Click => m_Wrapper.m_UI_Click;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @LSLeft.started += instance.OnLSLeft;
+            @LSLeft.performed += instance.OnLSLeft;
+            @LSLeft.canceled += instance.OnLSLeft;
+            @LSRight.started += instance.OnLSRight;
+            @LSRight.performed += instance.OnLSRight;
+            @LSRight.canceled += instance.OnLSRight;
+            @LSUp.started += instance.OnLSUp;
+            @LSUp.performed += instance.OnLSUp;
+            @LSUp.canceled += instance.OnLSUp;
+            @LSDown.started += instance.OnLSDown;
+            @LSDown.performed += instance.OnLSDown;
+            @LSDown.canceled += instance.OnLSDown;
+            @Reset.started += instance.OnReset;
+            @Reset.performed += instance.OnReset;
+            @Reset.canceled += instance.OnReset;
+            @Click.started += instance.OnClick;
+            @Click.performed += instance.OnClick;
+            @Click.canceled += instance.OnClick;
+        }
+
+        private void UnregisterCallbacks(IUIActions instance)
+        {
+            @LSLeft.started -= instance.OnLSLeft;
+            @LSLeft.performed -= instance.OnLSLeft;
+            @LSLeft.canceled -= instance.OnLSLeft;
+            @LSRight.started -= instance.OnLSRight;
+            @LSRight.performed -= instance.OnLSRight;
+            @LSRight.canceled -= instance.OnLSRight;
+            @LSUp.started -= instance.OnLSUp;
+            @LSUp.performed -= instance.OnLSUp;
+            @LSUp.canceled -= instance.OnLSUp;
+            @LSDown.started -= instance.OnLSDown;
+            @LSDown.performed -= instance.OnLSDown;
+            @LSDown.canceled -= instance.OnLSDown;
+            @Reset.started -= instance.OnReset;
+            @Reset.performed -= instance.OnReset;
+            @Reset.canceled -= instance.OnReset;
+            @Click.started -= instance.OnClick;
+            @Click.performed -= instance.OnClick;
+            @Click.canceled -= instance.OnClick;
+        }
+
+        public void RemoveCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     public interface IPlayerActionsActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -596,5 +873,14 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnArrowAttack(InputAction.CallbackContext context);
         void OnArrowAiming(InputAction.CallbackContext context);
         void OnSwordAttack(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnLSLeft(InputAction.CallbackContext context);
+        void OnLSRight(InputAction.CallbackContext context);
+        void OnLSUp(InputAction.CallbackContext context);
+        void OnLSDown(InputAction.CallbackContext context);
+        void OnReset(InputAction.CallbackContext context);
+        void OnClick(InputAction.CallbackContext context);
     }
 }
