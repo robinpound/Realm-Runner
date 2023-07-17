@@ -11,6 +11,10 @@ public class WeaponEquipped : MonoBehaviour
     public GameObject handBow;
     public bool bow;
 
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     private void Start()
     {

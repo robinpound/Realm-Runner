@@ -13,7 +13,8 @@ public class PlayerUIHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //health = 5;
+        player = GameObject.FindGameObjectWithTag("Player");
+        hearts = GameObject.FindGameObjectsWithTag("Heart");
     }
 
     // Update is called once per frame

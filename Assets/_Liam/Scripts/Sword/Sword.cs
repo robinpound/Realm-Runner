@@ -34,7 +34,7 @@ public class Sword : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        attackDamage = player.GetComponent<PlayerStats>().attackDamage;
+        //attackDamage = player.GetComponent<PlayerStats>().attackDamage;
         // Player input for attacking
         if (swordEquipped && !isAttackPressed)
         {
