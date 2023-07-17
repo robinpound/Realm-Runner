@@ -7,13 +7,18 @@ public class InteractNoteArea : MonoBehaviour
     [Header("Debugs DONT EDIT")]
     public bool canPlayerInteractNote = false;
     private const string PLAYER = "Player";
-    [SerializeField]
     private UIManager ui;
     private bool hasUIDisplayed = false; // Do once
 
     private void Start()
     {
         ui = FindObjectOfType<UIManager>();
+    }
+
+    private void Update()
+    {
+        //Debug.Log(ui);
+        //Debug.Log(canPlayerInteractNote);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -7,22 +7,31 @@ using UnityEngine;
 public class NoteBlock : MonoBehaviour
 {
     [Header("Note Block Settings")]
-    
+    [Tooltip("Change Id to change note this block plays, can be (1~3)")]
     [SerializeField] public int noteId; // add id in inspector
 
-    [Header("Debugs")]
+    [Header("Debugs DONT EDIT")]
     [SerializeField]
     private NotePuzzleManager manager;
+    
+    //private bool playerInTrigger = false;
     [SerializeField]
-    private bool playerInTrigger = false;
-    private bool hasBlockBeenPlayed = false; // Do once.
-
+    private bool hasBlockBeenPlayed = false;
+    private UIManager ui;
+    [SerializeField]
+    private InteractNoteArea interactNoteArea;
+    [Header("Debugs Attach")]
+    [Tooltip("Add indicator light game object here, under Visual in note block prefab.")]
+    [SerializeField]
+    private GameObject indicatorLight;
+    //private IndicatorLightTag indicatorLightTag; // Change to tag if finding in scene
+    
 
     [Header("Sound Debug Settings")]
     [Tooltip("Add sound to not block game object and drag and drop here")]
     [SerializeField]
     private GameObject sound1, sound2, sound3;
-
+    /*
     [Header("Gizmo Settings")]
     [SerializeField]
     private Transform noteBlockCenterLocation;
@@ -30,8 +39,8 @@ public class NoteBlock : MonoBehaviour
     private Vector3 gizmoSize;
     [SerializeField]
     private float gizmoOffsetX;
-    private UIManager ui;
-    private InteractNoteArea interactNoteArea;
+    */
+    
 
     private void Start()
     {
@@ -41,38 +50,24 @@ public class NoteBlock : MonoBehaviour
     }
     private void Update()
     {
-        if (playerInTrigger == true && Input.GetKeyDown(KeyCode.E) 
+        
+        if (Input.GetKeyDown(KeyCode.E) 
             && interactNoteArea.canPlayerInteractNote) // Change to interact action input.
         {
             PlaySoundOfBlock();
         }
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
+        if (hasBlockBeenPlayed)
         {
-            playerInTrigger = true;
-            if (!hasBlockBeenPlayed)
-            {
-                hasBlockBeenPlayed = true;
-                ui.PressEDisplay();
-            }
+            ShowIndicatorLight();
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            playerInTrigger = false;
-            hasBlockBeenPlayed = false;
-        }
-        
-    }
+    
     private void PlaySoundOfBlock()
     {
         Debug.Log("Play sound of block 1");
+        hasBlockBeenPlayed = true;
         manager.NoteBlockSoundHasPlayed(noteId);
         // Play note on child game object depending on current note id.
         if (noteId == 1)
@@ -89,9 +84,12 @@ public class NoteBlock : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    private void ShowIndicatorLight()
     {
-        Gizmos.color = new Color (0, .3f, .6f, .3f);
-        Gizmos.DrawCube(noteBlockCenterLocation.position + new Vector3(gizmoOffsetX, 0, 0), gizmoSize);
+        // Show the note blocks light to indicate player has activated it's note.
+        Debug.Log("Light on note block " + noteId);
+        indicatorLight.SetActive(true);
     }
+
+
 }
