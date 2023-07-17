@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,28 +9,33 @@ public class PlayerStats : MonoBehaviour
     [Header("Player Stats")]
     public int maxHealth;
     public int currentHealth;
-    public int attackDamage;
-    public float speed;
     public bool invincible;
 
+    [Header("Don't Touch!")]
     [Header("Death Vars")]
-    public GameObject player;
-    public GameObject deathScrn;
-    public Animator animator;
-    public CharacterController characterController;
-    public GameObject deathCam;
-    public GameObject mainCam;
+    GameObject player;
+    GameObject deathScrn;
+    Animator animator;
+    CharacterController characterController;
+    GameObject deathCam;
+    GameObject mainCam;
 
     // Start is called before the first frame update
     void Awake()
     {
-        attackDamage = 50;
+        player = GameObject.FindGameObjectWithTag("Player");
+        deathScrn = GameObject.FindGameObjectWithTag("DeathScreen");
+        animator = GetComponent<Animator>();
+        characterController = GetComponent<CharacterController>();
+        mainCam = GameObject.FindGameObjectWithTag("MainCamera");
+    }
+
+    private void Start()
+    {
         maxHealth = 5;
         currentHealth = maxHealth;
-        speed = 10;
 
         deathCam.SetActive(false);
-        characterController = GetComponent<CharacterController>();
         characterController.enabled = true;
         animator.enabled = true;
         deathScrn.SetActive(false);

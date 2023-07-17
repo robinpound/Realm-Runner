@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PauseActivate : MonoBehaviour
 {
-    public InputActions action;
-    public GameObject canvas;
+    [Header("Don't Touch!")]
+
+    [SerializeField] GameObject canvas;
     public bool paused;
     private void Start()
     {
