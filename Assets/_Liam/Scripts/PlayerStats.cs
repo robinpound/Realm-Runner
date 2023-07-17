@@ -13,12 +13,12 @@ public class PlayerStats : MonoBehaviour
 
     [Header("Don't Touch!")]
     [Header("Death Vars")]
-    GameObject player;
-    GameObject deathScrn;
-    Animator animator;
-    CharacterController characterController;
-    GameObject deathCam;
-    GameObject mainCam;
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject deathScrn;
+    [SerializeField] Animator animator;
+    [SerializeField] CharacterController characterController;
+    [SerializeField] GameObject deathCam;
+    [SerializeField] GameObject mainCam;
 
     // Start is called before the first frame update
     void Awake()
@@ -28,6 +28,7 @@ public class PlayerStats : MonoBehaviour
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         mainCam = GameObject.FindGameObjectWithTag("MainCamera");
+        deathCam = GameObject.Find("Death Cam");
     }
 
     private void Start()
