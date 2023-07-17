@@ -31,31 +31,22 @@ public class NoteBlock : MonoBehaviour
     [SerializeField]
     private float gizmoOffsetX;
     private UIManager ui;
+    private InteractNoteArea interactNoteArea;
 
     private void Start()
     {
         manager = GetComponentInParent<NotePuzzleManager>();
         ui = FindAnyObjectByType<UIManager>();
-
+        interactNoteArea = GetComponentInChildren<InteractNoteArea>();
     }
     private void Update()
     {
-        if (playerInTrigger == true && Input.GetKeyDown(KeyCode.E)) // Change to interact action input.
+        if (playerInTrigger == true && Input.GetKeyDown(KeyCode.E) 
+            && interactNoteArea.canPlayerInteractNote) // Change to interact action input.
         {
             PlaySoundOfBlock();
         }
     }
-    /*
-    // Collision not working with player.
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))  // Change to arrow or sword when merged
-        {
-            Debug.Log(collision.gameObject.name + " has collided with " + noteId);
-            PlaySoundOfBlock1();
-        }
-    }
-    */
 
     private void OnTriggerEnter(Collider other)
     {
