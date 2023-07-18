@@ -5,18 +5,37 @@ using UnityEngine.Events;
 
 public class PlayerSounds : MonoBehaviour
 {
-    public Animator animator;
-    public GameObject player;
-    public AudioSource audios;
-    public AudioClip footStep1;
-    public AudioClip footStep2;
-    public AudioClip jumpLaunch;
-    public AudioClip jumpLand;
+    public GameObject footStep1Prefab;
 
+    [Header("Don't Touch!")]
+    [Header("Audio Source & Clips")]
+
+    [SerializeField] Animator animator;
+    [SerializeField] GameObject player;
+    [Tooltip("Assign Player Audio Source Component Here!")]
+    [SerializeField] AudioSource audios;
+    [Tooltip("Assign FootStep Clip 1 Here!")]
+    [SerializeField] AudioClip footStep1;
+    [Tooltip("Assign FootStep Clip 2 Here!")]
+    [SerializeField] AudioClip footStep2;
+    [Tooltip("Assign Jump Launch Clip Here!")]
+    [SerializeField] AudioClip jumpLaunch;
+    [SerializeField] AudioClip jumpLand;
+
+    [Header("Can Touch!")]
+    [Header("Bools for Movement")]
+
+    [Tooltip("This bool is collected from the player movement script, so it is true and false when that script is")]
     [SerializeField] bool isWalking;
+    [Tooltip("This bool is collected from the player movement script, so it is true and false when that script is")]
     [SerializeField] bool isJumping;
+    [Tooltip("This float is so the script knows when it can start a sound for the player.")]
     public float timer;
 
+    [Header("Sound Events")]
+    [Tooltip("Add new event, assign the player, select PlayerSounds script and select StartJump or StartFootsteps functions," +
+        " depending on the event obviously.")]
+    [SerializeField] private int EventToolTip;
     [SerializeField] private UnityEvent jump;
     [SerializeField] private UnityEvent footsteps;
 
@@ -26,7 +45,8 @@ public class PlayerSounds : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
-        isWalking = player.GetComponent<ActionInputs>().isMovementPressed;
+        audios = GetComponent<AudioSource>();
+        
     }
 
     // Update is called once per frame
@@ -34,7 +54,7 @@ public class PlayerSounds : MonoBehaviour
     {
         isWalking = player.GetComponent<ActionInputs>().isMovementPressed;
         isJumping = player.GetComponent<ActionInputs>().isJumpPressed;
-        if (animator.GetBool("jump") == true && timer == 0)
+        if (animator.GetBool("jump") == true)
         {
             jump.Invoke();
         }

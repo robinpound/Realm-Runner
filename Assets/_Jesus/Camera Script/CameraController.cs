@@ -7,11 +7,6 @@ public class CameraController : MonoBehaviour
 {
     ActionInputs inputController;
     [SerializeField] Transform cameraFollow;
-     //Toggle cameras
-     public GameObject camFollow;
-     public GameObject aimCam;
-     public GameObject magicArrow;
-     public GameObject arrowPowerUp;
      float xRotation;
      float yRotation;
     
@@ -33,11 +28,11 @@ public class CameraController : MonoBehaviour
         cameraFollow.rotation = rotation;
     }
     public void CameraAimToggle(){
-        if (Input.GetKeyDown(KeyCode.Q) && !aimCam.activeInHierarchy)
-        {
-            aimCam.SetActive(true);
-        }else{
-            aimCam.SetActive(false);
-        }
+        //if (Input.GetKeyDown(KeyCode.Q) && !aimCam.activeInHierarchy)
+        //{
+        //    aimCam.SetActive(true);
+        //}else{
+        //    aimCam.SetActive(false);
+        //}
     }
 }

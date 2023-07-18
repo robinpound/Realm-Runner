@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class ArrowTest : MonoBehaviour
@@ -7,12 +8,17 @@ public class ArrowTest : MonoBehaviour
     public GameObject player;
     public GameObject arrow;
     public GameObject turret;
+    [SerializeField] GameObject bowArrow;
     public float launchVelocity = 10f;
 
     public bool bow;
+    public int timer;
+
+    [SerializeField] private bool isShot;
     // Start is called before the first frame update
     void Start()
     {
+        timer = 0;
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -28,20 +34,31 @@ public class ArrowTest : MonoBehaviour
                 Fire();
             }
         }
+
     }
 
     void Fire()
     {
-        GameObject launch = Instantiate(arrow, transform.position, transform.rotation);
-        //launch.GetComponent<Rigidbody>().AddForce(transform.forward * launchVelocity * Time.deltaTime);
-        launch.transform.position = turret.transform.position;
-        //launch.transform.rotation = turret.transform.rotation;
-        launch.transform.eulerAngles = new Vector3(
-            launch.transform.eulerAngles.x + -90,
-            launch.transform.eulerAngles.y + 20,
-            launch.transform.eulerAngles.z
-        );
-
-        launch.GetComponent<Rigidbody>().AddForce(transform.forward * launchVelocity, ForceMode.Impulse);
+        if(timer == 0)
+        {
+            timer = 1;
+            bowArrow.SetActive(false);
+            GameObject launch = Instantiate(arrow, transform.position, transform.rotation);
+            launch.transform.position = turret.transform.position;
+            launch.transform.eulerAngles = new Vector3(
+                launch.transform.eulerAngles.x + -90,
+                launch.transform.eulerAngles.y + 20,
+                launch.transform.eulerAngles.z
+            );
+            arrow.GetComponent<ArrowNew>().IsShot();
+            launch.GetComponent<Rigidbody>().AddForce(transform.forward * launchVelocity, ForceMode.Impulse);
+            Invoke(nameof(Reset), 1f);
+        }
+    }
+    private void Reset()
+    {
+        bowArrow.SetActive(true);
+        arrow.GetComponent<ArrowNew>().IsNotShot();
+        timer = 0;
     }
 }
