@@ -14,21 +14,29 @@ public class ArrowNew : MonoBehaviour
     [Header("Debugs")]
     public Rigidbody rigidbody;
 
-    private bool isShot;
-   // Cinemachine.CinemachineImpulseSource source;
+    [SerializeField] private bool isShot;
+
+    RigidbodyConstraints rbConstraints;
+    // Cinemachine.CinemachineImpulseSource source;
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.centerOfMass = transform.position;
+
+    }
+    private void Start()
+    {
+        //rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
     }
     private void Update()
     {
         if (isShot)
         {
+            Invoke(nameof(IsNotShot), 2f);
             // Adjust the rotation of the arrow based on its velocity
-            Vector3 velocity = rigidbody.velocity;
-            float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            //Vector3 velocity = rigidbody.velocity;
+            //float angle = Mathf.Atan(velocity.y) * Mathf.Rad2Deg;
+            //transform.rotation = Quaternion.AngleAxis(angle, Vector3.right);
         }
         
     }
@@ -44,9 +52,11 @@ public class ArrowNew : MonoBehaviour
                 enemyHealth.TakeDamage(damage);
                 StartCoroutine(Countdown());
             }
-            else return;
-            rigidbody.isKinematic = true;
-            StartCoroutine(Countdown());
+            else
+            {
+                rigidbody.isKinematic = true;
+                StartCoroutine(Countdown());
+            }
         }
         
     }
@@ -60,6 +70,7 @@ public class ArrowNew : MonoBehaviour
     }
     IEnumerator Countdown()
     {
+        IsNotShot();
         yield return new WaitForSeconds(.3f);
         Destroy(gameObject);
     }
