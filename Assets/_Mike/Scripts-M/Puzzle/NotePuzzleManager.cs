@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 // Created by Michael.
 // Validate Order Of Notes Played method Refactored by Robin.
 public class NotePuzzleManager : MonoBehaviour
@@ -20,6 +21,8 @@ public class NotePuzzleManager : MonoBehaviour
     [SerializeField]
     private bool isPuzzleSolved = false;
     private int orderCheckSuccess = 0; // How many notes have been played in order.
+    [SerializeField] UnityEvent resetLight;
+    
 
     private void Update()
     {
@@ -84,7 +87,7 @@ public class NotePuzzleManager : MonoBehaviour
             if (noteBlockPlayOrder[i] != i+1)
             {
                 ResetList();
-                ResetLights();
+                resetLight.Invoke();
                 return;
             } 
             else { orderCheckSuccess++;}
@@ -98,11 +101,5 @@ public class NotePuzzleManager : MonoBehaviour
 
     }
 
-    private void ResetLights()
-    {
-        Debug.Log("Reset @@@@@@");
-        indicatorLight1.SetActive(false);
-        indicatorLight2.SetActive(false);
-        indicatorLight3.SetActive(false);
-    }
+    
 }

@@ -63,7 +63,6 @@ public class NoteBlock : MonoBehaviour
         }
     }
 
-    
     private void PlaySoundOfBlock()
     {
         Debug.Log("Play sound of block" + noteId);
@@ -89,7 +88,13 @@ public class NoteBlock : MonoBehaviour
         // Show the note blocks light to indicate player has activated it's note.
         Debug.Log("Light on note block " + noteId);
         indicatorLight.SetActive(true);
+        hasBlockBeenPlayed = false;
     }
 
+    public void ResetLights()
+    {
+        Debug.Log("Reset  @@@@@@" + noteId);
+        indicatorLight.SetActive(false);
+    }
 
 }
