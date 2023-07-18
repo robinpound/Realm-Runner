@@ -28,14 +28,13 @@ public class PlayerStats : MonoBehaviour
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         mainCam = GameObject.FindGameObjectWithTag("MainCamera");
-        deathCam = GameObject.Find("Death Cam");
     }
 
     private void Start()
     {
         maxHealth = 5;
         currentHealth = maxHealth;
-
+        // Activating or Deactivating GameObjects or components
         deathCam.SetActive(false);
         characterController.enabled = true;
         animator.enabled = true;
@@ -47,7 +46,7 @@ public class PlayerStats : MonoBehaviour
     void Update()
     {
         //invincible = inviPotion.GetComponent<Invincibility>().invincible;
-
+        // Determining if the Player has run out of health, if so run death functions
         if(currentHealth <= 0)
         {
             characterController.enabled = false;
@@ -58,6 +57,7 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        //Player TakeDamage function which determins if the player has invincibility
         if (invincible)
         {
             invincible = false;
@@ -68,23 +68,32 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    public void InstaDead()
-    {
-        currentHealth = 0;
-    }
-
     void Die()
     {
+        // Unlocking cursor and making it visible
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        //Setting the Death Camera to the Main Camera Position, which also locks it so it cannot rotate with mouse anymore.
         deathCam.transform.position = mainCam.transform.position;
         deathCam.transform.rotation = mainCam.transform.rotation;
+        // Activating Death Cam and Deactivating Main Cam, aswell as Death Screen
         deathCam.SetActive(true);
         mainCam.SetActive(false);
         deathScrn.SetActive(true);
     }
+    // Function to disable animator. Used for Ragdoll death effect
     void DisableAnimator()
     {
         animator.enabled = false;
+    }
+    public void InstaDead()
+    {
+        // This function insta kills the player for if they fall in the water
+        currentHealth = 0;
+    }
+    // Function to add health for health collectable.
+    public void AddHealth(int health)
+    {
+        currentHealth += health;
     }
 }

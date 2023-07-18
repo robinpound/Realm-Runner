@@ -6,16 +6,20 @@ using UnityEngine.SceneManagement;
 
 public class PlayerDeathScrn : MonoBehaviour
 {
+    // This entire script is for the death screen buttons
     [Header("Death Scrn")]
-    public GameObject confirm;
+    [SerializeField] GameObject confirm;
     private void Start()
     {
+        // Turning off the confirm pop-up
         confirm.SetActive(false);
     }
+    // Function to activate the Pop-Up to confirm if the player actually wants to leave
     public void ExitMainMenu()
     {
         confirm.SetActive(true);
     }
+    // Region for confirm pop-up yes and no buttons 
     #region Confirm Yes & No Functions
     public void Yes()
     {
@@ -34,6 +38,8 @@ public class PlayerDeathScrn : MonoBehaviour
     }
     #endregion
 
+    // Function for the Player to respawn.
+    // Currently Just resets the scene, however in the future change to transport the player back to their last checkpoint.
     public void Respawn()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

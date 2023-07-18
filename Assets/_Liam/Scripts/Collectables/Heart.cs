@@ -4,34 +4,29 @@ using UnityEngine;
 
 public class Heart : MonoBehaviour
 {
-    public GameObject player;
+    [SerializeField] GameObject player;
+    [SerializeField] int health;
 
-    public Vector3 up = new Vector3(0, 10, 0);
-    public Vector3 down = new Vector3(0, -10, 0);
     // Start is called before the first frame update
     void Start()
     {
-
+        //Sets Health Pick up to one Heart / Health
+        health = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Rotates the Object Pickup
         transform.Rotate(0, 100*Time.deltaTime, 0);
-        //StartCoroutine(Bounce());
-    }
-    IEnumerator Bounce()
-    {
-        transform.position += Vector3.up * Time.deltaTime;
-        yield return new WaitForSeconds(0.5f);
-        transform.position += Vector3.down * Time.deltaTime;
-        StopCoroutine(Bounce());
     }
     private void OnTriggerEnter(Collider other)
     {
+        //Runs pickup for the collectable.
         if(other.tag == "Player")
         {
-            player.GetComponent<PlayerUIHealth>().health++;
+
+            player.GetComponent<PlayerStats>().AddHealth(health);
             Destroy(gameObject, 0.5f);
         }
     }
