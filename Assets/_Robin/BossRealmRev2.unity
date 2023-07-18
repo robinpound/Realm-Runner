@@ -38,7 +38,8 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: -1.6213857e-10, g: 1.7964798e-10, b: -7.295594e-12,
+    a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -312,7 +313,7 @@ Camera:
   m_GameObject: {fileID: 397356824}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.21698111, g: 0.08023531, b: 0.07880917, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -1858,7 +1859,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1946743154}
   m_LocalRotation: {x: -0, y: 0.29337767, z: -0, w: 0.9559967}
-  m_LocalPosition: {x: -70.048096, y: -83.76639, z: -96.57483}
+  m_LocalPosition: {x: -83.43, y: -83.05, z: -116.32}
   m_LocalScale: {x: 2.9681199, y: 3.48943, z: 0.58827996}
   m_ConstrainProportionsScale: 0
   m_Children: []
