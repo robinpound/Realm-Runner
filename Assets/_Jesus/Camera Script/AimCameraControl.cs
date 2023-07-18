@@ -8,8 +8,9 @@ using UnityEngine.InputSystem;
 public class AimCameraControl : MonoBehaviour
 {
     // public GameObject camFollow;
+    [Tooltip("Aim camera to be added from Player / CamwerasNew / AimCam")]
     public GameObject aimCam;
-    public GameObject arrowPowerUp;
+    //public GameObject arrowPowerUp;
     public GameObject reticle;
     [SerializeField] Transform aimTarget;
     ActionInputs input;
@@ -25,9 +26,6 @@ public class AimCameraControl : MonoBehaviour
     [SerializeField] float aimSmoothSpeed = 20;
     [SerializeField] Transform aimingPos;
     Animator animator;
-    // float xRotation;
-    // float yRotation;
-    // Start is called before the first frame update
     void Start()
     {
         input = GetComponent<ActionInputs>();

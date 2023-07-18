@@ -10,7 +10,7 @@ public class PlayerAnimations : MonoBehaviour
     ActionInputs input;
     [SerializeField] float moveSpeed = 3f;
     [SerializeField] float runSpeed = 5f;
-    [SerializeField] GameObject dust;
+    GameObject dust;
     [Tooltip("Set the particle effect to simulate dust when the player is moving. FootSteps GameOject gos here.")]
     PlayerCharacterController controller;
     public int isJumpingHash;
@@ -23,6 +23,7 @@ public class PlayerAnimations : MonoBehaviour
         animator = GetComponent<Animator>();
         input = GetComponent<ActionInputs>();
         controller = GetComponent<PlayerCharacterController>();
+        dust = GameObject.Find("FootSteps");
         //dust.SetActive(false);
        
 
