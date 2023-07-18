@@ -12,6 +12,8 @@ public class NotePuzzleManager : MonoBehaviour
     private List<int> noteBlockPlayOrder = new List<int>(); // How many notes have been played in game.
     [Header("Debugs")]
     [SerializeField]
+    private GameObject indicatorLight1, indicatorLight2, indicatorLight3;
+    [SerializeField]
     private GameObject fragment;
     [SerializeField]
     private Transform spawnTransform;
@@ -81,10 +83,26 @@ public class NotePuzzleManager : MonoBehaviour
         {
             if (noteBlockPlayOrder[i] != i+1)
             {
-                noteBlockPlayOrder.Clear();
+                ResetList();
+                ResetLights();
                 return;
             } 
             else { orderCheckSuccess++;}
         }
+    }
+
+    private void ResetList()
+    {
+        noteBlockPlayOrder.Clear();
+        Debug.Log("List cleared");
+
+    }
+
+    private void ResetLights()
+    {
+        Debug.Log("Reset @@@@@@");
+        indicatorLight1.SetActive(false);
+        indicatorLight2.SetActive(false);
+        indicatorLight3.SetActive(false);
     }
 }

@@ -66,7 +66,7 @@ public class NoteBlock : MonoBehaviour
     
     private void PlaySoundOfBlock()
     {
-        Debug.Log("Play sound of block 1");
+        Debug.Log("Play sound of block" + noteId);
         hasBlockBeenPlayed = true;
         manager.NoteBlockSoundHasPlayed(noteId);
         // Play note on child game object depending on current note id.
