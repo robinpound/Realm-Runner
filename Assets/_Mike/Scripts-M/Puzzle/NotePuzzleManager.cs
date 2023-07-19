@@ -18,11 +18,12 @@ public class NotePuzzleManager : MonoBehaviour
     private GameObject fragment;
     [SerializeField]
     private Transform spawnTransform;
-    [SerializeField]
-    private bool isPuzzleSolved = false;
+    [SerializeField] private bool isPuzzleSolved = false;
     private int orderCheckSuccess = 0; // How many notes have been played in order.
     [SerializeField] UnityEvent resetLight;
-    
+    [SerializeField] UnityEvent lightUpStatue;
+
+
 
     private void Update()
     {
@@ -44,7 +45,7 @@ public class NotePuzzleManager : MonoBehaviour
             // Play winning sound after coroutine.
             StartCoroutine(CountSeconds());
             isPuzzleSolved=true;
-
+            lightUpStatue.Invoke();
         }
 
 
@@ -61,6 +62,7 @@ public class NotePuzzleManager : MonoBehaviour
         PlayTriumphSound();
         SpawnFragment();
     }
+
 
     private void PlayTriumphSound()
     {
