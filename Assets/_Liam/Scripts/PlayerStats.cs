@@ -13,12 +13,12 @@ public class PlayerStats : MonoBehaviour
 
     [Header("Don't Touch!")]
     [Header("Death Vars")]
-    [SerializeField] GameObject player;
-    [SerializeField] GameObject deathScrn;
-    [SerializeField] Animator animator;
-    [SerializeField] CharacterController characterController;
-    [SerializeField] GameObject deathCam;
-    [SerializeField] GameObject mainCam;
+    GameObject player;
+    GameObject deathScrn;
+    Animator animator;
+    CharacterController characterController;
+    GameObject deathCam;
+    GameObject mainCam;
 
     // Start is called before the first frame update
     void Awake()
