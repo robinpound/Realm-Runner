@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 // Created by Michael.
 // Validate Order Of Notes Played method Refactored by Robin.
 public class NotePuzzleManager : MonoBehaviour
@@ -12,12 +13,17 @@ public class NotePuzzleManager : MonoBehaviour
     private List<int> noteBlockPlayOrder = new List<int>(); // How many notes have been played in game.
     [Header("Debugs")]
     [SerializeField]
+    private GameObject indicatorLight1, indicatorLight2, indicatorLight3;
+    [SerializeField]
     private GameObject fragment;
     [SerializeField]
     private Transform spawnTransform;
-    [SerializeField]
-    private bool isPuzzleSolved = false;
+    [SerializeField] private bool isPuzzleSolved = false;
     private int orderCheckSuccess = 0; // How many notes have been played in order.
+    [SerializeField] UnityEvent resetLight;
+    [SerializeField] UnityEvent lightUpStatue;
+
+
 
     private void Update()
     {
@@ -39,13 +45,14 @@ public class NotePuzzleManager : MonoBehaviour
             // Play winning sound after coroutine.
             StartCoroutine(CountSeconds());
             isPuzzleSolved=true;
-
+            SpawnFragment();
+            lightUpStatue.Invoke();
         }
 
 
     }
 
-    private IEnumerator CountSeconds(int seconds = 4)
+    private IEnumerator CountSeconds(int seconds = 2)
     {
         for (int i = 0; i <= seconds; i++)
         {
@@ -54,8 +61,9 @@ public class NotePuzzleManager : MonoBehaviour
             yield return new WaitForSeconds(.1f);
         }
         PlayTriumphSound();
-        SpawnFragment();
+        
     }
+
 
     private void PlayTriumphSound()
     {
@@ -81,10 +89,20 @@ public class NotePuzzleManager : MonoBehaviour
         {
             if (noteBlockPlayOrder[i] != i+1)
             {
-                noteBlockPlayOrder.Clear();
+                ResetList();
+                resetLight.Invoke();
                 return;
             } 
             else { orderCheckSuccess++;}
         }
     }
+
+    private void ResetList()
+    {
+        noteBlockPlayOrder.Clear();
+        Debug.Log("List cleared");
+
+    }
+
+    
 }

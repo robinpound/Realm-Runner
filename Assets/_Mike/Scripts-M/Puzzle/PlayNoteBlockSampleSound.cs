@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 // Created by Michael
 
 public class PlayNoteBlockSampleSound : MonoBehaviour
@@ -17,6 +17,7 @@ public class PlayNoteBlockSampleSound : MonoBehaviour
     private Vector3 gizmoSize;
     private UIManager ui;
     private bool hasBlockBeenPlayed = false;
+    [SerializeField] GameObject indicatorLight;
 
     private void Start()
     {
@@ -28,6 +29,8 @@ public class PlayNoteBlockSampleSound : MonoBehaviour
         if (playerInTrigger && Input.GetKeyDown(KeyCode.E))
         {
             GetComponent<AudioSource>().Play(); 
+            indicatorLight.SetActive(true);
+            StartCoroutine(Timer(1.5f));
         }
     }
 
@@ -53,6 +56,12 @@ public class PlayNoteBlockSampleSound : MonoBehaviour
             hasBlockBeenPlayed = false;
         }
 
+    }
+
+    IEnumerator Timer(float s)
+    {
+        yield return new WaitForSeconds(s);
+        indicatorLight.SetActive(false);
     }
 
     private void OnDrawGizmos()
