@@ -45,13 +45,14 @@ public class NotePuzzleManager : MonoBehaviour
             // Play winning sound after coroutine.
             StartCoroutine(CountSeconds());
             isPuzzleSolved=true;
+            SpawnFragment();
             lightUpStatue.Invoke();
         }
 
 
     }
 
-    private IEnumerator CountSeconds(int seconds = 4)
+    private IEnumerator CountSeconds(int seconds = 2)
     {
         for (int i = 0; i <= seconds; i++)
         {
@@ -60,7 +61,7 @@ public class NotePuzzleManager : MonoBehaviour
             yield return new WaitForSeconds(.1f);
         }
         PlayTriumphSound();
-        SpawnFragment();
+        
     }
 
 
