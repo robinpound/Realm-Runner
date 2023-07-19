@@ -10,6 +10,11 @@ public class MainMenu : MonoBehaviour
     public GameObject credits;
     public Scrollbar bar;
 
+    [SerializeField] bool optionsOpen;
+    [SerializeField] bool creditsOpen;
+
+
+
     private void Start()
     {
         credits.SetActive(false);
@@ -30,16 +35,51 @@ public class MainMenu : MonoBehaviour
     }
     public void Options()
     {
-        options[0].SetActive(true);
-        options[1].SetActive(true);
+        // If statement to detact whether options page is open or closed
+        if (!optionsOpen)
+        {
+            optionsOpen = true;
+            creditsOpen = false;
+            options[0].SetActive(true);
+            options[1].SetActive(true);
+            credits.SetActive(false);
+        }
+        else if (optionsOpen)
+        {
+            optionsOpen = false;
+            options[0].SetActive(false);
+            options[1].SetActive(false);
+            options[2].SetActive(false);
+            options[3].SetActive(false);
+        }
     }
+    // Function to Open and Close Credits Page
     public void Credits()
     {
-        credits.SetActive(true);
-        bar.value = 1;
+        //If Statement to detect whether credit page is open or closed
+        if (!creditsOpen)
+        {
+            // Run things to open credits and close options
+            creditsOpen = true;
+            optionsOpen = false;
+            credits.SetActive(true);
+            bar.value = 1;
+            options[0].SetActive(false);
+            options[1].SetActive(false);
+            options[2].SetActive(false);
+            options[3].SetActive(false);
+        }
+        else if (creditsOpen)
+        {
+            // Run things to close credits page
+            creditsOpen = false;
+            credits.SetActive(false);
+        }
     }
+    // Function to Exit Application
     public void Exit()
     {
+        //Code to exit application
         Application.Quit();
     }
     #endregion
@@ -55,11 +95,15 @@ public class MainMenu : MonoBehaviour
     }
     public void Jesus()
     {
-        Application.OpenURL("");
+        Application.OpenURL("https://j-misterio1.itch.io/");
     }
     public void Liam()
     {
         Application.OpenURL("https://liamwils20.itch.io");
+    }
+    public void Lani()
+    {
+        Application.OpenURL("");
     }
     public void CreditBack()
     {

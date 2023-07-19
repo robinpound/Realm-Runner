@@ -44,9 +44,11 @@ public class ArrowNew : MonoBehaviour
                 enemyHealth.TakeDamage(damage);
                 StartCoroutine(Countdown());
             }
-            else return;
-            rigidbody.isKinematic = true;
-            StartCoroutine(Countdown());
+            else
+            {
+                rigidbody.isKinematic = true;
+                StartCoroutine(Countdown());
+            }
         }
         
     }

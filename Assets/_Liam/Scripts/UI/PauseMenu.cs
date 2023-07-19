@@ -15,6 +15,7 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         gameManager = GameObject.FindGameObjectWithTag("GameManager");
         pauseMenu.SetActive(false);
         options[0].SetActive(false); //Main Options

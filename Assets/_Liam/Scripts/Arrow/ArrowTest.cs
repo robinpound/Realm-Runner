@@ -32,11 +32,11 @@ public class ArrowTest : MonoBehaviour
             {
                 Debug.Log("Input Works!");
                 Fire();
+                //Invoke(nameof(Fire), 0.1f);
             }
         }
 
     }
-
     void Fire()
     {
         if(timer == 0)
@@ -49,7 +49,7 @@ public class ArrowTest : MonoBehaviour
                 launch.transform.eulerAngles.x + -90,
                 launch.transform.eulerAngles.y + 20,
                 launch.transform.eulerAngles.z
-            );
+            ); 
             arrow.GetComponent<ArrowNew>().IsShot();
             launch.GetComponent<Rigidbody>().AddForce(transform.forward * launchVelocity, ForceMode.Impulse);
             Invoke(nameof(Reset), 1f);
