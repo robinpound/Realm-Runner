@@ -50,8 +50,8 @@ public class PlayerStats : MonoBehaviour
         if(currentHealth <= 0)
         {
             characterController.enabled = false;
-            Invoke(nameof(DisableAnimator), 1f);
-            Invoke(nameof(Die), 1.5f);
+            Invoke(nameof(DisableAnimator), 0.5f);
+            Invoke(nameof(Die), 1f);
         }
     }
 

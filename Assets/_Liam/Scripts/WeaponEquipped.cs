@@ -4,30 +4,33 @@ using UnityEngine;
 
 public class WeaponEquipped : MonoBehaviour
 {
-    public GameObject player;
+    [SerializeField] GameObject player;
 
     //Bow Objects
-    public GameObject backBow;
-    public GameObject handBow;
+    [SerializeField] GameObject backBow;
+    [SerializeField] GameObject handBow;
     public bool bow;
 
     private void Awake()
     {
+        // Fetching player character
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Start()
     {
+        // Setting bow inactive
         handBow.SetActive(false);
     }
     // Update is called once per frame
     void Update()
     {
-
+        // Activate bow on aim
         if (Input.GetMouseButtonDown(1))
         {
             BowEquip();
         }
+        // Deactivate bow on !aim
         if (Input.GetMouseButtonUp(1))
         {
             BowDeequip();   

@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject[] options;
-    public GameObject credits;
-    public Scrollbar bar;
+    [SerializeField] GameObject[] options;
+    [SerializeField] GameObject credits;
+    [SerializeField] Scrollbar bar;
 
     [SerializeField] bool optionsOpen;
     [SerializeField] bool creditsOpen;
@@ -25,14 +25,17 @@ public class MainMenu : MonoBehaviour
     }
 
     #region Main Menu Buttons
+    // Function to start the game, by loading the relevant starting scene
     public void Begin()
     {
         SceneManager.LoadScene("Rev1TutorialLevelWithAssets");
     }
+    // Function to Load Game, using persistent data
     public void LoadGame()
     {
         // Link to Load Function
     }
+    // Function to open and close the Options page
     public void Options()
     {
         // If statement to detact whether options page is open or closed
@@ -85,13 +88,14 @@ public class MainMenu : MonoBehaviour
     #endregion
 
     #region Credit Buttons
+    // Funstions linking game to everyone's gaming profiles
     public void Mike()
     {
         Application.OpenURL("https://mikehayes.itch.io");
     }
     public void Robin()
     {
-        Application.OpenURL("https://itch.io/profile/robinpound");
+        Application.OpenURL("https://robinpound.itch.io");
     }
     public void Jesus()
     {
@@ -99,12 +103,18 @@ public class MainMenu : MonoBehaviour
     }
     public void Liam()
     {
-        Application.OpenURL("https://liamwils20.itch.io");
+        Application.OpenURL("https://9zbp24iuonbfvzf5xzpdaw.on.drv.tw/www.Liams-Gaming-Portfolio.com/Index.html");
     }
     public void Lani()
     {
-        Application.OpenURL("");
+        Application.OpenURL("https://laniproductions.wixsite.com/my-site");
     }
+    // Functions Below linking game assets to the Unity 
+    public void Bonk()
+    {
+        Application.OpenURL("https://assetstore.unity.com/packages/2d/gui/rpg-fantasy-mobile-gui-with-source-files-166086");
+    }
+    // Function to close the credits age
     public void CreditBack()
     {
         credits.SetActive(false);
@@ -112,26 +122,21 @@ public class MainMenu : MonoBehaviour
     #endregion
 
     #region Options
-    public void OptionsBack()
-    {
-        options[0].SetActive(false);
-        options[1].SetActive(false);
-        options[2].SetActive(false);
-        options[3].SetActive(false);
-    }
-
+    // Function to Open Keybindings Page
     public void KeyBindings()
     {
         options[1].SetActive(true);
         options[2].SetActive(false);
         options[3].SetActive(false);
     }
+    // Function to Open Audio Page
     public void Audio()
     {
         options[2].SetActive(true);
         options[1].SetActive(false);
         options[3].SetActive(false);
     }
+    // Function to Open Video Page
     public void Video()
     {
         options[3].SetActive(true);
