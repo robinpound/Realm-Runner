@@ -5337,7 +5337,12 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 100
   invincible: 0
+  player: {fileID: 0}
+  deathScrn: {fileID: 0}
+  animator: {fileID: 0}
+  characterController: {fileID: 0}
   deathCam: {fileID: 4988471342608042551}
+  mainCam: {fileID: 0}
 --- !u!114 &8674957990978923951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5359,7 +5364,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4810955875347300303}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d347afa97d128b4b91adb9bbe9d86a5, type: 3}
   m_Name: 
