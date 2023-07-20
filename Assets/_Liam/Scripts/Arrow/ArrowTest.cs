@@ -30,7 +30,7 @@ public class ArrowTest : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("Input Works!");
+                //Debug.Log("Input Works!");
                 Fire();
                 //Invoke(nameof(Fire), 0.1f);
             }

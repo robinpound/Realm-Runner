@@ -38,9 +38,9 @@ public class AimCameraControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        AnimationShootObject();
         CameraAimToggle();
         // CameraRotation();
-        AnimationShootObject();
         xAxis.Update(Time.deltaTime);
         yAxis.Update(Time.deltaTime);
         
@@ -76,11 +76,11 @@ public void RotatePlayerToAimPosition(){
 }
 
     void AnimationShootObject(){
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetMouseButtonDown(0))
         {
             animator.SetBool("attack", true);
         } 
-        if (Input.GetKeyUp(KeyCode.F))
+        if (Input.GetMouseButtonUp(0))
         {
             animator.SetBool("attack", false);
         } 
