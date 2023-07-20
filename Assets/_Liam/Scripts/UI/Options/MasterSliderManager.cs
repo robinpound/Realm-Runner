@@ -5,20 +5,20 @@ using UnityEngine.UI;
 
 public class MasterSliderManager : MonoBehaviour
 {
-    public GameObject gameManager;
-    public Slider masterSlider;
-    public float mixer;
+    [SerializeField] GameObject optionsManager;
+    [SerializeField] Slider masterSlider;
+    [SerializeField] float mixer;
 
     // Update is called once per frame
     void Update()
     {
-        gameManager = GameObject.FindGameObjectWithTag("OptionsManager");
+        optionsManager = GameObject.FindGameObjectWithTag("OptionsManager");
         // Master Volume Slider
-        masterSlider.value = gameManager.GetComponent<OptionsManager>().mixer;
+        masterSlider.value = optionsManager.GetComponent<OptionsManager>().mixer;
         mixer = masterSlider.value;
         masterSlider.onValueChanged.AddListener((ms) => {
             mixer = masterSlider.value;
-            gameManager.GetComponent<OptionsManager>().mixer = masterSlider.value;
+            optionsManager.GetComponent<OptionsManager>().mixer = masterSlider.value;
         });
     }
 

@@ -13,12 +13,12 @@ public class PlayerStats : MonoBehaviour
 
     [Header("Don't Touch!")]
     [Header("Death Vars")]
-    GameObject player;
-    GameObject deathScrn;
-    Animator animator;
-    CharacterController characterController;
-    GameObject deathCam;
-    GameObject mainCam;
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject deathScrn;
+    [SerializeField] Animator animator;
+    [SerializeField] CharacterController characterController;
+    [SerializeField] GameObject deathCam;
+    [SerializeField] GameObject mainCam;
 
     // Start is called before the first frame update
     void Awake()
@@ -50,8 +50,8 @@ public class PlayerStats : MonoBehaviour
         if(currentHealth <= 0)
         {
             characterController.enabled = false;
-            Invoke(nameof(DisableAnimator), 1f);
-            Invoke(nameof(Die), 1.5f);
+            Invoke(nameof(DisableAnimator), 0.5f);
+            Invoke(nameof(Die), 1f);
         }
     }
 
