@@ -39,7 +39,7 @@ public class ArrowTest : MonoBehaviour
     }
     void Fire()
     {
-        if(timer == 0)
+        if(timer >= 0)
         {
             timer = 1;
             bowArrow.SetActive(false);
@@ -47,18 +47,19 @@ public class ArrowTest : MonoBehaviour
             launch.transform.position = turret.transform.position;
             launch.transform.eulerAngles = new Vector3(
                 launch.transform.eulerAngles.x + -90,
-                launch.transform.eulerAngles.y + 20,
+                launch.transform.eulerAngles.y,
                 launch.transform.eulerAngles.z
             ); 
-            arrow.GetComponent<ArrowNew>().IsShot();
-            launch.GetComponent<Rigidbody>().AddForce(transform.forward * launchVelocity, ForceMode.Impulse);
+            //arrow.GetComponent<ArrowNew>().IsShot();
+            launch.GetComponent<Rigidbody>().AddForce(turret.transform.forward * launchVelocity, ForceMode.Impulse);
+            //launch.GetComponent<Rigidbody>().velocity = turret.transform.forward * launchVelocity;
             Invoke(nameof(Reset), 1f);
         }
     }
     private void Reset()
     {
         bowArrow.SetActive(true);
-        arrow.GetComponent<ArrowNew>().IsNotShot();
+        //arrow.GetComponent<ArrowNew>().IsNotShot();
         timer = 0;
     }
 }

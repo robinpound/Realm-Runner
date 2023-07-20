@@ -36,6 +36,7 @@ public class WeaponEquipped : MonoBehaviour
             BowDeequip();   
         }
     }
+    // Function to equip the bow..
     public void BowEquip()
     {
         bow = true;
@@ -43,6 +44,7 @@ public class WeaponEquipped : MonoBehaviour
         backBow.SetActive(false);
         handBow.SetActive(true);
     }
+    // Function to Unequip the bow..
     public void BowDeequip()
     {
         bow = false;

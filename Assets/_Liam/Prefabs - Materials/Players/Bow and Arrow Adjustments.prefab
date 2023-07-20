@@ -235,3 +235,25 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4653867002282303868}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7717180279862432981 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3138223830425367977, guid: 920edfed6c13e3045a1e05bb3020f50f,
+    type: 3}
+  m_PrefabInstance: {fileID: 4653867002282303868}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2938841507352921264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7717180279862432981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16bd5bd0c381b92418e40d9418b57f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bowFirePoint: {fileID: 7717180279862432981}
+  arrowPref: {fileID: 6675546965279891045, guid: 3a2bbd7428745b84496e462e9bcd8e82,
+    type: 3}
+  arrowSpeed: 1000
