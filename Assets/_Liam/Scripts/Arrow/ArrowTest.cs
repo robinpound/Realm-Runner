@@ -47,7 +47,7 @@ public class ArrowTest : MonoBehaviour
             launch.transform.position = turret.transform.position;
             launch.transform.eulerAngles = new Vector3(
                 launch.transform.eulerAngles.x + -90,
-                launch.transform.eulerAngles.y + 20,
+                launch.transform.eulerAngles.y,
                 launch.transform.eulerAngles.z
             ); 
             arrow.GetComponent<ArrowNew>().IsShot();
