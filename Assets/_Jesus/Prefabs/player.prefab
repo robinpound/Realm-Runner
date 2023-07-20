@@ -4054,7 +4054,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5321695289473279575}
-  m_LocalRotation: {x: -0, y: -0.14634961, z: -0, w: -0.989233}
+  m_LocalRotation: {x: -0, y: -0.14635037, z: 0, w: -0.98923284}
   m_LocalPosition: {x: -14.552015, y: -16.25, z: -19.046707}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4180,7 +4180,6 @@ MonoBehaviour:
   animator: {fileID: 4837246785321202501}
   moveSpeed: 3
   runSpeed: 5
-  dust: {fileID: 5848534330487818556}
   isJumpingHash: -1481439722
   isRunningHash: 1349952704
   jumpCountHash: -1467138817
@@ -4238,7 +4237,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aimCam: {fileID: 0}
-  arrowPowerUp: {fileID: 0}
   reticle: {fileID: 0}
   aimTarget: {fileID: 5329763133627576988}
   rig: {fileID: 6503420630719295064}
@@ -4426,6 +4424,12 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 100
   invincible: 0
+  player: {fileID: 0}
+  deathScrn: {fileID: 0}
+  animator: {fileID: 0}
+  characterController: {fileID: 0}
+  deathCam: {fileID: 0}
+  mainCam: {fileID: 0}
 --- !u!114 &8321001873988908087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4495,10 +4499,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraFollow: {fileID: 5321695290083852883}
-  camFollow: {fileID: 0}
-  aimCam: {fileID: 0}
-  magicArrow: {fileID: 0}
-  arrowPowerUp: {fileID: 0}
 --- !u!1 &5321695289994871355
 GameObject:
   m_ObjectHideFlags: 0

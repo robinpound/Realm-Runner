@@ -20,6 +20,7 @@ public class ArrowTest : MonoBehaviour
     {
         timer = 0;
         player = GameObject.FindGameObjectWithTag("Player");
+        bowArrow = GameObject.FindGameObjectWithTag("Arrow");
     }
 
     // Update is called once per frame
@@ -39,7 +40,7 @@ public class ArrowTest : MonoBehaviour
     }
     void Fire()
     {
-        if(timer >= 0)
+        if(timer == 0)
         {
             timer = 1;
             bowArrow.SetActive(false);
