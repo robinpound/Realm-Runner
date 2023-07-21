@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] GameObject gameManager;
     [SerializeField] GameObject[] options;
     [SerializeField] GameObject credits;
     [SerializeField] Scrollbar bar;
@@ -17,6 +18,8 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
+
         credits.SetActive(false);
         options[0].SetActive(false); //Main Options
         options[1].SetActive(false); //Key Bindings Page
@@ -29,11 +32,15 @@ public class MainMenu : MonoBehaviour
     public void Begin()
     {
         SceneManager.LoadScene("Rev1TutorialLevelWithAssets");
+        Time.timeScale = 1;
     }
     // Function to Load Game, using persistent data
     public void LoadGame()
     {
         // Link to Load Function
+        gameManager.GetComponent<GameManager>().LoadProgress();
+        SceneManager.LoadScene("Rev1TutorialLevelWithAssets");
+        Time.timeScale = 1;
     }
     // Function to open and close the Options page
     public void Options()
