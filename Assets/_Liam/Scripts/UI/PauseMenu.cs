@@ -61,6 +61,7 @@ public class PauseMenu : MonoBehaviour
     public void SaveGame()
     {
         //Save Game Link / Code here.
+        gameManager.GetComponent<GameManager>().SaveProgress();
     }
     // Function to open the Options Menu
     public void Options()
@@ -73,6 +74,7 @@ public class PauseMenu : MonoBehaviour
     // Function to quit game to the main menu
     public void ExitMainMenu()
     {
+        player.GetComponent<PauseActivate>().paused = false;
         // Save Game Function link goes here
         SceneManager.LoadScene("MainMenu");
     }
