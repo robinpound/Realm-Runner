@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     public void SaveProgress()
     {
-        PlayerProgressData progressData = new PlayerProgressData(deathCount, coins, fragments, currentLevel, currentCheckpoint); // Create a data object with the player's progress
+        PlayerProgressData progressData = new PlayerProgressData(coins, fragments, currentLevel, currentCheckpoint, deathCount); // Create a data object with the player's progress
         string jsonData = JsonUtility.ToJson(progressData); // Convert the data object to JSON
         File.WriteAllText(savePath, jsonData); // Write the JSON data to the save file
     }
@@ -68,29 +68,28 @@ public class GameManager : MonoBehaviour
         {
             string jsonData = File.ReadAllText(savePath); // Read the JSON data from the save file
             PlayerProgressData progressData = JsonUtility.FromJson<PlayerProgressData>(jsonData); // Convert the JSON data to a data object
-            deathCount = progressData.deathCount;
             coins = progressData.coins; // Set the player's progress based on the data object
             fragments = progressData.fragments;
             currentLevel = progressData.currentLevel;
             currentCheckpoint = progressData.currentCheckpoint;
+            deathCount = progressData.deathCount;
         }
     }
 }
 [System.Serializable]
 public class PlayerProgressData
 {
-    public int deathCount;
     public int coins;
     public int fragments;
     public int currentLevel;
     public int currentCheckpoint;
+    public int deathCount;
     public PlayerProgressData(int coins, int fragments, int currentLevel, int currentCheckpoint, int deathCount)
     {
-        this.deathCount = deathCount;
         this.coins = coins;
         this.fragments = fragments;
         this.currentLevel = currentLevel;
         this.currentCheckpoint = currentCheckpoint;
-
-}
+        this.deathCount = deathCount;
+    }
 }

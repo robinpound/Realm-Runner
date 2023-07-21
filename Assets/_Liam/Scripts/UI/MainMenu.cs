@@ -32,6 +32,7 @@ public class MainMenu : MonoBehaviour
     public void Begin()
     {
         SceneManager.LoadScene("Rev1TutorialLevelWithAssets");
+        Time.timeScale = 1;
     }
     // Function to Load Game, using persistent data
     public void LoadGame()
@@ -39,6 +40,7 @@ public class MainMenu : MonoBehaviour
         // Link to Load Function
         gameManager.GetComponent<GameManager>().LoadProgress();
         SceneManager.LoadScene("Rev1TutorialLevelWithAssets");
+        Time.timeScale = 1;
     }
     // Function to open and close the Options page
     public void Options()
