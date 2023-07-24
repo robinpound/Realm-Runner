@@ -11,6 +11,7 @@ public class GamePadMove : MonoBehaviour
 
     public RectTransform cursor;
     public GameObject curserActive;
+    public Rigidbody2D m_Rigidbody2D;
 
     [SerializeField] GameObject canvas;
 
@@ -66,6 +67,9 @@ public class GamePadMove : MonoBehaviour
             transform.position = startPosition;
         }
     }
+  // Function to call the Click script
+
+
     public void Click()
     {
         cursor.GetComponent<GamepadClick>().Click();

@@ -10,6 +10,7 @@ public class UiInput : MonoBehaviour
     [SerializeField] GameObject canvas;
     GamePadMove g;
     [SerializeField]
+    bool move;
     private void Awake()
     {
         input = new InputActions();
@@ -65,8 +66,6 @@ public class UiInput : MonoBehaviour
         input.UI.Click.started += Click;
         #endregion
     }
-
-
     void Click(InputAction.CallbackContext context)
     {
         g.Click();

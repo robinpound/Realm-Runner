@@ -328,7 +328,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""id"": ""62d5ddcc-0b3a-469a-b074-afff383c10c9"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": ""ScaleVector2(x=5,y=5)"",
+                    ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Look"",
                     ""isComposite"": false,
@@ -521,6 +521,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftStick"",
+                    ""type"": ""Value"",
+                    ""id"": ""21902f4f-d01d-4a91-9fc7-4b29b16afeff"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -919,6 +928,61 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Keyboard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""eebf3496-3ff4-4710-a477-d27a576de622"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftStick"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""a0e94e5a-f05c-4e8c-b801-f13667ba230d"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftStick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""4a83f381-370d-4b97-abf7-ce00cadd40a3"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftStick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""54d347bd-1580-4c6e-835b-ce1570814628"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftStick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""7801219a-b7be-419e-ae67-ede176e65952"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftStick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -944,6 +1008,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
         m_UI_Controller = m_UI.FindAction("Controller", throwIfNotFound: true);
         m_UI_Keyboard = m_UI.FindAction("Keyboard", throwIfNotFound: true);
+        m_UI_LeftStick = m_UI.FindAction("LeftStick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1107,6 +1172,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Click;
     private readonly InputAction m_UI_Controller;
     private readonly InputAction m_UI_Keyboard;
+    private readonly InputAction m_UI_LeftStick;
     public struct UIActions
     {
         private @InputActions m_Wrapper;
@@ -1119,6 +1185,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @Click => m_Wrapper.m_UI_Click;
         public InputAction @Controller => m_Wrapper.m_UI_Controller;
         public InputAction @Keyboard => m_Wrapper.m_UI_Keyboard;
+        public InputAction @LeftStick => m_Wrapper.m_UI_LeftStick;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1152,6 +1219,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Keyboard.started += instance.OnKeyboard;
             @Keyboard.performed += instance.OnKeyboard;
             @Keyboard.canceled += instance.OnKeyboard;
+            @LeftStick.started += instance.OnLeftStick;
+            @LeftStick.performed += instance.OnLeftStick;
+            @LeftStick.canceled += instance.OnLeftStick;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -1180,6 +1250,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Keyboard.started -= instance.OnKeyboard;
             @Keyboard.performed -= instance.OnKeyboard;
             @Keyboard.canceled -= instance.OnKeyboard;
+            @LeftStick.started -= instance.OnLeftStick;
+            @LeftStick.performed -= instance.OnLeftStick;
+            @LeftStick.canceled -= instance.OnLeftStick;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1217,5 +1290,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnClick(InputAction.CallbackContext context);
         void OnController(InputAction.CallbackContext context);
         void OnKeyboard(InputAction.CallbackContext context);
+        void OnLeftStick(InputAction.CallbackContext context);
     }
 }
