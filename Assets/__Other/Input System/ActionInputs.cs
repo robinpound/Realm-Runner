@@ -9,14 +9,16 @@ public class ActionInputs : MonoBehaviour
     public bool isJumpPressed;
     public bool isMovementPressed;
     public bool isRunPressed;
+    public float delayJump;
     // Start is called before the first frame update
-   private void Awake() {
+    private void Awake() {
         
         actions = new InputActions();
         var moveAction =  actions.PlayerActions.Movement;
         var jumpAction =  actions.PlayerActions.Jump;
         var lookAction =  actions.PlayerActions.Look;
         var runAction =  actions.PlayerActions.Run;
+        delayJump = Time.deltaTime;
 
         //Movement
         moveAction.started += OnMove;
@@ -44,6 +46,7 @@ public class ActionInputs : MonoBehaviour
 
     void OnJump(InputAction.CallbackContext ctx){
         isJumpPressed = ctx.ReadValueAsButton();
+        delayJump = Time.time + 0.2f;
     }
     void OnLook(InputAction.CallbackContext ctx){
         lookInput = ctx.ReadValue<Vector2>();
