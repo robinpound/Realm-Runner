@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Scrollbar bar;
 
     [SerializeField] bool optionsOpen;
-    [SerializeField] bool creditsOpen;
+    public bool creditsOpen;
 
 
 

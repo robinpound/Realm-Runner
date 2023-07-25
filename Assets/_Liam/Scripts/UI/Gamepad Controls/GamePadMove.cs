@@ -1,27 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
+
 public class GamePadMove : MonoBehaviour
 {
-    public InputActions input;
+    [SerializeField] GameObject optionsManager;
     public RectTransform cursor;
     public GameObject curserActive;
 
     public Vector3 startPosition;
 
-    public int speed = 10;
-    public bool isMovingLeft;
-    public bool isMovingRight;
-    public bool isMovingUp;
-    public bool isMovingDown;
-    public bool reset;
-    public bool click;
-    private void Awake()
-    {
-        input = new InputActions();
-    }
+    //private Vector3 mousePos;
+    private float mouseX, mouseY;
+
+
+    [SerializeField] float speed;
+    bool isMovingLeft;
+    bool isMovingRight;
+    bool isMovingUp;
+    bool isMovingDown;
+    bool reset;
+    bool controller;
 
     private void Start()
     {
@@ -29,36 +33,18 @@ public class GamePadMove : MonoBehaviour
     }
     private void Update()
     {
-        input.UI.LSLeft.started += OnMoveLeft;
-        input.UI.LSLeft.performed += OnMoveLeft;
-        input.UI.LSLeft.canceled += OnStopLeft;
-
-        input.UI.LSRight.started += OnMoveRight;
-        input.UI.LSRight.performed += OnMoveRight;
-        input.UI.LSRight.canceled += OnStopRight;
-
-        input.UI.LSUp.started += OnMoveUp;
-        input.UI.LSUp.performed += OnMoveUp;
-        input.UI.LSUp.canceled += OnStopUp;
-
-        input.UI.LSDown.started += OnMoveDown;
-        input.UI.LSDown.performed += OnMoveDown;
-        input.UI.LSDown.canceled += OnStopDown;
-
-        input.UI.Click.started += OnClick;
-        input.UI.Click.performed += OnClick;
-        input.UI.Click.canceled += OnClickStop;
-
-        input.UI.Reset.started += OnMoveReset;
-        input.UI.Reset.performed += OnMoveReset;
-        input.UI.Reset.canceled += OnStopReset;
-
-
+        cursor = GetComponent<RectTransform>();
+        optionsManager = GameObject.FindGameObjectWithTag("OptionsManager");
+        speed = optionsManager.GetComponent<OptionsManager>().GpCSlider;
+        if (controller)
+        {
+            Mouse.current.WarpCursorPosition(new Vector2(cursor.position.x, cursor.position.y));
+            Cursor.visible = false;
+        }
 
         if (isMovingLeft)
         {
             cursor.transform.position += new Vector3(-0.1f, 0) * speed; //* Time.deltaTime;
-            
         }
         if (isMovingRight)
         {
@@ -76,32 +62,46 @@ public class GamePadMove : MonoBehaviour
         {
             transform.position = startPosition;
         }
-        if (click)
-        {
-            //Debug.Log("Clicked");
-            
-        }
+    }
+  // Function to call the Click script
+
+
+    public void Click()
+    {
+        cursor.GetComponent<GamepadClick>().Click();
     }
 
+    public void ActivateController()
+    {
+        controller = true;
+        curserActive.SetActive(true);
+        Cursor.visible = false;
+    }
+    public void DeactivateController()
+    {
+        controller = false;
+        curserActive.SetActive(false); 
+        Cursor.visible = true;
+    }
 
     #region Moving Left
-    void OnMoveLeft(InputAction.CallbackContext context)
+    public void OnMoveLeft()
     {
         isMovingLeft = true;
     }
-    void OnStopLeft(InputAction.CallbackContext context)
+    public void OnStopLeft()
     {
         isMovingLeft = false;
     }
     #endregion
 
     #region Moving Right
-    void OnMoveRight(InputAction.CallbackContext context)
+    public void OnMoveRight()
     {
         isMovingRight= true;
     }
 
-    void OnStopRight(InputAction.CallbackContext context)
+    public void OnStopRight()
     {
         isMovingRight = false;
     }
@@ -109,68 +109,38 @@ public class GamePadMove : MonoBehaviour
     #endregion
 
     #region Moving Up
-    void OnMoveUp(InputAction.CallbackContext context)
+    public void OnMoveUp()
     {
-        isMovingUp= true;
+        isMovingUp = true;
     }
 
-    void OnStopUp(InputAction.CallbackContext context)
+    public void OnStopUp()
     {
-        isMovingUp= false;
+        isMovingUp = false;
     }
 
     #endregion
 
     #region Moving Down
-    void OnMoveDown(InputAction.CallbackContext context)
+    public void OnMoveDown()
     {
         isMovingDown = true;
     }
 
-    void OnStopDown(InputAction.CallbackContext context)
+    public void OnStopDown()
     {
         isMovingDown = false;
     }
     #endregion
 
-    #region Cursor Clicks
-    public void OnClick(InputAction.CallbackContext context)
-    {
-        click = true;
-    }
-    public void OnClickStop(InputAction.CallbackContext context)
-    {
-        click = false;
-    }
-    #endregion
-
     #region Reset Cursor
-    public void OnMoveReset(InputAction.CallbackContext context)
+    public void OnMoveReset()
     {
         reset = true;
     }
-    public void OnStopReset(InputAction.CallbackContext context)
+    public void OnStopReset()
     {
         reset = false;
     }
     #endregion
-
-    private void OnEnable()
-    {
-        input.UI.LSLeft.Enable();
-        input.UI.LSRight.Enable();
-        input.UI.LSUp.Enable();
-        input.UI.LSDown.Enable();
-        input.UI.Reset.Enable();
-        input.UI.Click.Enable();
-    }
-    private void OnDisable()
-    {
-        input.UI.LSLeft.Disable();
-        input.UI.LSRight.Disable();
-        input.UI.LSUp.Disable();
-        input.UI.LSDown.Disable();
-        input.UI.Reset.Disable();
-        input.UI.Click.Disable();
-    }
 }
