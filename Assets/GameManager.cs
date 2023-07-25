@@ -3,24 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
-// Edited by Mike.
+// Edited by Mike & Liam.
 
 public class GameManager : MonoBehaviour
 {
     private string savePath; // Path to the JSON save file
     private GameObject player;
-    [SerializeField]
-    private GameObject portalDoor;
-    [SerializeField]
-    private UIManager ui;
+    [SerializeField] private GameObject portalDoor;
+    [SerializeField] private UIManager ui;
+    [SerializeField] private UnityEvent raisePlatform;
     public int deathCount;
     public int coins;
     public int fragments;
     public int currentLevel;
     public int currentCheckpoint;
-
-    private bool isPortalOpened = false;
+    // Do once
+    private bool isPortalOpened = false; 
+    public bool isPlatformRaised = false; 
 
     private const string PLAYERTAG = "Player", PORTALDOOR = "PortalDoor";
 
@@ -38,10 +39,18 @@ public class GameManager : MonoBehaviour
         //portalDoor = GameObject.Find("Portal door");
         if (portalDoor == null)
         {
-            portalDoor = GameObject.Find("Portal door");
+            portalDoor = GameObject.Find(PORTALDOOR);
             portalDoor.SetActive(false);
         }
-        if (fragments >= 2 && !isPortalOpened)
+        if (fragments == 2)
+        {
+            
+            raisePlatform.Invoke();
+            ui.PathToCastleMessage();
+            //isPlatformRaised = true;
+        }
+            
+        if (fragments == 3 && !isPortalOpened)
         {
             isPortalOpened = true;
             portalDoor.SetActive(true);

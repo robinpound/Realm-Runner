@@ -12,7 +12,6 @@ public class ShootingTimeTrialManager : MonoBehaviour
     private int points = 0;
     [SerializeField]
     private int pointsToWin;
-    [SerializeField]
     private FindTargetSpawnPoint targetSpawn;
    
     private bool stopTimer = false;
@@ -20,7 +19,6 @@ public class ShootingTimeTrialManager : MonoBehaviour
     private Transform spawnPoint;
     [SerializeField]
     private GameObject fragment;
-    [SerializeField]
     private UIManager ui;
 
     [Header("Timer Settings")]

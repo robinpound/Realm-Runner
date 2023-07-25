@@ -5,22 +5,23 @@ using UnityEngine;
 public class RaisedPlatformController : MonoBehaviour
 {
     [SerializeField]
-    private Transform raisingPlatform, endPoint;
+    private Transform platform, endPoint;
     private float lerpSpeed = 1f;
 
-    private void FixedUpdate()
+    public void RaisePlatfrom()
     {
         // Raise platform from current position to adjustable end point.
         // To move to a method that will be called by a switch script.
-        raisingPlatform.position = Vector3.Lerp(raisingPlatform.position, endPoint.position, lerpSpeed * Time.deltaTime);
+            platform.position = Vector3.Lerp(platform.position, endPoint.position, lerpSpeed * Time.deltaTime);
+            Debug.Log("Platforms raised");
     }
 
     private void OnDrawGizmos()
     {
-        if (raisingPlatform != null && endPoint != null)
+        if (endPoint != null)
         {
             Gizmos.color = Color.magenta;
-            Gizmos.DrawLine(raisingPlatform.transform.position, endPoint.transform.position);
+            Gizmos.DrawLine(platform.position, endPoint.position);
         }
     }
 }

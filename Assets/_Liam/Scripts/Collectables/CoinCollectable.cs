@@ -13,7 +13,6 @@ public class CoinCollectable : MonoBehaviour
 
     [Header("Added by Mike")]
     private GameManager _gameManager;
-    [SerializeField]
     private int normalCoinAmount;
     private const string PLAYERTAG = "Player", GAMEMANAGERTAG = "GameManager";
 

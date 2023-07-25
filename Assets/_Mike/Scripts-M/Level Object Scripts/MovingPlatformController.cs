@@ -6,6 +6,7 @@ public class MovingPlatformController : MonoBehaviour
 {
     [SerializeField]
     private Transform movingPlatform, startPoint, endPoint;
+    [SerializeField]
     private float lerpSpeed = 1f;
     private int direction = 1;
 

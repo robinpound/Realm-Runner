@@ -44,7 +44,7 @@ public class Breakablerock : MonoBehaviour
     {
         Destroy(rockToDestroy);
         Destroy(gameObject);
-        Debug.Log("Block broken into " + numberOfBreakablePieces + "Pieces");
+        //Debug.Log("Block broken into " + numberOfBreakablePieces + "Pieces");
         // Instantiate small pieces that will fly in different directions
         for (int i = 0; i < numberOfBreakablePieces; ++i)
         {
