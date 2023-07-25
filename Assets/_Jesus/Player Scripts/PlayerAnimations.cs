@@ -34,12 +34,12 @@ public class PlayerAnimations : MonoBehaviour
         jumpCountHash = Animator.StringToHash("jumpCount");
     }
     void Update(){
-        if (input.isMovementPressed && controller.IsGrounded())
-        {
-            //dust.SetActive(true);
-        }else{
-            //dust.SetActive(false);
-        }
+        //if (input.isMovementPressed && controller.isGrounded)
+        //{
+        //    //dust.SetActive(true);
+        //}else{
+        //    //dust.SetActive(false);
+        //}
     }
     public void WalkAnimation()
     {
