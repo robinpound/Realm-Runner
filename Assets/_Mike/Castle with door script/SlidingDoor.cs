@@ -12,7 +12,7 @@ public class SlidingDoor : MonoBehaviour
     {
         targetPoint = endPoint.position;
     }
-    private void Update()
+    public void OpenDoor()
     {
         movingObject.position = Vector3.Lerp(movingObject.position, targetPoint, lerpSpeed * Time.deltaTime);
     }

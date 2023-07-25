@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI timeRemaining, success, portalIsOpen, pressE, pathToCastleIsOpen;
 
+    private bool isFloatingPlatTextShown = false;
+
 
     private void Start()
     {
@@ -68,8 +70,13 @@ public class UIManager : MonoBehaviour
 
     public void PathToCastleMessage()
     {
-        pathToCastleIsOpen.gameObject.SetActive(true);
-        StartCoroutine(Timer(portalIsOpen.gameObject));
+        if (!isFloatingPlatTextShown)
+        {
+            pathToCastleIsOpen.gameObject.SetActive(true);
+            StartCoroutine(Timer(pathToCastleIsOpen.gameObject));
+            isFloatingPlatTextShown = true;
+        }
+        
     }
     IEnumerator Timer(GameObject text)
 {

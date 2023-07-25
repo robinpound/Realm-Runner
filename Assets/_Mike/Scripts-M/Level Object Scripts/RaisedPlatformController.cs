@@ -12,7 +12,8 @@ public class RaisedPlatformController : MonoBehaviour
     {
         // Raise platform from current position to adjustable end point.
         // To move to a method that will be called by a switch script.
-        platform.position = Vector3.Lerp(platform.position, endPoint.position, lerpSpeed * Time.deltaTime);
+            platform.position = Vector3.Lerp(platform.position, endPoint.position, lerpSpeed * Time.deltaTime);
+            Debug.Log("Platforms raised");
     }
 
     private void OnDrawGizmos()

@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public int currentCheckpoint;
     // Do once
     private bool isPortalOpened = false; 
-    private bool isPlatformRaised = false; 
+    public bool isPlatformRaised = false; 
 
     private const string PLAYERTAG = "Player", PORTALDOOR = "PortalDoor";
 
@@ -42,14 +42,15 @@ public class GameManager : MonoBehaviour
             portalDoor = GameObject.Find(PORTALDOOR);
             portalDoor.SetActive(false);
         }
-        if (fragments >= 2 && !isPlatformRaised)
+        if (fragments == 2)
         {
-            isPlatformRaised = true;
+            
             raisePlatform.Invoke();
             ui.PathToCastleMessage();
+            //isPlatformRaised = true;
         }
             
-        if (fragments >= 3 && !isPortalOpened)
+        if (fragments == 3 && !isPortalOpened)
         {
             isPortalOpened = true;
             portalDoor.SetActive(true);
