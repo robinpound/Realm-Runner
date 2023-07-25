@@ -62,6 +62,11 @@ public class UIManager : MonoBehaviour
         StartCoroutine(Timer(pressE.gameObject));
     }
 
+    public void StopEDisplay()
+    {
+        pressE.gameObject.SetActive(false);
+    }
+
     public void TellPlayerPortalIsOpen()
     {
         portalIsOpen.gameObject.SetActive(true);
