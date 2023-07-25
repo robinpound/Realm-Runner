@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
     private TextMeshProUGUI coins, fragments;
 
     [SerializeField]
-    private TextMeshProUGUI timeRemaining, success, portalIsOpen, pressE;
+    private TextMeshProUGUI timeRemaining, success, portalIsOpen, pressE, pathToCastleIsOpen;
 
 
     private void Start()
@@ -64,6 +64,12 @@ public class UIManager : MonoBehaviour
     {
         portalIsOpen.gameObject.SetActive(true);
         StartCoroutine(Timer(portalIsOpen.gameObject)); // Turn of notice display after timer finishes.
+    }
+
+    public void PathToCastleMessage()
+    {
+        pathToCastleIsOpen.gameObject.SetActive(true);
+        StartCoroutine(Timer(portalIsOpen.gameObject));
     }
     IEnumerator Timer(GameObject text)
 {
