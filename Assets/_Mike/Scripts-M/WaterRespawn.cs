@@ -7,7 +7,7 @@ using UnityEngine;
 public class WaterRespawn : MonoBehaviour
 {
     [SerializeField]
-    private Transform player, spawnPoint;
+    private Transform player, spawnPoint, castleSpawnPoint;
     PlayerGravity gravity;
     PlayerCharacterController controller;
 
@@ -22,6 +22,10 @@ public class WaterRespawn : MonoBehaviour
     private void Update()
     {
         //Debug.Log(spawnPoint.transform.position + " Spawn point poistion");
+        if (Input.GetKeyDown(KeyCode.L)) 
+        {
+            DebugRespawn();
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -40,6 +44,19 @@ public class WaterRespawn : MonoBehaviour
             //player.GetComponent<PlayerStats>().InstaDead();
             controller.controller.enabled = true;
         }
+    }
+
+    private void DebugRespawn()
+    {
+        controller.controller.enabled = false;
+
+        //player.position += new Vector3(spawnPoint.position.x, player.position.y, spawnPoint.position.z);
+        player.position = castleSpawnPoint.position;
+        Debug.Log("GRAVITY..." + gravity.currentMovement.y);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Debug.Log(player.position + " Spawn point poistion");
+        //player.GetComponent<PlayerStats>().InstaDead();
+        controller.controller.enabled = true;
     }
 
    
