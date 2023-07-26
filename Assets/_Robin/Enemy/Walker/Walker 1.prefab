@@ -1292,8 +1292,9 @@ MonoBehaviour:
   attackRange: 0.5
   timeBetweenAttacks: 1
   patrolSpeed: 0.5
-  chaseSpeed: 1.5
+  chaseSpeed: 4
   attackSpeed: 2
+  ranChanceWaypointReset: 1000
   waypoint: {x: 0, y: 0, z: 0}
   isWaypointSet: 0
   isplayerInChaseRange: 0
