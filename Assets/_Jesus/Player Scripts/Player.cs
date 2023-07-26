@@ -95,7 +95,7 @@ public class Player : MonoBehaviour
             _runMultiplier = -topSpeed;
         }
     }
-    void Movement()
+    public void Movement()
     {
         cameraRelativeMovement = camMove.ConvertToCameraSpace(pgravity._appliedMovement);
         pgravity._appliedMovement.x = input.isJumpPressed ? input.inputMovement.x * _jumpMoveMultiplier : input.inputMovement.x * _runMultiplier;
