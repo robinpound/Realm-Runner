@@ -2,19 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ArrowTest : MonoBehaviour
 {
+    InputActions input;
     public GameObject player;
     public GameObject arrow;
     public GameObject turret;
     [SerializeField] GameObject bowArrow;
     public float launchVelocity = 10f;
 
-    public bool bow;
+    [SerializeField]
+    bool aiming;
     public int timer;
 
     [SerializeField] private bool isShot;
+    private void Awake()
+    {
+        input = new InputActions();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -25,17 +32,29 @@ public class ArrowTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bow = player.GetComponent<WeaponEquipped>().bow;
-        if (Input.GetMouseButton(1))
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                //Debug.Log("Input Works!");
-                Fire();
-                //Invoke(nameof(Fire), 0.1f);
-            }
-        }
 
+        input.PlayerActions.ArrowAiming.started += Aim;
+        input.PlayerActions.ArrowAiming.performed += Aim;
+        input.PlayerActions.ArrowAiming.canceled += Aim;
+
+
+        input.PlayerActions.ArrowAttack.started += Shoot;
+        input.PlayerActions.ArrowAttack.performed += Shoot;
+        input.PlayerActions.ArrowAttack.canceled += Shoot;
+    }
+    void Aim(InputAction.CallbackContext context)
+    {
+        aiming = context.ReadValueAsButton();
+        player.GetComponent<AimCameraControl>().mouse = context.ReadValueAsButton();
+    }
+    void Shoot(InputAction.CallbackContext context)
+    {
+        if (aiming)
+        {
+            Debug.Log("Input Works!");
+            Fire();
+            player.GetComponent<AimCameraControl>().shoot = context.ReadValueAsButton();
+        }
     }
     void Fire()
     {
@@ -60,5 +79,13 @@ public class ArrowTest : MonoBehaviour
         bowArrow.SetActive(true);
         arrow.GetComponent<ArrowNew>().IsNotShot();
         timer = 0;
+    }
+    private void OnEnable()
+    {
+        input.PlayerActions.Enable();
+    }
+    private void OnDisable()
+    {
+        input.PlayerActions.Disable();
     }
 }
