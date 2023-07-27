@@ -1574,7 +1574,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh43120
+  m_Name: pb_Mesh47630
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2143,6 +2143,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97a7117f085f2b845a6556bee598f89e, type: 3}
+--- !u!4 &392646825 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400106, guid: 8c00db5be83e04b4c88b073e10fba9b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 862219294}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &394891596 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 478636093, guid: 8c00db5be83e04b4c88b073e10fba9b9,
@@ -2279,12 +2285,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 64.27547, y: 1.8925468, z: 27.544813}
   m_Center: {x: 32.137333, y: 7.67, z: 13.772243}
---- !u!4 &428458315 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 478636094, guid: 8c00db5be83e04b4c88b073e10fba9b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 862219294}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &449235526
 Mesh:
   m_ObjectHideFlags: 0
@@ -3995,7 +3995,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh43334
+  m_Name: pb_Mesh47844
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4898,6 +4898,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400108, guid: 8c00db5be83e04b4c88b073e10fba9b9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 478636093, guid: 8c00db5be83e04b4c88b073e10fba9b9, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 478636095, guid: 8c00db5be83e04b4c88b073e10fba9b9, type: 3}
@@ -8637,7 +8641,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1681221910}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -8943,10 +8947,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e56330030372d24bb585ffd7857bdaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 428458315}
-  offset_X: 0
-  offset_Y: 6.04
-  offset_Z: 0
+  target: {fileID: 392646825}
+  offset_X: -5
+  offset_Y: 1
+  offset_Z: -5
   updateMethod: 0
   followPos: 5
   copyRot: 0
