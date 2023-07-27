@@ -17,13 +17,16 @@ public class miniboss : MonoBehaviour
     float alertDistance;
     float shootingDistance;
 
-    public float temporaryHealth = 100; //TEMP
+    
     private float healingMinHealth = 30;
+    private EnemyHealth health;
 
     public GameObject missile;
     public GameObject spawnpoint;
 
     [SerializeField] private bool isDoingSomething = false;
+
+    
     
     private enum EnemyState
     {
@@ -37,6 +40,7 @@ public class miniboss : MonoBehaviour
 
     private void Awake() {
         references = GetComponent<miniboss_ref>();
+        health = GetComponent<EnemyHealth>();
     }
 
     private void Start() {
@@ -50,10 +54,11 @@ public class miniboss : MonoBehaviour
         //bool needsHealing = temporaryHealth < 25; // CHANGE-TO: randomiser + if (references.health.healthpoints <= (totalhealth * 0.2))
         //bool needsLeaping = temporaryHealth < 50; // CHANGE-TO: randomiser + ... ???
 
-        bool isLowHealth = temporaryHealth < healingMinHealth;
+        bool isLowHealth = health.GetCurrentHealth() < healingMinHealth;
         bool inAlertRange = Vector3.Distance(transform.position, playerTransform.position) <= alertDistance;
         bool inShootRange = Vector3.Distance(transform.position, playerTransform.position) <= shootingDistance;
         
+        //Debug.Log(inAlertRange + " : " + alertDistance + " --- Distance:" + Vector3.Distance(transform.position, playerTransform.position));
         
         if (inAlertRange & !isDoingSomething) currentState = EnemyState.MovingTo;
         if (inShootRange & !isDoingSomething) currentState = EnemyState.Shooting;
@@ -85,8 +90,9 @@ public class miniboss : MonoBehaviour
         if(Time.time >= pathUpdateDeadLine) 
         {
             pathUpdateDeadLine = Time.time + references.pathUpdateDelay;
-            references.navMA.SetDestination(playerTransform.position);
+            
         }
+        references.navMA.SetDestination(playerTransform.position);
     }
 
     private void LookAtPlayer() {
@@ -111,7 +117,7 @@ public class miniboss : MonoBehaviour
         if(Time.time >= healDeadLine)
         {
             references.ps.Play();
-            temporaryHealth += 15;
+            health.AddCurrentHealth(15);
             healingMinHealth -= 5;
             healDeadLine = Time.time + references.healDelay;
             Invoke(nameof(ResetDoing), references.healDelay);
@@ -127,6 +133,6 @@ public class miniboss : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         Debug.Log("HIT by somehting");
-        temporaryHealth -= 10;
+        health.TakeDamage(10);
     }
 }

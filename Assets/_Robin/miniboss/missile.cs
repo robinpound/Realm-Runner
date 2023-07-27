@@ -9,6 +9,7 @@ public class missile : MonoBehaviour
     public float rotationSpeed = 5f;
     public float wiggleSpeed = 5f;
     public float wiggleMagnitude = 5f;
+    public int attackDamage = 1;
     public GameObject explosion;
     
 
@@ -46,8 +47,10 @@ public class missile : MonoBehaviour
         if (other.gameObject == target)
         {
             Debug.Log("Hit Player!");
+            target.GetComponent<PlayerStats>().TakeDamage(attackDamage);
         }
         Instantiate(explosion, transform.position, Quaternion.identity);
         Destroy(gameObject);
+        
     }
 }
