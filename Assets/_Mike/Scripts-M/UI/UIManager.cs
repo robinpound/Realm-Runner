@@ -14,7 +14,9 @@ public class UIManager : MonoBehaviour
     private TextMeshProUGUI coins, fragments;
 
     [SerializeField]
-    private TextMeshProUGUI timeRemaining, success, portalIsOpen, pressE;
+    private TextMeshProUGUI timeRemaining, success, portalIsOpen, pressE, pathToCastleIsOpen;
+
+    private bool isFloatingPlatTextShown = false;
 
 
     private void Start()
@@ -60,10 +62,26 @@ public class UIManager : MonoBehaviour
         StartCoroutine(Timer(pressE.gameObject));
     }
 
+    public void StopEDisplay()
+    {
+        pressE.gameObject.SetActive(false);
+    }
+
     public void TellPlayerPortalIsOpen()
     {
         portalIsOpen.gameObject.SetActive(true);
         StartCoroutine(Timer(portalIsOpen.gameObject)); // Turn of notice display after timer finishes.
+    }
+
+    public void PathToCastleMessage()
+    {
+        if (!isFloatingPlatTextShown)
+        {
+            pathToCastleIsOpen.gameObject.SetActive(true);
+            StartCoroutine(Timer(pathToCastleIsOpen.gameObject));
+            isFloatingPlatTextShown = true;
+        }
+        
     }
     IEnumerator Timer(GameObject text)
 {

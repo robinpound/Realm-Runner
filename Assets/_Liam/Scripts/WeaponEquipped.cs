@@ -1,37 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WeaponEquipped : MonoBehaviour
 {
-    public GameObject player;
+    InputActions input;
+    [SerializeField] GameObject player;
 
     //Bow Objects
-    public GameObject backBow;
-    public GameObject handBow;
+    [SerializeField] GameObject backBow;
+    [SerializeField] GameObject handBow;
     public bool bow;
+
+    [SerializeField] bool aiming;
 
     private void Awake()
     {
+        input = new InputActions();
+        // Fetching player character
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Start()
     {
+        // Setting bow inactive
         handBow.SetActive(false);
     }
     // Update is called once per frame
     void Update()
     {
 
-        if (Input.GetMouseButtonDown(1))
+        input.PlayerActions.ArrowAiming.started += Bool;
+        input.PlayerActions.ArrowAiming.performed += Bool;
+        input.PlayerActions.ArrowAiming.canceled += Bool;
+
+
+        // Activate bow on aim
+        if (aiming)
         {
             BowEquip();
         }
-        if (Input.GetMouseButtonUp(1))
+        // Deactivate bow on !aim
+        if (!aiming)
         {
             BowDeequip();   
         }
+    }
+    private void Bool(InputAction.CallbackContext context)
+    {
+        aiming = context.ReadValueAsButton();
     }
     public void BowEquip()
     {
@@ -46,5 +64,14 @@ public class WeaponEquipped : MonoBehaviour
         // Swapping out GameObjects
         backBow.SetActive(true);
         handBow.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        input.PlayerActions.Enable();
+    }
+    private void OnDisable()
+    {
+        input.PlayerActions.Disable();
     }
 }

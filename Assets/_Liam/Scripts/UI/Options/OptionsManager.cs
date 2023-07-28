@@ -7,6 +7,7 @@ public class OptionsManager : MonoBehaviour
     public float mixer;
     public float mixer1;
     public float mixer2;
+    public float GpCSlider;
 
     public void Update()
     {

@@ -7,7 +7,8 @@ public class EnemyHealth : MonoBehaviour
     [Header("Health Variables")]
     public int maxHealth = 100;
     [SerializeField] int currentHealth;
-    // Start is called before the first frame update
+    public GameObject Deathexplosion;
+   
     void Start()
     {
         currentHealth = maxHealth;
@@ -16,7 +17,6 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-
 
         // Play Hurt Animations and Sounds
 
@@ -30,8 +30,14 @@ public class EnemyHealth : MonoBehaviour
     {
         Debug.Log("Enemy Died");
         //Play Death Animation
-
+        if(Deathexplosion != null) Instantiate(Deathexplosion, transform.position, Quaternion.identity);
+        
+        
         // Disable the Enemy
         gameObject.SetActive(false);
+        
+        
     }
+    public int GetCurrentHealth() {return currentHealth;}
+    public void AddCurrentHealth(int health) {currentHealth += health;}
 }

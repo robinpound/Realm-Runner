@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100108, guid: 8c00db5be83e04b4c88b073e10fba9b9, type: 3}
       propertyPath: m_Name
-      value: Final Spider battle
+      value: Final Spider battle Variant
       objectReference: {fileID: 0}
     - target: {fileID: 400108, guid: 8c00db5be83e04b4c88b073e10fba9b9, type: 3}
       propertyPath: m_RootOrder
@@ -17,27 +17,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400108, guid: 8c00db5be83e04b4c88b073e10fba9b9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400108, guid: 8c00db5be83e04b4c88b073e10fba9b9, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400108, guid: 8c00db5be83e04b4c88b073e10fba9b9, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400108, guid: 8c00db5be83e04b4c88b073e10fba9b9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 442.3
+      value: 79.6
       objectReference: {fileID: 0}
     - target: {fileID: 400108, guid: 8c00db5be83e04b4c88b073e10fba9b9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.9
+      value: 91.9
       objectReference: {fileID: 0}
     - target: {fileID: 400108, guid: 8c00db5be83e04b4c88b073e10fba9b9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 845.7
+      value: 16.8
       objectReference: {fileID: 0}
     - target: {fileID: 400108, guid: 8c00db5be83e04b4c88b073e10fba9b9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -67,6 +67,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 478636093, guid: 8c00db5be83e04b4c88b073e10fba9b9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 478636095, guid: 8c00db5be83e04b4c88b073e10fba9b9, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -90,6 +94,11 @@ PrefabInstance:
     - target: {fileID: 478636099, guid: 8c00db5be83e04b4c88b073e10fba9b9, type: 3}
       propertyPath: m_VersionIndex
       value: 5508
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451803855155969794, guid: 8c00db5be83e04b4c88b073e10fba9b9,
+        type: 3}
+      propertyPath: stepHeight
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c00db5be83e04b4c88b073e10fba9b9, type: 3}

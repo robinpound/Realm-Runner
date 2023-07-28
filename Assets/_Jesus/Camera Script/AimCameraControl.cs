@@ -26,6 +26,9 @@ public class AimCameraControl : MonoBehaviour
     [SerializeField] float aimSmoothSpeed = 20;
     [SerializeField] Transform aimingPos;
     Animator animator;
+
+    public bool mouse;
+    public bool shoot;
     void Start()
     {
         input = GetComponent<ActionInputs>();
@@ -38,9 +41,9 @@ public class AimCameraControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        AnimationShootObject();
         CameraAimToggle();
         // CameraRotation();
-        AnimationShootObject();
         xAxis.Update(Time.deltaTime);
         yAxis.Update(Time.deltaTime);
         
@@ -49,7 +52,7 @@ public class AimCameraControl : MonoBehaviour
     public void CameraAimToggle()
     {
         //These inputs needs to be replaced for the new iput system mouse buttons
-        if (Input.GetMouseButtonDown(1) && !aimCam.activeInHierarchy)
+        if (mouse && !aimCam.activeInHierarchy)
         {
             aimCam.SetActive(true);
             animator.SetBool("aiming", true);
@@ -57,7 +60,7 @@ public class AimCameraControl : MonoBehaviour
             rig.weight = 1f;
             
         }
-        if (Input.GetMouseButtonUp(1) && aimCam.activeInHierarchy)
+        if (!mouse && aimCam.activeInHierarchy)
         {
             aimCam.SetActive(false);
             animator.SetBool("aiming", false);
@@ -76,11 +79,11 @@ public void RotatePlayerToAimPosition(){
 }
 
     void AnimationShootObject(){
-        if (Input.GetKeyDown(KeyCode.F))
+        if (shoot)
         {
             animator.SetBool("attack", true);
         } 
-        if (Input.GetKeyUp(KeyCode.F))
+        if (!shoot)
         {
             animator.SetBool("attack", false);
         } 

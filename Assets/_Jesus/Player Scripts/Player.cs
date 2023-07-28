@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     float _rotationFactorPerFrame = 15.0f;
     float _runMultiplier = 0f; //8.0f;
     float _jumpMoveMultiplier = 8.0f;
-    float topSpeed = 15;
+    float topSpeed = 8;
     int _zero = 0;
     // gravity variables
     float _gravity = -9.8f;
@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
 
         if (input.isMovementPressed && !input.isJumpPressed)
         {
-            _runMultiplier += 15 * Time.deltaTime;
+            _runMultiplier += 8 * Time.deltaTime;
             // creates a new rotationbased on where the player is currently pressing
             Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
             // rotate the character to face the positionToLookAt            
@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            _runMultiplier = 0;
+            _runMultiplier = 8;
         }
 
 
@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
 
         if (aimCam.aimCam.activeInHierarchy)
             aimCam.RotatePlayerToAimPosition();
-        if (_runMultiplier < topSpeed)
+        if (_runMultiplier > topSpeed)
         {
             _runMultiplier = 8.0f;
         }
@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
         pgravity._appliedMovement.z = input.isJumpPressed ? input.inputMovement.y * _jumpMoveMultiplier : input.inputMovement.y * _runMultiplier;
 
         cc.controller.Move(cameraRelativeMovement * Time.deltaTime);
-        Debug.Log("RUN SPEED..." + _runMultiplier);
+        //Debug.Log("RUN SPEED..." + _runMultiplier);
     }
 
 

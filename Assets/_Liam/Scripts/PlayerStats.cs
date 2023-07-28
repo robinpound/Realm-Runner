@@ -13,16 +13,22 @@ public class PlayerStats : MonoBehaviour
 
     [Header("Don't Touch!")]
     [Header("Death Vars")]
-    GameObject player;
-    GameObject deathScrn;
-    Animator animator;
-    CharacterController characterController;
-    GameObject deathCam;
-    GameObject mainCam;
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject deathScrn;
+    [SerializeField] Animator animator;
+    [SerializeField] CharacterController characterController;
+    [SerializeField] GameObject deathCam;
+    [SerializeField] GameObject mainCam;
+
+    [Header("Game Manager")]
+    GameObject _gameManager;
+    [SerializeField] GameManager gameManager;
 
     // Start is called before the first frame update
     void Awake()
     {
+        _gameManager = GameObject.FindGameObjectWithTag("GameManager");
+        gameManager = _gameManager.GetComponent<GameManager>();
         player = GameObject.FindGameObjectWithTag("Player");
         deathScrn = GameObject.FindGameObjectWithTag("DeathScreen");
         animator = GetComponent<Animator>();
@@ -49,9 +55,10 @@ public class PlayerStats : MonoBehaviour
 
         if(currentHealth <= 0)
         {
+            gameManager.deathCount++;
             characterController.enabled = false;
-            Invoke(nameof(DisableAnimator), 1f);
-            Invoke(nameof(Die), 1.5f);
+            Invoke(nameof(DisableAnimator), 0.5f);
+            Invoke(nameof(Die), 1f);
         }
     }
 
@@ -74,6 +81,7 @@ public class PlayerStats : MonoBehaviour
 
     void Die()
     {
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         deathCam.transform.position = mainCam.transform.position;
