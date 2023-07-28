@@ -21,7 +21,6 @@ public class follow : MonoBehaviour
     public CopyRotation copyRot;
     void Update()
     {
-
         if (updateMethod != UpdateMethod.Update) return;
 
         switch (followPos)
@@ -66,11 +65,13 @@ public class follow : MonoBehaviour
                 transform.rotation = Quaternion.Euler(target.rotation.eulerAngles);
                 break;
         }
+       
 
     }
 
     private void FixedUpdate() 
     {
+        
         if (updateMethod != UpdateMethod.FixedUpdate) return;
 
         switch (followPos)
