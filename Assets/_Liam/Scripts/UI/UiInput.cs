@@ -11,13 +11,14 @@ public class UiInput : MonoBehaviour
     [SerializeField] GameObject c;
     [Header("Don't Touch")]
     [SerializeField] GamePadMove g;
-    [SerializeField]
+    [SerializeField] GameObject player;
     bool move;
     public bool scrollUp;
     public bool scrollDown;
     private void Awake()
     {
         input = new InputActions();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -74,7 +75,6 @@ public class UiInput : MonoBehaviour
         input.UI.ScrollUp.canceled += ScrollUp;
 
     }
-
     void ScrollDown(InputAction.CallbackContext context)
     {
         scrollDown = context.ReadValueAsButton();

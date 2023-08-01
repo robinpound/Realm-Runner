@@ -12,18 +12,22 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject playerUI;
     [SerializeField] GameObject[] options;
 
+    [SerializeField] GameObject camera;
+
     // Start is called before the first frame update
     void Start()
     {
         // Grabbing the in-game objects
         player = GameObject.FindGameObjectWithTag("Player");
         gameManager = GameObject.FindGameObjectWithTag("GameManager");
+        camera = GameObject.FindGameObjectWithTag("MainCamera");
         // Setting Pause Menu it inactive
         pauseMenu.SetActive(false);
         options[0].SetActive(false); //Main Options
         options[1].SetActive(false); //Key Bindings Page
         options[2].SetActive(false); //Audio Page
         options[3].SetActive(false); //Video Page
+
     }
 
     #region Pause Menu Buttons
@@ -37,6 +41,7 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = true;
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
+        camera.GetComponent<FollowAndOrbitCam>().enabled = false;
     }
     // Function to resume game
     public void Resume()
@@ -49,13 +54,16 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = false;
         // Setting pause bool to false
         player.GetComponent<PauseActivate>().paused = false;
+        camera.GetComponent<FollowAndOrbitCam>().enabled = true;
         // Setting player UI and options menu to inactive
+        #region PM UI
         playerUI.SetActive(true);
         pauseMenu.SetActive(false);
         options[0].SetActive(false); //Main Options
         options[1].SetActive(false); //Key Bindings Page
         options[2].SetActive(false); //Audio Page
         options[3].SetActive(false); //Video Page
+        #endregion
     }
     // Function to Save the Game using persistent data
     public void SaveGame()
@@ -74,8 +82,10 @@ public class PauseMenu : MonoBehaviour
     // Function to quit game to the main menu
     public void ExitMainMenu()
     {
-        //player.GetComponent<PauseActivate>().paused = false;
+        player.GetComponent<PauseActivate>().paused = false;
+        Cursor.visible = true;
         Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.None;
         SaveGame();
         SceneManager.LoadScene("MainMenu");
     }

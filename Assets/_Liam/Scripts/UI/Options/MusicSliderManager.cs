@@ -8,10 +8,6 @@ public class MusicSliderManager : MonoBehaviour
     [SerializeField] GameObject optionsManager;
     [SerializeField] Slider musicSlider;
     [SerializeField] float mixer;
-
-    // Start is called before the first frame update
-
-
     // Update is called once per frame
     void Update()
     {
@@ -23,5 +19,9 @@ public class MusicSliderManager : MonoBehaviour
             mixer = musicSlider.value;
             optionsManager.GetComponent<OptionsManager>().mixer1 = musicSlider.value;
         });
+    }
+    public void ResetSlider()
+    {
+        musicSlider.value = 80;
     }
 }
