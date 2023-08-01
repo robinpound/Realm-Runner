@@ -8,7 +8,6 @@ public class SFXSliderManager : MonoBehaviour
     [SerializeField] GameObject optionsManager;
     [SerializeField] Slider sfxSlider;
     [SerializeField] float mixer;
-
     // Update is called once per frame
     void Update()
     {
@@ -20,5 +19,9 @@ public class SFXSliderManager : MonoBehaviour
             mixer = sfxSlider.value;
             optionsManager.GetComponent<OptionsManager>().mixer2 = sfxSlider.value;
         });
+    }
+    public void ResetSlider()
+    {
+        sfxSlider.value = 80;
     }
 }

@@ -539,6 +539,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""b079d4d8-a6c3-478a-a7aa-4f89aed4248a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -992,6 +1001,28 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""ScrollDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ea285da1-120e-4da8-8690-dd2ffd03aed5"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d89bc57e-5076-4b00-8fd0-042c50ea4265"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1019,6 +1050,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_UI_Keyboard = m_UI.FindAction("Keyboard", throwIfNotFound: true);
         m_UI_ScrollDown = m_UI.FindAction("ScrollDown", throwIfNotFound: true);
         m_UI_ScrollUp = m_UI.FindAction("ScrollUp", throwIfNotFound: true);
+        m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1184,6 +1216,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Keyboard;
     private readonly InputAction m_UI_ScrollDown;
     private readonly InputAction m_UI_ScrollUp;
+    private readonly InputAction m_UI_Pause;
     public struct UIActions
     {
         private @InputActions m_Wrapper;
@@ -1198,6 +1231,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @Keyboard => m_Wrapper.m_UI_Keyboard;
         public InputAction @ScrollDown => m_Wrapper.m_UI_ScrollDown;
         public InputAction @ScrollUp => m_Wrapper.m_UI_ScrollUp;
+        public InputAction @Pause => m_Wrapper.m_UI_Pause;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1237,6 +1271,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @ScrollUp.started += instance.OnScrollUp;
             @ScrollUp.performed += instance.OnScrollUp;
             @ScrollUp.canceled += instance.OnScrollUp;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -1271,6 +1308,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @ScrollUp.started -= instance.OnScrollUp;
             @ScrollUp.performed -= instance.OnScrollUp;
             @ScrollUp.canceled -= instance.OnScrollUp;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1310,5 +1350,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnKeyboard(InputAction.CallbackContext context);
         void OnScrollDown(InputAction.CallbackContext context);
         void OnScrollUp(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

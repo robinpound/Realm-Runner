@@ -25,7 +25,7 @@ public class GamePadMove : MonoBehaviour
     bool isMovingUp;
     bool isMovingDown;
     bool reset;
-    bool controller;
+    [SerializeField] bool controller;
 
     private void Start()
     {

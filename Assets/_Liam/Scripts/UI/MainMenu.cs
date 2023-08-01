@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] GameObject gameManager;
+    [SerializeField] GameObject optionsManager;
     [SerializeField] GameObject[] options;
     [SerializeField] GameObject credits;
     [SerializeField] Scrollbar bar;
@@ -19,12 +20,23 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager");
+        optionsManager = GameObject.FindGameObjectWithTag("OptionsManager");
 
         credits.SetActive(false);
         options[0].SetActive(false); //Main Options
         options[1].SetActive(false); //Key Bindings Page
         options[2].SetActive(false); //Audio Page
         options[3].SetActive(false); //Video Page
+        ValueChange();
+    }
+    void ValueChange()
+    {
+        optionsManager.GetComponent<OptionsManager>().ValueChanged();
+    }
+    private void Update()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     #region Main Menu Buttons

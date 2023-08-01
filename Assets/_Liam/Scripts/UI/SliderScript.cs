@@ -8,12 +8,8 @@ public class SliderScript : MonoBehaviour
     [SerializeField] private Slider slider;
     [SerializeField] private Text sliderText;
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        slider.onValueChanged.AddListener((v) => {
-            sliderText.text = v.ToString("0.00");
-        });
+        sliderText.text = slider.value.ToString("0");
     }
 }

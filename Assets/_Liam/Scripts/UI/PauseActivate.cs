@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PauseActivate : MonoBehaviour
 {
     [Header("Don't Touch!")]
-
+    InputActions input;
     [SerializeField] GameObject canvas;
     public bool paused;
+    private void Awake()
+    {
+        input = new InputActions();
+    }
     private void Start()
     {
         canvas = GameObject.FindGameObjectWithTag("Canvas");
@@ -15,13 +20,10 @@ public class PauseActivate : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Pause();
-        }
+        input.UI.Pause.started += Pause;
     }
 
-    private void Pause()
+    public void Pause(InputAction.CallbackContext context)
     {
         if(paused == false)
         {
@@ -36,5 +38,12 @@ public class PauseActivate : MonoBehaviour
             canvas.GetComponent<PauseMenu>().Resume();
         }
     }
-
+    private void OnEnable()
+    {
+        input.UI.Enable();
+    }
+    private void OnDisable()
+    {
+        input.UI.Disable();
+    }
 }

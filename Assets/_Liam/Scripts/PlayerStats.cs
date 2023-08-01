@@ -52,13 +52,16 @@ public class PlayerStats : MonoBehaviour
     void Update()
     {
         //invincible = inviPotion.GetComponent<Invincibility>().invincible;
-
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            currentHealth -= 1;
+        }
         if(currentHealth <= 0)
         {
             gameManager.deathCount++;
             characterController.enabled = false;
-            Invoke(nameof(DisableAnimator), 0.5f);
-            Invoke(nameof(Die), 1f);
+            animator.enabled = false;
+            Invoke(nameof(Die), 0.1f);
         }
     }
 
@@ -89,9 +92,5 @@ public class PlayerStats : MonoBehaviour
         deathCam.SetActive(true);
         mainCam.SetActive(false);
         deathScrn.SetActive(true);
-    }
-    void DisableAnimator()
-    {
-        animator.enabled = false;
     }
 }
