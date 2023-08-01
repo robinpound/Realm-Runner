@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] GameObject canvas;
     [SerializeField] GameObject gameManager;
     [SerializeField] GameObject optionsManager;
     [SerializeField] GameObject[] options;
@@ -19,6 +20,7 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
+        canvas = GameObject.FindGameObjectWithTag("Canvas");
         gameManager = GameObject.FindGameObjectWithTag("GameManager");
         optionsManager = GameObject.FindGameObjectWithTag("OptionsManager");
 
@@ -35,6 +37,7 @@ public class MainMenu : MonoBehaviour
     }
     private void Update()
     {
+        canvas.GetComponent<UiInput>().paused = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }

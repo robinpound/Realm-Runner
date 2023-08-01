@@ -38,7 +38,7 @@ public class PlayerStats : MonoBehaviour
 
     private void Start()
     {
-        maxHealth = 5;
+        maxHealth = 3;
         currentHealth = maxHealth;
 
         deathCam.SetActive(false);
