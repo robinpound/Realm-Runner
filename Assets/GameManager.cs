@@ -36,12 +36,14 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+
         //portalDoor = GameObject.Find("Portal door");
         if (portalDoor == null)
         {
             portalDoor = GameObject.Find(PORTALDOOR);
             portalDoor.SetActive(false);
-        }
+        } else return;
+        
         if (fragments == 2)
         {
             
