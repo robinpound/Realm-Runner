@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 989032449}
   - component: {fileID: 989032447}
   - component: {fileID: 989032452}
+  - component: {fileID: 989032453}
   m_Layer: 9
   m_Name: Test Enemy!
   m_TagString: Untagged
@@ -303,7 +304,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  Deathexplosion: {fileID: 0}
+
+--- !u!114 &989032453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989032446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a664e97a5daf9041be54f8930517f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coins: {fileID: 9176229172762005397, guid: 2d221db3c9e10c744a1fc79e44c59d3e, type: 3}
+  drops:
+  - {fileID: 3886445164377298366, guid: 4b63b11d3f4963542aafd5b725968424, type: 3}
+  - {fileID: 8548025986168822695, guid: a5030a8d720f91445ab499272e2426c2, type: 3}
+  - {fileID: 4643880009539398727, guid: 060890d7cb981074a8f1807930fc9987, type: 3}
 --- !u!1 &1082441075
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,6 +432,7 @@ GameObject:
   - component: {fileID: 1766593028}
   - component: {fileID: 1766593027}
   - component: {fileID: 1766593026}
+  - component: {fileID: 1766593031}
   m_Layer: 9
   m_Name: Test Enemy 2.0!
   m_TagString: Untagged
@@ -514,6 +533,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1766593031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766593025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a664e97a5daf9041be54f8930517f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coins: {fileID: 9176229172762005397, guid: 2d221db3c9e10c744a1fc79e44c59d3e, type: 3}
+  drops:
+  - {fileID: 3886445164377298366, guid: 4b63b11d3f4963542aafd5b725968424, type: 3}
+  - {fileID: 8548025986168822695, guid: a5030a8d720f91445ab499272e2426c2, type: 3}
+  - {fileID: 4643880009539398727, guid: 060890d7cb981074a8f1807930fc9987, type: 3}
 --- !u!1 &1837632371
 GameObject:
   m_ObjectHideFlags: 0
