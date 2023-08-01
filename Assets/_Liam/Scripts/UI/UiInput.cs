@@ -12,6 +12,7 @@ public class UiInput : MonoBehaviour
     [Header("Don't Touch")]
     [SerializeField] GamePadMove g;
     [SerializeField] GameObject player;
+    public bool paused;
     bool move;
     public bool scrollUp;
     public bool scrollDown;
@@ -26,7 +27,7 @@ public class UiInput : MonoBehaviour
     {
         // Getting GamePadMove script for Function calling
         g = c.GetComponent<GamePadMove>();
-
+        paused = player.GetComponent<PauseActivate>().paused;
         #region Gamepad Cursor Move
 
         input.UI.LSLeft.started += OnMoveLeft;
@@ -52,14 +53,13 @@ public class UiInput : MonoBehaviour
         #endregion
 
         #region Cursor Activate
-        input.UI.Controller.started += ActivateController;
-        input.UI.Controller.performed += ActivateController;
-        input.UI.Controller.canceled += ActivateController;
+            input.UI.Controller.started += ActivateController;
+            input.UI.Controller.performed += ActivateController;
+            input.UI.Controller.canceled += ActivateController;
 
-        input.UI.Keyboard.started += DeactivateController;
-        input.UI.Keyboard.performed += DeactivateController;
-        input.UI.Keyboard.canceled += DeactivateController;
-
+            input.UI.Keyboard.started += DeactivateController;
+            input.UI.Keyboard.performed += DeactivateController;
+            input.UI.Keyboard.canceled += DeactivateController;
         #endregion
 
         #region Cursor Click
@@ -92,7 +92,10 @@ public class UiInput : MonoBehaviour
     #region Activate Cursor
     void ActivateController(InputAction.CallbackContext context)
     {
-        g.ActivateController();
+        if (paused)
+        {
+            g.ActivateController();
+        }
     }
     void DeactivateController(InputAction.CallbackContext context)
     {
