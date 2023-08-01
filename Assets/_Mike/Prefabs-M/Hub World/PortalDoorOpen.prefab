@@ -203,8 +203,9 @@ GameObject:
   - component: {fileID: 2780539804052924614}
   - component: {fileID: 2780539804052924615}
   - component: {fileID: 2780539804052924613}
+  - component: {fileID: 6456741317924231516}
   m_Layer: 0
-  m_Name: portal
+  m_Name: portal location script
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -288,3 +289,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.2204466e-16, z: 10.000002}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6456741317924231516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2780539804052924610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07d55a1c33f049448a01364ebdc4a434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  location: 0
