@@ -10,7 +10,7 @@ public class FollowAndOrbitCam : MonoBehaviour
 
     [SerializeField, Range(1f, 20f)]
     [Tooltip("Apply off set distance to the camera.")]
-    float distance = 5f;
+    public float distance = 5f;
 
     [SerializeField, Min(0f)]
     [Tooltip("Camera focus radius" + "This allow us to make the camera focus radius bigger or smaller")]

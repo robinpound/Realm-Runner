@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class AimCameraControl : MonoBehaviour
 {
+    FollowAndOrbitCam cam;
     // public GameObject camFollow;
     [Tooltip("Aim camera to be added from Player / CamwerasNew / AimCam")]
     public GameObject aimCam;
@@ -34,6 +35,7 @@ public class AimCameraControl : MonoBehaviour
         input = GetComponent<ActionInputs>();
         animator = GetComponent<Animator>();
         cameraTransform = Camera.main.transform;
+        cam = GetComponent<FollowAndOrbitCam>();
         rig.weight = 0f;
 
     }
@@ -52,17 +54,19 @@ public class AimCameraControl : MonoBehaviour
     public void CameraAimToggle()
     {
         //These inputs needs to be replaced for the new iput system mouse buttons
-        if (mouse && !aimCam.activeInHierarchy)
+        if (mouse)
         {
-            aimCam.SetActive(true);
+            //aimCam.SetActive(true);
+            cam.distance = 3f;
             animator.SetBool("aiming", true);
             reticle.SetActive(true);
             rig.weight = 1f;
             
         }
-        if (!mouse && aimCam.activeInHierarchy)
+        if (!mouse)
         {
-            aimCam.SetActive(false);
+            //aimCam.SetActive(false);
+            cam.distance = 5f;
             animator.SetBool("aiming", false);
             reticle.SetActive(false);
             rig.weight = 0f;
