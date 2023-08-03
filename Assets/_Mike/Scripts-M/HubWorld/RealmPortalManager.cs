@@ -8,10 +8,10 @@ using UnityEngine.SceneManagement;
 public class RealmPortalManager : MonoBehaviour
 {
     
-    public enum PortalLocationSM { hubWorld, tutorialLevel, forestLevel, bossRealm }
+    private enum PortalLocationSM { hubWorld, tutorialLevel, forestLevel, bossRealm }
     [Header("Portal Location Settings")]
     [Tooltip("Set which level this portal will load into.")]
-    public PortalLocationSM location;
+    [SerializeField] private PortalLocationSM location;
 
     private const string PLAYERTAG = "Player";
 
