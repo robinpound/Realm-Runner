@@ -25,9 +25,7 @@ public class miniboss : MonoBehaviour
     public GameObject spawnpoint;
 
     [SerializeField] private bool isDoingSomething = false;
-
-    
-    
+ 
     private enum EnemyState
     {
         waiting, 
@@ -51,20 +49,14 @@ public class miniboss : MonoBehaviour
 
     private void FixedUpdate() {
 
-        //bool needsHealing = temporaryHealth < 25; // CHANGE-TO: randomiser + if (references.health.healthpoints <= (totalhealth * 0.2))
-        //bool needsLeaping = temporaryHealth < 50; // CHANGE-TO: randomiser + ... ???
-
         bool isLowHealth = health.GetCurrentHealth() < healingMinHealth;
         bool inAlertRange = Vector3.Distance(transform.position, playerTransform.position) <= alertDistance;
         bool inShootRange = Vector3.Distance(transform.position, playerTransform.position) <= shootingDistance;
         
-        //Debug.Log(inAlertRange + " : " + alertDistance + " --- Distance:" + Vector3.Distance(transform.position, playerTransform.position));
-        
-        if (inAlertRange & !isDoingSomething) currentState = EnemyState.MovingTo;
-        if (inShootRange & !isDoingSomething) currentState = EnemyState.Shooting;
-        if (isDoingSomething) currentState = EnemyState.waiting; 
-            
-        if (isLowHealth) Heal(); 
+        if (isLowHealth) currentState = EnemyState.Healing; 
+        else if (isDoingSomething) currentState = EnemyState.waiting; 
+        else if (inShootRange & !isDoingSomething) currentState = EnemyState.Shooting;
+        else if (inAlertRange & !isDoingSomething) currentState = EnemyState.MovingTo;
         
         switch (currentState)
         {
@@ -76,8 +68,8 @@ public class miniboss : MonoBehaviour
                 UpdateNavPath();
                 break;
             case EnemyState.Shooting:
-                LookAtPlayer();
                 Shoot();
+                UpdateNavPath();
                 break;
             case EnemyState.Healing:
                 Heal(); 
@@ -90,9 +82,9 @@ public class miniboss : MonoBehaviour
         if(Time.time >= pathUpdateDeadLine) 
         {
             pathUpdateDeadLine = Time.time + references.pathUpdateDelay;
-            
+            references.navMA.SetDestination(playerTransform.position);
         }
-        references.navMA.SetDestination(playerTransform.position);
+        
     }
 
     private void LookAtPlayer() {
@@ -107,7 +99,6 @@ public class miniboss : MonoBehaviour
         if (Time.time >= attackDeadLine)
         {
             Instantiate(missile, spawnpoint.transform.position, Quaternion.identity);
-            references.navMA.SetDestination(transform.position);
             attackDeadLine = Time.time + references.attackDelay;
         }
     }
@@ -132,7 +123,10 @@ public class miniboss : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        Debug.Log("HIT by somehting");
-        health.TakeDamage(10);
+        
+        if(other.tag == "Arrow" || other.tag == "Missile") {
+            Debug.Log("BOSS Hit by: " + other);
+            health.TakeDamage(10);
+        }
     }
 }

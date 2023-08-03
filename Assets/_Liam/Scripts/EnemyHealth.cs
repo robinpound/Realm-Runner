@@ -31,12 +31,7 @@ public class EnemyHealth : MonoBehaviour
         Debug.Log("Enemy Died");
         //Play Death Animation
         if(Deathexplosion != null) Instantiate(Deathexplosion, transform.position, Quaternion.identity);
-        
-        
-        // Disable the Enemy
         gameObject.SetActive(false);
-        
-        
     }
     public int GetCurrentHealth() {return currentHealth;}
     public void AddCurrentHealth(int health) {currentHealth += health;}
