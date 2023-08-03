@@ -8,15 +8,27 @@ using UnityEngine.SceneManagement;
 public class RealmPortalManager : MonoBehaviour
 {
     
-    private enum PortalLocationSM { hubWorld, tutorialLevel, forestLevel, bossRealm }
+    private enum PortalDestinationSM { hubWorld, tutorialLevel, forestLevel, bossRealm }
     [Header("Portal Location Settings")]
     [Tooltip("Set which level this portal will load into.")]
-    [SerializeField] private PortalLocationSM location;
+    [SerializeField] private PortalDestinationSM destination;
 
+    [Header("Portal Type Settings")]
+    [Tooltip("Set to false to manually select destination of this portal. " +
+        "When set to true this portals destination will be set to the Hub World")]
+    [SerializeField] private bool isEndOfLevelPortal = false;
     private const string PLAYERTAG = "Player";
+    private void Start()
+    {
+        if (isEndOfLevelPortal)
+        {
+            destination = PortalDestinationSM.hubWorld;
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.gameObject.CompareTag(PLAYERTAG))
         {
             ActivatePortal();
@@ -25,20 +37,20 @@ public class RealmPortalManager : MonoBehaviour
 
     private void ActivatePortal()
     {
-        switch (location)
+        switch (destination)
         {
-            case PortalLocationSM.hubWorld:
+            case PortalDestinationSM.hubWorld:
                 SceneManager.LoadScene(1);
                 break;
-            case PortalLocationSM.tutorialLevel:
+            case PortalDestinationSM.tutorialLevel:
                 SceneManager.LoadScene(2);
                 break;
 
-            case PortalLocationSM.forestLevel:
+            case PortalDestinationSM.forestLevel:
                 SceneManager.LoadScene(3);
                 break;
 
-            case PortalLocationSM.bossRealm:
+            case PortalDestinationSM.bossRealm:
                 SceneManager.LoadScene(4);
                 break;
 
