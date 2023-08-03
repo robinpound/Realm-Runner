@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 936657894}
   m_Layer: 0
   m_Name: Missile
-  m_TagString: Untagged
+  m_TagString: Missile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4865,7 +4865,9 @@ MonoBehaviour:
   rotationSpeed: 1
   wiggleSpeed: 5
   wiggleMagnitude: 0.2
-  explosion: {fileID: 6785717962944446231, guid: 2c15f3e42e92504439eb4c3e5c768b5a, type: 3}
+  attackDamage: 1
+  explosion: {fileID: 6785717962944446231, guid: 2c15f3e42e92504439eb4c3e5c768b5a,
+    type: 3}
 --- !u!1 &6504096158808031949
 GameObject:
   m_ObjectHideFlags: 0
@@ -5229,6 +5231,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 91a268ff863283649ae6dce76cf7ea65, type: 3}
 --- !u!4 &6528760838386488043 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 4632165483495388, guid: 91a268ff863283649ae6dce76cf7ea65, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4632165483495388, guid: 91a268ff863283649ae6dce76cf7ea65,
+    type: 3}
   m_PrefabInstance: {fileID: 6524209023693958455}
   m_PrefabAsset: {fileID: 0}
