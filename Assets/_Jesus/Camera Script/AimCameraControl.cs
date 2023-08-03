@@ -52,17 +52,18 @@ public class AimCameraControl : MonoBehaviour
     public void CameraAimToggle()
     {
         //These inputs needs to be replaced for the new iput system mouse buttons
-        if (mouse && !aimCam.activeInHierarchy)
+        if (mouse)
         {
-            aimCam.SetActive(true);
+            RotatePlayerToAimPosition();
+            //aimCam.SetActive(true);
             animator.SetBool("aiming", true);
             reticle.SetActive(true);
             rig.weight = 1f;
             
         }
-        if (!mouse && aimCam.activeInHierarchy)
+        if (!mouse )
         {
-            aimCam.SetActive(false);
+            //aimCam.SetActive(false);
             animator.SetBool("aiming", false);
             reticle.SetActive(false);
             rig.weight = 0f;
