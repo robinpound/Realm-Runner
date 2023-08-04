@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Breakablerock : MonoBehaviour
 {
@@ -23,10 +25,16 @@ public class Breakablerock : MonoBehaviour
     private Transform spawnPosition;
     private bool isDestroyed = false;
     private List<GameObject> spawnedPieces = new List<GameObject>();
+    private AudioManager audioManager;
+
+    [Header("Event to show VCam3")]
+    [SerializeField] private UnityEvent showVCam3;
+    [SerializeField] private bool isThroneRoomDoor = false;
 
     private void Start()
     {
         health = maxHealth;
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void TakeDamage(int damage)
@@ -35,8 +43,17 @@ public class Breakablerock : MonoBehaviour
 
         if (health <= 0 && !isDestroyed)
         {
+            ShowCameraToThroneRoom();
             Destroy();
             isDestroyed = true;
+        }
+    }
+
+    public void ShowCameraToThroneRoom()
+    {
+        if (isThroneRoomDoor)
+        {
+            showVCam3.Invoke();
         }
     }
 
@@ -45,23 +62,13 @@ public class Breakablerock : MonoBehaviour
         Destroy(rockToDestroy);
         Destroy(gameObject);
         //Debug.Log("Block broken into " + numberOfBreakablePieces + "Pieces");
-        // Instantiate small pieces that will fly in different directions
         for (int i = 0; i < numberOfBreakablePieces; ++i)
         {
             GameObject piece = Instantiate(breakablePiece, spawnPosition.position, Quaternion.identity);
             spawnedPieces.Add(piece);
         }
-        //DeSpawnPieces();
     }
-    // Not working atm
-    private void DeSpawnPieces()
-    {
-        for (int i = 0; i < spawnedPieces.Count; ++i)
-        {
-            Destroy(spawnedPieces[i]);
-        }
-
-    }
+    
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -69,14 +76,18 @@ public class Breakablerock : MonoBehaviour
         {
             int damage = 1;
             TakeDamage(damage);
-            PlayDestroySound();
+            PlaySounds();
         }
         
     }
 
-    private void PlayDestroySound()
+    private void PlaySounds()
     {
-        FindObjectOfType<AudioManager>().PlaySound("RockBlowUp");
+        if (audioManager)
+        {
+            audioManager.PlaySound("RockBlowUp");
+            audioManager.PlaySound("Triumph");
+        }
         
     }
 

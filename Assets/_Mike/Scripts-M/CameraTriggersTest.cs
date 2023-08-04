@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class CameraTriggersTest : MonoBehaviour
 {
-    [SerializeField] private UnityEvent showVCam1, showVCam2;
+    [SerializeField] private UnityEvent showVCam1, showVCam2, showVCam3;
 
     private void Update()
     {
@@ -16,6 +16,10 @@ public class CameraTriggersTest : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             showVCam2.Invoke();
+        }
+        if (Input.GetKeyDown(KeyCode.I)) 
+        {
+            showVCam3.Invoke();
         }
     }
 }

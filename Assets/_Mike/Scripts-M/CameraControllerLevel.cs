@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraControllerLevel : MonoBehaviour
 {
     [Header("Set cameras")]
-    [SerializeField] private GameObject vcam1, vcam2;
+    [SerializeField] private GameObject vcam1, vcam2, vcam3;
     [Header("Set timer in seconds")]
     [SerializeField] private float timer = 2f;
 
@@ -25,6 +25,16 @@ public class CameraControllerLevel : MonoBehaviour
         {
             vcam2.SetActive(true);
             StartCoroutine(Timer(vcam2));
+        }
+        else Debug.LogWarning("Vcam 2 field not set in CameraControllerLevel");
+    }
+
+    public void ShowCam3()
+    {
+        if (vcam2 != null)
+        {
+            vcam3.SetActive(true);
+            StartCoroutine(Timer(vcam3));
         }
         else Debug.LogWarning("Vcam 2 field not set in CameraControllerLevel");
     }
