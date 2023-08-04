@@ -28,13 +28,13 @@ public class PauseActivate : MonoBehaviour
         if(paused == false)
         {
             paused = true;
-            Debug.Log("Paused!");
+            //Debug.Log("Paused!");
             canvas.GetComponent<PauseMenu>().Pause();
         }
         else if (paused == true)
         {
             paused = false;
-            Debug.Log("Un-Paused!");
+            //Debug.Log("Un-Paused!");
             canvas.GetComponent<PauseMenu>().Resume();
         }
     }
