@@ -8,6 +8,7 @@ using UnityEngine;
 public class FragmentCollectable : MonoBehaviour
 {
     private GameObject player;
+    private GameObject gameManager;
     [SerializeField] GameManager _gameManager;
     private const string PLAYERTAG = "Player", GAMEMANAGERTAG = "GameManager";
     
@@ -15,6 +16,8 @@ public class FragmentCollectable : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag(PLAYERTAG);
+        gameManager = GameObject.FindGameObjectWithTag(GAMEMANAGERTAG);
+        _gameManager = gameManager.GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -31,6 +34,7 @@ public class FragmentCollectable : MonoBehaviour
             PlayPickUpSound();
             //FragmentCollected();
             GameObject.Destroy(gameObject);
+            _gameManager.fragments++;
         }
     }
 

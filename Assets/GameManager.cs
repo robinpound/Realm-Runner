@@ -9,6 +9,7 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+
     private string savePath; // Path to the JSON save file
     private GameObject player;
     [SerializeField] private GameObject portalDoor;
@@ -17,8 +18,8 @@ public class GameManager : MonoBehaviour
     public int deathCount;
     public int coins;
     public int fragments;
-    public int currentLevel;
     public int currentCheckpoint;
+
     // Do once
     private bool isPortalOpened = false; 
     public bool isPlatformRaised = false; 
@@ -67,9 +68,11 @@ public class GameManager : MonoBehaviour
         return coins;
     }
 
+    public int GetFragments () { return fragments; }
+
     public void SaveProgress()
     {
-        PlayerProgressData progressData = new PlayerProgressData(coins, fragments, currentLevel, currentCheckpoint, deathCount); // Create a data object with the player's progress
+        PlayerProgressData progressData = new PlayerProgressData(coins, fragments, currentCheckpoint, deathCount); // Create a data object with the player's progress
         string jsonData = JsonUtility.ToJson(progressData); // Convert the data object to JSON
         File.WriteAllText(savePath, jsonData); // Write the JSON data to the save file
     }
@@ -81,7 +84,6 @@ public class GameManager : MonoBehaviour
             PlayerProgressData progressData = JsonUtility.FromJson<PlayerProgressData>(jsonData); // Convert the JSON data to a data object
             coins = progressData.coins; // Set the player's progress based on the data object
             fragments = progressData.fragments;
-            currentLevel = progressData.currentLevel;
             currentCheckpoint = progressData.currentCheckpoint;
             deathCount = progressData.deathCount;
         }
@@ -92,15 +94,13 @@ public class PlayerProgressData
 {
     public int coins;
     public int fragments;
-    public int currentLevel;
     public int currentCheckpoint;
     public int deathCount;
-    public PlayerProgressData(int coins, int fragments, int currentLevel, int currentCheckpoint, int deathCount)
+    public PlayerProgressData(int coins, int fragments, int currentCheckpoint, int deathCount)
     {
         this.coins = coins;
         this.fragments = fragments;
-        this.currentLevel = currentLevel;
         this.currentCheckpoint = currentCheckpoint;
         this.deathCount = deathCount;
-    }
+    }   
 }
