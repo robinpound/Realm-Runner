@@ -4535,32 +4535,32 @@ PrefabInstance:
     - target: {fileID: 2577028663783971901, guid: b16ea897b1f101440a0277ac99f52a1d,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 2.2262135
       objectReference: {fileID: 0}
     - target: {fileID: 2577028663783971901, guid: b16ea897b1f101440a0277ac99f52a1d,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.619208
+      value: 1.2015675
       objectReference: {fileID: 0}
     - target: {fileID: 2577028663783971901, guid: b16ea897b1f101440a0277ac99f52a1d,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.8049476
+      value: 2.0814707
       objectReference: {fileID: 0}
     - target: {fileID: 2577028663783971901, guid: b16ea897b1f101440a0277ac99f52a1d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.998
+      value: 19.939
       objectReference: {fileID: 0}
     - target: {fileID: 2577028663783971901, guid: b16ea897b1f101440a0277ac99f52a1d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.2919924
+      value: 1.381
       objectReference: {fileID: 0}
     - target: {fileID: 2577028663783971901, guid: b16ea897b1f101440a0277ac99f52a1d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.006223
+      value: 6.0054
       objectReference: {fileID: 0}
     - target: {fileID: 2577028663783971901, guid: b16ea897b1f101440a0277ac99f52a1d,
         type: 3}
@@ -9545,6 +9545,25 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1314729186 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7677299400744006471, guid: b16ea897b1f101440a0277ac99f52a1d,
+    type: 3}
+  m_PrefabInstance: {fileID: 709977235}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1314729188
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314729186}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.928021, y: 2.5750713, z: 0.70964766}
+  m_Center: {x: -0.035989724, y: -0.04063077, z: -0.035155866}
 --- !u!1001 &1333317381
 PrefabInstance:
   m_ObjectHideFlags: 0
