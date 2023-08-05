@@ -36,20 +36,20 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-
+        Debug.Log(fragments);
         //portalDoor = GameObject.Find("Portal door");
         if (portalDoor == null)
         {
             portalDoor = GameObject.Find(PORTALDOOR);
             portalDoor.SetActive(false);
-        } else return;
+        } 
         
-        if (fragments == 2)
+        if (fragments == 2 && !isPlatformRaised)
         {
-            
+            Debug.Log("2 fragments collected");
             raisePlatform.Invoke();
             ui.PathToCastleMessage();
-            //isPlatformRaised = true;
+            isPlatformRaised = true;
         }
             
         if (fragments == 3 && !isPortalOpened)
