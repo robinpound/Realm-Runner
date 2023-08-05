@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.VisualScripting;
 using System.Runtime.CompilerServices;
+using UnityEngine.Events;
 
 public class ShootingTimeTrialManager : MonoBehaviour
 {
@@ -26,12 +27,13 @@ public class ShootingTimeTrialManager : MonoBehaviour
     [SerializeField]
     private float timeRemaining = 10f;
 
+    [Header("Events")]
+    [SerializeField] UnityEvent lightUpStatue;
     // Change isTrialRunning bool to event later.
     public bool isTrialRunning = false; // Only read in interact to stop trial being played more than once at one time.
-    [SerializeField]
-    private bool fragmentSpawned = false; // Dont spawn fragment again
-    private bool isTimerSoundPlaying = false; // Dont play timer sound more than once.
-    private bool isWinSoundPlaying = false; // Dont play win sound more than once.
+    private bool fragmentSpawned = false; // Do once
+    private bool isTimerSoundPlaying = false;
+    private bool isWinSoundPlaying = false;
 
     private AudioSource timerSound;
 
@@ -44,8 +46,6 @@ public class ShootingTimeTrialManager : MonoBehaviour
         ui = FindObjectOfType<UIManager>();
 
         timerSound = GetComponent<AudioSource>(); // Change later!!
-        
-
     }
 
     private void Update()
@@ -70,6 +70,7 @@ public class ShootingTimeTrialManager : MonoBehaviour
         PlayPuzzleCompleteSound();
         ui.PlayerWinsShootingTrail(); // Show winning text in player UI.
         Invoke(nameof(ResetTrial), .1f);
+        lightUpStatue.Invoke();
         if (!fragmentSpawned)
         {
             SpawnFragment();
@@ -92,7 +93,6 @@ public class ShootingTimeTrialManager : MonoBehaviour
 
     }
 
-    // Timer for time trial
     public void Timer()
     {
         Debug.Log("Timer is running");
@@ -130,8 +130,6 @@ public class ShootingTimeTrialManager : MonoBehaviour
         {
             isTimerSoundPlaying = true;
             timerSound.Play();
-            //FindObjectOfType<AudioManager>().PlaySound("TimerClockTicking"); Change back to audio manager from audio source later.
-            //Debug.Log(isTimerSoundPlaying + " time trial sound has played");
         }
     }
 
@@ -159,10 +157,7 @@ public class ShootingTimeTrialManager : MonoBehaviour
 
     private void ResetTrial()
     {
-        //isTrialRunning = false;
         points = 0;
-        // Destroy all current targets that if they exist
-       
-        
+        // Add Destroy all current targets that if they currently exist.
     }
 }

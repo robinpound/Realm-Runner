@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4238184929185216822}
   - component: {fileID: 2582425660069677685}
   - component: {fileID: 3303623211285969226}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cone (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,7 +332,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 9871
+  m_VersionIndex: 9877
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 2937840071257912066}
   - component: {fileID: 4011086200854488307}
   - component: {fileID: 7480214242402423968}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cone (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -749,7 +749,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 9874
+  m_VersionIndex: 9883
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -847,7 +847,7 @@ GameObject:
   - component: {fileID: 391931696474225981}
   - component: {fileID: 4954919740336825724}
   - component: {fileID: 7165442619676408671}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cone (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1166,7 +1166,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 9868
+  m_VersionIndex: 9874
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1264,7 +1264,7 @@ GameObject:
   - component: {fileID: 1522134563949739787}
   - component: {fileID: 8856448742780352728}
   - component: {fileID: 3187739518549584792}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cone (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1583,7 +1583,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 9871
+  m_VersionIndex: 9880
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1681,7 +1681,7 @@ GameObject:
   - component: {fileID: 4396290740552570955}
   - component: {fileID: 7963644409982576664}
   - component: {fileID: 7294064723383897620}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cone (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2000,7 +2000,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 9874
+  m_VersionIndex: 9883
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2094,9 +2094,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2577028663783971901}
-  - component: {fileID: 1009994028271354415}
-  - component: {fileID: 2182484297536758275}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Fragment Statue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2112,7 +2110,7 @@ Transform:
   m_GameObject: {fileID: 7677299400744006471}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.424, y: 2.003, z: 0}
-  m_LocalScale: {x: 1.0695387, y: 0.57726854, z: 1}
+  m_LocalScale: {x: 3.0278034, y: 1.5569509, z: 2.5695891}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2845855415340008586}
@@ -2121,33 +2119,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1009994028271354415
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7677299400744006471}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.80119586, y: 2.9556317, z: 0.79201365}
-  m_Center: {x: -0.02159254, y: 0.25515297, z: -0.002218604}
---- !u!114 &2182484297536758275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7677299400744006471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2eb7bf15bac216458309e40d573a8e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lightUpStatue: {fileID: 0}
-  rockStatue: {fileID: 0}
 --- !u!1 &7948970435578713802
 GameObject:
   m_ObjectHideFlags: 0
@@ -2157,7 +2128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4057471705290084514}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Fragment Inside
   m_TagString: Untagged
   m_Icon: {fileID: 0}
