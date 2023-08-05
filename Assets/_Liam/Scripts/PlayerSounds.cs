@@ -18,17 +18,12 @@ public class PlayerSounds : MonoBehaviour
     [SerializeField] AudioClip footStep1;
     [Tooltip("Assign FootStep Clip 2 Here!")]
     [SerializeField] AudioClip footStep2;
-    [Tooltip("Assign Jump Launch Clip Here!")]
-    [SerializeField] AudioClip jumpLaunch;
-    [SerializeField] AudioClip jumpLand;
 
     [Header("Can Touch!")]
     [Header("Bools for Movement")]
 
     [Tooltip("This bool is collected from the player movement script, so it is true and false when that script is")]
     [SerializeField] bool isWalking;
-    [Tooltip("This bool is collected from the player movement script, so it is true and false when that script is")]
-    [SerializeField] bool isJumping;
     [Tooltip("This float is so the script knows when it can start a sound for the player.")]
     public float timer;
 
@@ -36,7 +31,6 @@ public class PlayerSounds : MonoBehaviour
     [Tooltip("Add new event, assign the player, select PlayerSounds script and select StartJump or StartFootsteps functions," +
         " depending on the event obviously.")]
     [SerializeField] private int EventToolTip;
-    [SerializeField] private UnityEvent jump;
     [SerializeField] private UnityEvent footsteps;
 
 
@@ -53,24 +47,10 @@ public class PlayerSounds : MonoBehaviour
     void Update()
     {
         isWalking = player.GetComponent<ActionInputs>().isMovementPressed;
-        isJumping = player.GetComponent<ActionInputs>().isJumpPressed;
-        if (animator.GetBool("jump") == true)
-        {
-            jump.Invoke();
-        }
-        else if(animator.GetBool("run") == true && timer ==0)
+        if(animator.GetBool("run") == true && timer ==0)
         {
             footsteps.Invoke();
         }
-        
-        //if(isWalking && isJumping && timer == 0)
-        //{
-        //    jump.Invoke();
-        //}
-        //else if(isWalking && !isJumping && timer == 0)
-        //{
-        //    footsteps.Invoke();
-        //}
     }
     private void Reset()
     {
@@ -82,12 +62,6 @@ public class PlayerSounds : MonoBehaviour
         StartCoroutine(Footsteps());
         Invoke(nameof(Reset), 0.5f);
     }
-    public void StartJump()
-    {
-        timer = 1;
-        Jump();
-        Invoke(nameof(Reset), 0.5f);
-    }
     IEnumerator Footsteps()
     {
         audios.clip = footStep1;
@@ -96,10 +70,5 @@ public class PlayerSounds : MonoBehaviour
         audios.clip = footStep2;
         audios.Play();
         
-    }
-    void Jump()
-    {
-        audios.clip = jumpLaunch;
-        audios.Play();
     }
 }
