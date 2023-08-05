@@ -21,7 +21,6 @@ public class FindTargetSpawnPoint : MonoBehaviour
     private bool shuffleList;
     // List used to shuffle and choose random spawn order of targets.
     private List<int> indexNumbers = new List<int> { 0, 1, 2, 3, 4, 5};
-    [SerializeField]
     private ShootingTimeTrialManager manager;
     private bool startTrial = false;
     
