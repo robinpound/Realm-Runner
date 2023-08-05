@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour
         coins = 0;
         fragments = 0;
         savePath = Application.persistentDataPath + "/playerProgress.json"; // Set the path to the JSON save file
+        if(!portalDoor) 
+            Debug.LogWarning("Portal Door Not Found");
+            return;
     }
 
     private void Update()

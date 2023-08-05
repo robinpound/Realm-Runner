@@ -46,7 +46,7 @@ public class MainMenu : MonoBehaviour
     // Function to start the game, by loading the relevant starting scene
     public void Begin()
     {
-        SceneManager.LoadScene("New Boss Realm (Boss Only)");
+        SceneManager.LoadScene("TutorialRobinRealm");
         Time.timeScale = 1;
     }
     // Function to Load Game, using persistent data
@@ -54,7 +54,7 @@ public class MainMenu : MonoBehaviour
     {
         // Link to Load Function
         gameManager.GetComponent<GameManager>().LoadProgress();
-        SceneManager.LoadScene("New Boss Realm (Boss Only)");
+        SceneManager.LoadScene("Hub Level With Assets");
         Time.timeScale = 1;
     }
     // Function to open and close the Options page
