@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class HubPortalManager : MonoBehaviour
 {
-    [SerializeField] private int currentFragments; //Change to reference the game manager
+    [SerializeField] private int fragmentsRequired = 4; // 1 tutorial level + 3 Forest level.
+    [SerializeField] private int currentFragments;
     [SerializeField] private GameObject bossPortalDoorClosed,bossPortalDoorOpen;
-    [SerializeField] private GameManager gameManager;
     //[SerializeField] private bool hasPlayerReachedCastle = false; // add in later.
-    private int fragmentsRequired = 3;
+    
     private bool isDoorOpen = false; // Do once
 
     private void Update()
     {
-        currentFragments = gameManager.GetFragments();
+        currentFragments = GameManager.Instance.GetFragments();
         if (currentFragments >= fragmentsRequired && !isDoorOpen)
         {
             OpenBossRealmPortal();

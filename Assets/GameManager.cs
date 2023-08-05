@@ -2,29 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using UnityEngine.SceneManagement;
-using UnityEngine.Events;
 
 // Edited by Mike & Liam.
 
 public class GameManager : MonoBehaviour
 {
-
+    public static GameManager Instance { get; private set; } // Singleton
     private string savePath; // Path to the JSON save file
     private GameObject player;
-    //[SerializeField] private GameObject portalDoor;
-    [SerializeField] private UIManager ui;
-    [SerializeField] private UnityEvent raisePlatform;
     public int deathCount;
     public int coins;
     public int fragments;
     public int currentCheckpoint;
 
-    // Do once
-    private bool isPortalOpened = false; 
-    public bool isPlatformRaised = false; 
-
     private const string PLAYERTAG = "Player", PORTALDOOR = "PortalDoor";
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -33,35 +38,6 @@ public class GameManager : MonoBehaviour
         coins = 0;
         fragments = 0;
         savePath = Application.persistentDataPath + "/playerProgress.json"; // Set the path to the JSON save file
-    }
-
-    private void Update()
-    {
-        /*
-        Debug.Log(fragments);
-        //portalDoor = GameObject.Find("Portal door");
-        if (portalDoor == null)
-        {
-            portalDoor = GameObject.Find(PORTALDOOR);
-            portalDoor.SetActive(false);
-        } 
-        */
-        
-        if (fragments == 2 && !isPlatformRaised)
-        {
-            Debug.Log("2 fragments collected");
-            raisePlatform.Invoke();
-            ui.PathToCastleMessage();
-            isPlatformRaised = true;
-        }
-            
-        if (fragments == 3 && !isPortalOpened)
-        {
-            isPortalOpened = true;
-            //portalDoor.SetActive(true);
-            ui.TellPlayerPortalIsOpen();
-        }
-        DontDestroyOnLoad(gameObject);
     }
 
     public int CoinCollected(int coinValue)

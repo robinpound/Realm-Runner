@@ -2750,6 +2750,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bbc1d179b26f349bbaca91b9ad526f28, type: 2}
+    - target: {fileID: 6096148584733901528, guid: 8b892482b6141c541aefc99ae39fda0c,
+        type: 3}
+      propertyPath: destination
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6456741317924231516, guid: 8b892482b6141c541aefc99ae39fda0c,
         type: 3}
       propertyPath: location
@@ -3130,6 +3135,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6096148584733901528, guid: 8b892482b6141c541aefc99ae39fda0c,
+        type: 3}
+      propertyPath: destination
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b892482b6141c541aefc99ae39fda0c, type: 3}
@@ -9468,11 +9478,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd2c0ecacb23afe42bb6962cf71dd58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fragmentsRequired: 3
   currentFragments: 0
   bossPortalDoorClosed: {fileID: 914811513}
   bossPortalDoorOpen: {fileID: 481907164}
-  gameManager: {fileID: 0}
-  hasPlayerReachedCastle: 0
 --- !u!4 &1310601521
 Transform:
   m_ObjectHideFlags: 0
@@ -14890,16 +14899,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86469a1212881d94f9636710b4c195ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portalDoor: {fileID: 0}
-  ui: {fileID: 0}
-  raisePlatform:
-    m_PersistentCalls:
-      m_Calls: []
   deathCount: 0
   coins: 0
   fragments: 0
   currentCheckpoint: 0
-  isPlatformRaised: 0
 --- !u!4 &1979141974
 Transform:
   m_ObjectHideFlags: 0
@@ -19246,6 +19249,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bbc1d179b26f349bbaca91b9ad526f28, type: 2}
+    - target: {fileID: 6096148584733901528, guid: 8b892482b6141c541aefc99ae39fda0c,
+        type: 3}
+      propertyPath: destination
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6456741317924231516, guid: 8b892482b6141c541aefc99ae39fda0c,
         type: 3}
       propertyPath: location

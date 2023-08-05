@@ -5,9 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class RealmPortalManager : MonoBehaviour
+public class RealmPortalDestinationSetter : MonoBehaviour
 {
-    
     private enum PortalDestinationSM { hubWorld, tutorialLevel, forestLevel, bossRealm }
     [Header("Portal Location Settings")]
     [Tooltip("Set which level this portal will load into.")]
@@ -39,10 +38,11 @@ public class RealmPortalManager : MonoBehaviour
     {
         switch (destination)
         {
-            case PortalDestinationSM.hubWorld:
+            case PortalDestinationSM.tutorialLevel:
                 SceneManager.LoadScene(1);
                 break;
-            case PortalDestinationSM.tutorialLevel:
+
+            case PortalDestinationSM.hubWorld:
                 SceneManager.LoadScene(2);
                 break;
 
