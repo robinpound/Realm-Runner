@@ -20,7 +20,6 @@ public class PauseMenu : MonoBehaviour
         // Grabbing the in-game objects
         player = GameObject.FindGameObjectWithTag("Player");
         gameManager = GameObject.FindGameObjectWithTag("GameManager");
-        camera = GameObject.FindGameObjectWithTag("MainCamera");
         // Setting Pause Menu it inactive
         pauseMenu.SetActive(false);
         options[0].SetActive(false); //Main Options
@@ -40,8 +39,6 @@ public class PauseMenu : MonoBehaviour
         // Un-Locking Cursor, setting to visible, and stopping time so player doesn't get attacked whilst paused.
         Cursor.visible = true;
         Time.timeScale = 0;
-        Cursor.lockState = CursorLockMode.None;
-        camera.GetComponent<FollowAndOrbitCam>().enabled = false;
     }
     // Function to resume game
     public void Resume()
@@ -54,7 +51,6 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = false;
         // Setting pause bool to false
         player.GetComponent<PauseActivate>().paused = false;
-        camera.GetComponent<FollowAndOrbitCam>().enabled = true;
         // Setting player UI and options menu to inactive
         #region PM UI
         playerUI.SetActive(true);

@@ -5,13 +5,17 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private GameObject[] fragments;
     private GameObject gameManager;
     private GameManager _gameManager;
     private const string GAMEMANAGERTAG = "GameManager";
 
     [Header("Text Debugs")]
     [SerializeField]
-    private TextMeshProUGUI coins, fragments;
+    private TextMeshProUGUI coins;
+    [SerializeField] private int fragmentsCollected;
+
+    [SerializeField] private int arraypos;
 
     [SerializeField]
     private TextMeshProUGUI timeRemaining, success, portalIsOpen, pressE, pathToCastleIsOpen;
@@ -28,7 +32,36 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         coins.text = _gameManager.coins.ToString();
-        fragments.text = _gameManager.fragments.ToString();
+        fragmentsCollected = _gameManager.fragments;
+        Fragment();
+    }
+
+    private void Fragment()
+    {
+        if(fragmentsCollected == 1)
+        {
+            fragments[0].SetActive(true);
+        }
+        else if (fragmentsCollected == 2)
+        {
+            fragments[1].SetActive(true);
+        }
+        else if (fragmentsCollected == 3)
+        {
+            fragments[2].SetActive(true);
+        }
+        else if (fragmentsCollected == 4)
+        {
+            fragments[3].SetActive(true);
+        }
+        else if (fragmentsCollected == 5)
+        {
+            fragments[4].SetActive(true);
+        }
+        else if (fragmentsCollected == 6)
+        {
+            fragments[5].SetActive(true);
+        }
     }
 
     public void ShowTimer()

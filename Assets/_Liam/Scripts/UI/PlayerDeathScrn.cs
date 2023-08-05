@@ -36,6 +36,6 @@ public class PlayerDeathScrn : MonoBehaviour
 
     public void Respawn()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("HubLevelWithAssets");
     }
 }
