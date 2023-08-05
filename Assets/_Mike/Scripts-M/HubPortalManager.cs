@@ -7,22 +7,17 @@ public class HubPortalManager : MonoBehaviour
     [SerializeField] private int currentFragments; //Change to reference the game manager
     [SerializeField] private GameObject bossPortalDoorClosed,bossPortalDoorOpen;
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private bool hasPlayerReachedCastle = false;
+    //[SerializeField] private bool hasPlayerReachedCastle = false; // add in later.
+    private int fragmentsRequired = 3;
+    private bool isDoorOpen = false; // Do once
 
-    private void Start()
-    {
-        if (!gameManager)
-        {
-            Debug.LogWarning("Game manager ref not set in HubPortalManager script");
-            return;
-        }
-    }
     private void Update()
     {
-
-        if (currentFragments == 3)
+        currentFragments = gameManager.GetFragments();
+        if (currentFragments >= fragmentsRequired && !isDoorOpen)
         {
             OpenBossRealmPortal();
+            isDoorOpen= true;
         }
     }
 
@@ -34,9 +29,7 @@ public class HubPortalManager : MonoBehaviour
 
     public void ArrivedAtCastle()
     {
-        hasPlayerReachedCastle = true;
+        //hasPlayerReachedCastle = true;
         // Set portal to castle checkpoint
     }
-
-   
 }

@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     private string savePath; // Path to the JSON save file
     private GameObject player;
-    [SerializeField] private GameObject portalDoor;
+    //[SerializeField] private GameObject portalDoor;
     [SerializeField] private UIManager ui;
     [SerializeField] private UnityEvent raisePlatform;
     public int deathCount;
@@ -33,13 +33,11 @@ public class GameManager : MonoBehaviour
         coins = 0;
         fragments = 0;
         savePath = Application.persistentDataPath + "/playerProgress.json"; // Set the path to the JSON save file
-        if(!portalDoor) 
-            Debug.LogWarning("Portal Door Not Found");
-            return;
     }
 
     private void Update()
     {
+        /*
         Debug.Log(fragments);
         //portalDoor = GameObject.Find("Portal door");
         if (portalDoor == null)
@@ -47,6 +45,7 @@ public class GameManager : MonoBehaviour
             portalDoor = GameObject.Find(PORTALDOOR);
             portalDoor.SetActive(false);
         } 
+        */
         
         if (fragments == 2 && !isPlatformRaised)
         {
@@ -59,7 +58,7 @@ public class GameManager : MonoBehaviour
         if (fragments == 3 && !isPortalOpened)
         {
             isPortalOpened = true;
-            portalDoor.SetActive(true);
+            //portalDoor.SetActive(true);
             ui.TellPlayerPortalIsOpen();
         }
         DontDestroyOnLoad(gameObject);
