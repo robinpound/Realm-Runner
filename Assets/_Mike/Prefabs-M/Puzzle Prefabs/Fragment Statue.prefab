@@ -107,7 +107,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3861862477315728133}
-  - component: {fileID: 3861862477315728135}
   - component: {fileID: 3861862477315728132}
   m_Layer: 3
   m_Name: Fragment Statue
@@ -134,19 +133,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3861862477315728135
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3861862477315728138}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.80119586, y: 2.9556317, z: 0.79201365}
-  m_Center: {x: -0.02159254, y: 0.25515297, z: -0.002218604}
 --- !u!114 &3861862477315728132
 MonoBehaviour:
   m_ObjectHideFlags: 0
