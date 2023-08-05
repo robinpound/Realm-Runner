@@ -33,10 +33,12 @@ public class Tutorial : MonoBehaviour
     }
 
     // Update is called once per frame
+    /*
     void Update()
     {
         controller = g.controller;
     }
+    */
     #region Tutorial Functions
     public void Move()
     {
