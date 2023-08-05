@@ -37,7 +37,7 @@ public class PlayerJumps : MonoBehaviour
         pGravity = GetComponent<PlayerGravity>();
         doubleJumpLeft = maxDoubleJump;
         SetupJumpVariables();
-        blobShadow.SetActive(false);
+        //blobShadow.SetActive(false);
     }
     public void SetupJumpVariables()
     {
@@ -87,7 +87,7 @@ public class PlayerJumps : MonoBehaviour
             anim.animator.SetBool(anim.isJumpingHash, true);
 
             _isJumping = true;
-            blobShadow.SetActive(true);
+            //blobShadow.SetActive(true);
             pGravity._isJumpAnimating = true;
             _jumpCount += 1;
             anim.animator.SetInteger(anim.jumpCountHash, _jumpCount);
@@ -97,7 +97,7 @@ public class PlayerJumps : MonoBehaviour
         else if (!input.isJumpPressed && _isJumping && cc.IsGrounded())
         {
             _isJumping = false;
-            blobShadow.SetActive(false);
+            //blobShadow.SetActive(false);
         }
     }
     public void DoubleJump()
