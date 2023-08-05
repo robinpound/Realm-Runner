@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerJumps : MonoBehaviour
 {
+    //Shadow object
+    [SerializeField] GameObject shadowObject;
+
     PlayerAnimations anim;
     PlayerCharacterController cc;
     Player player;
@@ -22,6 +25,8 @@ public class PlayerJumps : MonoBehaviour
     PlayerGravity pGravity;
 
     Dictionary<int, float> _initialJumpVelocities = new Dictionary<int, float>();
+
+    [Tooltip("Ammonut of gravity added to each jump")]
     public Dictionary<int, float> _jumpGravities = new Dictionary<int, float>();
     public Coroutine _currentJumpResetRoutine = null;
 
@@ -34,6 +39,7 @@ public class PlayerJumps : MonoBehaviour
         pGravity = GetComponent<PlayerGravity>();
         doubleJumpLeft = maxDoubleJump;
         SetupJumpVariables();
+        shadowObject.SetActive(false);
     }
     public void SetupJumpVariables()
     {
@@ -82,6 +88,8 @@ public class PlayerJumps : MonoBehaviour
             }
             anim.animator.SetBool(anim.isJumpingHash, true);
 
+            shadowObject.SetActive(true);
+
             _isJumping = true;
             pGravity._isJumpAnimating = true;
             _jumpCount += 1;
@@ -92,6 +100,7 @@ public class PlayerJumps : MonoBehaviour
         else if (!input.isJumpPressed && _isJumping && cc.IsGrounded())
         {
             _isJumping = false;
+            shadowObject.SetActive(false);
         }
     }
     public void DoubleJump()
