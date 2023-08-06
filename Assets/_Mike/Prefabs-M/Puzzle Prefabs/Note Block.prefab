@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 64719542380610684}
   - component: {fileID: 64719542379601166}
   - component: {fileID: 1994704312948486870}
-  m_Layer: 0
+  - component: {fileID: 1455761436}
+  m_Layer: 3
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,6 +99,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.009254, y: 1.0180192, z: 1.021225}
   m_Center: {x: -0.00000023841858, y: 0.5090096, z: 0}
+--- !u!114 &1455761436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64719542381622762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc2bbe6fca4e2344a5e6a32bca2211d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5396044664103631879}
+        m_TargetAssemblyTypeName: NoteBlock, Assembly-CSharp
+        m_MethodName: PlaySoundOfBlock
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &965215369963131639
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +139,7 @@ GameObject:
   - component: {fileID: 945265056452747371}
   - component: {fileID: 3735979645941667009}
   - component: {fileID: 5487534283313075216}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Interactable area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6640053215584458930}
   - component: {fileID: 2686099056487090858}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sound2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,7 +379,7 @@ GameObject:
   - component: {fileID: 4681313750419164988}
   - component: {fileID: 8381927880994012922}
   - component: {fileID: 6289508925732012637}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Indicator light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -458,7 +486,7 @@ GameObject:
   m_Component:
   - component: {fileID: 710408632530487536}
   - component: {fileID: 7262697842570048220}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sound1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -586,7 +614,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8234248013783038534}
   - component: {fileID: 5396044664103631879}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Note Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -625,7 +653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbee8bbcf9ebb3743af0c23cd22b7feb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noteId: 0
+  noteId: 3
   manager: {fileID: 0}
   hasBlockBeenPlayed: 0
   interactNoteArea: {fileID: 0}
@@ -643,7 +671,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5045809288990002986}
   - component: {fileID: 4578570914287020730}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sound3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -774,7 +802,7 @@ GameObject:
   - component: {fileID: 7204913987477073171}
   - component: {fileID: 3074924693660413182}
   - component: {fileID: 1780201985927271094}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Glow area
   m_TagString: Untagged
   m_Icon: {fileID: 0}

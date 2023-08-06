@@ -17,7 +17,6 @@ public class NoteBlock : MonoBehaviour
     //private bool playerInTrigger = false;
     [SerializeField]
     private bool hasBlockBeenPlayed = false;
-    private UIManager ui;
     [SerializeField]
     private InteractNoteArea interactNoteArea;
     [Header("Debugs Attach")]
@@ -31,26 +30,16 @@ public class NoteBlock : MonoBehaviour
     [Tooltip("Add sound to not block game object and drag and drop here")]
     [SerializeField]
     private GameObject sound1, sound2, sound3;
-    /*
-    [Header("Gizmo Settings")]
-    [SerializeField]
-    private Transform noteBlockCenterLocation;
-    [SerializeField]
-    private Vector3 gizmoSize;
-    [SerializeField]
-    private float gizmoOffsetX;
-    */
     
 
     private void Start()
     {
         manager = GetComponentInParent<NotePuzzleManager>();
-        ui = FindAnyObjectByType<UIManager>();
         interactNoteArea = GetComponentInChildren<InteractNoteArea>();
     }
     private void Update()
     {
-        
+
         if (Input.GetKeyDown(KeyCode.E) 
             && interactNoteArea.canPlayerInteractNote) // Change to interact action input.
         {
@@ -63,7 +52,7 @@ public class NoteBlock : MonoBehaviour
         }
     }
 
-    private void PlaySoundOfBlock()
+    public void PlaySoundOfBlock()
     {
         Debug.Log("Play sound of block" + noteId);
         hasBlockBeenPlayed = true;
