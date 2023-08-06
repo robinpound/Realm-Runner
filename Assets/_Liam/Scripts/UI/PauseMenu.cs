@@ -12,8 +12,6 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject playerUI;
     [SerializeField] GameObject[] options;
 
-    [SerializeField] GameObject camera;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +35,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(true);
         playerUI.SetActive(false);
         // Un-Locking Cursor, setting to visible, and stopping time so player doesn't get attacked whilst paused.
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Time.timeScale = 0;
     }
