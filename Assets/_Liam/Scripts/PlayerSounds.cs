@@ -22,6 +22,7 @@ public class PlayerSounds : MonoBehaviour
 
     [Tooltip("This bool is collected from the player movement script, so it is true and false when that script is")]
     [SerializeField] bool isWalking;
+    [Header("Timer")]
     [Tooltip("This float is so the script knows when it can start a sound for the player.")]
     public float timer;
 
@@ -38,7 +39,6 @@ public class PlayerSounds : MonoBehaviour
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         audios = GetComponent<AudioSource>();
-        
     }
 
     // Update is called once per frame

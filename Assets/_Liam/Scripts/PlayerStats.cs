@@ -63,6 +63,11 @@ public class PlayerStats : MonoBehaviour
             animator.enabled = false;
             Invoke(nameof(Die), 0.1f);
         }
+
+        if(animator.GetBool("jump") == true)
+        {
+            FindObjectOfType<AudioManager>().PlaySound("PlayerJumps");
+        }
     }
 
     public void TakeDamage(int damage)
@@ -75,6 +80,7 @@ public class PlayerStats : MonoBehaviour
         {
             currentHealth -= damage;
         }
+        FindObjectOfType<AudioManager>().PlaySound("PlayerAttack");
     }
 
     public void InstaDead()
@@ -92,5 +98,6 @@ public class PlayerStats : MonoBehaviour
         deathCam.SetActive(true);
         mainCam.SetActive(false);
         deathScrn.SetActive(true);
+        FindObjectOfType<AudioManager>().PlaySound("PlayerDeath");
     }
 }

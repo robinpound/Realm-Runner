@@ -60,6 +60,7 @@ public class ArrowTest : MonoBehaviour
     {
         if(timer == 0)
         {
+
             timer = 1;
             bowArrow.SetActive(false);
             GameObject launch = Instantiate(arrow, transform.position, transform.rotation);
@@ -71,6 +72,8 @@ public class ArrowTest : MonoBehaviour
             ); 
             arrow.GetComponent<ArrowNew>().IsShot();
             launch.GetComponent<Rigidbody>().AddForce(transform.forward * launchVelocity, ForceMode.Impulse);
+            FindObjectOfType<AudioManager>().PlaySound("BowFling");
+            FindObjectOfType<AudioManager>().PlaySound("PlayerAttack");
             Invoke(nameof(Reset), 1f);
         }
     }

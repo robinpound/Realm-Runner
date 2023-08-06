@@ -23,7 +23,7 @@ public class OptionsManager : MonoBehaviour
     }
     public void ValueChanged()
     {
-        mixer1 = 80;
-        mixer2 = 80;
+        mixer1 = 0;
+        mixer2 = 0;
     }
 }
