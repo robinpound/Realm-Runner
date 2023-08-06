@@ -5,13 +5,15 @@ using UnityEngine.Events;
 
 public class ForestFragmentEvents : MonoBehaviour
 {
-    [SerializeField] UnityEvent raisePlatform;
+    [SerializeField] UnityEvent raisePlatform, openPortal;
 
     private int collectedFragments;
     private int raisePlatformThreshold = 2;
 
     private bool isPlatformRaised = false;
-    private bool isPortalOpened = false;
+    [SerializeField] private bool isPortalOpened = false;
+
+
 
     private void Update()
     {
@@ -24,11 +26,15 @@ public class ForestFragmentEvents : MonoBehaviour
             isPlatformRaised = true;
         }
         
-        if (!isPortalOpened)
+        if (isPortalOpened)
         {
-            isPortalOpened = true;
-            SendFragmetnsToPersistentData(collectedFragments);
+            //isPortalOpened = true;
+            Debug.Log("Call fragment send function");
+            SendFragmetnsToPersistentData(collectedFragments); // change to leave level portal
+            isPortalOpened = false;
         }
+
+
     }
 
     private void RaisePlatform()
@@ -53,6 +59,7 @@ public class ForestFragmentEvents : MonoBehaviour
 
     private void SendFragmetnsToPersistentData(int fragments)
     {
+        Debug.Log("Sent to game manger");
         GameManager.Instance.AddFragmentsFromLevel(fragments);
     }
 
