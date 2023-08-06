@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 
@@ -17,6 +18,9 @@ public class RealmPortalDestinationSetter : MonoBehaviour
         "When set to true this portals destination will be set to the Hub World")]
     [SerializeField] private bool isEndOfLevelPortal = false;
     private const string PLAYERTAG = "Player";
+    [Header("Send collected realm fragments to the game manager")]
+    [SerializeField] UnityEvent sendCollectedFragmentsToTotal;
+
     private void Start()
     {
         if (isEndOfLevelPortal)
@@ -30,6 +34,7 @@ public class RealmPortalDestinationSetter : MonoBehaviour
         
         if (other.gameObject.CompareTag(PLAYERTAG))
         {
+            sendCollectedFragmentsToTotal.Invoke();
             ActivatePortal();
         }
     }

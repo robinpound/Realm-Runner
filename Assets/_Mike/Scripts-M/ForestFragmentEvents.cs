@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class ForestFragmentEvents : MonoBehaviour
 {
-    [SerializeField] UnityEvent raisePlatform, openPortal;
+    [SerializeField] UnityEvent raisePlatform, openPortal, showPortalCam;
 
     private int collectedFragments;
     private int raisePlatformThreshold = 2;
+    private int raiseEndPortalThreshold = 3;
 
     private bool isPlatformRaised = false;
-    [SerializeField] private bool isPortalOpened = false;
+    private bool isPortalOpened = false;
 
     private void Update()
     {
@@ -21,31 +23,38 @@ public class ForestFragmentEvents : MonoBehaviour
         if (!isPlatformRaised)
         {
             RaisePlatform();
-            isPlatformRaised = true;
         }
         
-        if (isPortalOpened)
+        if (!isPortalOpened)
         {
+            OpenPortalToHub();
             //isPortalOpened = true;
-            Debug.Log("Call fragment send function");
-            SendFragmetnsToPersistentData(collectedFragments); // change to leave level portal
-            isPortalOpened = false;
+            //Debug.Log("Call fragment send function");
+            //SendFragmetnsToPersistentData(collectedFragments); // change to leave level portal
         }
+
+        
     }
 
     private void RaisePlatform()
     {
-        //Debug.Log("RaisePlatform Called");
-        int tutorialLevelOffset = 1;
-        if (collectedFragments >= raisePlatformThreshold - tutorialLevelOffset)
+        if (collectedFragments >= raisePlatformThreshold)
         {
+            Debug.Log("RaisePlatform Called");
             raisePlatform.Invoke();
+            isPlatformRaised = true;
         }
     }
 
-    public void OpenPortalToHub()
+    private void OpenPortalToHub()
     {
-        //Invoke open portal
+        if (collectedFragments >= raiseEndPortalThreshold)
+        {
+            Debug.Log("Open Portal door");
+            openPortal.Invoke();
+            showPortalCam.Invoke();
+            isPortalOpened = true;
+        }
     }
 
     public void AddToForestFragmentCount()
@@ -58,11 +67,9 @@ public class ForestFragmentEvents : MonoBehaviour
         return collectedFragments;
     }
 
-    private void SendFragmetnsToPersistentData(int fragments)
+    public void SendFragmentsToPersistentData()
     {
         Debug.Log("Sent to game manger");
-        GameManager.Instance.AddFragmentsFromLevel(fragments);
+        GameManager.Instance.AddFragmentsFromLevel(collectedFragments);
     }
-
-
 }

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class CallSlidingDoor : MonoBehaviour
 {
-    [SerializeField] private UnityEvent openDoor;
+    [SerializeField] private UnityEvent openDoor, showCam;
     private InteractAreaTriggerBookKey interactArea;
     
 
@@ -20,6 +20,7 @@ public class CallSlidingDoor : MonoBehaviour
         if (interactArea != null && interactArea.bookKeyTrigger
             && Input.GetKey(KeyCode.E))
         {
+            showCam.Invoke();
             openDoor.Invoke();
         }
     }
