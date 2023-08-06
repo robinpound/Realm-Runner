@@ -7852,6 +7852,16 @@ PrefabInstance:
       objectReference: {fileID: 936791303}
     - target: {fileID: 5022746144740621219, guid: 9a2a892bd10b7e941b4a901988251d29,
         type: 3}
+      propertyPath: attackDelay
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5022746144740621219, guid: 9a2a892bd10b7e941b4a901988251d29,
+        type: 3}
+      propertyPath: pathUpdateDelay
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5022746144740621219, guid: 9a2a892bd10b7e941b4a901988251d29,
+        type: 3}
       propertyPath: shootingDistance
       value: 40
       objectReference: {fileID: 0}

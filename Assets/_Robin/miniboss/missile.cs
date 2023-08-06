@@ -11,7 +11,7 @@ public class missile : MonoBehaviour
     public float wiggleMagnitude = 5f;
     public int attackDamage = 1;
     public GameObject explosion;
-    
+    private bool exploded = false;
 
     private Rigidbody rb;
 
@@ -44,13 +44,12 @@ public class missile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == target)
+        if ((other.gameObject == target || other.tag == "Arrow") && !exploded)
         {
-            Debug.Log("Missile Hit Player");
+            exploded = true;
             target.GetComponent<PlayerStats>().TakeDamage(attackDamage);
+            Instantiate(explosion, transform.position, Quaternion.identity);
+            Destroy(gameObject);
         }
-        Instantiate(explosion, transform.position, Quaternion.identity);
-        Destroy(gameObject);
-        
     }
 }
