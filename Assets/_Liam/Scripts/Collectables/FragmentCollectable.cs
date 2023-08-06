@@ -7,17 +7,21 @@ using UnityEngine;
 
 public class FragmentCollectable : MonoBehaviour
 {
+    [SerializeField] private ForestFragmentEvents forestFragmentEvents;
     private GameObject player;
     private GameObject gameManager;
-    [SerializeField] GameManager _gameManager;
+    //[SerializeField] GameManager _gameManager;
+    [SerializeField] private bool isForestFragment = true;
     private const string PLAYERTAG = "Player", GAMEMANAGERTAG = "GameManager";
+
+
     
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag(PLAYERTAG);
-        gameManager = GameObject.FindGameObjectWithTag(GAMEMANAGERTAG);
-        _gameManager = gameManager.GetComponent<GameManager>();
+        //gameManager = GameObject.FindGameObjectWithTag(GAMEMANAGERTAG);
+        //_gameManager = gameManager.GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -32,13 +36,19 @@ public class FragmentCollectable : MonoBehaviour
         if (other.tag == PLAYERTAG)
         {
             PlayPickUpSound();
-            //FragmentCollected();
-            GameObject.Destroy(gameObject);
-            _gameManager.fragments++;
+            if (isForestFragment) 
+            {
+                ForestFragmentCollected();
+            } else
+            {
+                TutorialFragmentCollected();
+            }
+            
+            Destroy(gameObject);
         }
     }
-
-    private void FragmentCollected() => _gameManager.fragments++;
+    private void TutorialFragmentCollected() => GameManager.Instance.fragments++;
+    private void ForestFragmentCollected() => forestFragmentEvents.AddToForestFragmentCount();
 
     private void PlayPickUpSound()
     {

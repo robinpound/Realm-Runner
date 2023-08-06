@@ -15,7 +15,7 @@ public class ForestFragmentEvents : MonoBehaviour
 
     private void Update()
     {
-        collectedFragments = GameManager.Instance.GetFragments();
+        //collectedFragments = GameManager.Instance.GetFragments();
         Debug.Log("ForestFragmentsEvents Fragment count = " + collectedFragments);
 
         if (!isPlatformRaised)
@@ -27,6 +27,7 @@ public class ForestFragmentEvents : MonoBehaviour
         if (!isPortalOpened)
         {
             isPortalOpened = true;
+            SendFragmetnsToPersistentData(collectedFragments);
         }
     }
 
@@ -44,5 +45,16 @@ public class ForestFragmentEvents : MonoBehaviour
     {
         //Invoke open portal
     }
+
+    public void AddToForestFragmentCount()
+    {
+        collectedFragments++;
+    }
+
+    private void SendFragmetnsToPersistentData(int fragments)
+    {
+        GameManager.Instance.AddFragmentsFromLevel(fragments);
+    }
+
 
 }

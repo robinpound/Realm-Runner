@@ -24,4 +24,5 @@ public class MusicSliderManager : MonoBehaviour
     {
         musicSlider.value = 80;
     }
+
 }

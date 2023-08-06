@@ -46,6 +46,11 @@ public class GameManager : MonoBehaviour
         return coins;
     }
 
+    public void AddFragmentsFromLevel(int fragmentsAdded)
+    {
+        fragments += fragmentsAdded;
+    }
+
     public int GetFragments () { return fragments; }
     public int GetCoins () { return coins; }
 

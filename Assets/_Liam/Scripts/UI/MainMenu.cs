@@ -54,7 +54,7 @@ public class MainMenu : MonoBehaviour
     {
         // Link to Load Function
         gameManager.GetComponent<GameManager>().LoadProgress();
-        SceneManager.LoadScene("Hub Level With Assets");
+        SceneManager.LoadScene("HubLevelWithAssets");
         Time.timeScale = 1;
     }
     // Function to open and close the Options page
