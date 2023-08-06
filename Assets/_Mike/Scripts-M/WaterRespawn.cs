@@ -31,8 +31,8 @@ public class WaterRespawn : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("current movement on Y axis = " + gravity.currentMovement.y + " // -9.8");
-        Debug.Log(other.tag + " hit the water");
+        //Debug.Log("current movement on Y axis = " + gravity.currentMovement.y + " // -9.8");
+        //Debug.Log(other.tag + " hit the water");
         if (other.gameObject.CompareTag(PLAYERTAG) && gravity.currentMovement.y < -9.8)
         {
             //Debug.Log(other.tag + " spawned at new point");

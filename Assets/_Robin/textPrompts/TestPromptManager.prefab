@@ -44,8 +44,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 0.9999999, z: 0.93652976}
+  m_Center: {x: 0.0000000013861328, y: 0, z: -0.03173541}
 --- !u!114 &148364388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,8 +308,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.9999999, y: 0.9999999, z: 1.5479547}
+  m_Center: {x: -0.000000003068334, y: 0, z: -0.2739791}
 --- !u!114 &1276566409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,6 +331,182 @@ MonoBehaviour:
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1276566410}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Collider, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  Clear:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3667024325665305614}
+        m_TargetAssemblyTypeName: TextPrompManager, Assembly-CSharp
+        m_MethodName: ClearText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &1355873533
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1355873536}
+  - component: {fileID: 1355873534}
+  - component: {fileID: 1355873535}
+  m_Layer: 0
+  m_Name: Trigger (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1355873536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355873533}
+  m_LocalRotation: {x: -0, y: -0.24310334, z: -0, w: 0.97000045}
+  m_LocalPosition: {x: 125, y: -2.11, z: -25.31}
+  m_LocalScale: {x: 33.056873, y: 23.7042, z: 37.384453}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3667024325665305613}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: -28.14, z: 0}
+--- !u!65 &1355873534
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355873533}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.62, y: 1.06, z: 0.27}
+  m_Center: {x: -0.9, y: -0.23, z: 0.35}
+--- !u!114 &1355873535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355873533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40396442c7236f442a3549540d97b754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Set:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3667024325665305614}
+        m_TargetAssemblyTypeName: TextPrompManager, Assembly-CSharp
+        m_MethodName: SetText
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1355873534}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Collider, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  Clear:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3667024325665305614}
+        m_TargetAssemblyTypeName: TextPrompManager, Assembly-CSharp
+        m_MethodName: ClearText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &2087661746
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2087661749}
+  - component: {fileID: 2087661747}
+  - component: {fileID: 2087661748}
+  m_Layer: 0
+  m_Name: Trigger (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2087661749
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087661746}
+  m_LocalRotation: {x: -0, y: -0.24310334, z: -0, w: 0.97000045}
+  m_LocalPosition: {x: 125, y: -2.11, z: -25.31}
+  m_LocalScale: {x: 33.056873, y: 23.7042, z: 37.384453}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3667024325665305613}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: -28.14, z: 0}
+--- !u!65 &2087661747
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087661746}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.54, y: 0.9999999, z: 0.5383382}
+  m_Center: {x: -0.4, y: 0, z: 0.9601875}
+--- !u!114 &2087661748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087661746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40396442c7236f442a3549540d97b754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Set:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3667024325665305614}
+        m_TargetAssemblyTypeName: TextPrompManager, Assembly-CSharp
+        m_MethodName: SetText
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2087661747}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Collider, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -385,6 +561,8 @@ Transform:
   - {fileID: 617375851}
   - {fileID: 1276566408}
   - {fileID: 148364387}
+  - {fileID: 2087661749}
+  - {fileID: 1355873536}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -410,3 +588,7 @@ MonoBehaviour:
     theText: RIGHT-CLICK to AIM
   - triggerBox: {fileID: 148364389}
     theText: COLLECT Fragments to open the portal
+  - triggerBox: {fileID: 2087661747}
+    theText: SPACE  SPACE  to Double Jump
+  - triggerBox: {fileID: 1355873534}
+    theText: SPACE  SPACE  to Double Jump
