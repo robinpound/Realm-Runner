@@ -27,6 +27,10 @@ public class PauseMenu : MonoBehaviour
 
     }
 
+    public void Click()
+    {
+        FindObjectOfType<AudioManager>().PlaySound("Click");
+    }
     #region Pause Menu Buttons
     // Function to Pause the Game
     public void Pause()
