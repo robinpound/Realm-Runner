@@ -5,8 +5,6 @@ using UnityEngine.Events;
 
 public class PlayerSounds : MonoBehaviour
 {
-    public GameObject footStep1Prefab;
-
     [Header("Don't Touch!")]
     [Header("Audio Source & Clips")]
 
@@ -47,7 +45,11 @@ public class PlayerSounds : MonoBehaviour
     void Update()
     {
         isWalking = player.GetComponent<ActionInputs>().isMovementPressed;
-        if(animator.GetBool("run") == true && timer ==0)
+        if (animator.GetBool("jump") == true)
+        {
+            
+        }
+        else if(animator.GetBool("run") == true && timer == 0)
         {
             footsteps.Invoke();
         }
