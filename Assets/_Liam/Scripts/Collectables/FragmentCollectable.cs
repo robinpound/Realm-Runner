@@ -9,36 +9,39 @@ public class FragmentCollectable : MonoBehaviour
 {
     private GameObject player;
     private GameObject gameManager;
-    [SerializeField] GameManager _gameManager;
     private const string PLAYERTAG = "Player", GAMEMANAGERTAG = "GameManager";
-    
-    // Start is called before the first frame update
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag(PLAYERTAG);
-        gameManager = GameObject.FindGameObjectWithTag(GAMEMANAGERTAG);
-        _gameManager = gameManager.GetComponent<GameManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         int rotateSpeed = 70; 
         transform.Rotate(0, rotateSpeed * Time.deltaTime, 0);
     }
 
+    // Edited by Mike
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == PLAYERTAG)
         {
             PlayPickUpSound();
-            //FragmentCollected();
-            GameObject.Destroy(gameObject);
-            _gameManager.fragments++;
+            if (FindObjectOfType<ForestFragmentEvents>() != null) 
+            {
+                ForestFragmentCollected();
+            } else
+            {
+                TutorialFragmentCollected();
+            }
+            
+            Destroy(gameObject);
         }
     }
 
-    private void FragmentCollected() => _gameManager.fragments++;
+    private void TutorialFragmentCollected() => GameManager.Instance.fragments++;
+    private void ForestFragmentCollected() => FindObjectOfType<ForestFragmentEvents>().AddToForestFragmentCount();
 
     private void PlayPickUpSound()
     {

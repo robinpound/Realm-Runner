@@ -5467,7 +5467,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Exit Game
+  m_Text: ' Exit
+
+'
 --- !u!222 &319336283
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6799,19 +6801,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86469a1212881d94f9636710b4c195ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portalDoor: {fileID: 0}
-  ui: {fileID: 0}
-  raisePlatform:
-    m_PersistentCalls:
-      m_Calls: []
-  FragmentEvent:
-    m_PersistentCalls:
-      m_Calls: []
   deathCount: 0
   coins: 0
   fragments: 0
   currentCheckpoint: 0
-  isPlatformRaised: 0
 --- !u!4 &393421481
 Transform:
   m_ObjectHideFlags: 0
@@ -20205,7 +20198,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Begin
+  m_Text: New Game
 --- !u!222 &1128208218
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -32146,7 +32139,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90dc3c89120f857498af1f5522f28b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  optionsManager: {fileID: 0}
   musicSlider: {fileID: 1875439184}
   mixer: 0
 --- !u!1 &1876255715

@@ -4,39 +4,39 @@ using UnityEngine;
 
 public class HubPortalManager : MonoBehaviour
 {
-    [SerializeField] private int currentFragments; //Change to reference the game manager
-    [SerializeField] private GameObject bossPortalDoorClosed,bossPortalDoorOpen;
-    [SerializeField] private GameManager gameManager;
-    [SerializeField] private bool hasPlayerReachedCastle = false;
+    [Header("Debugs")]
+    [SerializeField] private int fragmentsRequired = 4; // 1 tutorial level + 3 Forest level.
+    [SerializeField] private int currentFragments;
+    [Header("Game Object References, Put In")]
+    [SerializeField] private GameObject bossPortalDoorClosed;
+    [SerializeField] private GameObject bossPortalDoorOpen;
+    [Tooltip("Attach light trail off and on game objects to corrosponding fields")]
+    [SerializeField] private GameObject lightToBossPortalOff,lightToBossPortalOn;
+    //[SerializeField] private bool hasPlayerReachedCastle = false; // add in later.
+    
+    private bool isDoorOpen = false; // Do once
 
-    private void Start()
-    {
-        if (!gameManager)
-        {
-            Debug.LogWarning("Game manager ref not set in HubPortalManager script");
-            return;
-        }
-    }
     private void Update()
     {
-
-        if (currentFragments == 3)
+        currentFragments = GameManager.Instance.GetFragments();
+        if (currentFragments >= fragmentsRequired && !isDoorOpen)
         {
             OpenBossRealmPortal();
+            isDoorOpen= true;
         }
     }
 
     private void OpenBossRealmPortal()
     {
         bossPortalDoorClosed.SetActive(false);
+        lightToBossPortalOff.SetActive(false);
         bossPortalDoorOpen.SetActive(true);
+        lightToBossPortalOn.SetActive(true);
     }
 
     public void ArrivedAtCastle()
     {
-        hasPlayerReachedCastle = true;
+        //hasPlayerReachedCastle = true;
         // Set portal to castle checkpoint
     }
-
-   
 }
