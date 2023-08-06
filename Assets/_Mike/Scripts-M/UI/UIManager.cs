@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] fragments;
-    private GameObject gameManager;
-    private GameManager _gameManager;
-    private const string GAMEMANAGERTAG = "GameManager";
+    private ForestFragmentEvents forestFragmentEvents;
 
     [Header("Text Debugs")]
     [SerializeField]
@@ -25,14 +24,16 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        gameManager = GameObject.FindGameObjectWithTag(GAMEMANAGERTAG);
-        _gameManager = gameManager.GetComponent<GameManager>();
+        if (FindAnyObjectByType<ForestFragmentEvents>() != null)
+        {
+            forestFragmentEvents = FindAnyObjectByType<ForestFragmentEvents>();
+        }
     }
 
     private void Update()
     {
-        coins.text = _gameManager.coins.ToString();
-        fragmentsCollected = _gameManager.fragments;
+        coins.text = GameManager.Instance.coins.ToString();
+        fragmentsCollected = forestFragmentEvents.GetForestCollectedFragments();
         Fragment();
     }
 

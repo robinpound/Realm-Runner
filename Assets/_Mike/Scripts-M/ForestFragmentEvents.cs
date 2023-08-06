@@ -13,8 +13,6 @@ public class ForestFragmentEvents : MonoBehaviour
     private bool isPlatformRaised = false;
     [SerializeField] private bool isPortalOpened = false;
 
-
-
     private void Update()
     {
         //collectedFragments = GameManager.Instance.GetFragments();
@@ -33,8 +31,6 @@ public class ForestFragmentEvents : MonoBehaviour
             SendFragmetnsToPersistentData(collectedFragments); // change to leave level portal
             isPortalOpened = false;
         }
-
-
     }
 
     private void RaisePlatform()
@@ -55,6 +51,11 @@ public class ForestFragmentEvents : MonoBehaviour
     public void AddToForestFragmentCount()
     {
         collectedFragments++;
+    }
+
+    public int GetForestCollectedFragments()
+    {
+        return collectedFragments;
     }
 
     private void SendFragmetnsToPersistentData(int fragments)
