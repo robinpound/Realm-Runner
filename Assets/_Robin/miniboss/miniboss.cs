@@ -124,8 +124,7 @@ public class miniboss : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         
-        if(other.tag == "Arrow" || other.tag == "Missile") {
-            Debug.Log("BOSS Hit by: " + other);
+        if(other.tag == "Arrow") {
             health.TakeDamage(10);
         }
     }
