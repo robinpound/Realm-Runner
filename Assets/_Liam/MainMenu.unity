@@ -1025,6 +1025,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1880416129}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &66333391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2925,6 +2937,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1880416129}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: Audio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1880416129}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8263,6 +8287,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1880416129}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &451076344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11750,8 +11786,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec107f5948326ca469cfc3654d019f70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixer1: 80
-  mixer2: 80
+  mixer1: 0
+  mixer2: 0
   GpCSlider: 100
 --- !u!1 &670143056
 GameObject:
@@ -12200,6 +12236,147 @@ Transform:
   - {fileID: 1954775105}
   m_Father: {fileID: 1962139266}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &691582556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 691582558}
+  - component: {fileID: 691582557}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &691582557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691582556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9629643006d63f24883f304ff622b04b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Click
+    clip: {fileID: 8300000, guid: 0a4cea927f0c95749abcaaa4e678bd3d, type: 3}
+    mixerGroup: {fileID: 2350674505637804875, guid: a6160916dc592c244b0f1a19c090b78d,
+      type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CoinCollected
+    clip: {fileID: 8300000, guid: 705742ac69d0a3747b4d0949917adffb, type: 3}
+    mixerGroup: {fileID: 2350674505637804875, guid: a6160916dc592c244b0f1a19c090b78d,
+      type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: FragmentCollected
+    clip: {fileID: 8300000, guid: 705742ac69d0a3747b4d0949917adffb, type: 3}
+    mixerGroup: {fileID: 2350674505637804875, guid: a6160916dc592c244b0f1a19c090b78d,
+      type: 2}
+    volume: 1
+    pitch: 0.43
+    loop: 0
+    source: {fileID: 0}
+  - name: BalloonPopped
+    clip: {fileID: 8300000, guid: 1e07b7e92977239469e28e4c4118a43a, type: 3}
+    mixerGroup: {fileID: 2350674505637804875, guid: a6160916dc592c244b0f1a19c090b78d,
+      type: 2}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: TimerClockTicking
+    clip: {fileID: 8300000, guid: aae17f1422636b14da43cb408701caee, type: 3}
+    mixerGroup: {fileID: 2350674505637804875, guid: a6160916dc592c244b0f1a19c090b78d,
+      type: 2}
+    volume: 0.812
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PuzzleWon
+    clip: {fileID: 8300000, guid: 2e9a326a73cbc63448a1eb7fd34c5776, type: 3}
+    mixerGroup: {fileID: 2350674505637804875, guid: a6160916dc592c244b0f1a19c090b78d,
+      type: 2}
+    volume: 0.772
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: RockBlowUp
+    clip: {fileID: 8300000, guid: 9128aff8988549845ac14d2b50bbae04, type: 3}
+    mixerGroup: {fileID: 2350674505637804875, guid: a6160916dc592c244b0f1a19c090b78d,
+      type: 2}
+    volume: 0.272
+    pitch: 0.16
+    loop: 0
+    source: {fileID: 0}
+  - name: Triumph
+    clip: {fileID: 8300000, guid: e29359d2813238d498332b4036ae6e8e, type: 3}
+    mixerGroup: {fileID: 2350674505637804875, guid: a6160916dc592c244b0f1a19c090b78d,
+      type: 2}
+    volume: 0.535
+    pitch: 0.16
+    loop: 0
+    source: {fileID: 0}
+  - name: BowFling
+    clip: {fileID: 8300000, guid: d6e25df2ebc44e541a7c5d37ab3c3f29, type: 3}
+    mixerGroup: {fileID: 2350674505637804875, guid: a6160916dc592c244b0f1a19c090b78d,
+      type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlayerAttack
+    clip: {fileID: 8300000, guid: 5873595a173598345875906d638e3e26, type: 3}
+    mixerGroup: {fileID: 2350674505637804875, guid: a6160916dc592c244b0f1a19c090b78d,
+      type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlayerDeath
+    clip: {fileID: 8300000, guid: 27b7def30f0a95f46904e2c245940184, type: 3}
+    mixerGroup: {fileID: 2350674505637804875, guid: a6160916dc592c244b0f1a19c090b78d,
+      type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlayerJumps
+    clip: {fileID: 8300000, guid: 592553f3414ef864197538efe7b1ed69, type: 3}
+    mixerGroup: {fileID: 2350674505637804875, guid: a6160916dc592c244b0f1a19c090b78d,
+      type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+--- !u!4 &691582558
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691582556}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -63.188164, y: 49.660805, z: -124.34397}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &709315493
 GameObject:
@@ -13877,6 +14054,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1880416129}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: Exit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1880416129}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16666,6 +16855,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1880416129}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &992869468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17464,6 +17665,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1880416129}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: LoadGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1880416129}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19114,6 +19327,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1880416129}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: Robin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1880416129}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21315,6 +21540,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1880416129}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1162227102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21477,6 +21714,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1880416129}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: Liam
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1880416129}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -25007,6 +25256,7 @@ GameObject:
   - component: {fileID: 1372787813}
   - component: {fileID: 1372787812}
   - component: {fileID: 1372787811}
+  - component: {fileID: 1372787814}
   m_Layer: 5
   m_Name: BeginButton
   m_TagString: Untagged
@@ -25091,6 +25341,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1880416129}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1372787812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25129,6 +25391,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1372787809}
   m_CullTransparentMesh: 1
+--- !u!114 &1372787814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372787809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94214d0683080e544bd612d6e4191e71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouse_over: 0
 --- !u!1 &1372996755
 GameObject:
   m_ObjectHideFlags: 0
@@ -28690,6 +28965,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1880416129}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1604988394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29784,6 +30071,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1880416129}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: Mike
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1880416129}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -32729,6 +33028,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1880416129}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: Lani
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1880416129}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -36888,6 +37199,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1880416129}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: KeyBindings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1880416129}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

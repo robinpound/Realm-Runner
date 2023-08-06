@@ -16,7 +16,10 @@ public class MainMenu : MonoBehaviour
     [SerializeField] bool optionsOpen;
     public bool creditsOpen;
 
-
+    public void Click()
+    {
+        FindObjectOfType<AudioManager>().PlaySound("Click");
+    }
 
     private void Start()
     {
