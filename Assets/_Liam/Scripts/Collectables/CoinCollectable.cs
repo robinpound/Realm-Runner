@@ -45,7 +45,11 @@ public class CoinCollectable : MonoBehaviour
 
     private void PickUpSound()
     {
-        FindObjectOfType<AudioManager>().PlaySound("CoinCollected");
+        if (FindObjectOfType<AudioManager>() != null)
+        {
+            FindObjectOfType<AudioManager>().PlaySound("CoinCollected");
+        }
+        
     }
 
     
