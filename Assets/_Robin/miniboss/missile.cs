@@ -46,7 +46,7 @@ public class missile : MonoBehaviour
     {
         if (other.gameObject == target)
         {
-            Debug.Log("Hit Player!");
+            Debug.Log("Missile Hit Player");
             target.GetComponent<PlayerStats>().TakeDamage(attackDamage);
         }
         Instantiate(explosion, transform.position, Quaternion.identity);
