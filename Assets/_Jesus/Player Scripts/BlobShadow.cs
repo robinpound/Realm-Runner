@@ -5,6 +5,7 @@ using UnityEngine;
 public class BlobShadow : MonoBehaviour
 {
     [SerializeField] GameObject fakeShadow;
+    [SerializeField] float blobOffsetY = 1f;
 
     // Update is called once per frame
     void Update()
@@ -14,7 +15,7 @@ public class BlobShadow : MonoBehaviour
         {
             Vector3 position = hit.point;
             position.y += 0.01f;
-            fakeShadow.transform.position = position;
+            fakeShadow.transform.position = position + new Vector3(0, blobOffsetY, 0);
         }
     }
 
