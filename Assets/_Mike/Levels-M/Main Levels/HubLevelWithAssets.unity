@@ -808,6 +808,7 @@ MonoBehaviour:
   oldFragmentsDisplay: {fileID: 369495882}
   newFragmentDisplay: {fileID: 250464880}
   fragmentCountUI: {fileID: 1493767027}
+  coinCountUI: {fileID: 582906972}
 --- !u!4 &42480449
 Transform:
   m_ObjectHideFlags: 0
@@ -3858,6 +3859,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 989087881}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &582906972 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3992475190829360308, guid: a3bd969789e357b419ffc0c2aa61fb5d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1333317381}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &602365526
 Mesh:
   m_ObjectHideFlags: 0

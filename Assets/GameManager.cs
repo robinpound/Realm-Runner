@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     }
 
     public int GetFragments () { return fragments; }
+    public int GetCoins () { return coins; }
 
     public void SaveProgress()
     {
