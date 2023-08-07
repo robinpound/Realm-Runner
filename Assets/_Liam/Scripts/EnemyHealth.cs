@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class EnemyHealth : MonoBehaviour
     public int maxHealth = 100;
     [SerializeField] int currentHealth;
     public GameObject Deathexplosion;
+
+    public bool isboss = false;
    
     void Start()
     {
@@ -29,6 +32,7 @@ public class EnemyHealth : MonoBehaviour
         //Play Death Animation
         if(Deathexplosion != null) Instantiate(Deathexplosion, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
+        if(isboss) { SceneManager.LoadScene("EndScene");}
     }
     public int GetCurrentHealth() {return currentHealth;}
     public void AddCurrentHealth(int health) {currentHealth += health;}
