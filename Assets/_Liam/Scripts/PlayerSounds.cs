@@ -32,7 +32,7 @@ public class PlayerSounds : MonoBehaviour
     [SerializeField] private int EventToolTip;
     [SerializeField] private UnityEvent footsteps;
 
-    bool aim;
+    [SerializeField] bool aim;
 
 
     // Start is called before the first frame update
@@ -66,29 +66,19 @@ public class PlayerSounds : MonoBehaviour
         timer = 1;
         if (aim)
         {
-            StartCoroutine(Footsteps());
+            Footsteps();
+            Invoke(nameof(Reset), 0.4f);
         }
         else if(!aim)
         {
-            StartCoroutine(FootstepsAim());
+            Footsteps();
+            Invoke(nameof(Reset), 0.25f);
         }
-        Invoke(nameof(Reset), 0.5f);
     }
-    IEnumerator Footsteps()
+    void Footsteps()
     {
         audios.clip = footStep1;
-        audios.Play();
-        yield return new WaitForSeconds(0.257f);
-        audios.clip = footStep2;
         audios.Play();
         
-    }
-    IEnumerator FootstepsAim()
-    {
-        audios.clip = footStep1;
-        audios.Play();
-        yield return new WaitForSeconds(0.5f);
-        audios.clip = footStep2;
-        audios.Play();
     }
 }
