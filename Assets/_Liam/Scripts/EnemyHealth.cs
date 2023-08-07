@@ -9,8 +9,6 @@ public class EnemyHealth : MonoBehaviour
     public int maxHealth = 100;
     [SerializeField] int currentHealth;
     public GameObject Deathexplosion;
-
-    [SerializeField] UnityEvent DamageBossEventIfTheresABossInScene;
    
     void Start()
     {
@@ -20,7 +18,6 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        DamageBossEventIfTheresABossInScene.Invoke();
         if(currentHealth <= 0)
         {
             Die();
