@@ -49,7 +49,7 @@ public class MainMenu : MonoBehaviour
     // Function to start the game, by loading the relevant starting scene
     public void Begin()
     {
-        SceneManager.LoadScene("TutorialRobinRealm");
+        SceneManager.LoadScene("HubLevelWithAssets");
         Time.timeScale = 1;
     }
     // Function to Load Game, using persistent data
