@@ -30,11 +30,11 @@ public class Breakablerock : MonoBehaviour
     [Header("Event to show VCam3")]
     [SerializeField] private UnityEvent showVCam3;
     [SerializeField] private bool isThroneRoomDoor = false;
+    private const string ARROWTAG = "Arrow";
 
     private void Start()
     {
         health = maxHealth;
-        audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void TakeDamage(int damage)
@@ -72,7 +72,7 @@ public class Breakablerock : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Arrow"))
+        if (collision.collider.CompareTag(ARROWTAG))
         {
             int damage = 1;
             TakeDamage(damage);
@@ -83,12 +83,7 @@ public class Breakablerock : MonoBehaviour
 
     private void PlaySounds()
     {
-        if (audioManager)
-        {
-            audioManager.PlaySound("RockBlowUp");
-            audioManager.PlaySound("Triumph");
-        }
-        
+        FindObjectOfType<AudioManager>().PlaySound("RockBlowUp");
     }
 
 }
