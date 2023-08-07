@@ -179,12 +179,21 @@ public class MainMenu : MonoBehaviour
     // Spider Boss Asset - By PolyNext:
     public void BossAsset()
     {
-        Application.OpenURL(" https://assetstore.unity.com/packages/3d/characters/animals/insects/spider-green-11869");
+        Application.OpenURL("https://assetstore.unity.com/packages/3d/characters/animals/insects/spider-green-11869");
     }
     // Missiles Asset: AurynSky: Rockets, Missiles & Bombs - Cartoon Low Poly Pack:
     public void MissleFlight()
     {
         Application.OpenURL("https://assetstore.unity.com/packages/3d/props/weapons/rockets-missiles-bombs-cartoon-low-poly-pack-73141");
+    }
+
+    public void MainMenuMusic()
+    {
+        Application.OpenURL("https://ovanisound.com/products/ambient-music-pack-vol-1");
+    }
+    public void BossFightMusic()
+    {
+        Application.OpenURL("https://ovanisound.com/products/horror-music-pack-vol-1");
     }
 
 
