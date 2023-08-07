@@ -12,6 +12,7 @@ public class OpenPortal : MonoBehaviour
 
     public void openPortalDoor()
     {
+        FindAnyObjectByType<AudioManager>().PlaySound("EndPortalDoorArriving");
         StartCoroutine(LerpOverTime());
     }
 
