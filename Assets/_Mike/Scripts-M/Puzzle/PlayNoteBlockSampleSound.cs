@@ -18,26 +18,30 @@ public class PlayNoteBlockSampleSound : MonoBehaviour
     private UIManager ui;
     private bool hasBlockBeenPlayed = false;
     [SerializeField] GameObject indicatorLight;
+    private const string PLAYERTAG = "Player", ARROWTAG = "Arrow";
 
     private void Start()
     {
         ui = FindAnyObjectByType<UIManager>();
-
     }
     private void Update()
     {
         if (playerInTrigger && Input.GetKeyDown(KeyCode.E))
         {
-            GetComponent<AudioSource>().Play(); 
-            indicatorLight.SetActive(true);
-            StartCoroutine(Timer(1.5f));
+            ActivateSampleBlock();
         }
     }
 
+    public void ActivateSampleBlock()
+    {
+        GetComponent<AudioSource>().Play();
+        indicatorLight.SetActive(true);
+        StartCoroutine(Timer(1.5f));
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag(PLAYERTAG))
         {
             playerInTrigger = true;
             if (!hasBlockBeenPlayed)
@@ -50,12 +54,11 @@ public class PlayNoteBlockSampleSound : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag(PLAYERTAG))
         {
             playerInTrigger = false;
             hasBlockBeenPlayed = false;
         }
-
     }
 
     IEnumerator Timer(float s)
