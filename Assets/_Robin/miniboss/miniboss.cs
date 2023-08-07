@@ -128,7 +128,6 @@ public class miniboss : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        
         if(other.tag == "Arrow") {
             DamageBossEventIfTheresABossInScene.Invoke();
             health.TakeDamage(5);
