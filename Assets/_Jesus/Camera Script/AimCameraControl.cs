@@ -4,6 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class AimCameraControl : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class AimCameraControl : MonoBehaviour
     [SerializeField] float aimSmoothSpeed = 20;
     [SerializeField] Transform aimingPos;
     Animator animator;
+
+    [SerializeField] UnityEvent slowDownAim;
+    [SerializeField] UnityEvent unslowDownAim;
 
     public bool mouse;
     public bool shoot;
@@ -54,11 +58,13 @@ public class AimCameraControl : MonoBehaviour
         //These inputs needs to be replaced for the new iput system mouse buttons
         if (mouse)
         {
+
             RotatePlayerToAimPosition();
             //aimCam.SetActive(true);
             animator.SetBool("aiming", true);
             reticle.SetActive(true);
             rig.weight = 1f;
+            slowDownAim.Invoke();
             
         }
         if (!mouse )
@@ -67,6 +73,7 @@ public class AimCameraControl : MonoBehaviour
             animator.SetBool("aiming", false);
             reticle.SetActive(false);
             rig.weight = 0f;
+            unslowDownAim.Invoke();
         }
     }
 public void RotatePlayerToAimPosition(){

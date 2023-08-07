@@ -35,13 +35,16 @@ public class PauseMenu : MonoBehaviour
     // Function to Pause the Game
     public void Pause()
     {
-        // Stting PM to true and Player UI to false
-        pauseMenu.SetActive(true);
-        playerUI.SetActive(false);
-        // Un-Locking Cursor, setting to visible, and stopping time so player doesn't get attacked whilst paused.
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        Time.timeScale = 0;
+        if (SceneManager.GetActiveScene().name != "New Boss Realm (Boss Only)"){
+            // Stting PM to true and Player UI to false
+            pauseMenu.SetActive(true);
+            playerUI.SetActive(false);
+            // Un-Locking Cursor, setting to visible, and stopping time so player doesn't get attacked whilst paused.
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Debug.Log(SceneManager.GetActiveScene().name);
+            Time.timeScale = 0;
+        }
     }
     // Function to resume game
     public void Resume()
