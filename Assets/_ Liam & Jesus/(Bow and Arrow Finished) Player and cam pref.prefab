@@ -9714,7 +9714,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6286310853620351270}
   m_LocalRotation: {x: -0, y: -0.14634961, z: -0, w: -0.989233}
-  m_LocalPosition: {x: -181.96, y: 33.88, z: -17.26}
+  m_LocalPosition: {x: -172.75, y: 0.54, z: -7.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9928,6 +9928,36 @@ MonoBehaviour:
     m_Bits: 9
   aimSmoothSpeed: 20
   aimingPos: {fileID: 6273545708252288493}
+  slowDownAim:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6868593510062057968}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: aimSlowTopSpeed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  unslowDownAim:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6868593510062057968}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: aimFastTopSpeed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   mouse: 0
   shoot: 0
 --- !u!114 &3005891514213505589
@@ -10113,7 +10143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d347afa97d128b4b91adb9bbe9d86a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  footStep1Prefab: {fileID: 0}
   animator: {fileID: 0}
   player: {fileID: 0}
   audios: {fileID: 0}
@@ -11436,7 +11465,7 @@ PrefabInstance:
     - target: {fileID: 8205579574084360762, guid: b0be6eca95f08b5468a4e41542d0649e,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 3068
+      value: 3071
       objectReference: {fileID: 0}
     - target: {fileID: 8856928970493661590, guid: b0be6eca95f08b5468a4e41542d0649e,
         type: 3}
