@@ -134,11 +134,61 @@ public class MainMenu : MonoBehaviour
     {
         Application.OpenURL("https://laniproductions.wixsite.com/my-site");
     }
+    //------------------------------------------------------------------------\\
+
     // Functions Below linking game assets to the Unity 
     public void Bonk()
     {
         Application.OpenURL("https://assetstore.unity.com/packages/2d/gui/rpg-fantasy-mobile-gui-with-source-files-166086");
     }
+    // Tower, Platforms, Caslte and Player Model Assets: Synty Studios: POLYGON Dungeons - Low Poly 3D Art by Synty: 
+    public void PolygonDungeons()
+    {
+        Application.OpenURL("https://assetstore.unity.com/packages/3d/environments/dungeons/polygon-dungeons-low-poly-3d-art-by-synty-102677");
+    }
+    // Bow and arrow, Tutorial level and Castle Assets: Synty Studios: Simple Fantasy - Cartoon Assets:
+    public void SimpleFantasy()
+    {
+        Application.OpenURL("https://syntystore.com/en-gb/products/simple-fantasy-cartoon-assets?_pos=4&_sid=99689c14d&_ss=r");
+    }
+    //Castle Assets: Synty Studios: Simple Fantasy Interiors - Cartoon Assets:
+    public void CastleAssets()
+    {
+        Application.OpenURL("https://syntystore.com/en-gb/products/simple-fantasy-interiors-cartoon-assets?_pos=6&_sid=99689c14d&_ss=r");
+    }
+    // Forest Level Assets: Synty Studios: POLYGON Nature - Low Poly 3D Art by Synty:
+    public void ForestLevel()
+    {
+        Application.OpenURL("https://assetstore.unity.com/packages/3d/vegetation/trees/polygon-nature-low-poly-3d-art-by-synty-120152");
+    }
+    // Camp fire Assets: Synty Studios: POLYGON Western - Low Poly 3D Art by Synty:
+    public void CampFireAsset()
+    {
+        Application.OpenURL("https://assetstore.unity.com/packages/3d/environments/historic/polygon-western-low-poly-3d-art-by-synty-112212");
+    }
+    // Walker enemies: Dungeon Mason: RPG Monster Duo PBR Polyart:
+    public void WalkerEnemies()
+    {
+        Application.OpenURL("https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-duo-pbr-polyart-157762");
+    }
+    // Flying enemies: Dungeon Mason: RPG Monster Partners PBR Polyart:
+    public void FlyingEnemies()
+    {
+        Application.OpenURL("https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-partners-pbr-polyart-168251");
+    }
+    // Spider Boss Asset - By PolyNext:
+    public void BossAsset()
+    {
+        Application.OpenURL(" https://assetstore.unity.com/packages/3d/characters/animals/insects/spider-green-11869");
+    }
+    // Missiles Asset: AurynSky: Rockets, Missiles & Bombs - Cartoon Low Poly Pack:
+    public void MissleFlight()
+    {
+        Application.OpenURL("https://assetstore.unity.com/packages/3d/props/weapons/rockets-missiles-bombs-cartoon-low-poly-pack-73141");
+    }
+
+
+
     // Function to close the credits age
     public void CreditBack()
     {
