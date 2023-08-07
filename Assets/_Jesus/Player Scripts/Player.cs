@@ -105,5 +105,6 @@ public class Player : MonoBehaviour
         //Debug.Log("RUN SPEED..." + _runMultiplier);
     }
 
-
+    public void aimSlowTopSpeed() => topSpeed = 4;
+    public void aimFastTopSpeed() => topSpeed = 8;
 }
