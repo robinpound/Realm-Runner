@@ -32,6 +32,8 @@ public class PlayerSounds : MonoBehaviour
     [SerializeField] private int EventToolTip;
     [SerializeField] private UnityEvent footsteps;
 
+    bool aim;
+
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +46,7 @@ public class PlayerSounds : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        aim = player.GetComponent<AimCameraControl>().mouse;
         isWalking = player.GetComponent<ActionInputs>().isMovementPressed;
         if (animator.GetBool("jump") == true)
         {
@@ -61,7 +64,14 @@ public class PlayerSounds : MonoBehaviour
     public void StartFootstepts()
     {
         timer = 1;
-        StartCoroutine(Footsteps());
+        if (aim)
+        {
+            StartCoroutine(Footsteps());
+        }
+        else if(!aim)
+        {
+            StartCoroutine(FootstepsAim());
+        }
         Invoke(nameof(Reset), 0.5f);
     }
     IEnumerator Footsteps()
@@ -72,5 +82,13 @@ public class PlayerSounds : MonoBehaviour
         audios.clip = footStep2;
         audios.Play();
         
+    }
+    IEnumerator FootstepsAim()
+    {
+        audios.clip = footStep1;
+        audios.Play();
+        yield return new WaitForSeconds(0.5f);
+        audios.clip = footStep2;
+        audios.Play();
     }
 }
