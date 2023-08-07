@@ -1286,7 +1286,7 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 256
-  attackDamage: 5
+  attackDamage: 1
   waypointRange: 5
   chaseRange: 10
   attackRange: 0.5
@@ -1353,6 +1353,9 @@ MonoBehaviour:
   currentHealth: 0
   Deathexplosion: {fileID: 6785717962944446231, guid: 6f4f2d0a300ff594fb8ae4de57b9808d,
     type: 3}
+  DamageBossEventIfTheresABossInScene:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8413533717633502377
 GameObject:
   m_ObjectHideFlags: 0

@@ -44,10 +44,15 @@ public class missile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if ((other.gameObject == target || other.tag == "Arrow") && !exploded)
+        if (other.gameObject == target && !exploded)
         {
             exploded = true;
             target.GetComponent<PlayerStats>().TakeDamage(attackDamage);
+            Instantiate(explosion, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        } else if (other.tag == "Arrow" && !exploded)
+        {
+            exploded = true;
             Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
