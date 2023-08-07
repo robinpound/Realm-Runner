@@ -108,6 +108,7 @@ MonoBehaviour:
   patrolPointRange: 25
   patrolSpeedmultiplier: 8
   patrolwaypointAcceptaceRadius: 2
+  attackDamage: 0
 --- !u!54 &125252602
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -138,6 +139,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  Deathexplosion: {fileID: 6785717962944446231, guid: 6f4f2d0a300ff594fb8ae4de57b9808d,
+    type: 3}
 --- !u!136 &5555645269247500392
 CapsuleCollider:
   m_ObjectHideFlags: 0

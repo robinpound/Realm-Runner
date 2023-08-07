@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class EnemyHealth : MonoBehaviour
     public int maxHealth = 100;
     [SerializeField] int currentHealth;
     public GameObject Deathexplosion;
+
+    [SerializeField] UnityEvent DamageBossEventIfTheresABossInScene;
    
     void Start()
     {
@@ -17,10 +20,7 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-
-        // Play Hurt Animations and Sounds
-
-        // Enemy is Dead
+        DamageBossEventIfTheresABossInScene.Invoke();
         if(currentHealth <= 0)
         {
             Die();

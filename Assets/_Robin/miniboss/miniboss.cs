@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class miniboss : MonoBehaviour
 {
@@ -25,6 +26,9 @@ public class miniboss : MonoBehaviour
     public GameObject spawnpoint;
 
     [SerializeField] private bool isDoingSomething = false;
+
+    [SerializeField] UnityEvent DamageBossEventIfTheresABossInScene;
+    [SerializeField] UnityEvent HealBossEventIfTheresABossInScene;
  
     private enum EnemyState
     {
@@ -108,6 +112,7 @@ public class miniboss : MonoBehaviour
         if(Time.time >= healDeadLine)
         {
             references.ps.Play();
+            HealBossEventIfTheresABossInScene.Invoke();
             health.AddCurrentHealth(15);
             healingMinHealth -= 5;
             healDeadLine = Time.time + references.healDelay;
@@ -124,9 +129,9 @@ public class miniboss : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         
-        if(other.tag == "Arrow" || other.tag == "Missile") {
-            Debug.Log("BOSS Hit by: " + other);
-            health.TakeDamage(10);
+        if(other.tag == "Arrow") {
+            DamageBossEventIfTheresABossInScene.Invoke();
+            health.TakeDamage(5);
         }
     }
 }
