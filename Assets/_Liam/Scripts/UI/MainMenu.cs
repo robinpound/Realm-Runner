@@ -186,14 +186,20 @@ public class MainMenu : MonoBehaviour
     {
         Application.OpenURL("https://assetstore.unity.com/packages/3d/props/weapons/rockets-missiles-bombs-cartoon-low-poly-pack-73141");
     }
-
+    // Ovani Sound - Ambient Music Pack Vol 1 - Nothingness Track
     public void MainMenuMusic()
     {
         Application.OpenURL("https://ovanisound.com/products/ambient-music-pack-vol-1");
     }
+    // Ovani Sound - Horror Music Pack Vol 1 - Followed Track
     public void BossFightMusic()
     {
         Application.OpenURL("https://ovanisound.com/products/horror-music-pack-vol-1");
+    }
+    // Noto Serif Vithkuqi - Google Font
+    public void FontUsed()
+    {
+        Application.OpenURL("https://fonts.google.com/noto/specimen/Noto+Serif+Vithkuqi?preview.text=Realm%20Runner&preview.text_type=custom");
     }
 
 
