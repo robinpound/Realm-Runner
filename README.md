@@ -1,2 +1,2 @@
 # NewCreative-Studio-1
-Creative-Studio-1 SAE
+A game collaboration project between four programmers for Creative-Studio-1 at SAE
